@@ -1,12 +1,12 @@
 - name: Download
-  link: /download/
+  link: /#download
+  new_window: false
+  highlight: false
+- name: Community
+  link: /#community
   new_window: false
   highlight: false
 - name: Documentation
   link: /docs/latest/index.html
-  new_window: false
-  highlight: false
-- name: Community
-  link: /coummunity/
   new_window: false
   highlight: false
