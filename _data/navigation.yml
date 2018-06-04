@@ -1,5 +1,5 @@
-- name: Download
-  link: /#download
+- name: Install
+  link: /#install
   new_window: false
   highlight: false
 - name: Community
