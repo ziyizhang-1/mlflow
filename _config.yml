@@ -66,6 +66,11 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 
+# A trick to get directories that begin with '_' to be copied over. 
+include:
+  - "_static"
+  - "_sources"
+
 exclude:
   - Gemfile
   - Gemfile.lock
