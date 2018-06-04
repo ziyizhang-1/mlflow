@@ -3,7 +3,7 @@
   new_window: false
   highlight: false
 - name: Documentation
-  link: /docs/latest
+  link: /docs/latest/index.html
   new_window: false
   highlight: false
 - name: Community
