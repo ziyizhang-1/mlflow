@@ -1,5 +1,5 @@
-- name: Install
-  link: /#install
+- name: Get Started
+  link: /#get-started
   new_window: false
   highlight: false
 - name: Community
