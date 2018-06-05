@@ -4,7 +4,7 @@
 title: MLflow
 url: "https://mlflow.org"
 #baseurl:
-#google_analytics_key:
+google_analytics_key: "UA-44077918-9"
 #google_maps_javascript_api_key:
 #disqus_shortname:
 
@@ -76,6 +76,7 @@ exclude:
   - Gemfile.lock
   - README.md
   - LICENCE
+  - s3_website.yml
 
 _comments:
   map: Update the map location and display settings.
