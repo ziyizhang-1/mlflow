@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; MLflow 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Concepts" href="concepts.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> MLflow
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-we-re-building">What We’re Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-ll-need">What You’ll Need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#training-the-model">Training the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparing-the-models">Comparing the Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#packaging-the-training-code">Packaging the Training Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#serving-the-model">Serving the Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#more-resources">More Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MLflow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-we-re-building">
+<h2>What We’re Building<a class="headerlink" href="#what-we-re-building" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will showcase how a data scientist can use MLflow end to end to create a
+linear regression model with hyperparameter tuning; how we can use MLflow to package the code
+which trains this model in a reusable and reproducible model format; and finally how we can use
+MLflow to create a simple HTTP server which will enable us to score predictions.</p>
+<p>For this tutorial we will use a dataset where we attempt to predict the quality of wine based on
+quantative features like the wine’s “fixed acidity”, “pH”, “residual sugar”, etc. The data-set
+we are using for this tutorial is from UCI’s <a class="reference external" href="http://archive.ics.uci.edu/ml/datasets/Wine+Quality">machine learning repository</a>.
+<a class="reference internal" href="#ref" id="id2">[Ref]</a></p>
+</div>
+<div class="section" id="what-you-ll-need">
+<h2>What You’ll Need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, we’ll be using MLflow, <code class="docutils literal notranslate"><span class="pre">conda</span></code>, and the tutorial code located at
+<code class="docutils literal notranslate"><span class="pre">example/tutorial</span></code> in the MLflow repository. To download the tutorial code run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">databricks</span><span class="o">/</span><span class="n">mlflow</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="training-the-model">
+<h2>Training the Model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
+<p>The first thing we’ll do is train several simple linear regression model each with a different
+set of hyperparameters.</p>
+<p>The code which we will use is located at <code class="docutils literal notranslate"><span class="pre">example/tutorial/train.py</span></code> and is reproduced
+below.</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the wine-quality csv file (make sure you&#39;re running this from the root of MLflow!)</span>
+<span class="n">wine_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)),</span> <span class="s2">&quot;wine-quality.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">wine_path</span><span class="p">)</span>
+
+<span class="c1"># Split the data into training and test sets. (0.75, 0.25) split.</span>
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># The predicted column is &quot;quality&quot; which is a scalar from [3, 9]</span>
+<span class="n">train_x</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;quality&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;quality&quot;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[[</span><span class="s2">&quot;quality&quot;</span><span class="p">]]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[[</span><span class="s2">&quot;quality&quot;</span><span class="p">]]</span>
+
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">l1_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Try the following parameters for alpha.</span>
+<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">l1_ratio</span> <span class="ow">in</span> <span class="n">l1_ratios</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+            <span class="n">lr</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">l1_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+            <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+
+            <span class="n">predicted_qualities</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+
+            <span class="p">(</span><span class="n">rmse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span> <span class="o">=</span> <span class="n">eval_metrics</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">predicted_qualities</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elasticnet model (alpha=</span><span class="si">%f</span><span class="s2">, l1_ratio=</span><span class="si">%f</span><span class="s2">):&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  RMSE: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rmse</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  MAE: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mae</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  R2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">r2</span><span class="p">)</span>
+
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;l1_ratio&quot;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="p">)</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;mae&quot;</span><span class="p">,</span> <span class="n">mae</span><span class="p">)</span>
+
+            <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this code, we use the familiar pandas, numpy, and sklearn APIs to create a simple machine learning
+model. In addition, we also use the <a class="reference internal" href="tracking.html"><span class="doc">MLflow tracking APIs</span></a> to log information about each
+training run, like the hyperparameters <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code> we used to train the model and metrics like
+the root mean square error which we will use to evaluate the model. In addition, we serialize the
+model which we produced in a format that MLflow knows how to deploy.</p>
+<p>To run this example execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">train</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>After running this, MLflow has logged information about your experiment runs in the directory called
+<code class="docutils literal notranslate"><span class="pre">mlruns</span></code>.</p>
+</div>
+<div class="section" id="comparing-the-models">
+<h2>Comparing the Models<a class="headerlink" href="#comparing-the-models" title="Permalink to this headline">¶</a></h2>
+<p>Next we will use the MLflow UI to compare the models which we have produced. Run <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code>
+in the same current working directory as the one which contains the <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory and
+navigate your browser to <a class="reference external" href="http://localhost:5000">http://localhost:5000</a>.</p>
+<p>On this page, we can see the metrics we can use to compare our models.</p>
+<img alt="_images/tutorial-compare.png" src="_images/tutorial-compare.png" />
+<p>Using this page, we can see that the lower <code class="docutils literal notranslate"><span class="pre">alpha</span></code> is the better our model. We can also
+use the search feature to quickly filter out many models. For example the query <code class="docutils literal notranslate"><span class="pre">metrics.rmse</span> <span class="pre">&lt;</span> <span class="pre">0.8</span></code>
+would return all the models with root mean squared error less than 0.8. For more complex manipulations,
+we can download this table as a CSV and use our favorite data munging software to analyze it.</p>
+</div>
+<div class="section" id="packaging-the-training-code">
+<h2>Packaging the Training Code<a class="headerlink" href="#packaging-the-training-code" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have our training code written, we would like to package it so that
+other data scientists can easily reuse our model, or so that we can run the training remotely e.g. on
+Databricks. To do this, we use the <a class="reference internal" href="projects.html"><span class="doc">MLflow Projects</span></a> conventions to specify the
+dependencies and entry points to our code. In the <code class="docutils literal notranslate"><span class="pre">example/tutorial/MLproject</span></code> file we specify
+that our project has the dependencies located in the
+<a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually">Conda environment file</a>
+called <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code> and that our project has one entry point which takes two parameters:
+alpha and l1_ratio.</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># example/tutorial/MLproject</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">tutorial</span>
+
+<span class="n">conda_env</span><span class="p">:</span> <span class="n">conda</span><span class="o">.</span><span class="n">yaml</span>
+
+<span class="n">entry_points</span><span class="p">:</span>
+  <span class="n">main</span><span class="p">:</span>
+    <span class="n">parameters</span><span class="p">:</span>
+      <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span>
+      <span class="n">l1_ratio</span><span class="p">:</span> <span class="p">{</span><span class="nb">type</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>
+    <span class="n">command</span><span class="p">:</span> <span class="s2">&quot;python train.py </span><span class="si">{alpha}</span><span class="s2"> </span><span class="si">{l1_ratio}</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># example/tutorial/conda.yaml</span>
+
+<span class="n">name</span><span class="p">:</span> <span class="n">tutorial</span>
+<span class="n">channels</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">defaults</span>
+<span class="n">dependencies</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">numpy</span><span class="o">=</span><span class="mf">1.14</span><span class="o">.</span><span class="mi">3</span>
+  <span class="o">-</span> <span class="n">pandas</span><span class="o">=</span><span class="mf">0.22</span><span class="o">.</span><span class="mi">0</span>
+  <span class="o">-</span> <span class="n">scikit</span><span class="o">-</span><span class="n">learn</span><span class="o">=</span><span class="mf">0.19</span><span class="o">.</span><span class="mi">1</span>
+  <span class="o">-</span> <span class="n">pip</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">mlflow</span>
+</pre></div>
+</div>
+<p>To run this project, we simply invoke <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">example/tutorial</span> <span class="pre">-P</span> <span class="pre">alpha=0.42</span></code>. After running
+this command, MLflow will run your training code in a new conda environment with the dependencies
+specified in <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code>.</p>
+<p>Projects can also be run directly from Github if the repository has a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file in the
+root. We’ve duplicated this tutorial to the <a class="reference external" href="https://github.com/databricks/mlflow-example">https://github.com/databricks/mlflow-example</a> repository
+which can be run with <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">git&#64;github.com:databricks/mlflow-example.git</span> <span class="pre">-P</span> <span class="pre">alpha=0.42</span></code>.</p>
+</div>
+<div class="section" id="serving-the-model">
+<h2>Serving the Model<a class="headerlink" href="#serving-the-model" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have packaged our model using the MLproject convention and have identified the best model,
+it is time to deploy the model using <a class="reference internal" href="models.html"><span class="doc">MLflow Models</span></a>. An MLflow Model is a standard format for
+packaging machine learning models that can be used in a variety of downstream tools — for example,
+real-time serving through a REST API or batch inference on Apache Spark.</p>
+<p>In our example training code, after training the linear regression model, we invoked a function
+in MLflow which saved the model as an artifact within the run.</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To view this artifact, we can use the UI again. By clicking on a row in the listing of experiment
+runs we’ll see this page.</p>
+<img alt="_images/tutorial-artifact.png" src="_images/tutorial-artifact.png" />
+<p>At the bottom, we can see that the call to <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn.log_model</span></code> produced two files in
+<code class="docutils literal notranslate"><span class="pre">/Users/mlflow/mlflow-prototype/mlruns/0/7c1a0d5c42844dcdb8f5191146925174/artifacts/model</span></code>.
+The first file, <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> is a metadata file which tells MLflow how to load the model. The
+second file, <code class="docutils literal notranslate"><span class="pre">model.pkl</span></code> is a serialized version of the linear regression model which we trained.</p>
+<p>In our example, we’ll demonstrate how we can use this MLmodel format with MLflow to deploy a local
+REST server which can serve predictions.</p>
+<p>To deploy the server run:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sklearn</span> <span class="n">serve</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">mlflow</span><span class="o">/</span><span class="n">mlflow</span><span class="o">-</span><span class="n">prototype</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="mi">0</span><span class="o">/</span><span class="mi">7</span><span class="n">c1a0d5c42844dcdb8f5191146925174</span><span class="o">/</span><span class="n">artifacts</span><span class="o">/</span><span class="n">model</span> <span class="o">-</span><span class="n">p</span> <span class="mi">1234</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The version of Python used to create the model must be the same as the one which is running
+<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sklearn</span></code>.
+If this is not the case, you may run into the error
+<code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError:</span> <span class="pre">'ascii'</span> <span class="pre">codec</span> <span class="pre">can't</span> <span class="pre">decode</span> <span class="pre">byte</span> <span class="pre">0x9f</span> <span class="pre">in</span> <span class="pre">position</span> <span class="pre">1:</span> <span class="pre">ordinal</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">range(128)</span></code>
+or <code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">ValueError,</span> <span class="pre">&quot;unsupported</span> <span class="pre">pickle</span> <span class="pre">protocol:</span> <span class="pre">%d&quot;</span></code>.</p>
+</div>
+<p>To serve a prediction run:</p>
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">H</span> <span class="s2">&quot;Content-Type:application/json&quot;</span> <span class="o">--</span><span class="n">data</span> <span class="s1">&#39;[{&quot;fixed acidity&quot;: 6.2, &quot;volatile acidity&quot;: 0.66, &quot;citric acid&quot;: 0.48, &quot;residual sugar&quot;: 1.2, &quot;chlorides&quot;: 0.029, &quot;free sulfur dioxide&quot;: 29, &quot;total sulfur dioxide&quot;: 75, &quot;density&quot;: 0.98, &quot;pH&quot;: 3.33, &quot;sulphates&quot;: 0.39, &quot;alcohol&quot;: 12.8}]&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">1234</span><span class="o">/</span><span class="n">invocations</span>
+
+<span class="c1"># RESPONSE</span>
+<span class="c1"># {&quot;predictions&quot;: [6.379428821398614]}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="more-resources">
+<h2>More Resources<a class="headerlink" href="#more-resources" title="Permalink to this headline">¶</a></h2>
+<p>Congratulations on finishing the tutorial! For more reading reference <a class="reference internal" href="tracking.html"><span class="doc">MLflow Tracking</span></a>, <a class="reference internal" href="projects.html"><span class="doc">MLflow Projects</span></a>, <a class="reference internal" href="models.html"><span class="doc">MLflow Models</span></a>,
+and more.</p>
+<table class="docutils citation" frame="void" id="ref" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[Ref]</a></td><td><ol class="first last upperalpha simple" start="16">
+<li>Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis. Modeling wine preferences by data mining from physicochemical properties. In Decision Support Systems, Elsevier, 47(4):547-553, 2009.</li>
+</ol>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="concepts.html" class="btn btn-neutral float-right" title="Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Databricks 2018. All rights reserved.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+</body>
+</html>
