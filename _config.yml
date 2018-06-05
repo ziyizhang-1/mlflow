@@ -60,16 +60,17 @@ jekyll-archives:
     - categories
 
 plugins:
-  - jekyll-archives
   - jekyll-sitemap
+#  - jekyll-archives
 #  - jekyll-seo-tag
-  - jekyll-feed
-  - jekyll-paginate
+#  - jekyll-feed
+#  - jekyll-paginate
 
 # A trick to get directories that begin with '_' to be copied over. 
 include:
   - "_static"
   - "_sources"
+  - "_images"
 
 exclude:
   - Gemfile
