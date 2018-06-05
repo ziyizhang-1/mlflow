@@ -12,6 +12,12 @@ And when you're building to push to production use:
 
 ...this will ensure that the sitemap and robots.txt is built correctly and that the google analytics snippet gets inserted into the pages.
 
+# Deploying
+
+Make sure you have your aws credentials set up (probably via `aws credentials`), and that you have write permissions to the s3 bucket (ask Andy).
+
+Then use the command `s3_website push`
+
 # Develop
 
 Hydra was built with [Jekyll](http://jekyllrb.com/) version 3.3.1, but should support newer versions as well.
@@ -24,11 +30,11 @@ $ bundle exec jekyll serve
 ~~~
 
 ## Building Docs
-check out mlflow-prototype (or the post-release project whatever that's called), then go into docs and run make.
+check out mlflow-prototype (or the post-release project name, whatever that's called), then go into docs and run `make`.
 
-Copy over the html docs to the docs/directory and poing latest at it.
+Copy over the html docs to the docs/latest and docs/`VERSIO_NUM` directories.
 
-the redeploy
+The redeploy
 
 
 # Jekyll Theme Attribution
