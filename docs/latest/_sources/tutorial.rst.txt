@@ -7,7 +7,7 @@ What We're Building
 -------------------
 
 In this tutorial, we will showcase how a data scientist can use MLflow end to end to create a
-linear regression model with hyperparameter tuning; how we can use MLflow to package the code
+linear regression model; how we can use MLflow to package the code
 which trains this model in a reusable and reproducible model format; and finally how we can use
 MLflow to create a simple HTTP server which will enable us to score predictions.
 
@@ -25,8 +25,8 @@ For this tutorial, we'll be using MLflow, ``conda``, and the tutorial code locat
 
 Training the Model
 ------------------
-The first thing we'll do is train several simple linear regression model each with a different
-set of hyperparameters.
+The first thing we'll do is train a linear regression model which takes two hyperparameters:
+alpha and l1_ratio.
 
 The code which we will use is located at ``example/tutorial/train.py`` and is reproduced
 below.
@@ -46,32 +46,29 @@ below.
     train_y = train[["quality"]]
     test_y = test[["quality"]]
 
-    alphas = [float(sys.argv[1])] if len(sys.argv) > 1 else [0, 0.5, 1]
-    l1_ratios = [float(sys.argv[2])] if len(sys.argv) > 2 else [0, 0.2, 0.5, 1]
+    alpha = float(sys.argv[1]) if len(sys.argv) > 1 else 0.5
+    l1_ratio = float(sys.argv[2]) if len(sys.argv) > 2 else 0.5
 
-    # Try the following parameters for alpha.
-    for alpha in alphas:
-        for l1_ratio in l1_ratios:
-            with mlflow.start_run():
-                lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
-                lr.fit(train_x, train_y)
+    with mlflow.start_run():
+        lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=42)
+        lr.fit(train_x, train_y)
 
-                predicted_qualities = lr.predict(test_x)
+        predicted_qualities = lr.predict(test_x)
 
-                (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
+        (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
-                print("Elasticnet model (alpha=%f, l1_ratio=%f):" % (alpha, l1_ratio))
-                print("  RMSE: %s" % rmse)
-                print("  MAE: %s" % mae)
-                print("  R2: %s" % r2)
+        print("Elasticnet model (alpha=%f, l1_ratio=%f):" % (alpha, l1_ratio))
+        print("  RMSE: %s" % rmse)
+        print("  MAE: %s" % mae)
+        print("  R2: %s" % r2)
 
-                mlflow.log_param("alpha", alpha)
-                mlflow.log_param("l1_ratio", l1_ratio)
-                mlflow.log_metric("rmse", rmse)
-                mlflow.log_metric("r2", r2)
-                mlflow.log_metric("mae", mae)
+        mlflow.log_param("alpha", alpha)
+        mlflow.log_param("l1_ratio", l1_ratio)
+        mlflow.log_metric("rmse", rmse)
+        mlflow.log_metric("r2", r2)
+        mlflow.log_metric("mae", mae)
 
-                mlflow.sklearn.log_model(lr, "model")
+        mlflow.sklearn.log_model(lr, "model")
 
 In this code, we use the familiar pandas, numpy, and sklearn APIs to create a simple machine learning
 model. In addition, we also use the :doc:`MLflow tracking APIs<tracking/>` to log information about each
@@ -82,6 +79,10 @@ model which we produced in a format that MLflow knows how to deploy.
 To run this example execute::
 
     python example/tutorial/train.py
+
+Try out some other values for alpha and l1_ratio by passing them as arguments to ``train.py``.::
+
+    python example/tutorial/train.py <alpha> <l1_ratio>
 
 After running this, MLflow has logged information about your experiment runs in the directory called
 ``mlruns``.

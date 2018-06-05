@@ -169,7 +169,7 @@
 <div class="section" id="what-we-re-building">
 <h2>What We’re Building<a class="headerlink" href="#what-we-re-building" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will showcase how a data scientist can use MLflow end to end to create a
-linear regression model with hyperparameter tuning; how we can use MLflow to package the code
+linear regression model; how we can use MLflow to package the code
 which trains this model in a reusable and reproducible model format; and finally how we can use
 MLflow to create a simple HTTP server which will enable us to score predictions.</p>
 <p>For this tutorial we will use a dataset where we attempt to predict the quality of wine based on
@@ -187,8 +187,8 @@ we are using for this tutorial is from UCI’s <a class="reference external" hre
 </div>
 <div class="section" id="training-the-model">
 <h2>Training the Model<a class="headerlink" href="#training-the-model" title="Permalink to this headline">¶</a></h2>
-<p>The first thing we’ll do is train several simple linear regression model each with a different
-set of hyperparameters.</p>
+<p>The first thing we’ll do is train a linear regression model which takes two hyperparameters:
+alpha and l1_ratio.</p>
 <p>The code which we will use is located at <code class="docutils literal notranslate"><span class="pre">example/tutorial/train.py</span></code> and is reproduced
 below.</p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the wine-quality csv file (make sure you&#39;re running this from the root of MLflow!)</span>
@@ -204,32 +204,29 @@ below.</p>
 <span class="n">train_y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[[</span><span class="s2">&quot;quality&quot;</span><span class="p">]]</span>
 <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[[</span><span class="s2">&quot;quality&quot;</span><span class="p">]]</span>
 
-<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">l1_ratios</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mf">0.5</span>
+<span class="n">l1_ratio</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="mf">0.5</span>
 
-<span class="c1"># Try the following parameters for alpha.</span>
-<span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">l1_ratio</span> <span class="ow">in</span> <span class="n">l1_ratios</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
-            <span class="n">lr</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">l1_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-            <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+    <span class="n">lr</span> <span class="o">=</span> <span class="n">ElasticNet</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="n">l1_ratio</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
 
-            <span class="n">predicted_qualities</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
+    <span class="n">predicted_qualities</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span>
 
-            <span class="p">(</span><span class="n">rmse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span> <span class="o">=</span> <span class="n">eval_metrics</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">predicted_qualities</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">rmse</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span> <span class="o">=</span> <span class="n">eval_metrics</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">predicted_qualities</span><span class="p">)</span>
 
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elasticnet model (alpha=</span><span class="si">%f</span><span class="s2">, l1_ratio=</span><span class="si">%f</span><span class="s2">):&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  RMSE: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rmse</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  MAE: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mae</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  R2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">r2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elasticnet model (alpha=</span><span class="si">%f</span><span class="s2">, l1_ratio=</span><span class="si">%f</span><span class="s2">):&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  RMSE: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">rmse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  MAE: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">mae</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  R2: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">r2</span><span class="p">)</span>
 
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;l1_ratio&quot;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="p">)</span>
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;mae&quot;</span><span class="p">,</span> <span class="n">mae</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;l1_ratio&quot;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;mae&quot;</span><span class="p">,</span> <span class="n">mae</span><span class="p">)</span>
 
-            <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+    <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>In this code, we use the familiar pandas, numpy, and sklearn APIs to create a simple machine learning
@@ -239,6 +236,10 @@ the root mean square error which we will use to evaluate the model. In addition,
 model which we produced in a format that MLflow knows how to deploy.</p>
 <p>To run this example execute:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">train</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Try out some other values for alpha and l1_ratio by passing them as arguments to <code class="docutils literal notranslate"><span class="pre">train.py</span></code>.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">example</span><span class="o">/</span><span class="n">tutorial</span><span class="o">/</span><span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">&lt;</span><span class="n">alpha</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">l1_ratio</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>After running this, MLflow has logged information about your experiment runs in the directory called
