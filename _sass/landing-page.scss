@@ -1,8 +1,6 @@
 .callouts {
 	@extend %flexbox;
 	@include flex-flow(wrap);
-	padding: 40px 70px;
-  background: $third-brand-color;
 
 	.callout {
 		list-style: none;
@@ -13,13 +11,6 @@
 		border-radius: 5px;
 		width: 100%;
 
-    p {
-      color: white;
-      font-size: 0.8em;
-      text-transform: uppercase;
-      font-weight: 400;
-      margin-bottom: 0;
-    }
 
     img {
       width: 50px;
@@ -38,16 +29,33 @@
 	}
 }
 
+.value-props {
+	padding: 40px 70px;
+  background: $third-brand-color;
+
+  .callout {
+    p {
+      color: white;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+  }
+}
+
 .functionality{
   .container {
-    padding: 100px 100px 125px;
+    padding: 100px 20px 125px;
 
-    .feature {
-      margin: 20px 40px;
-      border: 1px solid $fourth-brand-color;
-      border-radius: 10px;
-      min-height: 150px;
-      padding: 20px 25px;
+    .callout {
+      padding: 0 10px 10px;
+
+      li {
+        border: 1px solid $fourth-brand-color;
+        border-radius: 10px;
+        min-width: 200px;
+      }
     }
 
     h2 {
@@ -131,4 +139,14 @@
 	.content section:nth-child(even) .flex {
 		flex-direction: row-reverse;
 	}
+
+  .functionality{
+    .container {
+      .callout {
+        li {
+          min-height: 150px;
+        }
+      }
+    }
+  }
 }
