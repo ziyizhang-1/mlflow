@@ -1,3 +1,43 @@
+.functionality{
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .intro-text {
+    padding-top: 100px;
+    padding-bottom: 10px;
+  }
+
+  .callouts {
+    padding-bottom: 125px;
+
+    .callout {
+      padding: 0 10px 10px;
+
+      li {
+        border: 1px solid $fourth-brand-color;
+        border-radius: 10px;
+        min-width: 200px;
+      }
+    }
+
+    h2 {
+      color: $brand-color;
+      font-weight: 500;
+      font-size: 1.6em;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1em;
+      font-weight: 400;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+  }
+}
+
 .callouts {
 	@extend %flexbox;
 	@include flex-flow(wrap);
@@ -44,35 +84,6 @@
   }
 }
 
-.functionality{
-  .container {
-    padding: 100px 20px 125px;
-
-    .callout {
-      padding: 0 10px 10px;
-
-      li {
-        border: 1px solid $fourth-brand-color;
-        border-radius: 10px;
-        min-width: 200px;
-      }
-    }
-
-    h2 {
-      color: $brand-color;
-      font-weight: 500;
-      font-size: 1.6em;
-      text-align: center;
-    }
-
-    p {
-      font-size: 1.1em;
-      font-weight: 400;
-      margin-bottom: 10px;
-      text-align: left;
-    }
-  }
-}
 
 .get-started {
 	background: #f5f5f5;
