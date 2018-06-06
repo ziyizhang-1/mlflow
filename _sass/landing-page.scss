@@ -20,6 +20,13 @@
         border-radius: 10px;
         min-width: 200px;
       }
+
+      .read-more {
+        text-align: right;
+        font-size: 0.8em;
+        margin-top: 15px;
+        margin-bottom: 0;
+      }
     }
 
     h2 {
@@ -92,7 +99,7 @@
 
   p {
     text-align: center;
-    padding: 50px 40px;
+    padding: 50px 10px;
   }
   .button a {
     border-radius: 20px;
