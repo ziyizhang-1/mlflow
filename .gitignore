@@ -4,3 +4,4 @@ _site/
 docs/latest/.doctrees
 *.DS_Store
 *.swp
+*.idea

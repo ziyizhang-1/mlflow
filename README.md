@@ -30,11 +30,12 @@ $ bundle exec jekyll serve
 ~~~
 
 ## Building Docs
-check out mlflow-prototype (or the post-release project name, whatever that's called), then go into docs and run `make`.
+Clone https://github.com/databricks/mlflow and follow the
+[instructions for building docs](https://github.com/databricks/mlflow/blob/master/CONTRIBUTING.rst).
 
-Copy over the html docs to the docs/latest and docs/`VERSIO_NUM` directories.
+Copy over the html docs to the docs/latest and docs/`VERSION_NUM` directories.
 
-The redeploy
+Then redeploy the site.
 
 
 # Jekyll Theme Attribution

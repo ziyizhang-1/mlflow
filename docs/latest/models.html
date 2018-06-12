@@ -442,7 +442,7 @@ the model.</li>
 <p>MLFLow can output python function model as a Spark UDF, which can be uploaded to a Spark cluster and
 used to score the model.</p>
 <p>Example:</p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">udf</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">model</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyfunc_udf</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">model</span><span class="o">&gt;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">spark_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> <span class="n">pyfunc_udf</span><span class="p">(</span><span class="o">&lt;</span><span class="n">features</span><span class="o">&gt;</span><span class="p">))</span>
 </pre></div>
 </div>

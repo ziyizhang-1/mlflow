@@ -232,9 +232,8 @@ already be persisted with state “running” in <cite>store</cite>.</li>
 
 <dl class="function">
 <dt id="mlflow.tracking.create_experiment">
-<code class="descclassname">mlflow.tracking.</code><code class="descname">create_experiment</code><span class="sig-paren">(</span><em>experiment_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.create_experiment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates an experiment with the specified name (or a random UUID name if no name is specified)
-and returns its id.</p>
+<code class="descclassname">mlflow.tracking.</code><code class="descname">create_experiment</code><span class="sig-paren">(</span><em>experiment_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.create_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an experiment with the specified name and returns its ID.</p>
 </dd></dl>
 
 <dl class="function">
@@ -255,6 +254,12 @@ will write artifact(s) to subdirectories of the returned URI.</p>
 <dd><p>Returns the current tracking URI. Note that this may not correspond to the tracking URI of
 the currently active run, since the tracking URI may be updated via <cite>set_tracking_uri</cite>.
 :return: the tracking URI</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.list_experiments">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">list_experiments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.list_experiments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all experiments</p>
 </dd></dl>
 
 <dl class="function">
