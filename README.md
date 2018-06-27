@@ -14,7 +14,9 @@ And when you're building to push to production use:
 
 # Deploying
 
-Make sure you have your aws credentials set up (probably via `aws credentials`), and that you have write permissions to the s3 bucket (ask Andy).
+We use `s3_website`, which you can install via `gem install s3_website` -- see https://github.com/laurilehmijoki/s3_website
+
+Make sure you have your aws credentials set up (probably via `aws credentials`), and that you have write permissions to the s3 bucket (ask Andy or Aaron).
 
 Then use the command `s3_website push`
 
