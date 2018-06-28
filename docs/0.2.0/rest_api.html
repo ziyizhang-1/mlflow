@@ -1,0 +1,1664 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>REST API &mdash; MLflow 0.2.0 documentation</title>
+  
+  
+  
+    <link rel="canonical" href="https://docs.databricks.com/rest_api.html">
+  
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="MLflow 0.2.0 documentation" href="index.html"/>
+        <link rel="prev" title="mlflow.tracking" href="/python_api/mlflow.tracking.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+      <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="index.html" class="main-navigation-home"><img src="_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/index.html">Python API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">REST API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-experiment">Create Experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#request-structure">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#response-structure">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#list-experiments">List Experiments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowlistexperimentsresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-experiment">Get Experiment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetexperiment">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetexperimentresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#create-run">Create Run</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowcreaterun">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowcreaterunresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-run">Get Run</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetrun">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetrunresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#log-metric">Log Metric</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowlogmetric">Request Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#log-parameter">Log Parameter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowlogparameter">Request Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-metric">Get Metric</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetmetric">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetmetricresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-metrics-history">Get Metrics History</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetmetrichistory">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetmetrichistoryresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#search-runs">Search Runs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowsearchruns">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowsearchrunsresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#list-artifacts">List Artifacts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowlistartifacts">Request Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowlistartifactsresponse">Response Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#get-artifacts">Get Artifacts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowgetartifact">Request Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#update-run">Update Run</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mlflowupdaterun">Request Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-structures">Data Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#experiment">Experiment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metric">Metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run">Run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runinfo">RunInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runstatus">RunStatus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sourcetype">SourceType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runtag">RunTag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rundata">RunData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#param">Param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fileinfo">FileInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#searchexpression">SearchExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metricsearchexpression">MetricSearchExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametersearchexpression">ParameterSearchExpression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stringclause">StringClause</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#float-clause">Float Clause</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/databricks/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>REST API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="rest-api">
+<span id="id1"></span><h1>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline"> </a></h1>
+<p>MLflow’s REST API allows you to create, list, and get experiments and runs; and log params, metrics, and artifacts.</p>
+<div class="contents local topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#create-experiment" id="id21">Create Experiment</a></li>
+<li><a class="reference internal" href="#list-experiments" id="id22">List Experiments</a></li>
+<li><a class="reference internal" href="#get-experiment" id="id23">Get Experiment</a></li>
+<li><a class="reference internal" href="#create-run" id="id24">Create Run</a></li>
+<li><a class="reference internal" href="#get-run" id="id25">Get Run</a></li>
+<li><a class="reference internal" href="#log-metric" id="id26">Log Metric</a></li>
+<li><a class="reference internal" href="#log-parameter" id="id27">Log Parameter</a></li>
+<li><a class="reference internal" href="#get-metric" id="id28">Get Metric</a></li>
+<li><a class="reference internal" href="#get-metrics-history" id="id29">Get Metrics History</a></li>
+<li><a class="reference internal" href="#search-runs" id="id30">Search Runs</a></li>
+<li><a class="reference internal" href="#list-artifacts" id="id31">List Artifacts</a></li>
+<li><a class="reference internal" href="#get-artifacts" id="id32">Get Artifacts</a></li>
+<li><a class="reference internal" href="#update-run" id="id33">Update Run</a></li>
+<li><a class="reference internal" href="#data-structures" id="id34">Data Structures</a></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="create-experiment">
+<span id="mlflowmlflowservicecreateexperiment"></span><h2><a class="toc-backref" href="#id21">Create Experiment</a><a class="headerlink" href="#create-experiment" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="77%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/create</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Creates an new Experiment with a given name and returns the ID of the newly created experiment.
+Backend validates that another experiment with the same name does not already exist.</p>
+<p>Fails if another experiment with the same name already exists.</p>
+<div class="section" id="request-structure">
+<span id="mlflowcreateexperiment"></span><h3>Request Structure<a class="headerlink" href="#request-structure" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>This field is required.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="response-structure">
+<span id="mlflowcreateexperimentresponse"></span><h3>Response Structure<a class="headerlink" href="#response-structure" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="16%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiment_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unique identifier for created experiment.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="list-experiments">
+<span id="mlflowmlflowservicelistexperiments"></span><h2><a class="toc-backref" href="#id22">List Experiments</a><a class="headerlink" href="#list-experiments" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="76%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/list</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Returns a list of all experiments.</p>
+<div class="section" id="mlflowlistexperimentsresponse">
+<span id="id2"></span><h3>Response Structure<a class="headerlink" href="#mlflowlistexperimentsresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="55%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiments</td>
+<td>An array of <a class="reference internal" href="#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
+<td>All experiments</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="get-experiment">
+<span id="mlflowmlflowservicegetexperiment"></span><h2><a class="toc-backref" href="#id23">Get Experiment</a><a class="headerlink" href="#get-experiment" title="Permalink to this headline"> </a></h2>
+<p>Get meta data for experiment and a list of runs for this experiment.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="75%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/get</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Get experiment details.</p>
+<div class="section" id="mlflowgetexperiment">
+<span id="id3"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetexperiment" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="19%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiment_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Identifier to get an experiment
+This field is required.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowgetexperimentresponse">
+<span id="id4"></span><h3>Response Structure<a class="headerlink" href="#mlflowgetexperimentresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="30%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiment</td>
+<td><a class="reference internal" href="#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
+<td>Returns experiment details</td>
+</tr>
+<tr class="row-odd"><td>runs</td>
+<td>An array of <a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
+<td>All (max limit to be imposed) runs associated with this experiment</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="create-run">
+<span id="mlflowmlflowservicecreaterun"></span><h2><a class="toc-backref" href="#id24">Create Run</a><a class="headerlink" href="#create-run" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="73%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/create</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Create a new run within an experiment. A run is usually a single execution of a machine learning or data ETL
+pipeline. MLflow uses runs to track <a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a>, <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a>, and <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a>, associated with a single execution.</p>
+<div class="section" id="mlflowcreaterun">
+<span id="id5"></span><h3>Request Structure<a class="headerlink" href="#mlflowcreaterun" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="31%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiment_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unique identifier for the associated experiment.</td>
+</tr>
+<tr class="row-odd"><td>user_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>User ID or LDAP for the user executing the run.</td>
+</tr>
+<tr class="row-even"><td>run_name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Human readable name for run.</td>
+</tr>
+<tr class="row-odd"><td>source_type</td>
+<td><a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
+<td>Originating source for this run. One of <code class="docutils literal notranslate"><span class="pre">Notebook</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Job</span></code>, <code class="docutils literal notranslate"><span class="pre">Project</span></code>, <code class="docutils literal notranslate"><span class="pre">Local</span></code> or <code class="docutils literal notranslate"><span class="pre">Unknown</span></code>.</td>
+</tr>
+<tr class="row-even"><td>source_name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>String descriptor for source. For example, name
+or description of the notebook, or job name.</td>
+</tr>
+<tr class="row-odd"><td>status</td>
+<td><code class="docutils literal notranslate"><span class="pre">RunStatus</span></code></td>
+<td>Current status of the run. One of <code class="docutils literal notranslate"><span class="pre">RUNNING</span></code>,
+<code class="docutils literal notranslate"><span class="pre">SCHEDULE</span></code>, <code class="docutils literal notranslate"><span class="pre">FINISHED</span></code>, <code class="docutils literal notranslate"><span class="pre">FAILED</span></code>, <code class="docutils literal notranslate"><span class="pre">KILLED</span></code>.</td>
+</tr>
+<tr class="row-even"><td>start_time</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unix timestamp of when the run started in milliseconds.</td>
+</tr>
+<tr class="row-odd"><td>end_time</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unix timestamp of when the run ended in milliseconds</td>
+</tr>
+<tr class="row-even"><td>source_version</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Git version of the source code used to create run.</td>
+</tr>
+<tr class="row-odd"><td>artifact_uri</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>URI of the directory where artifacts should be uploaded
+This can be a local path (starting with “/”), or a
+distributed file system (DFS) path, like
+<code class="docutils literal notranslate"><span class="pre">s3://bucket/directory</span></code> or <code class="docutils literal notranslate"><span class="pre">dbfs:/my/directory.</span></code>
+If not set, the local <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> directory will be
+chosen by default.</td>
+</tr>
+<tr class="row-even"><td>entry_point_name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Name of the entry point for the run.</td>
+</tr>
+<tr class="row-odd"><td>run_tags</td>
+<td>An array of <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
+<td>Additional metadata for run in key-value pairs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowcreaterunresponse">
+<span id="id6"></span><h3>Response Structure<a class="headerlink" href="#mlflowcreaterunresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="30%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_info</td>
+<td><a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
+<td>Meta data of the newly created run.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="get-run">
+<span id="mlflowmlflowservicegetrun"></span><h2><a class="toc-backref" href="#id25">Get Run</a><a class="headerlink" href="#get-run" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="72%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/get</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Get meta data, params, tags, and metrics for run. Only last logged value for each  metric is returned.</p>
+<div class="section" id="mlflowgetrun">
+<span id="id7"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetrun" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="24%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>This field is required.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowgetrunresponse">
+<span id="id8"></span><h3>Response Structure<a class="headerlink" href="#mlflowgetrunresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="35%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run</td>
+<td><a class="reference internal" href="#mlflowrun"><span class="std std-ref">Run</span></a></td>
+<td>Returns run details</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="log-metric">
+<span id="mlflowmlflowservicelogmetric"></span><h2><a class="toc-backref" href="#id26">Log Metric</a><a class="headerlink" href="#log-metric" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="75%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-metric</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>API to log a metric for a run. Metrics key-value pair that record a single <code class="docutils literal notranslate"><span class="pre">float</span></code> measure.
+During a single execution of a run, a particular metric can be logged several times. Backend will keep track
+of historical values along with timestamps.</p>
+<div class="section" id="mlflowlogmetric">
+<span id="id9"></span><h3>Request Structure<a class="headerlink" href="#mlflowlogmetric" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="21%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Unique ID for the run for which metric is recorded.</td>
+</tr>
+<tr class="row-odd"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Name of the metric.</td>
+</tr>
+<tr class="row-even"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
+<td>Float value for the metric being logged.</td>
+</tr>
+<tr class="row-odd"><td>timestamp</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unix timestamp in milliseconds at the time metric was
+logged.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="log-parameter">
+<span id="mlflowmlflowservicelogparameter"></span><h2><a class="toc-backref" href="#id27">Log Parameter</a><a class="headerlink" href="#log-parameter" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="77%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-parameter</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>API to log a parameter used for this run. Examples are params and hyperparams used for ML training, or
+constant dates and values used in an ETL pipeline. A params is a <code class="docutils literal notranslate"><span class="pre">STRING</span></code> key-value pair.
+For a run, a single parameter is allowed to be logged only once.</p>
+<div class="section" id="mlflowlogparameter">
+<span id="id10"></span><h3>Request Structure<a class="headerlink" href="#mlflowlogparameter" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="21%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Unique ID for the run for which parameter is recorded.</td>
+</tr>
+<tr class="row-odd"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Name of the paramter.</td>
+</tr>
+<tr class="row-even"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>String value of the parameter.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="get-metric">
+<span id="mlflowmlflowservicegetmetric"></span><h2><a class="toc-backref" href="#id28">Get Metric</a><a class="headerlink" href="#get-metric" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="73%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/metrics/get</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>API to retrieve the logged value for a metric during a run. For a run, if this metric is logged more than once,
+this API will retrieve only the latest value logged.</p>
+<div class="section" id="mlflowgetmetric">
+<span id="id11"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetmetric" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="21%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Unique ID for the run for which metric is recorded.</td>
+</tr>
+<tr class="row-odd"><td>metric_key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Name of the metric.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowgetmetricresponse">
+<span id="id12"></span><h3>Response Structure<a class="headerlink" href="#mlflowgetmetricresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="37%" />
+<col width="42%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>metric</td>
+<td><a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
+<td>Latest reported metric</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="get-metrics-history">
+<span id="mlflowmlflowservicegetmetrichistory"></span><h2><a class="toc-backref" href="#id29">Get Metrics History</a><a class="headerlink" href="#get-metrics-history" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="77%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/metrics/get-history</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>For cases that a metric is logged more than once during a run, this API can be used to retrieve all logged
+values for this metric.</p>
+<div class="section" id="mlflowgetmetrichistory">
+<span id="id13"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetmetrichistory" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="21%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Unique ID for the run for which metric is recorded.</td>
+</tr>
+<tr class="row-odd"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Name of the metric.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowgetmetrichistoryresponse">
+<span id="id14"></span><h3>Response Structure<a class="headerlink" href="#mlflowgetmetrichistoryresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="40%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>metrics</td>
+<td>An array of <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
+<td>All logged values for this metric</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="search-runs">
+<span id="mlflowmlflowservicesearchruns"></span><h2><a class="toc-backref" href="#id30">Search Runs</a><a class="headerlink" href="#search-runs" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="73%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/search</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Search for runs that satisfy expressions. Search expressions can use <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a> and <a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a> keys.</p>
+<div class="section" id="mlflowsearchruns">
+<span id="id15"></span><h3>Request Structure<a class="headerlink" href="#mlflowsearchruns" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="57%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiment_ids</td>
+<td>An array of <code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>anded_expressions</td>
+<td>An array of <a class="reference internal" href="#mlflowsearchexpression"><span class="std std-ref">SearchExpression</span></a></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowsearchrunsresponse">
+<span id="id16"></span><h3>Response Structure<a class="headerlink" href="#mlflowsearchrunsresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="38%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>runs</td>
+<td>An array of <a class="reference internal" href="#mlflowrun"><span class="std std-ref">Run</span></a></td>
+<td>Runs that match the search criteria</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="list-artifacts">
+<span id="mlflowmlflowservicelistartifacts"></span><h2><a class="toc-backref" href="#id31">List Artifacts</a><a class="headerlink" href="#list-artifacts" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="75%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/artifacts/list</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>List artifacts.</p>
+<div class="section" id="mlflowlistartifacts">
+<span id="id17"></span><h3>Request Structure<a class="headerlink" href="#mlflowlistartifacts" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="70%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>path</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>This is the relative_path to the output base directory.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mlflowlistartifactsresponse">
+<span id="id18"></span><h3>Response Structure<a class="headerlink" href="#mlflowlistartifactsresponse" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="37%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>root_uri</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>This is the root output directory for the run.</td>
+</tr>
+<tr class="row-odd"><td>files</td>
+<td>An array of <a class="reference internal" href="#mlflowfileinfo"><span class="std std-ref">FileInfo</span></a></td>
+<td>File location and metadata for artifacts.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="get-artifacts">
+<span id="mlflowmlflowservicegetartifact"></span><h2><a class="toc-backref" href="#id32">Get Artifacts</a><a class="headerlink" href="#get-artifacts" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="75%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/artifacts/get</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>List artifacts.</p>
+<div class="section" id="mlflowgetartifact">
+<span id="id19"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetartifact" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>path</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Relative path from root artifact location.</td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+</div>
+</div>
+<div class="section" id="update-run">
+<span id="mlflowmlflowserviceupdaterun"></span><h2><a class="toc-backref" href="#id33">Update Run</a><a class="headerlink" href="#update-run" title="Permalink to this headline"> </a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="73%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Endpoint</th>
+<th class="head">HTTP Method</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/update</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="mlflowupdaterun">
+<span id="id20"></span><h3>Request Structure<a class="headerlink" href="#mlflowupdaterun" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="27%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>This field is required.</td>
+</tr>
+<tr class="row-odd"><td>status</td>
+<td><a class="reference internal" href="#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
+<td>Updated status of the run.</td>
+</tr>
+<tr class="row-even"><td>end_time</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unix timestamp of when the run ended in milliseconds</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="data-structures">
+<span id="mlflowadd"></span><h2><a class="toc-backref" href="#id34">Data Structures</a><a class="headerlink" href="#data-structures" title="Permalink to this headline"> </a></h2>
+<div class="section" id="experiment">
+<span id="mlflowexperiment"></span><h3>Experiment<a class="headerlink" href="#experiment" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="13%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>experiment_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unique identifier for the experiment</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Human readable name that identifies this experiment</td>
+</tr>
+<tr class="row-even"><td>artifact_location</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Location where all artifacts for this experiment are stored</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="metric">
+<span id="mlflowmetric"></span><h3>Metric<a class="headerlink" href="#metric" title="Permalink to this headline"> </a></h3>
+<p>Metric associated with a run. It is represented as a key-value pair.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="16%" />
+<col width="67%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Key identifying this metric</td>
+</tr>
+<tr class="row-odd"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
+<td>Value associated with this metric</td>
+</tr>
+<tr class="row-even"><td>timestamp</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>The timestamp at which this metric was recorded</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="run">
+<span id="mlflowrun"></span><h3>Run<a class="headerlink" href="#run" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="47%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>info</td>
+<td><a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>data</td>
+<td><a class="reference internal" href="#mlflowrundata"><span class="std std-ref">RunData</span></a></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="runinfo">
+<span id="mlflowruninfo"></span><h3>RunInfo<a class="headerlink" href="#runinfo" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="25%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Unique identifier for the run.</td>
+</tr>
+<tr class="row-odd"><td>experiment_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>The experiment</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Human readable name that identifies this run.</td>
+</tr>
+<tr class="row-odd"><td>source_type</td>
+<td><a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
+<td>Source type</td>
+</tr>
+<tr class="row-even"><td>source_name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Source identifier: github URL, name of notebook, name of job … etc</td>
+</tr>
+<tr class="row-odd"><td>user_id</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>User who initiated this run</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td><a class="reference internal" href="#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
+<td>Current status of the run</td>
+</tr>
+<tr class="row-odd"><td>start_time</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unix timestamp of when the run started in milliseconds.</td>
+</tr>
+<tr class="row-even"><td>end_time</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Unix timestamp of when the run ended in milliseconds.</td>
+</tr>
+<tr class="row-odd"><td>source_version</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Git commit of the code used for the run</td>
+</tr>
+<tr class="row-even"><td>entry_point_name</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Name of the entry point for the run</td>
+</tr>
+<tr class="row-odd"><td>tags</td>
+<td>An array of <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
+<td>Additional metadata key-value pairs</td>
+</tr>
+<tr class="row-even"><td>artifact_uri</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>URI of the directory where artifacts should be uploaded.
+This can be a local path (starting with “/”), or a distributed file system (DFS)
+path, like s3://bucket/directory or dbfs:/my/directory.
+If not set, the local “./mlruns” directory will be chosen.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="runstatus">
+<span id="mlflowrunstatus"></span><h3>RunStatus<a class="headerlink" href="#runstatus" title="Permalink to this headline"> </a></h3>
+<p>Status of a run</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">RUNNING</th>
+<th class="head">Has been initiated</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SCHEDULED</td>
+<td>Scheduled to run at a later time</td>
+</tr>
+<tr class="row-odd"><td>FINISHED</td>
+<td>Run has complete</td>
+</tr>
+<tr class="row-even"><td>FAILED</td>
+<td>Execution failed</td>
+</tr>
+<tr class="row-odd"><td>KILLED</td>
+<td>Was killed by user</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sourcetype">
+<span id="mlflowsourcetype"></span><h3>SourceType<a class="headerlink" href="#sourcetype" title="Permalink to this headline"> </a></h3>
+<p>Originating source for a run.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">NOTEBOOK</th>
+<th class="head">Within Databricks Notebook environment.</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>JOB</td>
+<td>Scheduled or Run Now Job.</td>
+</tr>
+<tr class="row-odd"><td>PROJECT</td>
+<td>As a prepackaged project: either a docker image or github source, … etc.</td>
+</tr>
+<tr class="row-even"><td>LOCAL</td>
+<td>Local run: Using CLI, IDE, or local notebook</td>
+</tr>
+<tr class="row-odd"><td>UNKNOWN</td>
+<td>Unknown source type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="runtag">
+<span id="mlflowruntag"></span><h3>RunTag<a class="headerlink" href="#runtag" title="Permalink to this headline"> </a></h3>
+<p>Tag for a run</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="32%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rundata">
+<span id="mlflowrundata"></span><h3>RunData<a class="headerlink" href="#rundata" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="57%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>metrics</td>
+<td>An array of <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
+<td>Metrics</td>
+</tr>
+<tr class="row-odd"><td>params</td>
+<td>An array of <a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a></td>
+<td>Params</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="param">
+<span id="mlflowparam"></span><h3>Param<a class="headerlink" href="#param" title="Permalink to this headline"> </a></h3>
+<p>Parameters associated with a run: Key-Value pair of strings</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Key identifying this param</td>
+</tr>
+<tr class="row-odd"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Value for this parameter</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fileinfo">
+<span id="mlflowfileinfo"></span><h3>FileInfo<a class="headerlink" href="#fileinfo" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>path</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>This is the relative path to the root_output_uri for the run.</td>
+</tr>
+<tr class="row-odd"><td>is_dir</td>
+<td><code class="docutils literal notranslate"><span class="pre">BOOL</span></code></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>file_size</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>File size in bytes. Unset for directories.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="searchexpression">
+<span id="mlflowsearchexpression"></span><h3>SearchExpression<a class="headerlink" href="#searchexpression" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="61%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">metric</span></code> OR <code class="docutils literal notranslate"><span class="pre">parameter</span></code></td>
+<td><a class="reference internal" href="#mlflowmetricsearchexpression"><span class="std std-ref">MetricSearchExpression</span></a> OR <a class="reference internal" href="#mlflowparametersearchexpression"><span class="std std-ref">ParameterSearchExpression</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">AND</span></code> ed list of
+search expressions.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="metricsearchexpression">
+<span id="mlflowmetricsearchexpression"></span><h3>MetricSearchExpression<a class="headerlink" href="#metricsearchexpression" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="35%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>float</td>
+<td><a class="reference internal" href="#mlflowfloatclause"><span class="std std-ref">Float Clause</span></a></td>
+<td>Float clause for comparison</td>
+</tr>
+<tr class="row-odd"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a> key for search.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="parametersearchexpression">
+<span id="mlflowparametersearchexpression"></span><h3>ParameterSearchExpression<a class="headerlink" href="#parametersearchexpression" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="36%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">string</span></code></td>
+<td><a class="reference internal" href="#mlflowstringclause"><span class="std std-ref">StringClause</span></a></td>
+<td>String clause for comparison.</td>
+</tr>
+<tr class="row-odd"><td>key</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a> key for search.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="stringclause">
+<span id="mlflowstringclause"></span><h3>StringClause<a class="headerlink" href="#stringclause" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="22%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>comparator</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>OneOf (<code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">~</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>String value for comparison.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="float-clause">
+<span id="mlflowfloatclause"></span><h3>Float Clause<a class="headerlink" href="#float-clause" title="Permalink to this headline"> </a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="15%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Field Name</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>comparator</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>OneOf (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">==</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>)</td>
+</tr>
+<tr class="row-odd"><td>value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
+<td>Float value for comparison</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="python_api/mlflow.tracking.html" class="btn btn-neutral" title="mlflow.tracking" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'./',
+      VERSION:'0.2.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="_static/jquery.js"></script>
+  <script type="text/javascript" src="_static/underscore.js"></script>
+  <script type="text/javascript" src="_static/doctools.js"></script>
+  
+
+  <script type="text/javascript" src="_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "_static/clippy.svg";</script>
+  <script type="text/javascript" src="_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>

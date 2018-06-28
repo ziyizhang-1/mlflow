@@ -1,0 +1,329 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command-Line Interface &mdash; MLflow 0.2.0 documentation</title>
+  
+  
+  
+    <link rel="canonical" href="https://docs.databricks.com/cli.html">
+  
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="MLflow 0.2.0 documentation" href="index.html"/>
+        <link rel="next" title="Python API" href="/python_api/index.html"/>
+        <link rel="prev" title="MLflow Models" href="/models.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+      <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="index.html" class="main-navigation-home"><img src="_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">MLflow Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#azure-ml">Azure ML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download">Download</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#python-function">Python Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sagemaker">SageMaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scikit-learn-models">scikit-learn Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run">Run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ui">UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/databricks/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>Command-Line Interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="command-line-interface">
+<span id="cli"></span><h1>Command-Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline"> </a></h1>
+<p>The MLflow command-line interface (CLI) provides a simple interface to various functionality in MLflow. You can use the CLI to
+start the tracking UI, run projects and runs, serve models to
+<a class="reference external" href="https://azure.microsoft.com/en-us/overview/machine-learning/">Microsoft Azure ML</a> or
+<a class="reference external" href="https://aws.amazon.com/sagemaker/">Amazon SageMaker</a>, create
+and list experiments, and download artifacts.</p>
+<div class="highlight-guess notranslate"><div class="highlight"><pre><span></span>$ mlflow --help
+Usage: mlflow <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+
+Options:
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+
+Commands:
+  azureml      Serve models on Azure ML.
+  download     Download the artifact at the specified DBFS or S3 URI.
+  experiments  Run and list experiments.
+  pyfunc       Serve Python models locally.
+  run          Run an MLflow project from the given URI.
+  sagemaker    Serve models on Amazon SageMaker.
+  sklearn      Serve scikit-learn models.
+  ui           Run the MLflow tracking UI.
+</pre></div>
+</div>
+<p>Each individual command has a detailed help screen accessible via <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">command_name</span> <span class="pre">--help</span></code></p>
+<div class="section" id="azure-ml">
+<h2>Azure ML<a class="headerlink" href="#azure-ml" title="Permalink to this headline"> </a></h2>
+<p>Subcommands to serve models on Azure ML.</p>
+</div>
+<div class="section" id="download">
+<h2>Download<a class="headerlink" href="#download" title="Permalink to this headline"> </a></h2>
+<p>Download the artifact at the specified DBFS or S3 URI into the specified
+local output path, or the current directory if no output path is
+specified.</p>
+</div>
+<div class="section" id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline"> </a></h2>
+<p>Subcommands to create and list experiments.</p>
+</div>
+<div class="section" id="python-function">
+<h2>Python Function<a class="headerlink" href="#python-function" title="Permalink to this headline"> </a></h2>
+<p>Subcommands to serve Python models and apply them for inference.</p>
+</div>
+<div class="section" id="sagemaker">
+<h2>SageMaker<a class="headerlink" href="#sagemaker" title="Permalink to this headline"> </a></h2>
+<p>Subcommands to serve models on SageMaker.</p>
+</div>
+<div class="section" id="scikit-learn-models">
+<h2>scikit-learn Models<a class="headerlink" href="#scikit-learn-models" title="Permalink to this headline"> </a></h2>
+<p>Subcommands to serve scikit-learn models and apply them for inference.</p>
+</div>
+<div class="section" id="run">
+<h2>Run<a class="headerlink" href="#run" title="Permalink to this headline"> </a></h2>
+<p>Run an MLflow project from the given URI.</p>
+<p>If running locally (the default), the URI can be either a Git repository
+URI or a local path. If running on Databricks, the URI must be a Git
+repository.</p>
+<p>By default, Git projects will run in a new working directory with the
+given parameters, while local projects will run from the project’s root
+directory.</p>
+</div>
+<div class="section" id="ui">
+<h2>UI<a class="headerlink" href="#ui" title="Permalink to this headline"> </a></h2>
+<p>Run the MLflow tracking UI. The UI is served at <a class="reference external" href="http://localhost:5000">http://localhost:5000</a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="models.html" class="btn btn-neutral" title="MLflow Models" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="python_api/index.html" class="btn btn-neutral" title="Python API" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'./',
+      VERSION:'0.2.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="_static/jquery.js"></script>
+  <script type="text/javascript" src="_static/underscore.js"></script>
+  <script type="text/javascript" src="_static/doctools.js"></script>
+  
+
+  <script type="text/javascript" src="_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "_static/clippy.svg";</script>
+  <script type="text/javascript" src="_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>

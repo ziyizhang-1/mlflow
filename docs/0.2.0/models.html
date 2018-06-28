@@ -1,0 +1,551 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MLflow Models &mdash; MLflow 0.2.0 documentation</title>
+  
+  
+  
+    <link rel="canonical" href="https://docs.databricks.com/models.html">
+  
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="MLflow 0.2.0 documentation" href="index.html"/>
+        <link rel="next" title="Command-Line Interface" href="/cli.html"/>
+        <link rel="prev" title="MLflow Projects" href="/projects.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+      <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="index.html" class="main-navigation-home"><img src="_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">MLflow Projects</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MLflow Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#storage-format">Storage Format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fields-in-the-mlmodel-format">Fields in the MLmodel Format</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#model-api">Model API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#built-in-model-flavors">Built-In Model Flavors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python-function-python-function">Python Function (<code class="docutils literal notranslate"><span class="pre">python_function</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scikit-learn-sklearn">Scikit-learn (<code class="docutils literal notranslate"><span class="pre">sklearn</span></code>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tensorflow-tensorflow">TensorFlow (<code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-flavors">Custom Flavors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#built-in-deployment-tools">Built-In Deployment Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#local">Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#microsoft-azureml">Microsoft AzureML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#amazon-sagemaker">Amazon Sagemaker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spark">Spark</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest_api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/databricks/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>MLflow Models</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="mlflow-models">
+<span id="models"></span><h1>MLflow Models<a class="headerlink" href="#mlflow-models" title="Permalink to this headline"> </a></h1>
+<p>An MLflow Model is a standard format for packaging machine learning models that can be used in a
+variety of downstream tools—for example, real-time serving through a REST API or batch inference
+on Apache Spark. They provide a convention to save a model in different “flavors” that can be
+understood by different downstream tools.</p>
+<div class="section" id="storage-format">
+<h2>Storage Format<a class="headerlink" href="#storage-format" title="Permalink to this headline"> </a></h2>
+<p>Each MLflow Model is simply a directory containing arbitrary files, together with an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code>
+file in the root of the directory that can define multiple <em>flavors</em> that the model can be viewed
+in.</p>
+<p>Flavors are the key concept that makes MLflow Models powerful: they are a convention that deployment
+tools can use to understand the model, which makes it possible to write tools that work with models
+from any ML library without having to integrate each tool with each library. MLflow defines
+several “standard” flavors that all of its built-in deployment tools support, such as a “Python
+function” flavor that describes how to run the model as a Python function. However, libraries can
+also define and use other flavors. For example, MLflow’s <a class="reference internal" href="python_api/mlflow.sklearn.html#module-mlflow.sklearn" title="mlflow.sklearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code></a> library allows
+loading models back as a scikit-learn <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code> object for use in code that is aware of
+scikit-learn, or as a generic Python function for use in tools that just need to apply the model
+(for example, the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sagemaker</span></code> tool for deploying models to Amazon SageMaker).</p>
+<p>All of the flavors that a particular model supports are defined in its <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file in YAML
+format. For example, <a class="reference internal" href="python_api/mlflow.sklearn.html#module-mlflow.sklearn" title="mlflow.sklearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code></a> outputs models as follows:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span># Directory written by mlflow.sklearn.save_model(model, &quot;my_model&quot;)
+my_model/
+├── MLmodel
+└── model.pkl
+</pre></div>
+</div>
+<p>And its <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file describes two flavors:</p>
+<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time_created</span><span class="p">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">25</span><span class="n">T17</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mf">53.35</span>
+
+<span class="n">flavors</span><span class="p">:</span>
+  <span class="n">sklearn</span><span class="p">:</span>
+    <span class="n">sklearn_version</span><span class="p">:</span> <span class="mf">0.19</span><span class="o">.</span><span class="mi">1</span>
+    <span class="n">pickled_model</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">pkl</span>
+  <span class="n">python_function</span><span class="p">:</span>
+    <span class="n">loader_module</span><span class="p">:</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span>
+</pre></div>
+</div>
+<p>This model can then be used with any tool that supports <em>either</em> the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> or
+<code class="docutils literal notranslate"><span class="pre">python_function</span></code> model flavor. For example, the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sklearn</span></code> command can serve a
+model with the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> flavor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sklearn</span> <span class="n">serve</span> <span class="n">my_model</span>
+</pre></div>
+</div>
+<p>In addition, the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sagemaker</span></code> command-line tool can package and deploy models to AWS
+SageMaker as long as they support the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">deploy</span> <span class="o">-</span><span class="n">m</span> <span class="n">my_model</span> <span class="p">[</span><span class="n">other</span> <span class="n">options</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="fields-in-the-mlmodel-format">
+<h3>Fields in the MLmodel Format<a class="headerlink" href="#fields-in-the-mlmodel-format" title="Permalink to this headline"> </a></h3>
+<p>Apart from a <strong>flavors</strong> field listing the model flavors, the MLmodel YAML format can contain
+the following fields:</p>
+<dl class="docutils">
+<dt>time_created</dt>
+<dd>Date and time when the model was created, in UTC ISO 8601 format.</dd>
+<dt>run_id</dt>
+<dd>ID of the run that created the model, if the model was saved using <a class="reference internal" href="tracking.html#tracking"><span class="std std-ref">MLflow Tracking</span></a>.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="model-api">
+<h2>Model API<a class="headerlink" href="#model-api" title="Permalink to this headline"> </a></h2>
+<p>You can save and load MLflow Models in multiple ways. First, MLflow includes integrations with
+several common libraries. For example, <a class="reference internal" href="python_api/mlflow.sklearn.html#module-mlflow.sklearn" title="mlflow.sklearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code></a> contains
+<a class="reference internal" href="python_api/mlflow.sklearn.html#mlflow.sklearn.save_model" title="mlflow.sklearn.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model</span></code></a>, <a class="reference internal" href="python_api/mlflow.sklearn.html#mlflow.sklearn.log_model" title="mlflow.sklearn.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model</span></code></a>
+and <a class="reference internal" href="python_api/mlflow.sklearn.html#mlflow.sklearn.load_model" title="mlflow.sklearn.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_model</span></code></a> functions for Scikit-learn models. Second,
+you can use the more general <a class="reference internal" href="python_api/mlflow.serving.html#mlflow.models.Model" title="mlflow.models.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.models.Model</span></code></a> class to create and write models. This
+class has four key functions:</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">add_flavor</span></code> to add a flavor to the model. Each flavor
+has a string name and a dictionary of key-value attributes, where the values can be any object
+that can be serialized to YAML.</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">save</span></code> saves the model to a local directory.</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">log_artifact</span></code> logs the model as an artifact in the
+current run using MLflow Tracking.</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">Model.load</span></code> loads a model from a local directory or
+from an artifact in a previous run.</li>
+</ul>
+</div>
+<div class="section" id="built-in-model-flavors">
+<h2>Built-In Model Flavors<a class="headerlink" href="#built-in-model-flavors" title="Permalink to this headline"> </a></h2>
+<p>MLflow provides several standard flavors that might be useful in your applications. Specifically,
+many of its deployment tools support these flavors, so you can export your own model in one of these
+flavors to benefit from all these tools.</p>
+<div class="section" id="python-function-python-function">
+<h3>Python Function (<code class="docutils literal notranslate"><span class="pre">python_function</span></code>)<a class="headerlink" href="#python-function-python-function" title="Permalink to this headline"> </a></h3>
+<p>The Python Function flavor defines a generic filesystem format for Python models and provides utilities
+for saving and loading models to and from this format. The format is self-contained in the sense
+that it includes all the information necessary to load and use a model. Dependencies
+are stored either directly with the model or referenced via Conda environment.</p>
+<p>The convention for Pyfunc models is to have a <code class="docutils literal notranslate"><span class="pre">predict</span></code> method or function with the following
+signature:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">|</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span>
+</pre></div>
+</div>
+<p>Other MLflow components expect Pyfunc models to follow this convention.</p>
+<p>The Pyfunc model format is defined as a directory structure containing all required data, code and
+configuration:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">dst</span><span class="o">-</span><span class="n">path</span><span class="o">/</span>
+    <span class="o">./</span><span class="n">MLmodel</span> <span class="o">-</span> <span class="n">config</span>
+    <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="o">-</span> <span class="nb">any</span> <span class="n">code</span> <span class="n">packaged</span> <span class="k">with</span> <span class="n">the</span> <span class="n">model</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">conf</span> <span class="n">file</span><span class="p">,</span> <span class="n">see</span> <span class="n">below</span><span class="p">)</span>
+    <span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span> <span class="o">-</span> <span class="nb">any</span> <span class="n">data</span> <span class="n">packaged</span> <span class="k">with</span> <span class="n">the</span> <span class="n">model</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">conf</span> <span class="n">file</span><span class="p">,</span> <span class="n">see</span> <span class="n">below</span><span class="p">)</span>
+    <span class="o">&lt;</span><span class="n">env</span><span class="o">&gt;</span>  <span class="o">-</span> <span class="n">conda</span> <span class="n">environment</span> <span class="n">definition</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">conf</span> <span class="n">file</span><span class="p">,</span> <span class="n">see</span> <span class="n">below</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A Pyfunc model directory must contain an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file in its root with “python_function” format and the following
+parameters:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>- loader_module [required]:
+      Python module that can load the model. Expected to be a module identifier
+      (e.g. ``mlflow.sklearn``) importable via ``importlib.import_module``.
+      The imported module must contain a function with the following signature:
+
+           load_pyfunc(path: string) -&gt; &lt;pyfunc model&gt;
+
+      The path argument is specified by the data parameter and may refer to a file or directory.
+
+- code [optional]:
+      A relative path to a directory containing the code packaged with this model.
+      All files and directories inside this directory are added to the Python path
+      prior to importing the model loader.
+
+- data [optional]:
+      A relative path to a file or directory containing model data.
+      the path is passed to the model loader.
+
+- env [optional]:
+      A relative path to an exported Conda environment. If present this environment
+      will be activated prior to running the model.
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;tree example/sklearn_iris/mlruns/run1/outputs/linear-lr
+├── MLmodel
+├── code
+│   ├── sklearn_iris.py
+│
+├── data
+│   └── model.pkl
+└── mlflow_env.yml
+
+&gt;cat example/sklearn_iris/mlruns/run1/outputs/linear-lr/MLmodel
+python_function:
+  code: code
+  data: data/model.pkl
+  env: mlflow_env.yml
+  main: sklearn_iris
+</pre></div>
+</div>
+<p>For more detail see docs at <a class="reference internal" href="python_api/mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></p>
+</div>
+<div class="section" id="scikit-learn-sklearn">
+<h3>Scikit-learn (<code class="docutils literal notranslate"><span class="pre">sklearn</span></code>)<a class="headerlink" href="#scikit-learn-sklearn" title="Permalink to this headline"> </a></h3>
+<p>The sklearn model flavor provides an easy to use interface for handling scikit-learn models with no
+external dependencies. It saves and loads models using Python’s pickle module and also generates a valid
+<code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">Function</span></code> flavor. For more information, see <a class="reference internal" href="python_api/mlflow.sklearn.html#module-mlflow.sklearn" title="mlflow.sklearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code></a>.</p>
+</div>
+<div class="section" id="tensorflow-tensorflow">
+<h3>TensorFlow (<code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>)<a class="headerlink" href="#tensorflow-tensorflow" title="Permalink to this headline"> </a></h3>
+<p>The TensorFlow model flavor enables logging TensorFlow <code class="docutils literal notranslate"><span class="pre">Saved</span> <span class="pre">Models</span></code> and loading them back as <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">Function</span></code> models for inference on Pandas DataFrames. Given a directory containing a saved model, you can log the model to MLflow via <code class="docutils literal notranslate"><span class="pre">log_saved_model</span></code>. The saved model can then be loaded for inference via <code class="docutils literal notranslate"><span class="pre">load_pyfunc()</span></code>. For more information, see <a class="reference internal" href="python_api/mlflow.tensorflow.html#module-mlflow.tensorflow" title="mlflow.tensorflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="custom-flavors">
+<h2>Custom Flavors<a class="headerlink" href="#custom-flavors" title="Permalink to this headline"> </a></h2>
+<p>In general, you can add any flavor you’d like in MLmodel files, either by writing them directly or
+building them with the <a class="reference internal" href="python_api/mlflow.serving.html#mlflow.models.Model" title="mlflow.models.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.models.Model</span></code></a> class. Just choose an arbitrary string name
+for your flavor. MLflow’s tools will ignore flavors that they do not understand in the MLmodel file.</p>
+</div>
+<div class="section" id="built-in-deployment-tools">
+<h2>Built-In Deployment Tools<a class="headerlink" href="#built-in-deployment-tools" title="Permalink to this headline"> </a></h2>
+<p>MLflow provides tools for deployment on a local machine and several production environments.
+You can use these tools to easily apply your models in a production environment. Not all deployment
+methods are available for all model flavors. Deployment is currently supported mostly for the
+python function format and all compatible formats.</p>
+<div class="section" id="local">
+<h3>Local<a class="headerlink" href="#local" title="Permalink to this headline"> </a></h3>
+<p>MLflow can deploy models locally as a local REST API endpoint or to directly score csv files.
+This functionality is a convenient way of testing models before uploading to remote.</p>
+<p>Python function flavor can be deployed locally via <a class="reference internal" href="python_api/mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> module as</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">serve</span></code>
+deploys model as a local REST api server</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">predict</span></code> uses the model to generate prediction for local
+csv file.</li>
+</ul>
+<p>For more info, see</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">pyfunc</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">pyfunc</span> <span class="n">serve</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">pyfunc</span> <span class="n">predict</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="microsoft-azureml">
+<h3>Microsoft AzureML<a class="headerlink" href="#microsoft-azureml" title="Permalink to this headline"> </a></h3>
+<p>MLflow’s <a class="reference internal" href="python_api/mlflow.azureml.html#module-mlflow.azureml" title="mlflow.azureml"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.azureml</span></code></a> module can export <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">Function</span></code> models as Azure ML compatible models. It
+can also be used to directly deploy and serve models on Azure ML, provided the environment has
+been correctly set up.</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">export</span></code> exports the model in Azure ML-compatible format.
+MLFlow will output a directory with the dependencies necessary to deploy the model.</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">deploy</span></code> deploys the model directly to Azure ML.
+You first need to set up your environment to work with the Azure ML CLI. Currently this can be done by
+starting a shell from the Azure ML Workbench application. You also have to set up all accounts
+required to run and deploy on Azure ML. Note that where the model is deployed is dependent on your
+active Azure ML environment. If the active environment is set up for local deployment, the model
+will be deployed locally in a Docker container (Docker is required).</li>
+</ul>
+<p>Model export example:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span>mlflow azureml export -m &lt;path-to-model&gt; -o test-output
+tree test-output
+test-output
+├── create_service.sh  - you can use this script to upload the model to Azure ML
+├── score.py - main module required by Azure ML
+└── test-output - dir containing MLFlow model in Python Function flavor
+</pre></div>
+</div>
+<p>Example model worklow for deployment:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">az</span> <span class="n">ml</span> <span class="nb">set</span> <span class="n">env</span> <span class="o">&lt;</span><span class="n">local</span><span class="o">-</span><span class="n">env</span><span class="o">&gt;</span> <span class="o">-</span> <span class="nb">set</span> <span class="n">environment</span> <span class="n">to</span> <span class="n">local</span> <span class="n">deployment</span>
+<span class="n">mlflow</span> <span class="n">azureml</span> <span class="n">deploy</span> <span class="o">&lt;</span><span class="n">parameters</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">deploy</span> <span class="n">locally</span> <span class="n">to</span> <span class="n">test</span> <span class="n">the</span> <span class="n">model</span>
+<span class="n">az</span> <span class="n">ml</span> <span class="nb">set</span> <span class="n">env</span> <span class="o">&lt;</span><span class="n">cluster</span><span class="o">-</span><span class="n">env</span><span class="o">&gt;</span> <span class="o">-</span> <span class="nb">set</span> <span class="n">environment</span> <span class="n">to</span> <span class="n">cluster</span>
+<span class="n">mlflow</span> <span class="n">azureml</span> <span class="n">deploy</span> <span class="o">&lt;</span><span class="n">parameters</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">deploy</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cloud</span>
+</pre></div>
+</div>
+<p>For more info, see</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">azureml</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">azureml</span> <span class="n">export</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">azureml</span> <span class="n">deploy</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="amazon-sagemaker">
+<h3>Amazon Sagemaker<a class="headerlink" href="#amazon-sagemaker" title="Permalink to this headline"> </a></h3>
+<p>MLflow’s <a class="reference internal" href="python_api/mlflow.sagemaker.html#module-mlflow.sagemaker" title="mlflow.sagemaker"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sagemaker</span></code></a> module can deploy <code class="docutils literal notranslate"><span class="pre">Python</span> <span class="pre">Function</span></code> models on Sagemaker
+or locally in a docker container with Sagemaker compatible environment (Docker is required).
+Similarly to Azure ML, you have to set up your environment and user accounts first in order to
+deploy to Sagemaker with MLflow. Also, in order to export a custom model to Sagemaker, you need a
+MLflow-compatible Docker image to be available on Amazon ECR. MLflow provides a default Docker
+image defintion, however, it is up to the user to build the actual image and upload it to ECR.
+MLflow includes a utility function to perform this step. Once built and uploaded, the MLflow
+container can be used for all MLflow models.</p>
+<ul class="simple">
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">build-and-push-container</span></code> builds an MLFLow
+Docker image and uploads it to ECR. The calling user has to have the correct permissions set up. The image
+is built locally and requires Docker to be present on the machine that performs this step.</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">run_local</span></code> deploys the model locally in a Docker
+container. The image and the environment should be identical to how the model would be run
+remotely and it is therefore useful for testing the model prior to deployment.</li>
+<li><code class="xref py py-func docutils literal notranslate"><span class="pre">deploy</span></code> deploys the model on Amazon Sagemaker. MLflow
+will upload the Python Function model into S3 and start an Amazon Sagemaker endpoint serving
+the model.</li>
+</ul>
+<p>Example workflow:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">build</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">push</span><span class="o">-</span><span class="n">container</span>  <span class="o">-</span> <span class="n">build</span> <span class="n">the</span> <span class="n">container</span> <span class="p">(</span><span class="n">only</span> <span class="n">needs</span> <span class="n">to</span> <span class="n">be</span> <span class="n">called</span> <span class="n">once</span><span class="p">)</span>
+<span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">run</span><span class="o">-</span><span class="n">local</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">yourmodel</span><span class="o">&gt;</span>  <span class="o">-</span> <span class="n">test</span> <span class="n">the</span> <span class="n">model</span> <span class="n">locally</span>
+<span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">deploy</span> <span class="o">&lt;</span><span class="n">parameters</span><span class="o">&gt;</span> <span class="o">-</span> <span class="n">deploy</span> <span class="n">the</span> <span class="n">model</span> <span class="n">to</span> <span class="n">the</span> <span class="n">cloud</span>
+</pre></div>
+</div>
+<p>For more info, see</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">build</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">push</span><span class="o">-</span><span class="n">container</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">run</span><span class="o">-</span><span class="n">local</span> <span class="o">--</span><span class="n">help</span>
+<span class="n">mlflow</span> <span class="n">sagemaker</span> <span class="n">deploy</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spark">
+<h3>Spark<a class="headerlink" href="#spark" title="Permalink to this headline"> </a></h3>
+<p>MLFLow can output python function model as a Spark UDF, which can be uploaded to a Spark cluster and
+used to score the model.</p>
+<p>Example:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyfunc_udf</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="o">&lt;</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">model</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark_df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> <span class="n">pyfunc_udf</span><span class="p">(</span><span class="o">&lt;</span><span class="n">features</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="projects.html" class="btn btn-neutral" title="MLflow Projects" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="cli.html" class="btn btn-neutral" title="Command-Line Interface" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'./',
+      VERSION:'0.2.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="_static/jquery.js"></script>
+  <script type="text/javascript" src="_static/underscore.js"></script>
+  <script type="text/javascript" src="_static/doctools.js"></script>
+  
+
+  <script type="text/javascript" src="_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "_static/clippy.svg";</script>
+  <script type="text/javascript" src="_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>
