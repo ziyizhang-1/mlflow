@@ -85,11 +85,7 @@
     
 <div role="search">
   
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-  </form>
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
   
 </div>
 
@@ -208,6 +204,14 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.EntryPoint.compute_command">compute_command() (mlflow.projects.EntryPoint method)</a>
+</li>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.EntryPoint.compute_parameters">compute_parameters() (mlflow.projects.EntryPoint method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.Parameter.compute_value">compute_value() (mlflow.projects.Parameter method)</a>
+</li>
       <li><a href="python_api/mlflow.html#mlflow.create_experiment">create_experiment() (in module mlflow)</a>
 
       <ul>
@@ -240,6 +244,8 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.EntryPoint">EntryPoint (class in mlflow.projects)</a>
+</li>
       <li><a href="python_api/mlflow.projects.html#mlflow.projects.ExecutionException">ExecutionException</a>
 </li>
       <li><a href="python_api/mlflow.azureml.html#mlflow.azureml.export">export() (in module mlflow.azureml)</a>
@@ -260,6 +266,8 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.Project.get_entry_point">get_entry_point() (mlflow.projects.Project method)</a>
+</li>
       <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.get_module_loader_src">get_module_loader_src() (in module mlflow.pyfunc)</a>
 </li>
       <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.ActiveRun.get_run">get_run() (mlflow.tracking.ActiveRun method)</a>
@@ -362,6 +370,12 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.Parameter">Parameter (class in mlflow.projects)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.Project">Project (class in mlflow.projects)</a>
+</li>
       <li><a href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.push_image_to_ecr">push_image_to_ecr() (in module mlflow.sagemaker)</a>
 </li>
   </ul></td>
@@ -490,6 +504,17 @@
 </script>
 
 
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

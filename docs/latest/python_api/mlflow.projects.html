@@ -87,11 +87,7 @@
     
 <div role="search">
   
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-  </form>
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
   
 </div>
 
@@ -176,31 +172,78 @@
                 
   <div class="section" id="module-mlflow.projects">
 <span id="mlflow-projects"></span><h1>mlflow.projects<a class="headerlink" href="#module-mlflow.projects" title="Permalink to this headline"> </a></h1>
-<p>APIs for running MLflow Projects locally or remotely.</p>
+<dl class="class">
+<dt id="mlflow.projects.EntryPoint">
+<em class="property">class </em><code class="descclassname">mlflow.projects.</code><code class="descname">EntryPoint</code><span class="sig-paren">(</span><em>name</em>, <em>parameters</em>, <em>command</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.EntryPoint" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An entry point in an MLproject specification.</p>
+<dl class="method">
+<dt id="mlflow.projects.EntryPoint.compute_command">
+<code class="descname">compute_command</code><span class="sig-paren">(</span><em>user_parameters</em>, <em>storage_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.EntryPoint.compute_command" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.projects.EntryPoint.compute_parameters">
+<code class="descname">compute_parameters</code><span class="sig-paren">(</span><em>user_parameters</em>, <em>storage_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.EntryPoint.compute_parameters" title="Permalink to this definition"> </a></dt>
+<dd><p>Given a dict mapping user-specified param names to values, computes parameters to
+substitute into the command for this entry point. Returns a tuple (params, extra_params)
+where <cite>params</cite> contains key-value pairs for parameters specified in the entry point
+definition, and <cite>extra_params</cite> contains key-value pairs for additional parameters passed
+by the user.</p>
+<p>Note that resolving parameter values can be a heavy operation, e.g. if a remote URI is
+passed for a parameter of type <cite>path</cite>, we download the URI to a local path within
+<cite>storage_dir</cite> and substitute in the local path as the parameter value.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="exception">
 <dt id="mlflow.projects.ExecutionException">
 <em class="property">exception </em><code class="descclassname">mlflow.projects.</code><code class="descname">ExecutionException</code><a class="headerlink" href="#mlflow.projects.ExecutionException" title="Permalink to this definition"> </a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">exceptions.Exception</span></code></p>
-<p>Exception thrown when executing a project fails.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflow.projects.Parameter">
+<em class="property">class </em><code class="descclassname">mlflow.projects.</code><code class="descname">Parameter</code><span class="sig-paren">(</span><em>name</em>, <em>yaml_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.Parameter" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A parameter in an MLproject entry point.</p>
+<dl class="method">
+<dt id="mlflow.projects.Parameter.compute_value">
+<code class="descname">compute_value</code><span class="sig-paren">(</span><em>user_param_value</em>, <em>storage_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.Parameter.compute_value" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflow.projects.Project">
+<em class="property">class </em><code class="descclassname">mlflow.projects.</code><code class="descname">Project</code><span class="sig-paren">(</span><em>uri</em>, <em>yaml_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.Project" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A project specification loaded from an MLproject file.</p>
+<dl class="method">
+<dt id="mlflow.projects.Project.get_entry_point">
+<code class="descname">get_entry_point</code><span class="sig-paren">(</span><em>entry_point</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.Project.get_entry_point" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.projects.run">
-<code class="descclassname">mlflow.projects.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>use_temp_cwd=False</em>, <em>storage_dir=None</em>, <em>block=True</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.run" title="Permalink to this definition"> </a></dt>
-<dd><p>Run an MLflow project from the given URI.</p>
+<code class="descclassname">mlflow.projects.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>use_temp_cwd=False</em>, <em>storage_dir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.run" title="Permalink to this definition"> </a></dt>
+<dd><p>Run an MLflow project from the given URI in a new directory.</p>
 <p>Supports downloading projects from Git URIs with a specified version, or copying them from
 the file system. For Git-based projects, a commit can be specified as the <cite>version</cite>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>entry_point</strong> – Entry point to run within the project. If no entry point with the specified
 name is found, attempts to run the project file <cite>entry_point</cite> as a script,
 using “python” to run .py files and the default shell (specified by
 environment variable $SHELL) to run .sh files.</li>
 <li><strong>experiment_id</strong> – ID of experiment under which to launch the run.</li>
-<li><strong>mode</strong> – Execution mode for the run. Can be set to “local” or “databricks”.</li>
+<li><strong>mode</strong> – Execution mode for the run. Can be set to “databricks” or “local”</li>
 <li><strong>cluster_spec</strong> – Path to JSON file describing the cluster to use when launching a run on
 Databricks.</li>
 <li><strong>git_username</strong> – Username for HTTP(S) authentication with Git.</li>
@@ -216,11 +259,7 @@ the working directory.</li>
 <li><strong>storage_dir</strong> – Only used if <cite>mode</cite> is local. MLflow will download artifacts from
 distributed URIs passed to parameters of type ‘path’ to subdirectories of
 storage_dir.</li>
-<li><strong>block</strong> – Whether or not to block while waiting for a run to complete. Defaults to True.</li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">UUID of the run</p>
 </td>
 </tr>
 </tbody>
@@ -308,6 +347,17 @@ storage_dir.</li>
 </script>
 
 
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="../_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>
