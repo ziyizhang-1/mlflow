@@ -1,0 +1,427 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mlflow.tracking &mdash; MLflow 0.1.0 documentation</title>
+  
+  
+  
+    <link rel="canonical" href="https://docs.databricks.com/python_api/mlflow.tracking.html">
+  
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MLflow 0.1.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API" href="index.html"/>
+        <link rel="next" title="REST API" href="/../rest_api.html"/>
+        <link rel="prev" title="mlflow.tensorflow" href="/mlflow.tensorflow.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+      <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="../index.html" class="main-navigation-home"><img src="../_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlflow.html">mlflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.azureml.html">mlflow.azureml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rest_api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/databricks/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+        <li><a href="index.html">Python API</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>mlflow.tracking</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="module-mlflow.tracking">
+<span id="mlflow-tracking"></span><h1>mlflow.tracking<a class="headerlink" href="#module-mlflow.tracking" title="Permalink to this headline"> </a></h1>
+<dl class="class">
+<dt id="mlflow.tracking.ActiveRun">
+<em class="property">class </em><code class="descclassname">mlflow.tracking.</code><code class="descname">ActiveRun</code><span class="sig-paren">(</span><em>run_info</em>, <em>store</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class representing an active run. Has a reference to the store to which state for the run
+(e.g. run metadata, metrics, parameters, and artifacts) should be persisted.</p>
+<p>Contains methods for logging metrics, parameters, etc under the current run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>run_info</strong> – RunInfo describing the active run. A corresponding <cite>Run</cite> object is assumed to
+already be persisted with state “running” in <cite>store</cite>.</li>
+<li><strong>store</strong> – Backend store to which the current run should persist state updates.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.get_artifact_uri">
+<code class="descname">get_artifact_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.get_artifact_uri" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.get_run">
+<code class="descname">get_run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.get_run" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.log_artifact">
+<code class="descname">log_artifact</code><span class="sig-paren">(</span><em>local_path</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.log_artifact" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.log_artifacts">
+<code class="descname">log_artifacts</code><span class="sig-paren">(</span><em>local_dir</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.log_artifacts" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.log_metric">
+<code class="descname">log_metric</code><span class="sig-paren">(</span><em>metric</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.log_metric" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.log_param">
+<code class="descname">log_param</code><span class="sig-paren">(</span><em>param</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.log_param" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.ActiveRun.set_terminated">
+<code class="descname">set_terminated</code><span class="sig-paren">(</span><em>status</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.ActiveRun.set_terminated" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.active_run">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">active_run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.active_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Returns the currently active <cite>Run</cite>, or None if no such run exists.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.create_experiment">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">create_experiment</code><span class="sig-paren">(</span><em>experiment_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.create_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Creates an experiment with the specified name and returns its ID.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.end_run">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">end_run</code><span class="sig-paren">(</span><em>status='FINISHED'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.end_run" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.get_artifact_uri">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">get_artifact_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.get_artifact_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Returns the artifact URI of the currently active run. Calls to <cite>log_artifact</cite>, <cite>log_artifacts</cite>
+will write artifact(s) to subdirectories of the returned URI.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.get_tracking_uri">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">get_tracking_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.get_tracking_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Returns the current tracking URI. Note that this may not correspond to the tracking URI of
+the currently active run, since the tracking URI may be updated via <cite>set_tracking_uri</cite>.
+:return: the tracking URI</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.list_experiments">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">list_experiments</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.list_experiments" title="Permalink to this definition"> </a></dt>
+<dd><p>Returns a list of all experiments</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.log_artifact">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">log_artifact</code><span class="sig-paren">(</span><em>local_path</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.log_artifact" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a local file or directory as an artifact of the currently active run.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.log_artifacts">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">log_artifacts</code><span class="sig-paren">(</span><em>local_dir</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.log_artifacts" title="Permalink to this definition"> </a></dt>
+<dd><p>Log all the contents of a local directory as artifacts of the run.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.log_metric">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">log_metric</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.log_metric" title="Permalink to this definition"> </a></dt>
+<dd><p>Logs the passed-in metric under the current run, creating a run if necessary.
+:param key: Metric name (string)
+:param value: Metric value (float)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.log_param">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">log_param</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.log_param" title="Permalink to this definition"> </a></dt>
+<dd><p>Logs the passed-in parameter under the current run, creating a run if necessary.
+:param key: Parameter name (string)
+:param value: Parameter value (string)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.set_tracking_uri">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">set_tracking_uri</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.set_tracking_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Sets the tracking server URI to the passed-in value. Note that this does not affect the
+currently active run (if one exists), but will take effect for any successive runs.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.start_run">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">start_run</code><span class="sig-paren">(</span><em>run_uuid=None</em>, <em>experiment_id=None</em>, <em>source_name=None</em>, <em>source_version=None</em>, <em>entry_point_name=None</em>, <em>source_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.start_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Start a new MLflow run, setting it as the active run under which metrics and params
+will be logged. The return value can be used as a context manager within a <cite>with</cite> block;
+otherwise, <cite>end_run()</cite> must be called to terminate the current run.</p>
+<p>Note that if a run is currently in progress (i.e., start_run has been called without an
+end_run, or you are running from “mlflow run”), then this function will return the
+existing run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>run_uuid</strong> – If specified, gets the run with the specified UUID and logs metrics
+and params under that run. The run’s end time will be unset and its status
+will be set to running, but the run’s other attributes will remain unchanged
+(the run’s source_version, source_type, etc will not be changed).</li>
+<li><strong>experiment_id</strong> – Only used when run_uuid is unspecified. ID of the experiment under which
+to create the current run. If unspecified, the run will be created under
+a new experiment with a randomly-generated name</li>
+<li><strong>source_name</strong> – Name of the source file or URI of the project to be associated with the run.
+Defaults to the current file if none provided.</li>
+<li><strong>source_version</strong> – Optional Git commit hash to associate with the run.</li>
+<li><strong>entry_point_name</strong> – Optional name of the entry point for to the current run.</li>
+<li><strong>source_type</strong> – Integer enum value describing the type of the run (“local”, “project”, etc).
+Defaults to mlflow.entities.source_type.SourceType.LOCAL.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <a class="reference internal" href="#mlflow.tracking.ActiveRun" title="mlflow.tracking.ActiveRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActiveRun</span></code></a> object that acts as a context manager wrapping the run’s state</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mlflow.tensorflow.html" class="btn btn-neutral" title="mlflow.tensorflow" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="../rest_api.html" class="btn btn-neutral" title="REST API" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'../',
+      VERSION:'0.1.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="../_static/jquery.js"></script>
+  <script type="text/javascript" src="../_static/underscore.js"></script>
+  <script type="text/javascript" src="../_static/doctools.js"></script>
+  
+
+  <script type="text/javascript" src="../_static/js/zclipboard.min.js"></script>
+  <script type="text/javascript" src="../_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  <script type="text/javascript" src="../_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+</body>
+</html>
