@@ -1,12 +1,12 @@
-- name: Get Started
-  link: /docs/latest/quickstart.html
-  new_window: false
-  highlight: false
 - name: Documentation
   link: /docs/latest/index.html
   new_window: false
   highlight: false
 - name: Community
   link: /#community
+  new_window: false
+  highlight: false
+- name: Code
+  link: https://github.com/mlflow/mlflow/
   new_window: false
   highlight: false
