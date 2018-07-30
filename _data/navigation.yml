@@ -7,6 +7,6 @@
   new_window: false
   highlight: false
 - name: Code
-  link: https://github.com/databricks/mlflow/
+  link: https://github.com/mlflow/mlflow/
   new_window: false
   highlight: false
