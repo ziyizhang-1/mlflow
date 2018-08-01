@@ -9,12 +9,10 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.spark &mdash; MLflow 0.3.0 documentation</title>
+  <title>Python Module Index &mdash; MLflow 0.4.0 documentation</title>
   
-  
-  
-    <link rel="canonical" href="https://docs.databricks.com/mlflow.spark.html">
-  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/py-modindex.html">
   
   
     <link rel="shortcut icon" href="_static/favicon.ico"/>
@@ -51,7 +49,10 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.3.0 documentation" href="index.html"/> 
+    <link rel="top" title="MLflow 0.4.0 documentation" href="index.html"/>
+ 
+
+
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -67,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.3.0</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.4.0</span>
   </li>
 </ul>
   </nav>
@@ -84,11 +85,7 @@
     
 <div role="search">
   
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-  <input type="text" name="q" placeholder="Search" />
-  <input type="hidden" name="check_keywords" value="yes" />
-  <input type="hidden" name="area" value="default" />
-  </form>
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
   
 </div>
 
@@ -125,7 +122,7 @@
     
 
     <p>
-      <a id='feedbacklink' href="https://github.com/databricks/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
     </p>
   </div>
 </div>
@@ -151,11 +148,11 @@
     <li><a href="index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
     
     
-      <li>mlflow.spark</li>
+      <li>Python Module Index</li>
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/mlflow.spark.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/py-modindex" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -163,76 +160,69 @@
             <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
               <div itemprop="articleBody">
                 
-  <div class="section" id="module-mlflow.spark">
-<span id="mlflow-spark"></span><h1>mlflow.spark<a class="headerlink" href="#module-mlflow.spark" title="Permalink to this headline"> </a></h1>
-<p>MLflow integration for Spark MLlib models.</p>
-<p>Spark MLlib models are saved and loaded using native Spark MLlib persistence.
-The models can be exported as pyfunc for out-of Spark deployment or it can be loaded back as Spark
-Transformer in order to score it in Spark. The pyfunc flavor instantiates SparkContext internally
-and reads the input data as Spark DataFrame prior to scoring.</p>
-<dl class="function">
-<dt id="mlflow.spark.load_model">
-<code class="descclassname">mlflow.spark.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load the Spark MLlib model from the given path.
-:param run_id: Run ID. If provided it is combined with path to identify the model.
-:param path: Local filesystem path or Run-relative artifact path to the model.
-:return: SparkML model.
-:rtype: pyspark.ml.pipeline.PipelineModel</p>
-</dd></dl>
 
-<dl class="function">
-<dt id="mlflow.spark.load_pyfunc">
-<code class="descclassname">mlflow.spark.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Load the model as PyFunc.
-:param path: Local path
-:return: The model as PyFunc.</p>
-</dd></dl>
+   <h1>Python Module Index</h1>
 
-<dl class="function">
-<dt id="mlflow.spark.log_model">
-<code class="descclassname">mlflow.spark.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>spark_model</em>, <em>artifact_path</em>, <em>conda_env=None</em>, <em>jars=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.log_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Log a Spark MLlib model as an MLflow artifact for the current run.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>spark_model</strong> – PipelineModel to be saved.</li>
-<li><strong>artifact_path</strong> – Run-relative artifact path.</li>
-<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, this defines enrionment for
-the model. At minimum, it should specify python, pyspark and mlflow with appropriate
-versions.</li>
-<li><strong>jars</strong> – List of jars needed by the model.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
+   <div class="modindex-jumpbox">
+   <a href="#cap-m"><strong>m</strong></a>
+   </div>
 
-<dl class="function">
-<dt id="mlflow.spark.save_model">
-<code class="descclassname">mlflow.spark.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>spark_model</em>, <em>path</em>, <em>mlflow_model=&lt;mlflow.models.Model object&gt;</em>, <em>conda_env=None</em>, <em>jars=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.save_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Save Spark MLlib PipelineModel at given local path.</p>
-<p>Uses Spark MLlib persistence mechanism.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>spark_model</strong> – Spark PipelineModel to be saved. Currently can only save PipelineModels.</li>
-<li><strong>path</strong> – Local path where the model is to be saved.</li>
-<li><strong>mlflow_model</strong> – MLflow model config this flavor is being added to.</li>
-<li><strong>conda_env</strong> – Conda environment this model depends on.</li>
-<li><strong>jars</strong> – List of jars needed by the model.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-m"><td></td><td>
+       <strong>m</strong></td><td></td></tr>
+     <tr>
+       <td><img src="_static/minus.png" class="toggler"
+              id="toggle-1" style="display: none" alt="-" /></td>
+       <td>
+       <a href="python_api/mlflow.html#module-mlflow"><code class="xref">mlflow</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.azureml.html#module-mlflow.azureml"><code class="xref">mlflow.azureml</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.serving.html#module-mlflow.models"><code class="xref">mlflow.models</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.projects.html#module-mlflow.projects"><code class="xref">mlflow.projects</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.pyfunc.html#module-mlflow.pyfunc"><code class="xref">mlflow.pyfunc</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.sagemaker.html#module-mlflow.sagemaker"><code class="xref">mlflow.sagemaker</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.sklearn.html#module-mlflow.sklearn"><code class="xref">mlflow.sklearn</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.spark.html#module-mlflow.spark"><code class="xref">mlflow.spark</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.tensorflow.html#module-mlflow.tensorflow"><code class="xref">mlflow.tensorflow</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-1">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="python_api/mlflow.tracking.html#module-mlflow.tracking"><code class="xref">mlflow.tracking</code></a></td><td>
+       <em></em></td></tr>
+   </table>
 
 
               </div>
@@ -263,7 +253,7 @@ versions.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.3.0',
+      VERSION:'0.4.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -304,6 +294,17 @@ versions.</li>
 </script>
 
 
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>
