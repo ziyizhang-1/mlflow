@@ -84,7 +84,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -176,7 +180,7 @@ start the tracking UI, run projects and runs, serve models to
 <a class="reference external" href="https://azure.microsoft.com/en-us/overview/machine-learning/">Microsoft Azure ML</a> or
 <a class="reference external" href="https://aws.amazon.com/sagemaker/">Amazon SageMaker</a>, create
 and list experiments, and download artifacts.</p>
-<div class="code highlight-default"><div class="highlight"><pre><span></span>$ mlflow --help
+<div class="code highlight-default notranslate"><div class="highlight"><pre><span></span>$ mlflow --help
 Usage: mlflow [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -194,7 +198,7 @@ Commands:
   ui           Run the MLflow tracking UI.
 </pre></div>
 </div>
-<p>Each individual command has a detailed help screen accessible via <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">command_name</span> <span class="pre">--help</span></code></p>
+<p>Each individual command has a detailed help screen accessible via <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">command_name</span> <span class="pre">--help</span></code></p>
 <div class="section" id="azure-ml">
 <h2>Azure ML<a class="headerlink" href="#azure-ml" title="Permalink to this headline"> </a></h2>
 <p>Subcommands to serve models on Azure ML.</p>
@@ -316,17 +320,6 @@ directory.</p>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

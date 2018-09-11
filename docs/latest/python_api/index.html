@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Python API &mdash; MLflow 0.5.2 documentation</title>
+  <title>Python API &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/index.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="next" title="mlflow" href="/mlflow.html"/>
         <link rel="prev" title="Command-Line Interface" href="/../cli.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -115,17 +115,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -177,8 +179,8 @@
                 
   <div class="section" id="python-api">
 <span id="id1"></span><h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline"> </a></h1>
-<p>MLflow’s Python API is organized into the following packages. The most common functions are also
-exposed in the <a class="reference internal" href="mlflow.html#module-mlflow" title="mlflow"><code class="xref py py-mod docutils literal"><span class="pre">mlflow</span></code></a> module, so we recommend starting there.</p>
+<p>The MLflow Python API is organized into the following modules. The most common functions are also
+exposed in the <a class="reference internal" href="mlflow.html#module-mlflow" title="mlflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow</span></code></a> module, so we recommend starting there.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.html">mlflow</a></li>
@@ -186,11 +188,12 @@ exposed in the <a class="reference internal" href="mlflow.html#module-mlflow" ti
 <li class="toctree-l1"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
@@ -238,7 +241,7 @@ exposed in the <a class="reference internal" href="mlflow.html#module-mlflow" ti
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

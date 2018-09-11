@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -186,7 +190,7 @@
 <code class="descclassname">mlflow.projects.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>storage_dir=None</em>, <em>block=True</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.run" title="Permalink to this definition"> </a></dt>
 <dd><p>Run an MLflow project from the given URI.</p>
 <p>Supports downloading projects from Git URIs with a specified version, or copying them from
-the file system. For Git-based projects, a commit can be specified as the <code class="docutils literal"><span class="pre">version</span></code>.</p>
+the file system. For Git-based projects, a commit can be specified as the <code class="docutils literal notranslate"><span class="pre">version</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -199,7 +203,7 @@ the file system. For Git-based projects, a commit can be specified as the <code 
 path or a git repository URI (e.g. <a class="reference external" href="https://github.com/mlflow/mlflow-example">https://github.com/mlflow/mlflow-example</a>)
 pointing to a project directory containing an MLproject file.</li>
 <li><strong>entry_point</strong> – Entry point to run within the project. If no entry point with the specified
-name is found, attempts to run the project file <code class="docutils literal"><span class="pre">entry_point</span></code> as a script,
+name is found, attempts to run the project file <code class="docutils literal notranslate"><span class="pre">entry_point</span></code> as a script,
 using “python” to run .py files and the default shell (specified by
 environment variable $SHELL) to run .sh files.</li>
 <li><strong>experiment_id</strong> – ID of experiment under which to launch the run.</li>
@@ -212,11 +216,11 @@ Databricks.</li>
 installs project dependencies within that environment. Otherwise, runs the
 project in the current environment without installing any project
 dependencies.</li>
-<li><strong>storage_dir</strong> – Only used if <code class="docutils literal"><span class="pre">mode</span></code> is local. MLflow will download artifacts from
+<li><strong>storage_dir</strong> – Only used if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is local. MLflow will download artifacts from
 distributed URIs passed to parameters of type ‘path’ to subdirectories of
-<code class="docutils literal"><span class="pre">storage_dir</span></code>.</li>
+<code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>.</li>
 <li><strong>block</strong> – Whether or not to block while waiting for a run to complete. Defaults to True.
-Note that if <code class="docutils literal"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
+Note that if <code class="docutils literal notranslate"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
 the current process will block when exiting until the local run completes.
 If the current process is interrupted, any asynchronous runs launched via this
 method will be terminated.</li>
@@ -226,8 +230,8 @@ creating a new run.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <code class="docutils literal"><span class="pre">SubmittedRun</span></code> exposing information (e.g. run ID) about the launched run. The
-returned <code class="docutils literal"><span class="pre">SubmittedRun</span></code> is not thread-safe.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <code class="docutils literal notranslate"><span class="pre">SubmittedRun</span></code> exposing information (e.g. run ID) about the launched run. The
+returned <code class="docutils literal notranslate"><span class="pre">SubmittedRun</span></code> is not thread-safe.</p>
 </td>
 </tr>
 </tbody>
@@ -315,17 +319,6 @@ returned <code class="docutils literal"><span class="pre">SubmittedRun</span></c
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

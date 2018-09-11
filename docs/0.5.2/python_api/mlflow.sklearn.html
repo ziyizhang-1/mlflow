@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -184,7 +188,7 @@
 <dl class="function">
 <dt id="mlflow.sklearn.load_model">
 <code class="descclassname">mlflow.sklearn.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a scikit-learn model from a local file (if <code class="docutils literal"><span class="pre">run_id</span></code> is None) or a run.</p>
+<dd><p>Load a scikit-learn model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is None) or a run.</p>
 </dd></dl>
 
 <dl class="function">
@@ -302,17 +306,6 @@ and mlflow with appropriate versions.</li>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

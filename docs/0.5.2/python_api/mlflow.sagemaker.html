@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -228,7 +232,7 @@ Currently active AWS account needs to have correct permissions set up.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_name</strong> – Name of the deployed application.</li>
-<li><strong>path</strong> – Path to the model. Either local if no <code class="docutils literal"><span class="pre">run_id</span></code> or MLflow-relative if <code class="docutils literal"><span class="pre">run_id</span></code>
+<li><strong>path</strong> – Path to the model. Either local if no <code class="docutils literal notranslate"><span class="pre">run_id</span></code> or MLflow-relative if <code class="docutils literal notranslate"><span class="pre">run_id</span></code>
 is specified.</li>
 <li><strong>execution_role_arn</strong> – Amazon execution role with SageMaker rights.
 Defaults to the currently-assumed role.</li>
@@ -240,26 +244,26 @@ publicly-available pre-built image.</li>
 <li><strong>region_name</strong> – Name of the AWS region to which to deploy the application.</li>
 <li><strong>mode</strong> – <p>The mode in which to deploy the application. Must be one of the following:</p>
 <dl class="docutils">
-<dt><code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_CREATE</span></code></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_CREATE</span></code></dt>
 <dd>Create an application with the specified name and model. This fails if an
 application of the same name already exists.</dd>
-<dt><code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code></dt>
 <dd>If an application of the specified name exists, its model(s) is replaced with
 the specified model. If no such application exists, it is created with the
 specified name and model.</dd>
-<dt><code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_ADD</span></code></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_ADD</span></code></dt>
 <dd>Add the specified model to a pre-existing application with the specified name,
 if one exists. If the application does not exist, a new application is created
 with the specified name and model. NOTE: If the application <strong>already exists</strong>,
 the specified model is added to the application’s corresponding SageMaker
 endpoint with an initial weight of zero (0). To route traffic to the model,
 update the application’s associated endpoint configuration using either the
-AWS console or the <code class="docutils literal"><span class="pre">UpdateEndpointWeightsAndCapacities</span></code> function defined in
+AWS console or the <code class="docutils literal notranslate"><span class="pre">UpdateEndpointWeightsAndCapacities</span></code> function defined in
 <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpointWeightsAndCapacities.html">https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpointWeightsAndCapacities.html</a>.</dd>
 </dl>
 </li>
 <li><strong>archive</strong> – If True, any pre-existing SageMaker application resources that become inactive
-(i.e. as a result of deploying in <code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code>
+(i.e. as a result of deploying in <code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code>
 mode) are preserved. If False, these resources are deleted.</li>
 <li><strong>instance_type</strong> – The type of SageMaker ML instance on which to deploy the model. For a list
 of supported instance types, see
@@ -272,7 +276,7 @@ SageMaker boto3 client (<a class="reference external" href="https://boto3.readth
 services/sagemaker.html#SageMaker.Client.create_model). For more information,
 see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html">https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html</a>.</p>
 <p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.sagemaker</span> <span class="k">as</span> <span class="nn">mfs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.sagemaker</span> <span class="k">as</span> <span class="nn">mfs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vpc_config</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>                 <span class="s1">&#39;SecurityGroupIds&#39;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>                     <span class="s1">&#39;sg-123456abc&#39;</span><span class="p">,</span>
@@ -316,8 +320,8 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>model_path</strong> – path to the model. Either local if no <code class="docutils literal"><span class="pre">run_id</span></code> or MLflow-relative if
-<code class="docutils literal"><span class="pre">run_id</span></code> is specified.</li>
+<li><strong>model_path</strong> – path to the model. Either local if no <code class="docutils literal notranslate"><span class="pre">run_id</span></code> or MLflow-relative if
+<code class="docutils literal notranslate"><span class="pre">run_id</span></code> is specified.</li>
 <li><strong>run_id</strong> – MLflow run ID.</li>
 <li><strong>port</strong> – Local port.</li>
 <li><strong>image</strong> – Name of the Docker image to be used.</li>
@@ -409,17 +413,6 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.azureml &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.azureml &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.azureml.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.entities" href="/mlflow.entities.html"/>
         <link rel="prev" title="mlflow" href="/mlflow.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,19 +182,21 @@
                 
   <div class="section" id="module-mlflow.azureml">
 <span id="mlflow-azureml"></span><h1>mlflow.azureml<a class="headerlink" href="#module-mlflow.azureml" title="Permalink to this headline"> </a></h1>
-<p>Utilities for deploying MLflow models to Microsoft Azure Machine Learning.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.azureml</span></code> module provides an API for deploying MLflow models to Azure
+Machine Learning.</p>
 <dl class="function">
 <dt id="mlflow.azureml.deploy">
-<code class="descclassname">mlflow.azureml.</code><code class="descname">deploy</code><span class="sig-paren">(</span><em>app_name</em>, <em>model_path</em>, <em>run_id</em>, <em>mlflow_home</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.azureml.deploy" title="Permalink to this definition"> </a></dt>
-<dd><p>Deploy MLflow model to Azure ML.</p>
+<code class="descclassname">mlflow.azureml.</code><code class="descname">deploy</code><span class="sig-paren">(</span><em>app_name</em>, <em>model_path</em>, <em>run_id=None</em>, <em>mlflow_home=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.azureml.deploy" title="Permalink to this definition"> </a></dt>
+<dd><p>Deploy an MLflow model to Azure Machine Learning.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
-<li>This command must be called from a console launched from Azure ML Workbench. Caller is
-reponsible for setting up Azure ML environment and accounts.</li>
-<li>Azure ML can not handle any Conda environment. In particular the Python version is fixed.
-If the model contains Conda environment and it has been trained outside of Azure ML, the
-Conda environment might need to be edited to work with Azure ML.</li>
+<li>This command must be called from a console launched from Azure Machine Learning Workbench.
+Caller is reponsible for setting up Azure Machine Learning environment and accounts.</li>
+<li>Azure Machine Learning cannot handle any Conda environment. In particular the Python
+version is fixed. If the model contains Conda environment and it has been trained outside
+of Azure Machine Learning, the Conda environment might need to be edited to work with
+Azure Machine Learning.</li>
 </ul>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -201,8 +205,10 @@ Conda environment might need to be edited to work with Azure ML.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_name</strong> – Name of the deployed application.</li>
-<li><strong>model_path</strong> – Local or MLflow-run-relative path to the model to be exported.</li>
-<li><strong>run_id</strong> – If provided, <code class="docutils literal"><span class="pre">run_id</span></code> is used to retrieve the model logged with MLflow.</li>
+<li><strong>model_path</strong> – Local or MLflow-run-relative path to the model to be deployed.</li>
+<li><strong>run_id</strong> – MLflow run ID.</li>
+<li><strong>mlflow_home</strong> – Directory containing checkout of the MLflow GitHub project or
+current directory if not specified.</li>
 </ul>
 </td>
 </tr>
@@ -212,17 +218,17 @@ Conda environment might need to be edited to work with Azure ML.</li>
 
 <dl class="function">
 <dt id="mlflow.azureml.export">
-<code class="descclassname">mlflow.azureml.</code><code class="descname">export</code><span class="sig-paren">(</span><em>output</em>, <em>model_path</em>, <em>run_id</em>, <em>mlflow_home</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.azureml.export" title="Permalink to this definition"> </a></dt>
-<dd><p>Export MLflow model as Azure ML compatible model ready to be deployed.</p>
-<p>Export MLflow model with everything needed to deploy on Azure ML.
-Output includes sh script with command to deploy the generated model to Azure ML.</p>
+<code class="descclassname">mlflow.azureml.</code><code class="descname">export</code><span class="sig-paren">(</span><em>output</em>, <em>model_path</em>, <em>run_id=None</em>, <em>mlflow_home=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.azureml.export" title="Permalink to this definition"> </a></dt>
+<dd><p>Export an MLflow model with everything needed to deploy on Azure Machine Learning.
+Output includes sh script with command to deploy the generated model to Azure Machine Learning.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <ul class="last simple">
-<li>This command does not need an Azure ML environment to run.</li>
-<li>Azure ML can not handle any Conda environment. If the model contains Conda environment
-and it has been trained outside of Azure ML, the Conda environment might need
-to be edited.</li>
+<li>This command does not need an Azure Machine Learning environment to run.</li>
+<li>Azure Machine Learning cannot handle any Conda environment. In particular the Python
+version is fixed. If the model contains Conda environment and it has been trained outside
+of Azure Machine Learning, the Conda environment might need to be edited to work with
+Azure Machine Learning.</li>
 </ul>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -232,7 +238,9 @@ to be edited.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>output</strong> – Output folder where the model is going to be exported to.</li>
 <li><strong>model_path</strong> – Local or MLflow run relative path to the model to be exported.</li>
-<li><strong>run_id</strong> – If provided, <code class="docutils literal"><span class="pre">run_id</span></code> is used to retrieve model logged with MLflow.</li>
+<li><strong>run_id</strong> – MLflow run ID.</li>
+<li><strong>mlflow_home</strong> – Directory containing checkout of the MLflow GitHub project or
+current directory if not specified.</li>
 </ul>
 </td>
 </tr>
@@ -280,7 +288,7 @@ to be edited.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

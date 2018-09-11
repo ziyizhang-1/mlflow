@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.entities &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.entities &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.entities.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.h2o" href="/mlflow.h2o.html"/>
         <link rel="prev" title="mlflow.azureml" href="/mlflow.azureml.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,12 +182,13 @@
                 
   <div class="section" id="module-mlflow.entities">
 <span id="mlflow-entities"></span><h1>mlflow.entities<a class="headerlink" href="#module-mlflow.entities" title="Permalink to this headline"> </a></h1>
-<p>All entities returned by the MLflow REST API.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.entities</span></code> module defines entities returned by the MLflow
+<a class="reference external" href="../rest-api.html">REST API</a>.</p>
 <dl class="class">
 <dt id="mlflow.entities.Experiment">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">Experiment</code><span class="sig-paren">(</span><em>experiment_id</em>, <em>name</em>, <em>artifact_location</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.Experiment" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Experiment object for Python client.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Experiment object.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.Experiment.DEFAULT_EXPERIMENT_ID">
 <code class="descname">DEFAULT_EXPERIMENT_ID</code><em class="property"> = 0</em><a class="headerlink" href="#mlflow.entities.Experiment.DEFAULT_EXPERIMENT_ID" title="Permalink to this definition"> </a></dt>
@@ -224,12 +227,12 @@
 <dl class="class">
 <dt id="mlflow.entities.FileInfo">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">FileInfo</code><span class="sig-paren">(</span><em>path</em>, <em>is_dir</em>, <em>file_size</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.FileInfo" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Class exposing metadata about a file or directory.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Metadata about a file or directory.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.FileInfo.file_size">
 <code class="descname">file_size</code><a class="headerlink" href="#mlflow.entities.FileInfo.file_size" title="Permalink to this definition"> </a></dt>
-<dd><p>Size of the file or directory. May be None if the current FileInfo is a directory.</p>
+<dd><p>Size of the file or directory. If the FileInfo is a directory, returns None.</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -240,7 +243,7 @@
 <dl class="attribute">
 <dt id="mlflow.entities.FileInfo.is_dir">
 <code class="descname">is_dir</code><a class="headerlink" href="#mlflow.entities.FileInfo.is_dir" title="Permalink to this definition"> </a></dt>
-<dd><p><em>Boolean</em> – whether the current FileInfo corresponds to a directory.</p>
+<dd><p>Whether the FileInfo corresponds to a directory.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -259,8 +262,8 @@
 <dl class="class">
 <dt id="mlflow.entities.Metric">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">Metric</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>timestamp</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.Metric" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Metric object for python client.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Metric object.</p>
 <dl class="classmethod">
 <dt id="mlflow.entities.Metric.from_proto">
 <em class="property">classmethod </em><code class="descname">from_proto</code><span class="sig-paren">(</span><em>proto</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.Metric.from_proto" title="Permalink to this definition"> </a></dt>
@@ -269,13 +272,13 @@
 <dl class="attribute">
 <dt id="mlflow.entities.Metric.key">
 <code class="descname">key</code><a class="headerlink" href="#mlflow.entities.Metric.key" title="Permalink to this definition"> </a></dt>
-<dd><p>String key corresponding to the metric’s name.</p>
+<dd><p>String key corresponding to the metric name.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mlflow.entities.Metric.timestamp">
 <code class="descname">timestamp</code><a class="headerlink" href="#mlflow.entities.Metric.timestamp" title="Permalink to this definition"> </a></dt>
-<dd><p>Metric timestamp as an integer (typically, milliseconds since the Unix epoch).</p>
+<dd><p>Metric timestamp as an integer (milliseconds since the Unix epoch).</p>
 </dd></dl>
 
 <dl class="method">
@@ -294,8 +297,8 @@
 <dl class="class">
 <dt id="mlflow.entities.Param">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">Param</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.Param" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Param object for python client.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Parameter object.</p>
 <dl class="classmethod">
 <dt id="mlflow.entities.Param.from_proto">
 <em class="property">classmethod </em><code class="descname">from_proto</code><span class="sig-paren">(</span><em>proto</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.Param.from_proto" title="Permalink to this definition"> </a></dt>
@@ -304,7 +307,7 @@
 <dl class="attribute">
 <dt id="mlflow.entities.Param.key">
 <code class="descname">key</code><a class="headerlink" href="#mlflow.entities.Param.key" title="Permalink to this definition"> </a></dt>
-<dd><p>String key corresponding to the param name.</p>
+<dd><p>String key corresponding to the parameter name.</p>
 </dd></dl>
 
 <dl class="method">
@@ -315,7 +318,7 @@
 <dl class="attribute">
 <dt id="mlflow.entities.Param.value">
 <code class="descname">value</code><a class="headerlink" href="#mlflow.entities.Param.value" title="Permalink to this definition"> </a></dt>
-<dd><p>String value of the param.</p>
+<dd><p>String value of the parameter.</p>
 </dd></dl>
 
 </dd></dl>
@@ -323,12 +326,20 @@
 <dl class="class">
 <dt id="mlflow.entities.Run">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">Run</code><span class="sig-paren">(</span><em>run_info</em>, <em>run_data</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.Run" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Run object for python client.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Run object.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.Run.data">
 <code class="descname">data</code><a class="headerlink" href="#mlflow.entities.Run.data" title="Permalink to this definition"> </a></dt>
-<dd><p><em>return</em> – <a class="reference internal" href="#mlflow.entities.RunData" title="mlflow.entities.RunData"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.RunData</span></code></a></p>
+<dd><p>The run data, including metrics, parameters, and tags.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#mlflow.entities.RunData" title="mlflow.entities.RunData"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunData</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="classmethod">
@@ -344,7 +355,15 @@
 <dl class="attribute">
 <dt id="mlflow.entities.Run.info">
 <code class="descname">info</code><a class="headerlink" href="#mlflow.entities.Run.info" title="Permalink to this definition"> </a></dt>
-<dd><p><em>return</em> – <a class="reference internal" href="#mlflow.entities.RunInfo" title="mlflow.entities.RunInfo"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.RunInfo</span></code></a></p>
+<dd><p>The run metadata, such as the run id, start time, and status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#mlflow.entities.RunInfo" title="mlflow.entities.RunInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunInfo</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -361,9 +380,9 @@
 
 <dl class="class">
 <dt id="mlflow.entities.RunData">
-<em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">RunData</code><span class="sig-paren">(</span><em>metrics=None</em>, <em>params=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunData" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Class exposing run data (metrics and parameters).</p>
+<em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">RunData</code><span class="sig-paren">(</span><em>metrics=None</em>, <em>params=None</em>, <em>tags=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunData" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Run data (metrics and parameters).</p>
 <dl class="classmethod">
 <dt id="mlflow.entities.RunData.from_dictionary">
 <em class="property">classmethod </em><code class="descname">from_dictionary</code><span class="sig-paren">(</span><em>the_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunData.from_dictionary" title="Permalink to this definition"> </a></dt>
@@ -377,13 +396,19 @@
 <dl class="attribute">
 <dt id="mlflow.entities.RunData.metrics">
 <code class="descname">metrics</code><a class="headerlink" href="#mlflow.entities.RunData.metrics" title="Permalink to this definition"> </a></dt>
-<dd><p>List of <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.metric.Metric</span></code> for the current run.</p>
+<dd><p>List of <a class="reference internal" href="#mlflow.entities.Metric" title="mlflow.entities.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Metric</span></code></a> for the current run.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mlflow.entities.RunData.params">
 <code class="descname">params</code><a class="headerlink" href="#mlflow.entities.RunData.params" title="Permalink to this definition"> </a></dt>
-<dd><p>List of <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.param.Param</span></code> for the current run.</p>
+<dd><p>List of <a class="reference internal" href="#mlflow.entities.Param" title="mlflow.entities.Param"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Param</span></code></a> for the current run.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflow.entities.RunData.tags">
+<code class="descname">tags</code><a class="headerlink" href="#mlflow.entities.RunData.tags" title="Permalink to this definition"> </a></dt>
+<dd><p>List of <a class="reference internal" href="#mlflow.entities.RunTag" title="mlflow.entities.RunTag"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunTag</span></code></a> for the current run.</p>
 </dd></dl>
 
 <dl class="method">
@@ -395,19 +420,13 @@
 
 <dl class="class">
 <dt id="mlflow.entities.RunInfo">
-<em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">RunInfo</code><span class="sig-paren">(</span><em>run_uuid</em>, <em>experiment_id</em>, <em>name</em>, <em>source_type</em>, <em>source_name</em>, <em>entry_point_name</em>, <em>user_id</em>, <em>status</em>, <em>start_time</em>, <em>end_time</em>, <em>source_version</em>, <em>tags</em>, <em>artifact_uri=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunInfo" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>Class containing metadata for a run.</p>
+<em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">RunInfo</code><span class="sig-paren">(</span><em>run_uuid</em>, <em>experiment_id</em>, <em>name</em>, <em>source_type</em>, <em>source_name</em>, <em>entry_point_name</em>, <em>user_id</em>, <em>status</em>, <em>start_time</em>, <em>end_time</em>, <em>source_version</em>, <em>artifact_uri=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunInfo" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Metadata about a run.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.RunInfo.artifact_uri">
 <code class="descname">artifact_uri</code><a class="headerlink" href="#mlflow.entities.RunInfo.artifact_uri" title="Permalink to this definition"> </a></dt>
-<dd><p><em>String</em> – root artifact URI of the run.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="mlflow.entities.RunInfo.copy_with_overrides">
-<code class="descname">copy_with_overrides</code><span class="sig-paren">(</span><em>status</em>, <em>end_time</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunInfo.copy_with_overrides" title="Permalink to this definition"> </a></dt>
-<dd><p>Returns a copy the current RunInfo with certain attributes modified</p>
+<dd><p>String root artifact URI of the run.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -460,14 +479,13 @@ etc).</p>
 <dl class="attribute">
 <dt id="mlflow.entities.RunInfo.source_type">
 <code class="descname">source_type</code><a class="headerlink" href="#mlflow.entities.RunInfo.source_type" title="Permalink to this definition"> </a></dt>
-<dd><p>Enum (one of the values in <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.source_type.SourceType</span></code>)
-describing the source of the run.</p>
+<dd><p><a class="reference internal" href="#mlflow.entities.SourceType" title="mlflow.entities.SourceType"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.SourceType</span></code></a> describing the source of the run.</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mlflow.entities.RunInfo.source_version">
 <code class="descname">source_version</code><a class="headerlink" href="#mlflow.entities.RunInfo.source_version" title="Permalink to this definition"> </a></dt>
-<dd><p><em>String</em> – git commit of the code used for the run, if available.</p>
+<dd><p>String Git commit hash of the code used for the run, if available.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -479,14 +497,8 @@ describing the source of the run.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.RunInfo.status">
 <code class="descname">status</code><a class="headerlink" href="#mlflow.entities.RunInfo.status" title="Permalink to this definition"> </a></dt>
-<dd><p>Enum (one of the values in <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.run_status.RunStatus</span></code>)
+<dd><p>One of the values in <a class="reference internal" href="#mlflow.entities.RunStatus" title="mlflow.entities.RunStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunStatus</span></code></a>
 describing the status of the run.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="mlflow.entities.RunInfo.tags">
-<code class="descname">tags</code><a class="headerlink" href="#mlflow.entities.RunInfo.tags" title="Permalink to this definition"> </a></dt>
-<dd><p>List of <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.run_tag.RunTag</span></code> for the run.</p>
 </dd></dl>
 
 <dl class="method">
@@ -505,8 +517,8 @@ describing the status of the run.</p>
 <dl class="class">
 <dt id="mlflow.entities.RunStatus">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">RunStatus</code><a class="headerlink" href="#mlflow.entities.RunStatus" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Enum describing the status of a <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.run.Run</span></code>.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Enum for status of an <a class="reference internal" href="#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a>.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.RunStatus.FAILED">
 <code class="descname">FAILED</code><em class="property"> = 4</em><a class="headerlink" href="#mlflow.entities.RunStatus.FAILED" title="Permalink to this definition"> </a></dt>
@@ -547,8 +559,8 @@ describing the status of the run.</p>
 <dl class="class">
 <dt id="mlflow.entities.RunTag">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">RunTag</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunTag" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
-<p>RunTag object for Python client.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities._mlflow_object._MLflowObject</span></code></p>
+<p>Tag object associated with a run.</p>
 <dl class="classmethod">
 <dt id="mlflow.entities.RunTag.from_proto">
 <em class="property">classmethod </em><code class="descname">from_proto</code><span class="sig-paren">(</span><em>proto</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.RunTag.from_proto" title="Permalink to this definition"> </a></dt>
@@ -576,8 +588,8 @@ describing the status of the run.</p>
 <dl class="class">
 <dt id="mlflow.entities.SourceType">
 <em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">SourceType</code><a class="headerlink" href="#mlflow.entities.SourceType" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>Enum describing the originating source of a <code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.run.Run</span></code>.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Enum for originating source of a <a class="reference internal" href="#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a>.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.SourceType.JOB">
 <code class="descname">JOB</code><em class="property"> = 2</em><a class="headerlink" href="#mlflow.entities.SourceType.JOB" title="Permalink to this definition"> </a></dt>
@@ -601,6 +613,38 @@ describing the status of the run.</p>
 <dl class="attribute">
 <dt id="mlflow.entities.SourceType.UNKNOWN">
 <code class="descname">UNKNOWN</code><em class="property"> = 5</em><a class="headerlink" href="#mlflow.entities.SourceType.UNKNOWN" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflow.entities.ViewType">
+<em class="property">class </em><code class="descclassname">mlflow.entities.</code><code class="descname">ViewType</code><a class="headerlink" href="#mlflow.entities.ViewType" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Enum to filter requested experiment types.</p>
+<dl class="attribute">
+<dt id="mlflow.entities.ViewType.ACTIVE_ONLY">
+<code class="descname">ACTIVE_ONLY</code><em class="property"> = 1</em><a class="headerlink" href="#mlflow.entities.ViewType.ACTIVE_ONLY" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mlflow.entities.ViewType.ALL">
+<code class="descname">ALL</code><em class="property"> = 3</em><a class="headerlink" href="#mlflow.entities.ViewType.ALL" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mlflow.entities.ViewType.DELETED_ONLY">
+<code class="descname">DELETED_ONLY</code><em class="property"> = 2</em><a class="headerlink" href="#mlflow.entities.ViewType.DELETED_ONLY" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mlflow.entities.ViewType.from_string">
+<em class="property">static </em><code class="descname">from_string</code><span class="sig-paren">(</span><em>view_str</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.ViewType.from_string" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="mlflow.entities.ViewType.to_string">
+<em class="property">static </em><code class="descname">to_string</code><span class="sig-paren">(</span><em>view_type</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.entities.ViewType.to_string" title="Permalink to this definition"> </a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -645,7 +689,7 @@ describing the status of the run.</p>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

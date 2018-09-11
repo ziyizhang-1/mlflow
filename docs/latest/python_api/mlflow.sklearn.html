@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.sklearn &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.sklearn &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.sklearn.html">
@@ -49,10 +49,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.spark" href="/mlflow.spark.html"/>
-        <link rel="prev" title="mlflow.models" href="/mlflow.serving.html"/> 
+        <link rel="prev" title="mlflow.sagemaker" href="/mlflow.sagemaker.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,23 +182,66 @@
                 
   <div class="section" id="module-mlflow.sklearn">
 <span id="mlflow-sklearn"></span><h1>mlflow.sklearn<a class="headerlink" href="#module-mlflow.sklearn" title="Permalink to this headline"> </a></h1>
-<p>MLflow integration for scikit-learn.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code> module provides an API for logging and loading scikit-learn models. This
+module exports scikit-learn models with the following flavors:</p>
+<dl class="docutils">
+<dt>Python (native) <a class="reference external" href="http://scikit-learn.org/stable/modules/model_persistence.html">pickle</a> format</dt>
+<dd>This is the main flavor that can be loaded back into scikit-learn.</dd>
+<dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></dt>
+<dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
+</dl>
 <dl class="function">
 <dt id="mlflow.sklearn.load_model">
 <code class="descclassname">mlflow.sklearn.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a scikit-learn model from a local file (if <code class="docutils literal"><span class="pre">run_id</span></code> is None) or a run.</p>
+<dd><p>Load a scikit-learn model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is None) or a run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model saved
+by <a class="reference internal" href="#mlflow.sklearn.save_model" title="mlflow.sklearn.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.sklearn.save_model()</span></code></a>.</li>
+<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.sklearn.load_pyfunc">
 <code class="descclassname">mlflow.sklearn.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a Python Function model from a local file.</p>
+<dd><p>Load a persisted scikit-learn model as a <code class="docutils literal notranslate"><span class="pre">python_function</span></code> model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> – Local filesystem path to the model saved by <a class="reference internal" href="#mlflow.sklearn.save_model" title="mlflow.sklearn.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.sklearn.save_model()</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pyfunc format model with function
+<code class="docutils literal notranslate"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame</span></code>.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.sklearn.log_model">
 <code class="descclassname">mlflow.sklearn.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>sk_model</em>, <em>artifact_path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.log_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Log a scikit-learn model as an MLflow artifact for the current run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sk_model</strong> – scikit-learn model to be saved.</li>
+<li><strong>artifact_path</strong> – Run-relative artifact path.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
@@ -213,7 +258,7 @@
 <li><strong>conda_env</strong> – Path to a Conda environment file. If provided, this decribes the environment
 this model should be run in. At minimum, it should specify python, scikit-learn,
 and mlflow with appropriate versions.</li>
-<li><strong>mlflow_model</strong> – MLflow model config this flavor is being added to.</li>
+<li><strong>mlflow_model</strong> – <a class="reference internal" href="mlflow.models.html#mlflow.models.Model" title="mlflow.models.Model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.models.Model</span></code></a> this flavor is being added to.</li>
 </ul>
 </td>
 </tr>
@@ -230,7 +275,7 @@ and mlflow with appropriate versions.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mlflow.serving.html" class="btn btn-neutral" title="mlflow.models" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+        <a href="mlflow.sagemaker.html" class="btn btn-neutral" title="mlflow.sagemaker" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
       
       
         <a href="mlflow.spark.html" class="btn btn-neutral" title="mlflow.spark" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
@@ -261,7 +306,7 @@ and mlflow with appropriate versions.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

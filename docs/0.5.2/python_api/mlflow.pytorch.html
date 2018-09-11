@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -188,7 +192,7 @@ models or as Python Function models.</p>
 <code class="descclassname">mlflow.pytorch.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pytorch.load_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Load a PyTorch model from a local file (if run_id is None) or a run.
 :param path: Local filesystem path or Run-relative artifact path to the model saved
-by <a class="reference internal" href="#mlflow.pytorch.log_model" title="mlflow.pytorch.log_model"><code class="xref py py-func docutils literal"><span class="pre">mlflow.pytorch.log_model()</span></code></a>.</p>
+by <a class="reference internal" href="#mlflow.pytorch.log_model" title="mlflow.pytorch.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pytorch.log_model()</span></code></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -209,13 +213,13 @@ by <a class="reference internal" href="#mlflow.pytorch.log_model" title="mlflow.
 <dd><p>Load the model as PyFunc. The loaded PyFunc exposes a <cite>predict(pd.DataFrame) -&gt; pd.DataFrame</cite>
 method that, given an input DataFrame of n rows and k float-valued columns, feeds a
 corresponding (n x k) torch.FloatTensor (or torch.cuda.FloatTensor) as input to the PyTorch
-model. <code class="docutils literal"><span class="pre">predict</span></code> returns the model’s predictions (output tensor) in a single-column DataFrame.</p>
+model. <code class="docutils literal notranslate"><span class="pre">predict</span></code> returns the model’s predictions (output tensor) in a single-column DataFrame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>path</strong> – Local filesystem path to the model saved by <a class="reference internal" href="#mlflow.pytorch.log_model" title="mlflow.pytorch.log_model"><code class="xref py py-func docutils literal"><span class="pre">mlflow.pytorch.log_model()</span></code></a>.</li>
+<li><strong>path</strong> – Local filesystem path to the model saved by <a class="reference internal" href="#mlflow.pytorch.log_model" title="mlflow.pytorch.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pytorch.log_model()</span></code></a>.</li>
 <li><strong>kwargs</strong> – kwargs to pass to <cite>torch.load</cite> method.</li>
 </ul>
 </td>
@@ -239,7 +243,7 @@ and produce a single output tensor.</li>
 <li><strong>conda_env</strong> – Path to a Conda environment file. If provided, this defines the environment
 for the model. At minimum, it should specify Python, PyTorch and MLflow with appropriate
 versions.</li>
-<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal"><span class="pre">torch.save</span></code> method</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">torch.save</span></code> method</li>
 </ul>
 </td>
 </tr>
@@ -263,7 +267,7 @@ and produce a single output tensor.</li>
 this model should be run in. At minimum, it should specify Python, PyTorch
 and MLflow with appropriate versions.</li>
 <li><strong>mlflow_model</strong> – MLflow model config this flavor is being added to.</li>
-<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal"><span class="pre">torch.save</span></code> method</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">torch.save</span></code> method</li>
 </ul>
 </td>
 </tr>
@@ -352,17 +356,6 @@ and MLflow with appropriate versions.</li>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

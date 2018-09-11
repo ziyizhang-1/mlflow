@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.tensorflow &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.tensorflow &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.tensorflow.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.tracking" href="/mlflow.tracking.html"/>
         <link rel="prev" title="mlflow.spark" href="/mlflow.spark.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,28 +182,27 @@
                 
   <div class="section" id="module-mlflow.tensorflow">
 <span id="mlflow-tensorflow"></span><h1>mlflow.tensorflow<a class="headerlink" href="#module-mlflow.tensorflow" title="Permalink to this headline"> </a></h1>
-<p>MLflow integration for TensorFlow.</p>
-<p>Manages logging and loading TensorFlow models as Python Functions. You are expected to save your own
-<code class="docutils literal"><span class="pre">saved_models</span></code> and pass their paths to <code class="docutils literal"><span class="pre">log_saved_model()</span></code> so that MLflow can track the models.</p>
-<p>In order to load the model to predict on it again, you can call
-<code class="docutils literal"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">mlflow.pyfunc.load_pyfunc(saved_model_dir)</span></code>,
-followed by <code class="docutils literal"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a
-pandas DataFrame.</p>
-<p>The loaded PyFunc model does not expose any APIs for model training.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code> module provides an API for logging and loading TensorFlow models
+as <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> models.</p>
+<p>You must save your own <code class="docutils literal notranslate"><span class="pre">saved_model</span></code> and pass its
+path to <code class="docutils literal notranslate"><span class="pre">log_saved_model(saved_model_dir)</span></code>. To load the model to predict on it, you call
+<code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">load_pyfunc(saved_model_dir)</span></code> followed by
+<code class="docutils literal notranslate"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a pandas DataFrame.</p>
+<p>The loaded <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model <em>does not</em> expose any APIs for model training.</p>
 <dl class="function">
 <dt id="mlflow.tensorflow.load_pyfunc">
 <code class="descclassname">mlflow.tensorflow.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>saved_model_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Load model stored in Python Function format.
-The loaded model object exposes a <code class="docutils literal"><span class="pre">predict(pandas</span> <span class="pre">DataFrame)</span></code> method that returns a Pandas
+<dd><p>Load a persisted TensorFlow model as a PyFunc.
+The loaded model object exposes a <code class="docutils literal notranslate"><span class="pre">predict(pandas</span> <span class="pre">DataFrame)</span></code> method that returns a pandas
 DataFrame containing the model’s inference output on an input DataFrame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>saved_model_dir</strong> – Directory where the model is saved.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>saved_model_dir</strong> – Directory where the TensorFlow model is saved.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pyfunc format model with function
-<code class="docutils literal"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame)</span></code>.</td>
+<code class="docutils literal notranslate"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -216,11 +217,11 @@ DataFrame containing the model’s inference output on an input DataFrame.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>saved_model_dir</strong> – Directory where the exported TensorFlow model is saved.</li>
+<li><strong>saved_model_dir</strong> – Directory where the TensorFlow model is saved.</li>
 <li><strong>signature_def_key</strong> – The signature definition to use when loading the model again.
 See <a class="reference external" href="https://www.tensorflow.org/serving/signature_defs">SignatureDefs in SavedModel for TensorFlow Serving</a> for details.</li>
 <li><strong>artifact_path</strong> – Path (within the artifact directory for the current run) to which
-artifacts of the model will be saved.</li>
+artifacts of the model are saved.</li>
 </ul>
 </td>
 </tr>
@@ -268,7 +269,7 @@ artifacts of the model will be saved.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -182,11 +186,11 @@
 <span id="mlflow-tracking"></span><h1>mlflow.tracking<a class="headerlink" href="#module-mlflow.tracking" title="Permalink to this headline"> </a></h1>
 <p>The MLflow Tracking package provides a Python CRUD interface to MLflow Experiments
 and Runs. This is a lower level API that more directly translates to REST calls.
-For a more fluent API of managing an ‘active run’, see <a class="reference internal" href="mlflow.html#module-mlflow" title="mlflow"><code class="xref py py-mod docutils literal"><span class="pre">mlflow</span></code></a>.</p>
+For a more fluent API of managing an ‘active run’, see <a class="reference internal" href="mlflow.html#module-mlflow" title="mlflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow</span></code></a>.</p>
 <dl class="class">
 <dt id="mlflow.tracking.MLflowService">
 <em class="property">class </em><code class="descclassname">mlflow.tracking.</code><code class="descname">MLflowService</code><span class="sig-paren">(</span><em>store</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MLflowService" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Client to an MLflow Tracking Server that can create and manage experiments and
 runs. This may either manage files locally or remotely depending on the
 AbstractStore provided.</p>
@@ -214,11 +218,11 @@ AbstractStore provided.</p>
 <dl class="method">
 <dt id="mlflow.tracking.MLflowService.create_run">
 <code class="descname">create_run</code><span class="sig-paren">(</span><em>experiment_id</em>, <em>user_id=None</em>, <em>run_name=None</em>, <em>source_type=None</em>, <em>source_name=None</em>, <em>entry_point_name=None</em>, <em>start_time=None</em>, <em>source_version=None</em>, <em>tags=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MLflowService.create_run" title="Permalink to this definition"> </a></dt>
-<dd><p>Creates a new <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.Run</span></code></a> object, which can be associated with
+<dd><p>Creates a new <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> object, which can be associated with
 metrics, parameters, artifacts, etc.
-Unlike <a class="reference internal" href="mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.projects.run()</span></code></a>, does not actually run code, just creates objects.
-Unlike <a class="reference internal" href="mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.start_run()</span></code></a>, this does not change the “active run” used by
-<a class="reference internal" href="mlflow.html#mlflow.log_param" title="mlflow.log_param"><code class="xref py py-func docutils literal"><span class="pre">mlflow.log_param()</span></code></a> and friends.</p>
+Unlike <a class="reference internal" href="mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a>, does not actually run code, just creates objects.
+Unlike <a class="reference internal" href="mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.start_run()</span></code></a>, this does not change the “active run” used by
+<a class="reference internal" href="mlflow.html#mlflow.log_param" title="mlflow.log_param"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_param()</span></code></a> and friends.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -231,7 +235,7 @@ RunTag objects.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.Run</span></code></a> which was created</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> which was created</p>
 </td>
 </tr>
 </tbody>
@@ -245,7 +249,7 @@ RunTag objects.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -258,7 +262,7 @@ RunTag objects.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.Run</span></code></a> associated with this run id</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> associated with this run id</td>
 </tr>
 </tbody>
 </table>
@@ -271,7 +275,7 @@ RunTag objects.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -284,7 +288,7 @@ RunTag objects.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.Run</span></code></a> (with only RunInfo filled)</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> (with only RunInfo filled)</td>
 </tr>
 </tbody>
 </table>
@@ -348,7 +352,7 @@ use the current timestamp.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>status</strong> – A string value of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunStatus" title="mlflow.entities.RunStatus"><code class="xref py py-class docutils literal"><span class="pre">mlflow.entities.RunStatus</span></code></a>.
+<li><strong>status</strong> – A string value of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunStatus" title="mlflow.entities.RunStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunStatus</span></code></a>.
 Defaults to FINISHED.</li>
 <li><strong>end_time</strong> – If not provided, defaults to the current time.</li>
 </ul>
@@ -381,7 +385,7 @@ this will default to the store set by mlflow.tracking.set_tracking_uri. See
 <dt id="mlflow.tracking.get_tracking_uri">
 <code class="descclassname">mlflow.tracking.</code><code class="descname">get_tracking_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.get_tracking_uri" title="Permalink to this definition"> </a></dt>
 <dd><p>Return the current tracking URI. This may not correspond to the tracking URI of
-the currently active run, since the tracking URI can be updated via <code class="docutils literal"><span class="pre">set_tracking_uri</span></code>.</p>
+the currently active run, since the tracking URI can be updated via <code class="docutils literal notranslate"><span class="pre">set_tracking_uri</span></code>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -399,9 +403,9 @@ the currently active run, since the tracking URI can be updated via <code class=
 currently active run (if one exists), but takes effect for any successive runs.</p>
 <p>The provided URI can be one of three types:</p>
 <ul class="simple">
-<li>An empty string, or a local file path, prefixed with <code class="docutils literal"><span class="pre">file:/</span></code>. Data is stored
-locally at the provided file (or <code class="docutils literal"><span class="pre">./mlruns</span></code> if empty).</li>
-<li>An HTTP URI like <code class="docutils literal"><span class="pre">https://my-tracking-server:5000</span></code>.</li>
+<li>An empty string, or a local file path, prefixed with <code class="docutils literal notranslate"><span class="pre">file:/</span></code>. Data is stored
+locally at the provided file (or <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> if empty).</li>
+<li>An HTTP URI like <code class="docutils literal notranslate"><span class="pre">https://my-tracking-server:5000</span></code>.</li>
 <li>A Databricks workspace, provided as just the string ‘databricks’ or, to use a specific
 Databricks profile (per the Databricks CLI), ‘databricks://profileName’.</li>
 </ul>
@@ -488,17 +492,6 @@ Databricks profile (per the Databricks CLI), ‘databricks://profileName’.</li
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

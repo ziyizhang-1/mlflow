@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -182,17 +186,17 @@
 <span id="mlflow-tensorflow"></span><h1>mlflow.tensorflow<a class="headerlink" href="#module-mlflow.tensorflow" title="Permalink to this headline"> </a></h1>
 <p>MLflow integration for TensorFlow.</p>
 <p>Manages logging and loading TensorFlow models as Python Functions. You are expected to save your own
-<code class="docutils literal"><span class="pre">saved_models</span></code> and pass their paths to <code class="docutils literal"><span class="pre">log_saved_model()</span></code> so that MLflow can track the models.</p>
+<code class="docutils literal notranslate"><span class="pre">saved_models</span></code> and pass their paths to <code class="docutils literal notranslate"><span class="pre">log_saved_model()</span></code> so that MLflow can track the models.</p>
 <p>In order to load the model to predict on it again, you can call
-<code class="docutils literal"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">mlflow.pyfunc.load_pyfunc(saved_model_dir)</span></code>,
-followed by <code class="docutils literal"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a
+<code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">mlflow.pyfunc.load_pyfunc(saved_model_dir)</span></code>,
+followed by <code class="docutils literal notranslate"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a
 pandas DataFrame.</p>
 <p>The loaded PyFunc model does not expose any APIs for model training.</p>
 <dl class="function">
 <dt id="mlflow.tensorflow.load_pyfunc">
 <code class="descclassname">mlflow.tensorflow.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>saved_model_dir</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.load_pyfunc" title="Permalink to this definition"> </a></dt>
 <dd><p>Load model stored in Python Function format.
-The loaded model object exposes a <code class="docutils literal"><span class="pre">predict(pandas</span> <span class="pre">DataFrame)</span></code> method that returns a Pandas
+The loaded model object exposes a <code class="docutils literal notranslate"><span class="pre">predict(pandas</span> <span class="pre">DataFrame)</span></code> method that returns a Pandas
 DataFrame containing the model’s inference output on an input DataFrame.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -201,7 +205,7 @@ DataFrame containing the model’s inference output on an input DataFrame.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>saved_model_dir</strong> – Directory where the model is saved.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pyfunc format model with function
-<code class="docutils literal"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame)</span></code>.</td>
+<code class="docutils literal notranslate"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame)</span></code>.</td>
 </tr>
 </tbody>
 </table>
@@ -309,17 +313,6 @@ artifacts of the model will be saved.</li>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

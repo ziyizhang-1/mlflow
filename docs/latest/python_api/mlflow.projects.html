@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.projects &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.projects &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.projects.html">
@@ -49,10 +49,10 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.pyfunc" href="/mlflow.pyfunc.html"/>
-        <link rel="prev" title="mlflow.keras" href="/mlflow.keras.html"/> 
+        <link rel="prev" title="mlflow.models" href="/mlflow.models.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,13 +182,13 @@
                 
   <div class="section" id="module-mlflow.projects">
 <span id="mlflow-projects"></span><h1>mlflow.projects<a class="headerlink" href="#module-mlflow.projects" title="Permalink to this headline"> </a></h1>
-<p>APIs for running MLflow projects locally or remotely.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.projects</span></code> module provides an API for running MLflow projects locally or remotely.</p>
 <dl class="function">
 <dt id="mlflow.projects.run">
 <code class="descclassname">mlflow.projects.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>storage_dir=None</em>, <em>block=True</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.run" title="Permalink to this definition"> </a></dt>
-<dd><p>Run an MLflow project from the given URI.</p>
-<p>Supports downloading projects from Git URIs with a specified version, or copying them from
-the file system. For Git-based projects, a commit can be specified as the <code class="docutils literal"><span class="pre">version</span></code>.</p>
+<dd><p>Run an MLflow project. The project can be local or stored at a Git URI.</p>
+<p>You can run the project locally or remotely on a Databricks.</p>
+<p>For information on using this method in chained workflows, see <a class="reference external" href="../projects.html#building-multistep-workflows">Building Multistep Workflows</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -195,43 +197,90 @@ the file system. For Git-based projects, a commit can be specified as the <code 
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>uri</strong> – URI of project to run. Expected to be either a relative/absolute local filesystem
-path or a git repository URI (e.g. <a class="reference external" href="https://github.com/mlflow/mlflow-example">https://github.com/mlflow/mlflow-example</a>)
+<li><strong>uri</strong> – URI of project to run. A local filesystem path
+or a Git repository URI (e.g. <a class="reference external" href="https://github.com/mlflow/mlflow-example">https://github.com/mlflow/mlflow-example</a>)
 pointing to a project directory containing an MLproject file.</li>
 <li><strong>entry_point</strong> – Entry point to run within the project. If no entry point with the specified
-name is found, attempts to run the project file <code class="docutils literal"><span class="pre">entry_point</span></code> as a script,
-using “python” to run .py files and the default shell (specified by
-environment variable $SHELL) to run .sh files.</li>
+name is found, runs the project file <code class="docutils literal notranslate"><span class="pre">entry_point</span></code> as a script,
+using “python” to run <code class="docutils literal notranslate"><span class="pre">.py</span></code> files and the default shell (specified by
+environment variable <code class="docutils literal notranslate"><span class="pre">$SHELL</span></code>) to run <code class="docutils literal notranslate"><span class="pre">.sh</span></code> files.</li>
+<li><strong>version</strong> – For Git-based projects, a commit hash.</li>
 <li><strong>experiment_id</strong> – ID of experiment under which to launch the run.</li>
-<li><strong>mode</strong> – Execution mode for the run. Can be set to “local” or “databricks”.</li>
-<li><strong>cluster_spec</strong> – Path to JSON file describing the cluster to use when launching a run on
-Databricks.</li>
+<li><strong>mode</strong> – Execution mode of the run: “local” or “databricks”.</li>
+<li><strong>cluster_spec</strong> – When <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “databricks”, path to a JSON file containing a
+<a class="reference external" href="https://docs.databricks.com/api/latest/jobs.html#clusterspec">Databricks cluster specification</a>
+to use when launching a run.</li>
 <li><strong>git_username</strong> – Username for HTTP(S) authentication with Git.</li>
 <li><strong>git_password</strong> – Password for HTTP(S) authentication with Git.</li>
-<li><strong>use_conda</strong> – If True (the default), creates a new Conda environment for the run and
-installs project dependencies within that environment. Otherwise, runs the
+<li><strong>use_conda</strong> – If True (the default), create a new Conda environment for the run and
+install project dependencies within that environment. Otherwise, run the
 project in the current environment without installing any project
 dependencies.</li>
-<li><strong>storage_dir</strong> – Only used if <code class="docutils literal"><span class="pre">mode</span></code> is local. MLflow will download artifacts from
-distributed URIs passed to parameters of type ‘path’ to subdirectories of
-<code class="docutils literal"><span class="pre">storage_dir</span></code>.</li>
-<li><strong>block</strong> – Whether or not to block while waiting for a run to complete. Defaults to True.
-Note that if <code class="docutils literal"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
+<li><strong>storage_dir</strong> – Used only if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “local”. MLflow downloads artifacts from
+distributed URIs passed to parameters of type <code class="docutils literal notranslate"><span class="pre">path</span></code> to subdirectories of
+<code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>.</li>
+<li><strong>block</strong> – Whether to block while waiting for a run to complete. Defaults to True.
+Note that if <code class="docutils literal notranslate"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
 the current process will block when exiting until the local run completes.
 If the current process is interrupted, any asynchronous runs launched via this
 method will be terminated.</li>
 <li><strong>run_id</strong> – Note: this argument is used internally by the MLflow project APIs and should
-not be specified. If specified, the given run ID will be used instead of
+not be specified. If specified, the run ID will be used instead of
 creating a new run.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A <code class="docutils literal"><span class="pre">SubmittedRun</span></code> exposing information (e.g. run ID) about the launched run. The
-returned <code class="docutils literal"><span class="pre">SubmittedRun</span></code> is not thread-safe.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#mlflow.projects.SubmittedRun" title="mlflow.projects.SubmittedRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.projects.SubmittedRun</span></code></a> exposing information (e.g. run ID)
+about the launched run.</p>
 </td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflow.projects.SubmittedRun">
+<em class="property">class </em><code class="descclassname">mlflow.projects.</code><code class="descname">SubmittedRun</code><a class="headerlink" href="#mlflow.projects.SubmittedRun" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wrapper around an MLflow project run (e.g. a subprocess running an entry point
+command or a Databricks job run) and exposing methods for waiting on and cancelling the run.
+This class defines the interface that the MLflow project runner uses to manage the lifecycle
+of runs launched in different environments (e.g. runs launched locally or on Databricks).</p>
+<p><code class="docutils literal notranslate"><span class="pre">SubmittedRun</span></code> is not thread-safe. That is, concurrent calls to wait() / cancel()
+from multiple threads may inadvertently kill resources (e.g. local processes) unrelated to the
+run.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Subclasses of <code class="docutils literal notranslate"><span class="pre">SubmittedRun</span></code> must expose a <code class="docutils literal notranslate"><span class="pre">run_id</span></code> member containing the
+run’s MLflow run ID.</p>
+</div>
+<dl class="method">
+<dt id="mlflow.projects.SubmittedRun.cancel">
+<code class="descname">cancel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.SubmittedRun.cancel" title="Permalink to this definition"> </a></dt>
+<dd><p>Cancel the run (interrupts the command subprocess, cancels the Databricks run, etc) and
+waits for it to terminate. The MLflow run status may not be set correctly
+upon run cancellation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.projects.SubmittedRun.get_status">
+<code class="descname">get_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.SubmittedRun.get_status" title="Permalink to this definition"> </a></dt>
+<dd><p>Get status of the run.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflow.projects.SubmittedRun.run_id">
+<code class="descname">run_id</code><a class="headerlink" href="#mlflow.projects.SubmittedRun.run_id" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mlflow.projects.SubmittedRun.wait">
+<code class="descname">wait</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.SubmittedRun.wait" title="Permalink to this definition"> </a></dt>
+<dd><p>Wait for the run to finish, returning True if the run succeeded and false otherwise. Note
+that in some cases (e.g. remote execution on Databricks), we may wait until the remote job
+completes rather than until the MLflow run completes.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -243,7 +292,7 @@ returned <code class="docutils literal"><span class="pre">SubmittedRun</span></c
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mlflow.keras.html" class="btn btn-neutral" title="mlflow.keras" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+        <a href="mlflow.models.html" class="btn btn-neutral" title="mlflow.models" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
       
       
         <a href="mlflow.pyfunc.html" class="btn btn-neutral" title="mlflow.pyfunc" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
@@ -274,7 +323,7 @@ returned <code class="docutils literal"><span class="pre">SubmittedRun</span></c
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

@@ -84,7 +84,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -230,8 +234,8 @@ example, you can record them in a standalone program, on a remote cloud machine,
 interactive notebook. If you record runs in an <a class="reference internal" href="projects.html#projects"><span class="std std-ref">MLflow Project</span></a>, MLflow
 remembers the project URI and source version.</p>
 <p>Finally, runs can optionally be organized into <em>experiments</em>, which group together runs for a
-specific task. You can create an experiment via the <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">experiments</span></code> CLI, with
-<a class="reference internal" href="python_api/mlflow.html#mlflow.create_experiment" title="mlflow.create_experiment"><code class="xref py py-func docutils literal"><span class="pre">mlflow.create_experiment()</span></code></a>, or via the corresponding REST parameters. The MLflow API and
+specific task. You can create an experiment via the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">experiments</span></code> CLI, with
+<a class="reference internal" href="python_api/mlflow.html#mlflow.create_experiment" title="mlflow.create_experiment"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.create_experiment()</span></code></a>, or via the corresponding REST parameters. The MLflow API and
 UI let you create and search for experiments.</p>
 <p>Once your runs have been recorded, you can query them using the <a class="reference internal" href="#tracking-ui"><span class="std std-ref">Tracking UI</span></a> or the MLflow
 API.</p>
@@ -239,15 +243,15 @@ API.</p>
 <div class="section" id="where-runs-get-recorded">
 <h2><a class="toc-backref" href="#id5">Where Runs Get Recorded</a><a class="headerlink" href="#where-runs-get-recorded" title="Permalink to this headline"> </a></h2>
 <p>MLflow runs can be recorded either locally in files or remotely to a tracking server.
-By default, the MLflow Python API logs runs to files in an <code class="docutils literal"><span class="pre">mlruns</span></code> directory wherever you
-ran your program. You can then run <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">ui</span></code> to see the logged runs. Set the
-<code class="docutils literal"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable to a server’s URI or call
-<a class="reference internal" href="python_api/mlflow.html#mlflow.set_tracking_uri" title="mlflow.set_tracking_uri"><code class="xref py py-func docutils literal"><span class="pre">mlflow.set_tracking_uri()</span></code></a> to log runs remotely.</p>
+By default, the MLflow Python API logs runs to files in an <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory wherever you
+ran your program. You can then run <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code> to see the logged runs. Set the
+<code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable to a server’s URI or call
+<a class="reference internal" href="python_api/mlflow.html#mlflow.set_tracking_uri" title="mlflow.set_tracking_uri"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri()</span></code></a> to log runs remotely.</p>
 <p>There are a different kinds of remote tracking URIs:</p>
 <ul class="simple">
-<li>Local file path (specified as <code class="docutils literal"><span class="pre">file:/my/local/dir</span></code>), where data is just directly stored locally.</li>
-<li>HTTP server (specified as <code class="docutils literal"><span class="pre">https://my-server:5000</span></code>), which is a server hosting <a class="reference internal" href="#tracking-server"><span class="std std-ref">your own tracking server</span></a>.</li>
-<li>Databricks workspace (specified as <code class="docutils literal"><span class="pre">databricks</span></code>, or a specific Databricks CLI profile as <code class="docutils literal"><span class="pre">databricks://profileName</span></code>. For more information on configuring a Databricks CLI, see <a class="reference external" href="https://github.com/databricks/databricks-cli">here</a>. This only works for workspaces for which the Databricks MLflow Tracking Server is enabled; please contact Databricks if interested.</li>
+<li>Local file path (specified as <code class="docutils literal notranslate"><span class="pre">file:/my/local/dir</span></code>), where data is just directly stored locally.</li>
+<li>HTTP server (specified as <code class="docutils literal notranslate"><span class="pre">https://my-server:5000</span></code>), which is a server hosting <a class="reference internal" href="#tracking-server"><span class="std std-ref">your own tracking server</span></a>.</li>
+<li>Databricks workspace (specified as <code class="docutils literal notranslate"><span class="pre">databricks</span></code>, or a specific Databricks CLI profile as <code class="docutils literal notranslate"><span class="pre">databricks://profileName</span></code>. For more information on configuring a Databricks CLI, see <a class="reference external" href="https://github.com/databricks/databricks-cli">here</a>. This only works for workspaces for which the Databricks MLflow Tracking Server is enabled; please contact Databricks if interested.</li>
 </ul>
 </div>
 <div class="section" id="logging-data-to-runs">
@@ -256,63 +260,63 @@ ran your program. You can then run <code class="docutils literal"><span class="p
 shows the Python API.</p>
 <div class="section" id="basic-logging-functions">
 <span id="id1"></span><h3>Basic Logging Functions<a class="headerlink" href="#basic-logging-functions" title="Permalink to this headline"> </a></h3>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.set_tracking_uri" title="mlflow.set_tracking_uri"><code class="xref py py-func docutils literal"><span class="pre">mlflow.set_tracking_uri()</span></code></a> connects to a tracking URI. You can also set the
-<code class="docutils literal"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable to have MLflow find a URI from there. In both cases,
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.set_tracking_uri" title="mlflow.set_tracking_uri"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri()</span></code></a> connects to a tracking URI. You can also set the
+<code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable to have MLflow find a URI from there. In both cases,
 the URI can either be a HTTP/HTTPS URI for a remote server, or a local path to log data to a
-directory. The URI defaults to <code class="docutils literal"><span class="pre">mlruns</span></code>.</p>
-<p><code class="xref py py-func docutils literal"><span class="pre">mlflow.get_tracking_uri()</span></code> returns the current tracking URI.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.create_experiment" title="mlflow.create_experiment"><code class="xref py py-func docutils literal"><span class="pre">mlflow.create_experiment()</span></code></a> creates a new experiment and returns its ID. Runs can be
-launched under the experiment by passing the experiment ID to <code class="docutils literal"><span class="pre">mlflow.start_run</span></code>.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.start_run()</span></code></a> returns the currently active run (if one exists), or starts a new run
-and returns a <code class="xref py py-class docutils literal"><span class="pre">mlflow.tracking.ActiveRun</span></code> object usable as a context manager for the
-current run. You do not need to call <code class="docutils literal"><span class="pre">start_run</span></code> explicitly: calling one of the logging functions
+directory. The URI defaults to <code class="docutils literal notranslate"><span class="pre">mlruns</span></code>.</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.get_tracking_uri()</span></code> returns the current tracking URI.</p>
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.create_experiment" title="mlflow.create_experiment"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.create_experiment()</span></code></a> creates a new experiment and returns its ID. Runs can be
+launched under the experiment by passing the experiment ID to <code class="docutils literal notranslate"><span class="pre">mlflow.start_run</span></code>.</p>
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.start_run()</span></code></a> returns the currently active run (if one exists), or starts a new run
+and returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.tracking.ActiveRun</span></code> object usable as a context manager for the
+current run. You do not need to call <code class="docutils literal notranslate"><span class="pre">start_run</span></code> explicitly: calling one of the logging functions
 with no active run will automatically start a new one.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.end_run" title="mlflow.end_run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.end_run()</span></code></a> ends the currently active run, if any, taking an optional run status.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.active_run" title="mlflow.active_run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.active_run()</span></code></a> returns a <code class="xref py py-class docutils literal"><span class="pre">mlflow.tracking.Run</span></code> object corresponding to the
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.end_run" title="mlflow.end_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.end_run()</span></code></a> ends the currently active run, if any, taking an optional run status.</p>
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.active_run" title="mlflow.active_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.active_run()</span></code></a> returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.tracking.Run</span></code> object corresponding to the
 currently active run, if any.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_param" title="mlflow.log_param"><code class="xref py py-func docutils literal"><span class="pre">mlflow.log_param()</span></code></a> logs a key-value parameter in the currently active run. The keys and
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_param" title="mlflow.log_param"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_param()</span></code></a> logs a key-value parameter in the currently active run. The keys and
 values are both strings.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_metric" title="mlflow.log_metric"><code class="xref py py-func docutils literal"><span class="pre">mlflow.log_metric()</span></code></a> logs a key-value metric. The value must always be a number. MLflow will
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_metric" title="mlflow.log_metric"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_metric()</span></code></a> logs a key-value metric. The value must always be a number. MLflow will
 remember the history of values for each metric.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_artifact" title="mlflow.log_artifact"><code class="xref py py-func docutils literal"><span class="pre">mlflow.log_artifact()</span></code></a> logs a local file as an artifact, optionally taking an
-<code class="docutils literal"><span class="pre">artifact_path</span></code> to place it in within the run’s artifact URI. Run artifacts can be organized into
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_artifact" title="mlflow.log_artifact"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_artifact()</span></code></a> logs a local file as an artifact, optionally taking an
+<code class="docutils literal notranslate"><span class="pre">artifact_path</span></code> to place it in within the run’s artifact URI. Run artifacts can be organized into
 directories, so you can place the artifact in a directory this way.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_artifacts" title="mlflow.log_artifacts"><code class="xref py py-func docutils literal"><span class="pre">mlflow.log_artifacts()</span></code></a> logs all the files in a given directory as artifacts, again taking
-an optional <code class="docutils literal"><span class="pre">artifact_path</span></code>.</p>
-<p><a class="reference internal" href="python_api/mlflow.html#mlflow.get_artifact_uri" title="mlflow.get_artifact_uri"><code class="xref py py-func docutils literal"><span class="pre">mlflow.get_artifact_uri()</span></code></a> returns the URI that artifacts from the current run should be
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.log_artifacts" title="mlflow.log_artifacts"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_artifacts()</span></code></a> logs all the files in a given directory as artifacts, again taking
+an optional <code class="docutils literal notranslate"><span class="pre">artifact_path</span></code>.</p>
+<p><a class="reference internal" href="python_api/mlflow.html#mlflow.get_artifact_uri" title="mlflow.get_artifact_uri"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.get_artifact_uri()</span></code></a> returns the URI that artifacts from the current run should be
 logged to.</p>
 </div>
 <div class="section" id="launching-multiple-runs-in-one-program">
 <h3>Launching Multiple Runs in One Program<a class="headerlink" href="#launching-multiple-runs-in-one-program" title="Permalink to this headline"> </a></h3>
 <p>Sometimes you want to execute multiple MLflow runs in the same program: for example, maybe you are
 performing a hyperparameter search locally or your experiments are just very fast to run. This is
-easy to do because the <code class="docutils literal"><span class="pre">ActiveRun</span></code> object returned by <a class="reference internal" href="python_api/mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.start_run()</span></code></a> is a Python
+easy to do because the <code class="docutils literal notranslate"><span class="pre">ActiveRun</span></code> object returned by <a class="reference internal" href="python_api/mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.start_run()</span></code></a> is a Python
 <a class="reference external" href="https://docs.python.org/2.5/whatsnew/pep-343.html">context manager</a>. You can “scope” each run to
 just one block of code as follows:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>The run remains open throughout the <code class="docutils literal"><span class="pre">with</span></code> statement, and is automatically closed when the
+<p>The run remains open throughout the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement, and is automatically closed when the
 statement exits, even if it exits due to an exception.</p>
 </div>
 </div>
 <div class="section" id="organizing-runs-in-experiments">
 <h2><a class="toc-backref" href="#id7">Organizing Runs in Experiments</a><a class="headerlink" href="#organizing-runs-in-experiments" title="Permalink to this headline"> </a></h2>
 <p>MLflow allows you to group runs under experiments, which can be useful for comparing runs intended
-to tackle a particular task. You can create experiments via the CLI (<code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">experiments</span></code>) or via
-the <code class="xref py py-func docutils literal"><span class="pre">create_experiment()</span></code> Python API. You can pass the experiment ID for a individual run
-via the CLI (for example, <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">...</span> <span class="pre">--experiment-id</span> <span class="pre">[ID]</span></code>) or via the <code class="docutils literal"><span class="pre">MLFLOW_EXPERIMENT_ID</span></code>
+to tackle a particular task. You can create experiments via the CLI (<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">experiments</span></code>) or via
+the <code class="xref py py-func docutils literal notranslate"><span class="pre">create_experiment()</span></code> Python API. You can pass the experiment ID for a individual run
+via the CLI (for example, <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">...</span> <span class="pre">--experiment-id</span> <span class="pre">[ID]</span></code>) or via the <code class="docutils literal notranslate"><span class="pre">MLFLOW_EXPERIMENT_ID</span></code>
 environment variable.</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Prints &quot;created an experiment with ID &lt;id&gt;</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prints &quot;created an experiment with ID &lt;id&gt;</span>
 <span class="n">mlflow</span> <span class="n">experiments</span> <span class="n">create</span> <span class="n">fraud</span><span class="o">-</span><span class="n">detection</span>
 <span class="c1"># Set the ID via environment variables</span>
 <span class="n">export</span> <span class="n">MLFLOW_EXPERIMENT_ID</span><span class="o">=&lt;</span><span class="nb">id</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Launch a run. The experiment ID is inferred from the MLFLOW_EXPERIMENT_ID environment</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Launch a run. The experiment ID is inferred from the MLFLOW_EXPERIMENT_ID environment</span>
 <span class="c1"># variable, or from the --experiment-id parameter passed to the MLflow CLI (the latter</span>
 <span class="c1"># taking precedence)</span>
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
@@ -324,7 +328,7 @@ environment variable.</p>
 <h3>Managing Experiments and Runs with the Tracking Service API<a class="headerlink" href="#managing-experiments-and-runs-with-the-tracking-service-api" title="Permalink to this headline"> </a></h3>
 <p>MLflow provides a more detailed Tracking Service API for managing experiments and runs directly, which is available in the <a class="reference internal" href="python_api/mlflow.tracking.html"><span class="doc">mlflow.tracking</span></a> package. This makes it possible to query data about past runs, log additional information about them, create experiments and more.</p>
 <p>Example usage:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span>  <span class="nn">mlflow.tracking</span> <span class="k">import</span> <span class="n">get_service</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span>  <span class="nn">mlflow.tracking</span> <span class="k">import</span> <span class="n">get_service</span>
 <span class="n">service</span> <span class="o">=</span> <span class="n">get_service</span><span class="p">()</span>
 <span class="n">experiments</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">list_experiments</span><span class="p">()</span> <span class="c1"># returns a list of mlflow.entities.Experiment</span>
 <span class="n">run</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">create_run</span><span class="p">(</span><span class="n">experiments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">experiment_id</span><span class="p">)</span> <span class="c1"># returns mlflow.entities.Run</span>
@@ -337,8 +341,8 @@ environment variable.</p>
 <div class="section" id="tracking-ui">
 <span id="id2"></span><h2><a class="toc-backref" href="#id8">Tracking UI</a><a class="headerlink" href="#tracking-ui" title="Permalink to this headline"> </a></h2>
 <p>The Tracking UI lets you visualize, search and compare runs, as well as download run artifacts or
-metadata for analysis in other tools. If you have been logging runs to a local <code class="docutils literal"><span class="pre">mlruns</span></code> directory,
-run <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">ui</span></code> in the directory above it, and it will load the corresponding runs.
+metadata for analysis in other tools. If you have been logging runs to a local <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory,
+run <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code> in the directory above it, and it will load the corresponding runs.
 Alternatively, the <a class="reference internal" href="#tracking-server"><span class="std std-ref">MLflow Server</span></a> serves the same UI, and enables remote storage of run artifacts.</p>
 <p>The UI contains the following key features:</p>
 <ul class="simple">
@@ -351,7 +355,7 @@ Alternatively, the <a class="reference internal" href="#tracking-server"><span c
 <div class="section" id="querying-runs-programmatically">
 <span id="tracking-query-api"></span><h2><a class="toc-backref" href="#id9">Querying Runs Programmatically</a><a class="headerlink" href="#querying-runs-programmatically" title="Permalink to this headline"> </a></h2>
 <p>All of the functions in the Tracking UI can be accessed programmatically through the
-<a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.tracking</span></code></a> module and the REST API. This makes it easy to do several
+<a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tracking</span></code></a> module and the REST API. This makes it easy to do several
 common tasks:</p>
 <ul class="simple">
 <li>Query and compare runs using any data analysis tool of your choice, for example, <strong>pandas</strong>.</li>
@@ -364,12 +368,12 @@ submit new ones.</li>
 </div>
 <div class="section" id="running-a-tracking-server">
 <span id="tracking-server"></span><h2><a class="toc-backref" href="#id10">Running a Tracking Server</a><a class="headerlink" href="#running-a-tracking-server" title="Permalink to this headline"> </a></h2>
-<p>The MLflow tracking server launched via <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">server</span></code> also hosts REST APIs for tracking runs,
+<p>The MLflow tracking server launched via <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">server</span></code> also hosts REST APIs for tracking runs,
 writing data to the local filesystem. You can specify a tracking server URI
-via the <code class="docutils literal"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable and MLflow’s tracking APIs automatically
+via the <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable and MLflow’s tracking APIs automatically
 communicate with the tracking server at that URI to create/get run information, log metrics, and so on.</p>
 <p>An example configuration for a server is as follows:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">server</span> \
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">server</span> \
     <span class="o">--</span><span class="n">file</span><span class="o">-</span><span class="n">store</span> <span class="o">/</span><span class="n">mnt</span><span class="o">/</span><span class="n">persistent</span><span class="o">-</span><span class="n">disk</span> \
     <span class="o">--</span><span class="n">default</span><span class="o">-</span><span class="n">artifact</span><span class="o">-</span><span class="n">root</span> <span class="n">s3</span><span class="p">:</span><span class="o">//</span><span class="n">my</span><span class="o">-</span><span class="n">mlflow</span><span class="o">-</span><span class="n">bucket</span><span class="o">/</span> \
     <span class="o">--</span><span class="n">host</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
@@ -378,20 +382,20 @@ communicate with the tracking server at that URI to create/get run information, 
 <div class="section" id="storage">
 <h3>Storage<a class="headerlink" href="#storage" title="Permalink to this headline"> </a></h3>
 <p>The tracking server has two properties related to how data is stored: File Store and Artifact Store.</p>
-<p>The <strong>File Store</strong> (exposed via <code class="docutils literal"><span class="pre">--file-store</span></code>) is where the <em>server</em> stores run and experiment metadata.
-It defaults to the local <code class="docutils literal"><span class="pre">./mlruns</span></code> directory (same as when running <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code> locally), but when
+<p>The <strong>File Store</strong> (exposed via <code class="docutils literal notranslate"><span class="pre">--file-store</span></code>) is where the <em>server</em> stores run and experiment metadata.
+It defaults to the local <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> directory (same as when running <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> locally), but when
 running a server, make sure that this points to a persistent (that is, non-ephemeral) file system location.</p>
 <p>The <strong>Artifact Store</strong> is a location suitable for large data (such as an S3 bucket or shared NFS file system)
 where <em>clients</em> log their artifact output (for example, models). The Artifact Store is a property
-of an experiment, but the <code class="docutils literal"><span class="pre">--default-artifact-root</span></code> flag sets the artifact root URI for
-newly-created experiments that do not specify one. Once you create an experiment, the <code class="docutils literal"><span class="pre">--default-artifact-root</span></code> is no longer relevant to it.</p>
+of an experiment, but the <code class="docutils literal notranslate"><span class="pre">--default-artifact-root</span></code> flag sets the artifact root URI for
+newly-created experiments that do not specify one. Once you create an experiment, the <code class="docutils literal notranslate"><span class="pre">--default-artifact-root</span></code> is no longer relevant to it.</p>
 <p>To allow the clients and server to access the artifact location, you should configure your cloud
-provider credentials as normal. For example, for S3, you can set the <code class="docutils literal"><span class="pre">AWS_ACCESS_KEY_ID</span></code>
-and <code class="docutils literal"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> environment variables, use an IAM role, or configure a default
-profile in <code class="docutils literal"><span class="pre">~/.aws/credentials</span></code>. See <a class="reference external" href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-credentials.html">Set up AWS Credentials and Region for Development</a> for more info.</p>
+provider credentials as normal. For example, for S3, you can set the <code class="docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code>
+and <code class="docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> environment variables, use an IAM role, or configure a default
+profile in <code class="docutils literal notranslate"><span class="pre">~/.aws/credentials</span></code>. See <a class="reference external" href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-credentials.html">Set up AWS Credentials and Region for Development</a> for more info.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
-<p class="last">If you do not specify a <code class="docutils literal"><span class="pre">--default-artifact-root</span></code> or an artifact URI when creating the experiment (for example, <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">experiments</span> <span class="pre">create</span> <span class="pre">--artifact-root</span> <span class="pre">s3://&lt;my-bucket&gt;</span></code>), then the artifact root will be a path inside the File Store. Typically this is not an appropriate location, as the client and server will probably be referring to different physical locations (that is, the same path on different disks).</p>
+<p class="last">If you do not specify a <code class="docutils literal notranslate"><span class="pre">--default-artifact-root</span></code> or an artifact URI when creating the experiment (for example, <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">experiments</span> <span class="pre">create</span> <span class="pre">--artifact-root</span> <span class="pre">s3://&lt;my-bucket&gt;</span></code>), then the artifact root will be a path inside the File Store. Typically this is not an appropriate location, as the client and server will probably be referring to different physical locations (that is, the same path on different disks).</p>
 </div>
 </div>
 <div class="section" id="supported-artifact-stores">
@@ -400,55 +404,55 @@ profile in <code class="docutils literal"><span class="pre">~/.aws/credentials</
 Amazon S3, Azure Blob Storage, and Google Cloud Storage.</p>
 <div class="section" id="amazon-s3">
 <h4>Amazon S3<a class="headerlink" href="#amazon-s3" title="Permalink to this headline"> </a></h4>
-<p>Specify a URI of the form <code class="docutils literal"><span class="pre">s3://&lt;bucket&gt;/&lt;path&gt;</span></code> to store artifacts in S3. MLflow obtains
-credentials to access S3 from your machine’s IAM role, a profile in <code class="docutils literal"><span class="pre">~/.aws/credentials</span></code>, or
-the environment variables <code class="docutils literal"><span class="pre">AWS_ACCESS_KEY_ID</span></code> and <code class="docutils literal"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> depending on which of
+<p>Specify a URI of the form <code class="docutils literal notranslate"><span class="pre">s3://&lt;bucket&gt;/&lt;path&gt;</span></code> to store artifacts in S3. MLflow obtains
+credentials to access S3 from your machine’s IAM role, a profile in <code class="docutils literal notranslate"><span class="pre">~/.aws/credentials</span></code>, or
+the environment variables <code class="docutils literal notranslate"><span class="pre">AWS_ACCESS_KEY_ID</span></code> and <code class="docutils literal notranslate"><span class="pre">AWS_SECRET_ACCESS_KEY</span></code> depending on which of
 these are available. See
 <a class="reference external" href="https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-credentials.html">Set up AWS Credentials and Region for Development</a> for more information on how to set credentials.</p>
 </div>
 <div class="section" id="azure-blob-storage">
 <h4>Azure Blob Storage<a class="headerlink" href="#azure-blob-storage" title="Permalink to this headline"> </a></h4>
-<p>Specify a URI of the form <code class="docutils literal"><span class="pre">wasbs://&lt;container&gt;&#64;&lt;storage-account&gt;.blob.core.windows.net/&lt;path&gt;</span></code> to store
+<p>Specify a URI of the form <code class="docutils literal notranslate"><span class="pre">wasbs://&lt;container&gt;&#64;&lt;storage-account&gt;.blob.core.windows.net/&lt;path&gt;</span></code> to store
 artifacts in Azure Blob Storage. MLflow looks for your Azure Storage access credentials in the
-<code class="docutils literal"><span class="pre">AZURE_STORAGE_CONNECTION_STRING</span></code> or <code class="docutils literal"><span class="pre">AZURE_STORAGE_ACCESS_KEY</span></code> environment variables (preferring
+<code class="docutils literal notranslate"><span class="pre">AZURE_STORAGE_CONNECTION_STRING</span></code> or <code class="docutils literal notranslate"><span class="pre">AZURE_STORAGE_ACCESS_KEY</span></code> environment variables (preferring
 a connection string if one is set), so you will need to set one of these variables on both your client
-application and your MLflow tracking server. Finally, you will need to <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">azure-storage</span></code>
+application and your MLflow tracking server. Finally, you will need to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">azure-storage</span></code>
 separately (on both your client and the server) to access Azure Blob Storage; MLflow does not declare
 a dependency on this package by default.</p>
 </div>
 <div class="section" id="google-cloud-storage">
 <h4>Google Cloud Storage<a class="headerlink" href="#google-cloud-storage" title="Permalink to this headline"> </a></h4>
-<p>Specify a URI of the form <code class="docutils literal"><span class="pre">gs://&lt;bucket&gt;/&lt;path&gt;</span></code> to store artifacts in Google Cloud Storage.
+<p>Specify a URI of the form <code class="docutils literal notranslate"><span class="pre">gs://&lt;bucket&gt;/&lt;path&gt;</span></code> to store artifacts in Google Cloud Storage.
 You should configure credentials for accessing the GCS container on the client and server as described
 in the <a class="reference external" href="https://google-cloud.readthedocs.io/en/latest/core/auth.html">GCS documentation</a>.
-Finally, you will need to <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">google-cloud-storage</span></code> (on both your client and the server)
+Finally, you will need to <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">google-cloud-storage</span></code> (on both your client and the server)
 to access Google Cloud Storage; MLflow does not declare a dependency on this package by default.</p>
 </div>
 <div class="section" id="sftp-server">
 <h4>SFTP server<a class="headerlink" href="#sftp-server" title="Permalink to this headline"> </a></h4>
 <p>Specify a URI of the form sftp://user&#64;host/path/to/directory to store artifacts in an SFTP server. You should configure the client to be able to login to the SFTP server without a password over SSH (e.g. public key, identityfile in ssh_config…).</p>
-<p>In principle the following format <code class="docutils literal"><span class="pre">sftp://pass:user&#64;host/</span></code> is supported for logging in. But for safety reasons this is not recommended.</p>
-<p>When using this store, <code class="docutils literal"><span class="pre">pysftp</span></code> has to be installed on both client and server. Simply <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pysftp</span></code> will install the required package.</p>
+<p>In principle the following format <code class="docutils literal notranslate"><span class="pre">sftp://pass:user&#64;host/</span></code> is supported for logging in. But for safety reasons this is not recommended.</p>
+<p>When using this store, <code class="docutils literal notranslate"><span class="pre">pysftp</span></code> has to be installed on both client and server. Simply <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pysftp</span></code> will install the required package.</p>
 </div>
 </div>
 <div class="section" id="networking">
 <h3>Networking<a class="headerlink" href="#networking" title="Permalink to this headline"> </a></h3>
-<p>The <code class="docutils literal"><span class="pre">--host</span></code> option exposes the service on all interfaces. If running a server in production, we
+<p>The <code class="docutils literal notranslate"><span class="pre">--host</span></code> option exposes the service on all interfaces. If running a server in production, we
 would recommend not exposing the built-in server broadly (as it is unauthenticated and unencrypted),
 and instead putting it behind a reverse proxy like NGINX or Apache httpd, or connecting over VPN.
-Additionally, you should ensure that the <code class="docutils literal"><span class="pre">--file-store</span></code> (which defaults to the <code class="docutils literal"><span class="pre">./mlruns</span></code> directory)
+Additionally, you should ensure that the <code class="docutils literal notranslate"><span class="pre">--file-store</span></code> (which defaults to the <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> directory)
 points to a persistent (non-ephemeral) disk.</p>
 </div>
 <div class="section" id="connecting-to-a-remote-server">
 <h3>Connecting to a Remote Server<a class="headerlink" href="#connecting-to-a-remote-server" title="Permalink to this headline"> </a></h3>
-<p>Once you have a server running, set <code class="docutils literal"><span class="pre">MLFLOW_TRACKING_URI</span></code> to the server’s URI, along
-with its scheme and port (for example, <code class="docutils literal"><span class="pre">http://10.0.0.1:5000</span></code>). Then you can use <code class="docutils literal"><span class="pre">mlflow</span></code> as normal:</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+<p>Once you have a server running, set <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> to the server’s URI, along
+with its scheme and port (for example, <code class="docutils literal notranslate"><span class="pre">http://10.0.0.1:5000</span></code>). Then you can use <code class="docutils literal notranslate"><span class="pre">mlflow</span></code> as normal:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
 <span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">():</span>
     <span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal"><span class="pre">mlflow.start_run</span></code> and <code class="docutils literal"><span class="pre">mlflow.log_metric</span></code> calls make API requests to your remote
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.start_run</span></code> and <code class="docutils literal notranslate"><span class="pre">mlflow.log_metric</span></code> calls make API requests to your remote
 tracking server.</p>
 </div>
 </div>
@@ -533,17 +537,6 @@ tracking server.</p>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

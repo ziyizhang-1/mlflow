@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.keras &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.keras &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.keras.html">
@@ -49,9 +49,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
-        <link rel="next" title="mlflow.projects" href="/mlflow.projects.html"/>
+        <link rel="next" title="mlflow.mleap" href="/mlflow.mleap.html"/>
         <link rel="prev" title="mlflow.h2o" href="/mlflow.h2o.html"/> 
 
   
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,33 +182,90 @@
                 
   <div class="section" id="module-mlflow.keras">
 <span id="mlflow-keras"></span><h1>mlflow.keras<a class="headerlink" href="#module-mlflow.keras" title="Permalink to this headline"> </a></h1>
-<p>MLflow integration for Keras.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.keras</span></code> module provides an API for logging and loading Keras models. This module
+exports Keras models with the following flavors:</p>
+<dl class="docutils">
+<dt>Keras (native) format</dt>
+<dd>This is the main flavor that can be loaded back into Keras.</dd>
+<dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></dt>
+<dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
+</dl>
 <dl class="function">
 <dt id="mlflow.keras.load_model">
 <code class="descclassname">mlflow.keras.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.keras.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a Keras model from a local file (if run_id is None) or a run.</p>
+<dd><p>Load a Keras model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is None) or a run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model saved
+by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.keras.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.log_model()</span></code></a>.</li>
+<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load persisted model as a Keras model or as a PyFunc, call predict() on a Pandas DataFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">,</span> <span class="n">run_id</span><span class="o">=</span><span class="s2">&quot;96771d893a5e46159d9f3b49bf9013e2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.keras.load_pyfunc">
 <code class="descclassname">mlflow.keras.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>model_file</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.keras.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Loads a Keras model as a PyFunc from the passed-in persisted Keras model file.</p>
+<dd><p>Load a persisted Keras model as a <code class="docutils literal notranslate"><span class="pre">python_function</span></code> model.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model_file</strong> – Path to Keras model file.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model_file</strong> – Local filesystem path to model saved by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.keras.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.log_model()</span></code></a>.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">PyFunc model.</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pyfunc format model with function
+<code class="docutils literal notranslate"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame</span></code>.</td>
 </tr>
 </tbody>
 </table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model_file</span> <span class="o">=</span> <span class="s2">&quot;/tmp/pyfunc-keras-model&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">load_pyfunc</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can apply the loaded PyFunc for inference on a pandas DataFrame via predict()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.keras.log_model">
 <code class="descclassname">mlflow.keras.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>keras_model</em>, <em>artifact_path</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.keras.log_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Log a Keras model as an MLflow artifact for the current run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>keras_model</strong> – Keras model to be saved.</li>
+<li><strong>artifact_path</strong> – Run-relative artifact path.</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">keras_model.save</span></code> method.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">layers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Build, compile, and train your model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;rmsprop&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Log metrics and log the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">()</span> <span class="k">as</span> <span class="n">run</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">mlflow</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">keras_model</span><span class="p">,</span> <span class="s2">&quot;models&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -226,6 +285,17 @@
 </tr>
 </tbody>
 </table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Build, compile, and train your model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model_path</span> <span class="o">=</span> <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;rmsprop&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">))</span>
+<span class="gp">... </span><span class="c1"># Save the model as an MLflow Model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mlflow</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">keras_model</span><span class="p">,</span> <span class="n">keras_model_path</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -240,7 +310,7 @@
         <a href="mlflow.h2o.html" class="btn btn-neutral" title="mlflow.h2o" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
       
       
-        <a href="mlflow.projects.html" class="btn btn-neutral" title="mlflow.projects" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+        <a href="mlflow.mleap.html" class="btn btn-neutral" title="mlflow.mleap" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
       
     </div>
   
@@ -268,7 +338,7 @@
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

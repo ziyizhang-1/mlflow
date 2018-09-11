@@ -84,7 +84,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -172,22 +176,22 @@
 <div class="section" id="installing-mlflow">
 <h2>Installing MLflow<a class="headerlink" href="#installing-mlflow" title="Permalink to this headline"> </a></h2>
 <p>You install MLflow by running:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">mlflow</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">mlflow</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">You cannot install MLflow on the MacOS system installation of Python. We recommend installing
 Python 3 through the <a class="reference external" href="https://brew.sh/">Homebrew</a> package manager using
-<code class="docutils literal"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">python</span></code>. (In this case, installing MLflow is now <code class="docutils literal"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">mlflow</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">python</span></code>. (In this case, installing MLflow is now <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">mlflow</span></code>).</p>
 </div>
 <p>At this point we recommend you follow the <a class="reference internal" href="tutorial.html"><span class="doc">Tutorial</span></a> for a walk-through on how you
 can leverage MLflow in your daily workflow.</p>
 </div>
 <div class="section" id="downloading-the-quickstart">
 <h2>Downloading the Quickstart<a class="headerlink" href="#downloading-the-quickstart" title="Permalink to this headline"> </a></h2>
-<p>Download the quickstart code by cloning MLflow via <code class="docutils literal"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/mlflow/mlflow</span></code>,
-and cd into the <code class="docutils literal"><span class="pre">example</span></code> subdirectory of the repository. We’ll use this working directory for
+<p>Download the quickstart code by cloning MLflow via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/mlflow/mlflow</span></code>,
+and cd into the <code class="docutils literal notranslate"><span class="pre">example</span></code> subdirectory of the repository. We’ll use this working directory for
 running the quickstart.</p>
 <p>We avoid running directly from our clone of MLflow as doing so would cause the tutorial to
 use MLflow from source, rather than your PyPi installation of MLflow.</p>
@@ -196,8 +200,8 @@ use MLflow from source, rather than your PyPi installation of MLflow.</p>
 <h2>Using the Tracking API<a class="headerlink" href="#using-the-tracking-api" title="Permalink to this headline"> </a></h2>
 <p>The <a class="reference internal" href="tracking.html"><span class="doc">MLflow Tracking API</span></a> lets you log metrics and artifacts (files) from your data
 science code and see a history of your runs. You can try it out by writing a simple Python script
-as follows (this example is also included in <code class="docutils literal"><span class="pre">quickstart/test.py</span></code>):</p>
-<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+as follows (this example is also included in <code class="docutils literal notranslate"><span class="pre">quickstart/test.py</span></code>):</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">mlflow</span> <span class="k">import</span> <span class="n">log_metric</span><span class="p">,</span> <span class="n">log_param</span><span class="p">,</span> <span class="n">log_artifact</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -218,15 +222,15 @@ as follows (this example is also included in <code class="docutils literal"><spa
 </div>
 <div class="section" id="viewing-the-tracking-ui">
 <h2>Viewing the Tracking UI<a class="headerlink" href="#viewing-the-tracking-ui" title="Permalink to this headline"> </a></h2>
-<p>By default, wherever you run your program, the tracking API writes data into files into an <code class="docutils literal"><span class="pre">mlruns</span></code> directory.
+<p>By default, wherever you run your program, the tracking API writes data into files into an <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory.
 You can then run MLflow’s Tracking UI:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">ui</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">ui</span>
 </pre></div>
 </div>
 <p>and view it at <a class="reference external" href="http://localhost:5000">http://localhost:5000</a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">If you see message <code class="docutils literal"><span class="pre">[CRITICAL]</span> <span class="pre">WORKER</span> <span class="pre">TIMEOUT</span></code> in the MLflow UI or error logs, try using <code class="docutils literal"><span class="pre">http://localhost:5000</span></code> instead of <code class="docutils literal"><span class="pre">http://127.0.0.1:5000</span></code>.</p>
+<p class="last">If you see message <code class="docutils literal notranslate"><span class="pre">[CRITICAL]</span> <span class="pre">WORKER</span> <span class="pre">TIMEOUT</span></code> in the MLflow UI or error logs, try using <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code> instead of <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:5000</span></code>.</p>
 </div>
 <p>Alternatively, you can configure MLflow to <a class="reference internal" href="tracking.html#tracking"><span class="std std-ref">log runs to a remote server</span></a> to manage
 your results centrally or share them across a team.</p>
@@ -234,70 +238,70 @@ your results centrally or share them across a team.</p>
 <div class="section" id="running-mlflow-projects">
 <h2>Running MLflow Projects<a class="headerlink" href="#running-mlflow-projects" title="Permalink to this headline"> </a></h2>
 <p>MLflow allows you to package code and its dependencies as a <em>project</em> that can be run in a
-reproducible fashion on other data. Each project includes its code and a <code class="docutils literal"><span class="pre">MLproject</span></code> file that
+reproducible fashion on other data. Each project includes its code and a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file that
 defines its dependencies (for example, Python environment) as well as what commands can be run into the
 project and what arguments they take.</p>
-<p>You can easily run existing projects with the <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code> command, which runs a project from
+<p>You can easily run existing projects with the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> command, which runs a project from
 either a local directory or a GitHub URI:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="n">tutorial</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="n">tutorial</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
 
 <span class="n">mlflow</span> <span class="n">run</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">mlflow</span><span class="o">/</span><span class="n">mlflow</span><span class="o">-</span><span class="n">example</span><span class="o">.</span><span class="n">git</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span>
 </pre></div>
 </div>
-<p>There’s a sample project in <code class="docutils literal"><span class="pre">tutorial</span></code>, including a <code class="docutils literal"><span class="pre">MLproject</span></code> file that
+<p>There’s a sample project in <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>, including a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file that
 specifies its dependencies. All projects that run also log their Tracking API data in the local
-<code class="docutils literal"><span class="pre">mlruns</span></code> directory (or on your tracking server if you’ve configured one), so you should be able
-to see these runs using <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">ui</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory (or on your tracking server if you’ve configured one), so you should be able
+to see these runs using <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">By default <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code> installs all dependencies using <a class="reference external" href="https://conda.io/">conda</a>.
-To run a project without using <code class="docutils literal"><span class="pre">conda</span></code>, you can provide the <code class="docutils literal"><span class="pre">--no-conda</span></code> option to
-<code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code>. In this case, you must ensure that the necessary dependencies are already installed
+<p class="last">By default <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> installs all dependencies using <a class="reference external" href="https://conda.io/">conda</a>.
+To run a project without using <code class="docutils literal notranslate"><span class="pre">conda</span></code>, you can provide the <code class="docutils literal notranslate"><span class="pre">--no-conda</span></code> option to
+<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code>. In this case, you must ensure that the necessary dependencies are already installed
 in your Python environment.</p>
 </div>
 <p>For more information, see <a class="reference internal" href="projects.html"><span class="doc">MLflow Projects</span></a>.</p>
 </div>
 <div class="section" id="saving-and-serving-models">
 <h2>Saving and Serving Models<a class="headerlink" href="#saving-and-serving-models" title="Permalink to this headline"> </a></h2>
-<p>MLflow includes a generic <code class="docutils literal"><span class="pre">MLmodel</span></code> format for saving <em>models</em> from a variety of tools in diverse
-<em>flavors</em>. For example, many models can be served as Python functions, so an <code class="docutils literal"><span class="pre">MLmodel</span></code> file can
+<p>MLflow includes a generic <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> format for saving <em>models</em> from a variety of tools in diverse
+<em>flavors</em>. For example, many models can be served as Python functions, so an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file can
 declare how each model should be interpreted as a Python function in order to let various tools
 serve it. MLflow also includes tools for running such models locally and exporting them to Docker
 containers or commercial serving platforms.</p>
-<p>To illustrate this functionality, the <code class="docutils literal"><span class="pre">mlflow.sklearn</span></code> package can log scikit-learn models as
+<p>To illustrate this functionality, the <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code> package can log scikit-learn models as
 MLflow artifacts and then load them again for serving. There is an example training application in
-<code class="docutils literal"><span class="pre">quickstart/test_sklearn.py</span></code> that you can run as follows:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">quickstart</span><span class="o">/</span><span class="n">test_sklearn</span><span class="o">.</span><span class="n">py</span>
+<code class="docutils literal notranslate"><span class="pre">quickstart/test_sklearn.py</span></code> that you can run as follows:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">quickstart</span><span class="o">/</span><span class="n">test_sklearn</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 <p>When you run the example, it outputs an MLflow run ID for that experiment. If you look at
-<code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">ui</span></code>, you will also see that the run saved a <code class="docutils literal"><span class="pre">model</span></code> folder containing an <code class="docutils literal"><span class="pre">MLmodel</span></code>
+<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code>, you will also see that the run saved a <code class="docutils literal notranslate"><span class="pre">model</span></code> folder containing an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code>
 description file and a pickled scikit-learn model. You can pass the run ID and the path of the model
 within the artifacts directory (here “model”) to various tools. For example, MLflow includes a
 simple REST server for scikit-learn models:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sklearn</span> <span class="n">serve</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">RUN_ID</span><span class="o">&gt;</span> <span class="n">model</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">sklearn</span> <span class="n">serve</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">RUN_ID</span><span class="o">&gt;</span> <span class="n">model</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">By default the server runs on port 5000. If that port is already in use, use the <cite>–port</cite> option to
-specify a different port. For example: <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">sklearn</span> <span class="pre">serve</span> <span class="pre">--port</span> <span class="pre">1234</span> <span class="pre">-r</span> <span class="pre">&lt;RUN_ID&gt;</span> <span class="pre">model</span></code></p>
+specify a different port. For example: <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sklearn</span> <span class="pre">serve</span> <span class="pre">--port</span> <span class="pre">1234</span> <span class="pre">-r</span> <span class="pre">&lt;RUN_ID&gt;</span> <span class="pre">model</span></code></p>
 </div>
-<p>Once you have started the server, you can pass it some sample data with <code class="docutils literal"><span class="pre">curl</span></code> and see the
+<p>Once you have started the server, you can pass it some sample data with <code class="docutils literal notranslate"><span class="pre">curl</span></code> and see the
 predictions:</p>
-<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;[{&quot;x&quot;: 1}, {&quot;x&quot;: -1}]&#39;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">invocations</span>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;[{&quot;x&quot;: 1}, {&quot;x&quot;: -1}]&#39;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">invocations</span>
 </pre></div>
 </div>
 <p>which returns:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;predictions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;predictions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p>The <code class="docutils literal"><span class="pre">quickstart/test_sklearn.py</span></code> script must be run with the same Python version as
-the version of Python that runs <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">sklearn</span> <span class="pre">serve</span></code>. If they are not the same version,
+<p>The <code class="docutils literal notranslate"><span class="pre">quickstart/test_sklearn.py</span></code> script must be run with the same Python version as
+the version of Python that runs <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sklearn</span> <span class="pre">serve</span></code>. If they are not the same version,
 the stacktrace below may appear:</p>
-<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/site-packages/mlflow/sklearn.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">54</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_load_model_from_local_file</span>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/site-packages/mlflow/sklearn.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">54</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_load_model_from_local_file</span>
 <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xc6 in position 0: ordinal not in range(128)</span>
 </pre></div>
@@ -386,17 +390,6 @@ the stacktrace below may appear:</p>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

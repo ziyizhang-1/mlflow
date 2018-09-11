@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -192,10 +196,10 @@
 <dl class="function">
 <dt id="mlflow.h2o.load_pyfunc">
 <code class="descclassname">mlflow.h2o.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.h2o.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Loads an H2O model from the directory at <code class="docutils literal"><span class="pre">path</span></code> as a Python Function model.
-Note that this method calls <code class="docutils literal"><span class="pre">h2o.init(...)</span></code>, so the right version of h2o(-py) must be in the
-environment. The arguments given to <code class="docutils literal"><span class="pre">h2o.init(...)</span></code> can be customized in <code class="docutils literal"><span class="pre">path/h2o.yaml</span></code>
-under the key <code class="docutils literal"><span class="pre">init</span></code>.</p>
+<dd><p>Loads an H2O model from the directory at <code class="docutils literal notranslate"><span class="pre">path</span></code> as a Python Function model.
+Note that this method calls <code class="docutils literal notranslate"><span class="pre">h2o.init(...)</span></code>, so the right version of h2o(-py) must be in the
+environment. The arguments given to <code class="docutils literal notranslate"><span class="pre">h2o.init(...)</span></code> can be customized in <code class="docutils literal notranslate"><span class="pre">path/h2o.yaml</span></code>
+under the key <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -304,17 +308,6 @@ under the key <code class="docutils literal"><span class="pre">init</span></code
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

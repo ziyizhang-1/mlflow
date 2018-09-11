@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -202,7 +206,7 @@ Conda environment might need to be edited to work with Azure ML.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_name</strong> – Name of the deployed application.</li>
 <li><strong>model_path</strong> – Local or MLflow-run-relative path to the model to be exported.</li>
-<li><strong>run_id</strong> – If provided, <code class="docutils literal"><span class="pre">run_id</span></code> is used to retrieve the model logged with MLflow.</li>
+<li><strong>run_id</strong> – If provided, <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is used to retrieve the model logged with MLflow.</li>
 </ul>
 </td>
 </tr>
@@ -232,7 +236,7 @@ to be edited.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>output</strong> – Output folder where the model is going to be exported to.</li>
 <li><strong>model_path</strong> – Local or MLflow run relative path to the model to be exported.</li>
-<li><strong>run_id</strong> – If provided, <code class="docutils literal"><span class="pre">run_id</span></code> is used to retrieve model logged with MLflow.</li>
+<li><strong>run_id</strong> – If provided, <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is used to retrieve model logged with MLflow.</li>
 </ul>
 </td>
 </tr>
@@ -321,17 +325,6 @@ to be edited.</li>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

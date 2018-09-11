@@ -85,7 +85,11 @@
     
 <div role="search">
   
-  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
   
 </div>
 
@@ -182,8 +186,8 @@
 <span id="mlflow-models"></span><h1>mlflow.models<a class="headerlink" href="#module-mlflow.models" title="Permalink to this headline"> </a></h1>
 <dl class="class">
 <dt id="mlflow.models.Model">
-<em class="property">class </em><code class="descclassname">mlflow.models.</code><code class="descname">Model</code><span class="sig-paren">(</span><em>artifact_path=None</em>, <em>run_id=None</em>, <em>utc_time_created=datetime.datetime(2018</em>, <em>8</em>, <em>27</em>, <em>19</em>, <em>58</em>, <em>21</em>, <em>557406)</em>, <em>flavors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<em class="property">class </em><code class="descclassname">mlflow.models.</code><code class="descname">Model</code><span class="sig-paren">(</span><em>artifact_path=None</em>, <em>run_id=None</em>, <em>utc_time_created=datetime.datetime(2018</em>, <em>9</em>, <em>11</em>, <em>0</em>, <em>16</em>, <em>22</em>, <em>447600)</em>, <em>flavors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A MLflow model that can support multiple model flavors.</p>
 <dl class="method">
 <dt id="mlflow.models.Model.add_flavor">
@@ -208,7 +212,7 @@
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>artifact_path</strong> – Run relative path identifying this model.</li>
 <li><strong>flavor</strong> – Flavor module / object to save the model with. The module / object must have
-the <code class="docutils literal"><span class="pre">save_model</span></code> function that will persist the model as a valid
+the <code class="docutils literal notranslate"><span class="pre">save_model</span></code> function that will persist the model as a valid
 MLflow model.</li>
 <li><strong>kwargs</strong> – Extra args passed to the model flavor.</li>
 </ul>
@@ -312,17 +316,6 @@ MLflow model.</li>
 </script>
 
 
-  
-    <!-- Algolia Search -->
-    <script type="text/javascript">
-      var algoliaConfigs = {
-        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
-        index: 'mlflow',
-      };
-    </script>
-    <div id="algolia-wrapper"></div>
-    <script src="../_static/js/tether.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
   
 </body>
 </html>

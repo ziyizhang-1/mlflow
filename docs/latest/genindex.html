@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; MLflow 0.5.2 documentation</title>
+  <title>Index &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/genindex.html">
@@ -50,7 +50,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="index.html"/> 
+    <link rel="top" title="MLflow 0.6.0 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -66,7 +66,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -109,6 +109,7 @@
 <li class="toctree-l1"><a class="reference internal" href="models.html">MLflow Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_api/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rest-api.html">REST API</a></li>
 </ul>
 
@@ -181,20 +182,29 @@
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.entities.html#mlflow.entities.ViewType.ACTIVE_ONLY">ACTIVE_ONLY (mlflow.entities.ViewType attribute)</a>
+</li>
       <li><a href="python_api/mlflow.html#mlflow.active_run">active_run() (in module mlflow)</a>
 </li>
       <li><a href="python_api/mlflow.html#mlflow.ActiveRun">ActiveRun (class in mlflow)</a>
 </li>
-      <li><a href="python_api/mlflow.serving.html#mlflow.models.Model.add_flavor">add_flavor() (mlflow.models.Model method)</a>
+      <li><a href="python_api/mlflow.models.html#mlflow.models.Model.add_flavor">add_flavor() (mlflow.models.Model method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.add_to_model">add_to_model() (in module mlflow.pyfunc)</a>
+      <li><a href="python_api/mlflow.mleap.html#mlflow.mleap.add_to_model">add_to_model() (in module mlflow.mleap)</a>
+
+      <ul>
+        <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.add_to_model">(in module mlflow.pyfunc)</a>
+</li>
+      </ul></li>
+      <li><a href="python_api/mlflow.entities.html#mlflow.entities.ViewType.ALL">ALL (mlflow.entities.ViewType attribute)</a>
 </li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.Experiment.artifact_location">artifact_location (mlflow.entities.Experiment attribute)</a>
 </li>
@@ -214,17 +224,17 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunInfo.copy_with_overrides">copy_with_overrides() (mlflow.entities.RunInfo method)</a>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.SubmittedRun.cancel">cancel() (mlflow.projects.SubmittedRun method)</a>
 </li>
       <li><a href="python_api/mlflow.html#mlflow.create_experiment">create_experiment() (in module mlflow)</a>
 
       <ul>
-        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.create_experiment">(mlflow.tracking.MLflowService method)</a>
+        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.create_experiment">(mlflow.tracking.MlflowClient method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.create_run">create_run() (mlflow.tracking.MLflowService method)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.create_run">create_run() (mlflow.tracking.MlflowClient method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -236,9 +246,13 @@
 </li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.Experiment.DEFAULT_EXPERIMENT_ID">DEFAULT_EXPERIMENT_ID (mlflow.entities.Experiment attribute)</a>
 </li>
+      <li><a href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.delete">delete() (in module mlflow.sagemaker)</a>
+</li>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.delete_experiment">delete_experiment() (mlflow.tracking.MlflowClient method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.delete">delete() (in module mlflow.sagemaker)</a>
+      <li><a href="python_api/mlflow.entities.html#mlflow.entities.ViewType.DELETED_ONLY">DELETED_ONLY (mlflow.entities.ViewType attribute)</a>
 </li>
       <li><a href="python_api/mlflow.azureml.html#mlflow.azureml.deploy">deploy() (in module mlflow.azureml)</a>
 
@@ -246,6 +260,8 @@
         <li><a href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.deploy">(in module mlflow.sagemaker)</a>
 </li>
       </ul></li>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.download_artifacts">download_artifacts() (mlflow.tracking.MlflowClient method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -313,7 +329,11 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunStatus.from_string">from_string() (mlflow.entities.RunStatus static method)</a>
+
+      <ul>
+        <li><a href="python_api/mlflow.entities.html#mlflow.entities.ViewType.from_string">(mlflow.entities.ViewType static method)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -322,15 +342,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="python_api/mlflow.html#mlflow.get_artifact_uri">get_artifact_uri() (in module mlflow)</a>
 </li>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.get_experiment">get_experiment() (mlflow.tracking.MLflowService method)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.get_experiment">get_experiment() (mlflow.tracking.MlflowClient method)</a>
 </li>
-      <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.get_module_loader_src">get_module_loader_src() (in module mlflow.pyfunc)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.get_experiment_by_name">get_experiment_by_name() (mlflow.tracking.MlflowClient method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.get_run">get_run() (mlflow.tracking.MLflowService method)</a>
+      <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.get_module_loader_src">get_module_loader_src() (in module mlflow.pyfunc)</a>
 </li>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.get_service">get_service() (in module mlflow.tracking)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.get_run">get_run() (mlflow.tracking.MlflowClient method)</a>
+</li>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.SubmittedRun.get_status">get_status() (mlflow.projects.SubmittedRun method)</a>
 </li>
       <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.get_tracking_uri">get_tracking_uri() (in module mlflow.tracking)</a>
 </li>
@@ -376,11 +398,13 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.list_experiments">list_experiments() (mlflow.tracking.MLflowService method)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.list_artifacts">list_artifacts() (mlflow.tracking.MlflowClient method)</a>
 </li>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.list_runs">list_runs() (mlflow.tracking.MLflowService method)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.list_experiments">list_experiments() (mlflow.tracking.MlflowClient method)</a>
 </li>
-      <li><a href="python_api/mlflow.serving.html#mlflow.models.Model.load">load() (mlflow.models.Model class method)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.list_run_infos">list_run_infos() (mlflow.tracking.MlflowClient method)</a>
+</li>
+      <li><a href="python_api/mlflow.models.html#mlflow.models.Model.load">load() (mlflow.models.Model class method)</a>
 </li>
       <li><a href="python_api/mlflow.h2o.html#mlflow.h2o.load_model">load_model() (in module mlflow.h2o)</a>
 
@@ -414,30 +438,32 @@
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.serving.html#mlflow.models.Model.log">log() (mlflow.models.Model class method)</a>
+      <li><a href="python_api/mlflow.models.html#mlflow.models.Model.log">log() (mlflow.models.Model class method)</a>
 </li>
       <li><a href="python_api/mlflow.html#mlflow.log_artifact">log_artifact() (in module mlflow)</a>
 
       <ul>
-        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.log_artifact">(mlflow.tracking.MLflowService method)</a>
+        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.log_artifact">(mlflow.tracking.MlflowClient method)</a>
 </li>
       </ul></li>
       <li><a href="python_api/mlflow.html#mlflow.log_artifacts">log_artifacts() (in module mlflow)</a>
 
       <ul>
-        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.log_artifacts">(mlflow.tracking.MLflowService method)</a>
+        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.log_artifacts">(mlflow.tracking.MlflowClient method)</a>
 </li>
       </ul></li>
       <li><a href="python_api/mlflow.html#mlflow.log_metric">log_metric() (in module mlflow)</a>
 
       <ul>
-        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.log_metric">(mlflow.tracking.MLflowService method)</a>
+        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.log_metric">(mlflow.tracking.MlflowClient method)</a>
 </li>
       </ul></li>
       <li><a href="python_api/mlflow.h2o.html#mlflow.h2o.log_model">log_model() (in module mlflow.h2o)</a>
 
       <ul>
         <li><a href="python_api/mlflow.keras.html#mlflow.keras.log_model">(in module mlflow.keras)</a>
+</li>
+        <li><a href="python_api/mlflow.mleap.html#mlflow.mleap.log_model">(in module mlflow.mleap)</a>
 </li>
         <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.log_model">(in module mlflow.pyfunc)</a>
 </li>
@@ -451,7 +477,7 @@
       <li><a href="python_api/mlflow.html#mlflow.log_param">log_param() (in module mlflow)</a>
 
       <ul>
-        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.log_param">(mlflow.tracking.MLflowService method)</a>
+        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.log_param">(mlflow.tracking.MlflowClient method)</a>
 </li>
       </ul></li>
       <li><a href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.log_saved_model">log_saved_model() (in module mlflow.tensorflow)</a>
@@ -476,12 +502,14 @@
 </li>
       <li><a href="python_api/mlflow.keras.html#module-mlflow.keras">mlflow.keras (module)</a>
 </li>
-      <li><a href="python_api/mlflow.serving.html#module-mlflow.models">mlflow.models (module)</a>
+      <li><a href="python_api/mlflow.mleap.html#module-mlflow.mleap">mlflow.mleap (module)</a>
 </li>
-      <li><a href="python_api/mlflow.projects.html#module-mlflow.projects">mlflow.projects (module)</a>
+      <li><a href="python_api/mlflow.models.html#module-mlflow.models">mlflow.models (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#module-mlflow.projects">mlflow.projects (module)</a>
+</li>
       <li><a href="python_api/mlflow.pyfunc.html#module-mlflow.pyfunc">mlflow.pyfunc (module)</a>
 </li>
       <li><a href="python_api/mlflow.pytorch.html#module-mlflow.pytorch">mlflow.pytorch (module)</a>
@@ -496,9 +524,9 @@
 </li>
       <li><a href="python_api/mlflow.tracking.html#module-mlflow.tracking">mlflow.tracking (module)</a>
 </li>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService">MLflowService (class in mlflow.tracking)</a>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient">MlflowClient (class in mlflow.tracking)</a>
 </li>
-      <li><a href="python_api/mlflow.serving.html#mlflow.models.Model">Model (class in mlflow.models)</a>
+      <li><a href="python_api/mlflow.models.html#mlflow.models.Model">Model (class in mlflow.models)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -540,6 +568,8 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.restore_experiment">restore_experiment() (mlflow.tracking.MlflowClient method)</a>
+</li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.Run">Run (class in mlflow.entities)</a>
 </li>
       <li><a href="python_api/mlflow.html#mlflow.run">run() (in module mlflow)</a>
@@ -548,12 +578,14 @@
         <li><a href="python_api/mlflow.projects.html#mlflow.projects.run">(in module mlflow.projects)</a>
 </li>
       </ul></li>
-      <li><a href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.run_local">run_local() (in module mlflow.sagemaker)</a>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.SubmittedRun.run_id">run_id (mlflow.projects.SubmittedRun attribute)</a>
 </li>
-      <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunInfo.run_uuid">run_uuid (mlflow.entities.RunInfo attribute)</a>
+      <li><a href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.run_local">run_local() (in module mlflow.sagemaker)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunInfo.run_uuid">run_uuid (mlflow.entities.RunInfo attribute)</a>
+</li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunData">RunData (class in mlflow.entities)</a>
 </li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunInfo">RunInfo (class in mlflow.entities)</a>
@@ -570,12 +602,14 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.serving.html#mlflow.models.Model.save">save() (mlflow.models.Model method)</a>
+      <li><a href="python_api/mlflow.models.html#mlflow.models.Model.save">save() (mlflow.models.Model method)</a>
 </li>
       <li><a href="python_api/mlflow.h2o.html#mlflow.h2o.save_model">save_model() (in module mlflow.h2o)</a>
 
       <ul>
         <li><a href="python_api/mlflow.keras.html#mlflow.keras.save_model">(in module mlflow.keras)</a>
+</li>
+        <li><a href="python_api/mlflow.mleap.html#mlflow.mleap.save_model">(in module mlflow.mleap)</a>
 </li>
         <li><a href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.save_model">(in module mlflow.pyfunc)</a>
 </li>
@@ -588,10 +622,16 @@
       </ul></li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunStatus.SCHEDULED">SCHEDULED (mlflow.entities.RunStatus attribute)</a>
 </li>
-      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MLflowService.set_terminated">set_terminated() (mlflow.tracking.MLflowService method)</a>
+      <li><a href="python_api/mlflow.html#mlflow.set_tag">set_tag() (in module mlflow)</a>
+
+      <ul>
+        <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.set_tag">(mlflow.tracking.MlflowClient method)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.tracking.html#mlflow.tracking.MlflowClient.set_terminated">set_terminated() (mlflow.tracking.MlflowClient method)</a>
+</li>
       <li><a href="python_api/mlflow.html#mlflow.set_tracking_uri">set_tracking_uri() (in module mlflow)</a>
 
       <ul>
@@ -614,13 +654,15 @@
 </li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunInfo.status">status (mlflow.entities.RunInfo attribute)</a>
 </li>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.SubmittedRun">SubmittedRun (class in mlflow.projects)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunInfo.tags">tags (mlflow.entities.RunInfo attribute)</a>
+      <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunData.tags">tags (mlflow.entities.RunData attribute)</a>
 </li>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.Metric.timestamp">timestamp (mlflow.entities.Metric attribute)</a>
 </li>
@@ -647,8 +689,12 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunStatus.to_string">to_string() (mlflow.entities.RunStatus static method)</a>
+
+      <ul>
+        <li><a href="python_api/mlflow.entities.html#mlflow.entities.ViewType.to_string">(mlflow.entities.ViewType static method)</a>
 </li>
-      <li><a href="python_api/mlflow.serving.html#mlflow.models.Model.to_yaml">to_yaml() (mlflow.models.Model method)</a>
+      </ul></li>
+      <li><a href="python_api/mlflow.models.html#mlflow.models.Model.to_yaml">to_yaml() (mlflow.models.Model method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -676,6 +722,18 @@
         <li><a href="python_api/mlflow.entities.html#mlflow.entities.RunTag.value">(mlflow.entities.RunTag attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.entities.html#mlflow.entities.ViewType">ViewType (class in mlflow.entities)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="python_api/mlflow.projects.html#mlflow.projects.SubmittedRun.wait">wait() (mlflow.projects.SubmittedRun method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -709,7 +767,7 @@
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

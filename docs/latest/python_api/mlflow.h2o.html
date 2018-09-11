@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.h2o &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.h2o &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.h2o.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.keras" href="/mlflow.keras.html"/>
         <link rel="prev" title="mlflow.entities" href="/mlflow.entities.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,34 +182,77 @@
                 
   <div class="section" id="module-mlflow.h2o">
 <span id="mlflow-h2o"></span><h1>mlflow.h2o<a class="headerlink" href="#module-mlflow.h2o" title="Permalink to this headline"> </a></h1>
-<p>MLflow integration for H2O.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.h2o</span></code> module provides an API for logging and loading H2O models. This module exports
+H2O models with the following flavors:</p>
+<dl class="docutils">
+<dt>H20 (native) format</dt>
+<dd>This is the main flavor that can be loaded back into H2O.</dd>
+<dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></dt>
+<dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
+</dl>
 <dl class="function">
 <dt id="mlflow.h2o.load_model">
 <code class="descclassname">mlflow.h2o.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.h2o.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a H2O model from a local file (if run_id is None) or a run.</p>
-<p>This function expects there is a h2o instance initialised with
-<cite>h2o.init()</cite>.</p>
+<dd><p>Load an H2O model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>) or a run.
+This function expects there is an H2O instance initialised with <code class="docutils literal notranslate"><span class="pre">h2o.init</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model saved
+by <a class="reference internal" href="#mlflow.h2o.save_model" title="mlflow.h2o.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.h2o.save_model()</span></code></a>.</li>
+<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.h2o.load_pyfunc">
 <code class="descclassname">mlflow.h2o.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.h2o.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Loads an H2O model from the directory at <code class="docutils literal"><span class="pre">path</span></code> as a Python Function model.
-Note that this method calls <code class="docutils literal"><span class="pre">h2o.init(...)</span></code>, so the right version of h2o(-py) must be in the
-environment. The arguments given to <code class="docutils literal"><span class="pre">h2o.init(...)</span></code> can be customized in <code class="docutils literal"><span class="pre">path/h2o.yaml</span></code>
-under the key <code class="docutils literal"><span class="pre">init</span></code>.</p>
+<dd><p>Load a persisted H2O model as a <code class="docutils literal notranslate"><span class="pre">python_function</span></code> model.
+This method calls <code class="docutils literal notranslate"><span class="pre">h2o.init</span></code>, so the right version of h2o(-py) must be in the
+environment. The arguments given to <code class="docutils literal notranslate"><span class="pre">h2o.init</span></code> can be customized in <code class="docutils literal notranslate"><span class="pre">path/h2o.yaml</span></code>
+under the key <code class="docutils literal notranslate"><span class="pre">init</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> – Local filesystem path to the model saved by <a class="reference internal" href="#mlflow.h2o.save_model" title="mlflow.h2o.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.h2o.save_model()</span></code></a>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Pyfunc format model with function
+<code class="docutils literal notranslate"><span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span> <span class="pre">-&gt;</span> <span class="pre">pandas</span> <span class="pre">DataFrame</span></code>.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.h2o.log_model">
 <code class="descclassname">mlflow.h2o.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>h2o_model</em>, <em>artifact_path</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.h2o.log_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Log a H2O model as an MLflow artifact for the current run.</p>
+<dd><p>Log an H2O model as an MLflow artifact for the current run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>h2o_model</strong> – H2O model to be saved.</li>
+<li><strong>artifact_path</strong> – Run-relative artifact path.</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">h2o.save_model</span></code> method.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="function">
 <dt id="mlflow.h2o.save_model">
 <code class="descclassname">mlflow.h2o.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>h2o_model</em>, <em>path</em>, <em>conda_env=None</em>, <em>mlflow_model=&lt;mlflow.models.Model object&gt;</em>, <em>settings=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.h2o.save_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Save a H2O model to a path on the local file system.</p>
+<dd><p>Save an H2O model to a path on the local file system.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -215,7 +260,7 @@ under the key <code class="docutils literal"><span class="pre">init</span></code
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>h2o_model</strong> – H2O model to be saved.</li>
 <li><strong>path</strong> – Local path where the model is to be saved.</li>
-<li><strong>mlflow_model</strong> – MLflow model config this flavor is being added to.</li>
+<li><strong>mlflow_model</strong> – <a class="reference internal" href="mlflow.models.html#mlflow.models.Model" title="mlflow.models.Model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.models.Model</span></code></a> this flavor is being added to.</li>
 </ul>
 </td>
 </tr>
@@ -263,7 +308,7 @@ under the key <code class="docutils literal"><span class="pre">init</span></code
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

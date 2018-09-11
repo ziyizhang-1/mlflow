@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.sagemaker &mdash; MLflow 0.5.2 documentation</title>
+  <title>mlflow.sagemaker &mdash; MLflow 0.6.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.sagemaker.html">
@@ -49,9 +49,9 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.5.2 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
-        <link rel="next" title="mlflow.models" href="/mlflow.serving.html"/>
+        <link rel="next" title="mlflow.sklearn" href="/mlflow.sklearn.html"/>
         <link rel="prev" title="mlflow.pytorch" href="/mlflow.pytorch.html"/> 
 
   
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.5.2</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
   </li>
 </ul>
   </nav>
@@ -116,17 +116,19 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.sagemaker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="mlflow.serving.html">mlflow.models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
 </ul>
 
@@ -180,17 +182,22 @@
                 
   <div class="section" id="module-mlflow.sagemaker">
 <span id="mlflow-sagemaker"></span><h1>mlflow.sagemaker<a class="headerlink" href="#module-mlflow.sagemaker" title="Permalink to this headline"> </a></h1>
-<p>Utilities for deploying MLflow models to Amazon SageMaker.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker</span></code> module provides an API for deploying MLflow models to Amazon SageMaker.</p>
 <dl class="function">
 <dt id="mlflow.sagemaker.build_image">
 <code class="descclassname">mlflow.sagemaker.</code><code class="descname">build_image</code><span class="sig-paren">(</span><em>name='mlflow-pyfunc'</em>, <em>mlflow_home=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.build_image" title="Permalink to this definition"> </a></dt>
-<dd><p>This function builds an MLflow Docker image.
+<dd><p>Build an MLflow Docker image.
 The image is built locally and it requires Docker to run.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – image name</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> – Docker image name.</li>
+<li><strong>mlflow_home</strong> – Directory containing checkout of the MLflow GitHub project or
+current directory if not specified.</li>
+</ul>
+</td>
 </tr>
 </tbody>
 </table>
@@ -199,7 +206,7 @@ The image is built locally and it requires Docker to run.</p>
 <dl class="function">
 <dt id="mlflow.sagemaker.delete">
 <code class="descclassname">mlflow.sagemaker.</code><code class="descname">delete</code><span class="sig-paren">(</span><em>app_name</em>, <em>region_name='us-west-2'</em>, <em>archive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.delete" title="Permalink to this definition"> </a></dt>
-<dd><p>Delete the specified application.</p>
+<dd><p>Delete a SageMaker application.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -219,16 +226,16 @@ If False, these resources will be deleted.</li>
 
 <dl class="function">
 <dt id="mlflow.sagemaker.deploy">
-<code class="descclassname">mlflow.sagemaker.</code><code class="descname">deploy</code><span class="sig-paren">(</span><em>app_name</em>, <em>model_path</em>, <em>execution_role_arn=None</em>, <em>bucket=None</em>, <em>run_id=None</em>, <em>image_url=None</em>, <em>region_name='us-west-2'</em>, <em>mode='create'</em>, <em>archive=False</em>, <em>instance_type='ml.m4.xlarge'</em>, <em>instance_count=1</em>, <em>vpc_config=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.deploy" title="Permalink to this definition"> </a></dt>
-<dd><p>Deploy model on SageMaker.
-Currently active AWS account needs to have correct permissions set up.</p>
+<code class="descclassname">mlflow.sagemaker.</code><code class="descname">deploy</code><span class="sig-paren">(</span><em>app_name</em>, <em>model_path</em>, <em>execution_role_arn=None</em>, <em>bucket=None</em>, <em>run_id=None</em>, <em>image_url=None</em>, <em>region_name='us-west-2'</em>, <em>mode='create'</em>, <em>archive=False</em>, <em>instance_type='ml.m4.xlarge'</em>, <em>instance_count=1</em>, <em>vpc_config=None</em>, <em>flavor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.deploy" title="Permalink to this definition"> </a></dt>
+<dd><p>Deploy an MLflow model on AWS SageMaker.
+The currently active AWS account must have correct permissions set up.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_name</strong> – Name of the deployed application.</li>
-<li><strong>path</strong> – Path to the model. Either local if no <code class="docutils literal"><span class="pre">run_id</span></code> or MLflow-relative if <code class="docutils literal"><span class="pre">run_id</span></code>
+<li><strong>path</strong> – Path to the model. Either local if no <code class="docutils literal notranslate"><span class="pre">run_id</span></code> or MLflow-relative if <code class="docutils literal notranslate"><span class="pre">run_id</span></code>
 is specified.</li>
 <li><strong>execution_role_arn</strong> – Amazon execution role with SageMaker rights.
 Defaults to the currently-assumed role.</li>
@@ -240,26 +247,26 @@ publicly-available pre-built image.</li>
 <li><strong>region_name</strong> – Name of the AWS region to which to deploy the application.</li>
 <li><strong>mode</strong> – <p>The mode in which to deploy the application. Must be one of the following:</p>
 <dl class="docutils">
-<dt><code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_CREATE</span></code></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_CREATE</span></code></dt>
 <dd>Create an application with the specified name and model. This fails if an
 application of the same name already exists.</dd>
-<dt><code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code></dt>
 <dd>If an application of the specified name exists, its model(s) is replaced with
 the specified model. If no such application exists, it is created with the
 specified name and model.</dd>
-<dt><code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_ADD</span></code></dt>
+<dt><code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_ADD</span></code></dt>
 <dd>Add the specified model to a pre-existing application with the specified name,
 if one exists. If the application does not exist, a new application is created
 with the specified name and model. NOTE: If the application <strong>already exists</strong>,
 the specified model is added to the application’s corresponding SageMaker
 endpoint with an initial weight of zero (0). To route traffic to the model,
 update the application’s associated endpoint configuration using either the
-AWS console or the <code class="docutils literal"><span class="pre">UpdateEndpointWeightsAndCapacities</span></code> function defined in
+AWS console or the <code class="docutils literal notranslate"><span class="pre">UpdateEndpointWeightsAndCapacities</span></code> function defined in
 <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpointWeightsAndCapacities.html">https://docs.aws.amazon.com/sagemaker/latest/dg/API_UpdateEndpointWeightsAndCapacities.html</a>.</dd>
 </dl>
 </li>
 <li><strong>archive</strong> – If True, any pre-existing SageMaker application resources that become inactive
-(i.e. as a result of deploying in <code class="docutils literal"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code>
+(i.e. as a result of deploying in <code class="docutils literal notranslate"><span class="pre">mlflow.sagemaker.DEPLOYMENT_MODE_REPLACE</span></code>
 mode) are preserved. If False, these resources are deleted.</li>
 <li><strong>instance_type</strong> – The type of SageMaker ML instance on which to deploy the model. For a list
 of supported instance types, see
@@ -267,12 +274,12 @@ of supported instance types, see
 <li><strong>instance_count</strong> – The number of SageMaker ML instances on which to deploy the model.</li>
 <li><strong>vpc_config</strong> – <p>A dictionary specifying the VPC configuration to use when creating the
 new SageMaker model associated with this application. The acceptable values
-for this parameter are identical to those of the <cite>VpcConfig</cite> parameter in the
-SageMaker boto3 client (<a class="reference external" href="https://boto3.readthedocs.io/en/latest/reference/">https://boto3.readthedocs.io/en/latest/reference/</a>
+for this parameter are identical to those of the <code class="docutils literal notranslate"><span class="pre">VpcConfig</span></code> parameter in
+the SageMaker boto3 client (<a class="reference external" href="https://boto3.readthedocs.io/en/latest/reference/">https://boto3.readthedocs.io/en/latest/reference/</a>
 services/sagemaker.html#SageMaker.Client.create_model). For more information,
 see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html">https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html</a>.</p>
 <p>Example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.sagemaker</span> <span class="k">as</span> <span class="nn">mfs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.sagemaker</span> <span class="k">as</span> <span class="nn">mfs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vpc_config</span> <span class="o">=</span> <span class="p">{</span>
 <span class="gp">... </span>                 <span class="s1">&#39;SecurityGroupIds&#39;</span><span class="p">:</span> <span class="p">[</span>
 <span class="gp">... </span>                     <span class="s1">&#39;sg-123456abc&#39;</span><span class="p">,</span>
@@ -285,6 +292,11 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
 </pre></div>
 </div>
 </li>
+<li><strong>flavor</strong> – The name of the flavor of the model to use for deployment. Must be either
+<code class="docutils literal notranslate"><span class="pre">None</span></code> or one of mlflow.sagemaker.SUPPORTED_DEPLOYMENT_FLAVORS. If <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+a flavor is automatically selected from the model’s available flavors. If the
+specified flavor is not present or not supported for deployment, an exception
+will be thrown.</li>
 </ul>
 </td>
 </tr>
@@ -295,13 +307,13 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
 <dl class="function">
 <dt id="mlflow.sagemaker.push_image_to_ecr">
 <code class="descclassname">mlflow.sagemaker.</code><code class="descname">push_image_to_ecr</code><span class="sig-paren">(</span><em>image='mlflow-pyfunc'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.push_image_to_ecr" title="Permalink to this definition"> </a></dt>
-<dd><p>Push local Docker image to ECR.</p>
-<p>The image is pushed under current active AWS account and to current active AWS region.</p>
+<dd><p>Push local Docker image to AWS ECR.</p>
+<p>The image is pushed under currently active AWS account and to the currently active AWS region.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>image</strong> – image name</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>image</strong> – Docker image name.</td>
 </tr>
 </tbody>
 </table>
@@ -309,18 +321,22 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
 
 <dl class="function">
 <dt id="mlflow.sagemaker.run_local">
-<code class="descclassname">mlflow.sagemaker.</code><code class="descname">run_local</code><span class="sig-paren">(</span><em>model_path</em>, <em>run_id=None</em>, <em>port=5000</em>, <em>image='mlflow-pyfunc'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.run_local" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.sagemaker.</code><code class="descname">run_local</code><span class="sig-paren">(</span><em>model_path</em>, <em>run_id=None</em>, <em>port=5000</em>, <em>image='mlflow-pyfunc'</em>, <em>flavor=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sagemaker.run_local" title="Permalink to this definition"> </a></dt>
 <dd><p>Serve model locally in a SageMaker compatible Docker container.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>model_path</strong> – path to the model. Either local if no <code class="docutils literal"><span class="pre">run_id</span></code> or MLflow-relative if
-<code class="docutils literal"><span class="pre">run_id</span></code> is specified.</li>
+<li><strong>model_path</strong> – path to the model. Either local if no <code class="docutils literal notranslate"><span class="pre">run_id</span></code> or MLflow-relative if
+<code class="docutils literal notranslate"><span class="pre">run_id</span></code> is specified.</li>
 <li><strong>run_id</strong> – MLflow run ID.</li>
 <li><strong>port</strong> – Local port.</li>
 <li><strong>image</strong> – Name of the Docker image to be used.</li>
+<li><strong>flavor</strong> – The name of the flavor of the model to use for local serving. If <code class="docutils literal notranslate"><span class="pre">None</span></code>,
+a flavor is automatically selected from the model’s available flavors. If the
+specified flavor is not present or not supported for deployment, an exception
+is thrown.</li>
 </ul>
 </td>
 </tr>
@@ -340,7 +356,7 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
         <a href="mlflow.pytorch.html" class="btn btn-neutral" title="mlflow.pytorch" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
       
       
-        <a href="mlflow.serving.html" class="btn btn-neutral" title="mlflow.models" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+        <a href="mlflow.sklearn.html" class="btn btn-neutral" title="mlflow.sklearn" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
       
     </div>
   
@@ -368,7 +384,7 @@ see <a class="reference external" href="https://docs.aws.amazon.com/sagemaker/la
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.5.2',
+      VERSION:'0.6.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
