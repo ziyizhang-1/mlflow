@@ -11,7 +11,7 @@ description: An open source platform for the end-to-end machine learning lifecyc
     <h2>Latest News</h2>
     <ul class="list-news">
       {% for post in site.categories.news limit:4 %}
-      <li><a href="{{ post.url }}">{{ post.title }} <span class="small"> ({{ post.date | date_to_string }})</span></a></li>
+      <li><a href="{{ post.url }}index.html">{{ post.title }} <span class="small"> ({{ post.date | date_to_string }})</span></a></li>
       {% endfor %}
     </ul>
   </div>
