@@ -7,6 +7,14 @@ description: An open source platform for the end-to-end machine learning lifecyc
     <img src="{{ site.baseurl }}/images/MLflow-header-pic@2x.png" alt="MLflow Logo" style="width:100%" />
     <p class="subtext">An open source platform for the machine learning lifecycle</p>
   </div>
+  <div class="news-container">
+    <h2>Latest News</h2>
+    <ul class="list-news">
+      {% for post in site.categories.news limit:4 %}
+      <li><a href="{{ post.url }}">{{ post.title }} <span class="small"> ({{ post.date | date_to_string }})</span></a></li>
+      {% endfor %}
+    </ul>
+  </div>
 </section>
 
 <div class="content">
