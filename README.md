@@ -39,6 +39,8 @@ Then redeploy the site.
 # [Re]-deploying the website
 
 We use `s3_website`, which you can install via `gem install s3_website` -- see https://github.com/laurilehmijoki/s3_website
+(Note: If the gem installation fails with a permissions error, you can also do `gem install s3_website --user-install` and 
+add the executable to your PATH as described in https://guides.rubygems.org/faqs/#user-install)
 
 Make sure you have your aws credentials set up (probably via `aws credentials`), and that you have write permissions to the s3 bucket (ask Andy or Aaron).
 
