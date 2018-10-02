@@ -1,0 +1,502 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mlflow.pyfunc &mdash; MLflow 0.6.0 documentation</title>
+  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.pyfunc.html">
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MLflow 0.6.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API" href="index.html"/>
+        <link rel="next" title="mlflow.pytorch" href="/mlflow.pytorch.html"/>
+        <link rel="prev" title="mlflow.projects" href="/mlflow.projects.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.6.0</span>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="../index.html" class="main-navigation-home"><img src="../_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlflow.html">mlflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.azureml.html">mlflow.azureml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.pyfunc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+        <li><a href="index.html">Python API</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>mlflow.pyfunc</li>
+    
+    
+    <li class="wy-breadcrumbs-aside">
+      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.pyfunc.rst" class="fa fa-github"> Edit on GitHub</a>
+    </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="module-mlflow.pyfunc">
+<span id="mlflow-pyfunc"></span><h1>mlflow.pyfunc<a class="headerlink" href="#module-mlflow.pyfunc" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code> module defines a generic filesystem format for Python models and provides
+utilities for saving to and loading from this format. The format is self contained in the sense
+that it includes all necessary information for anyone to load it and use it. Dependencies
+are either stored directly with the model or referenced via a Conda environment.</p>
+<p>The convention for pyfunc models is to have a <code class="docutils literal notranslate"><span class="pre">predict</span></code> method or function with the following
+signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span> <span class="o">|</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>
+</pre></div>
+</div>
+<p>This convention is relied on by other MLflow components.</p>
+<p>Pyfunc model format is defined as a directory structure containing all required data, code, and
+configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">dst</span><span class="o">-</span><span class="n">path</span><span class="o">/</span>
+    <span class="o">./</span><span class="n">MLmodel</span><span class="p">:</span> <span class="n">configuration</span>
+    <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">code</span> <span class="n">packaged</span> <span class="k">with</span> <span class="n">the</span> <span class="n">model</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MLmodel</span> <span class="n">file</span><span class="p">)</span>
+    <span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">data</span> <span class="n">packaged</span> <span class="k">with</span> <span class="n">the</span> <span class="n">model</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MLmodel</span> <span class="n">file</span><span class="p">)</span>
+    <span class="o">&lt;</span><span class="n">env</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">Conda</span> <span class="n">environment</span> <span class="n">definition</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MLmodel</span> <span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A Python model contains an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file in “python_function” format in its root with the
+following parameters:</p>
+<ul>
+<li><dl class="first docutils">
+<dt>loader_module [required]:</dt>
+<dd><p class="first">Python module that can load the model. Expected as module identifier
+e.g. <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code>, it will be imported via <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code>.
+The imported module must contain function with the following signature:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">load_pyfunc</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&lt;</span><span class="n">pyfunc</span> <span class="n">model</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p class="last">The path argument is specified by the <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter and may refer to a file or
+directory.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>code [optional]:</dt>
+<dd><p class="first last">Relative path to a directory containing the code packaged with this model.
+All files and directories inside this directory are added to the Python path
+prior to importing the model loader.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>data [optional]:</dt>
+<dd><p class="first last">Relative path to a file or directory containing model data.
+The path is passed to the model loader.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>env [optional]:</dt>
+<dd><p class="first last">Relative path to an exported Conda environment. If present this environment
+should be activated prior to running the model.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p class="rubric">Example</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="n">example</span><span class="o">/</span><span class="n">sklearn_iris</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="n">run1</span><span class="o">/</span><span class="n">outputs</span><span class="o">/</span><span class="n">linear</span><span class="o">-</span><span class="n">lr</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── MLmodel
+├── code
+│   ├── sklearn_iris.py
+│
+├── data
+│   └── model.pkl
+└── mlflow_env.yml
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cat</span> <span class="n">example</span><span class="o">/</span><span class="n">sklearn_iris</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="n">run1</span><span class="o">/</span><span class="n">outputs</span><span class="o">/</span><span class="n">linear</span><span class="o">-</span><span class="n">lr</span><span class="o">/</span><span class="n">MLmodel</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python_function</span><span class="p">:</span>
+  <span class="n">code</span><span class="p">:</span> <span class="n">code</span>
+  <span class="n">data</span><span class="p">:</span> <span class="n">data</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">pkl</span>
+  <span class="n">loader_module</span><span class="p">:</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span>
+  <span class="n">env</span><span class="p">:</span> <span class="n">mlflow_env</span><span class="o">.</span><span class="n">yml</span>
+  <span class="n">main</span><span class="p">:</span> <span class="n">sklearn_iris</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="mlflow.pyfunc.add_to_model">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">add_to_model</code><span class="sig-paren">(</span><em>model</em>, <em>loader_module</em>, <em>data=None</em>, <em>code=None</em>, <em>env=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.add_to_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Add a pyfunc spec to the model configuration.</p>
+<p>Defines pyfunc configuration schema. Caller can use this to create a valid pyfunc model flavor
+out of an existing directory structure. For example, other model flavors can use this to specify
+how to use their output as a pyfunc.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All paths are relative to the exported model root directory.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>model</strong> – Existing model.</li>
+<li><strong>loader_module</strong> – The module to be used to load the model.</li>
+<li><strong>data</strong> – Path to the model data.</li>
+<li><strong>code</strong> – Path to the code dependencies.</li>
+<li><strong>env</strong> – Conda environment.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Updated model configuration.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pyfunc.get_module_loader_src">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">get_module_loader_src</code><span class="sig-paren">(</span><em>src_path</em>, <em>dst_path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.get_module_loader_src" title="Permalink to this definition"> </a></dt>
+<dd><p>Generate Python source of the model loader.</p>
+<p>Model loader contains <code class="docutils literal notranslate"><span class="pre">load_pyfunc</span></code> method with no parameters. It hardcodes model
+loading of the given model into a Python source. This is done so that the exported model has no
+unnecessary dependencies on MLflow or any other configuration file format or parsing library.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>src_path</strong> – Current path to the model.</li>
+<li><strong>dst_path</strong> – Relative or absolute path where the model will be stored in the deployment
+environment.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Python source code of the model loader as string.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pyfunc.load_pyfunc">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em>, <em>suppress_warnings=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.load_pyfunc" title="Permalink to this definition"> </a></dt>
+<dd><p>Load a model stored in Python function format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> – Path to the model.</li>
+<li><strong>run_id</strong> – MLflow run ID.</li>
+<li><strong>suppress_warnings</strong> – If True, non-fatal warning messages associated with the model
+loading process will be suppressed. If False, these warning messages
+will be emitted.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pyfunc.log_model">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>artifact_path</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.log_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Export model in Python function form and log it with current MLflow tracking service.</p>
+<p>Model is exported by calling <a class="reference internal" href="#mlflow.pyfunc.save_model" title="mlflow.pyfunc.save_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_model()</span></code></a> and logging the result with
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">mlflow.tracking.log_artifacts()</span></code>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pyfunc.save_model">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>dst_path</em>, <em>loader_module</em>, <em>data_path=None</em>, <em>code_path=()</em>, <em>conda_env=None</em>, <em>model=&lt;mlflow.models.Model object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.save_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Export model as a generic Python function model.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>dst_path</strong> – Path where the model is stored.</li>
+<li><strong>loader_module</strong> – The module to be used to load the model.</li>
+<li><strong>data_path</strong> – Path to a file or directory containing model data.</li>
+<li><strong>code_path</strong> – List of paths (file or dir) contains code dependencies not present in
+the environment. Every path in the <code class="docutils literal notranslate"><span class="pre">code_path</span></code> is added to the Python
+path before the model is loaded.</li>
+<li><strong>conda_env</strong> – Path to the Conda environment definition. This environment is activated
+prior to running model code.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Model configuration containing model info.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pyfunc.spark_udf">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">spark_udf</code><span class="sig-paren">(</span><em>spark</em>, <em>path</em>, <em>run_id=None</em>, <em>result_type='double'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.spark_udf" title="Permalink to this definition"> </a></dt>
+<dd><p>A Spark UDF that can be used to invoke the Python function formatted model.</p>
+<p>Parameters passed to the UDF are forwarded to the model as a DataFrame where the names are
+ordinals (0, 1, …).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">predict</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;/my/local/model&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>spark</strong> – A SparkSession object.</li>
+<li><strong>path</strong> – A path containing a <a class="reference internal" href="#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model.</li>
+<li><strong>run_id</strong> – ID of the run that produced this model. If provided, <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is used to
+retrieve the model logged with MLflow.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Spark UDF type returned by the model’s prediction method. Default double.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mlflow.projects.html" class="btn btn-neutral" title="mlflow.projects" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="mlflow.pytorch.html" class="btn btn-neutral" title="mlflow.pytorch" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'../',
+      VERSION:'0.6.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="../_static/jquery.js"></script>
+  <script type="text/javascript" src="../_static/underscore.js"></script>
+  <script type="text/javascript" src="../_static/doctools.js"></script>
+  
+
+  <script type="text/javascript" src="../_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="../_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "../_static/clippy.svg";</script>
+  <script type="text/javascript" src="../_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="../_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>
