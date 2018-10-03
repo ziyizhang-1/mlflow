@@ -181,8 +181,36 @@
             <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
               <div itemprop="articleBody">
                 
-  <div class="section" id="mlflow-tensorflow">
-<h1>mlflow.tensorflow<a class="headerlink" href="#mlflow-tensorflow" title="Permalink to this headline"> </a></h1>
+  <div class="section" id="module-mlflow.tensorflow">
+<span id="mlflow-tensorflow"></span><h1>mlflow.tensorflow<a class="headerlink" href="#module-mlflow.tensorflow" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code> module provides an API for logging and loading TensorFlow models
+as <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> models.</p>
+<p>You must save your own <code class="docutils literal notranslate"><span class="pre">saved_model</span></code> and pass its
+path to <code class="docutils literal notranslate"><span class="pre">log_saved_model(saved_model_dir)</span></code>. To load the model to predict on it, you call
+<code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">pyfunc.load_pyfunc(saved_model_dir)</span></code> followed by
+<code class="docutils literal notranslate"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a pandas DataFrame.</p>
+<p>The loaded <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model <em>does not</em> expose any APIs for model training.</p>
+<dl class="function">
+<dt id="mlflow.tensorflow.log_saved_model">
+<code class="descclassname">mlflow.tensorflow.</code><code class="descname">log_saved_model</code><span class="sig-paren">(</span><em>saved_model_dir</em>, <em>signature_def_key</em>, <em>artifact_path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.log_saved_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a TensorFlow model as an MLflow artifact for the current run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>saved_model_dir</strong> – Directory where the TensorFlow model is saved.</li>
+<li><strong>signature_def_key</strong> – The signature definition to use when loading the model again.
+See <a class="reference external" href="https://www.tensorflow.org/serving/signature_defs">SignatureDefs in SavedModel for TensorFlow Serving</a> for details.</li>
+<li><strong>artifact_path</strong> – Path (within the artifact directory for the current run) to which
+artifacts of the model are saved.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 

@@ -181,8 +181,152 @@
             <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
               <div itemprop="articleBody">
                 
-  <div class="section" id="mlflow-pytorch">
-<h1>mlflow.pytorch<a class="headerlink" href="#mlflow-pytorch" title="Permalink to this headline"> </a></h1>
+  <div class="section" id="module-mlflow.pytorch">
+<span id="mlflow-pytorch"></span><h1>mlflow.pytorch<a class="headerlink" href="#module-mlflow.pytorch" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.pytorch</span></code> module provides an API for logging and loading PyTorch models. This module
+exports PyTorch models with the following flavors:</p>
+<dl class="docutils">
+<dt>PyTorch (native) format</dt>
+<dd>This is the main flavor that can be loaded back into PyTorch.</dd>
+<dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></dt>
+<dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
+</dl>
+<dl class="function">
+<dt id="mlflow.pytorch.load_model">
+<code class="descclassname">mlflow.pytorch.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pytorch.load_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Load a PyTorch model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>) or a run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model saved
+by <a class="reference internal" href="#mlflow.pytorch.log_model" title="mlflow.pytorch.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pytorch.log_model()</span></code></a>.</li>
+<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">torch.load</span></code> method.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.pytorch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># set values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model_path_dir</span> <span class="o">=</span> <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">run_id</span><span class="o">=</span><span class="s2">&quot;96771d893a5e46159d9f3b49bf9013e2&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytorch_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path_dir</span><span class="p">,</span> <span class="n">run_id</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">pytorch_model</span><span class="p">(</span><span class="n">x_new_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pytorch.log_model">
+<code class="descclassname">mlflow.pytorch.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>pytorch_model</em>, <em>artifact_path</em>, <em>conda_env=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pytorch.log_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a PyTorch model as an MLflow artifact for the current run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pytorch_model</strong> – PyTorch model to be saved. Must accept a single <code class="docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> as
+input and produce a single output tensor.</li>
+<li><strong>artifact_path</strong> – Run-relative artifact path.</li>
+<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, this defines the environment
+for the model. At minimum, it should specify python, pytorch, and mlflow with appropriate
+versions.</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">torch.save</span></code> method.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="k">import</span> <span class="n">Variable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.pytorch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># X data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_data</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Y data with its expected value: labels</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_data</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">6.0</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Partial Model example modified from Sung Kim</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># https://github.com/hunkim/PyTorchZeroToAll</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="nb">super</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># One in and one out</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="k">return</span> <span class="n">y_pred</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># our model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">criterion</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">(</span><span class="n">size_average</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Training loop</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c1"># Forward pass: Compute predicted y by passing x to the model</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c1"># Compute and print loss</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="nb">print</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="c1">#Zero gradients, perform a backward pass, and update the weights.</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># After training</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">hv</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">]:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">hour_var</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">([[</span><span class="n">hv</span><span class="p">]]))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">hour_var</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;predict (after training)&quot;</span><span class="p">,</span>  <span class="n">hv</span><span class="p">,</span> <span class="n">model</span><span class="p">(</span><span class="n">hour_var</span> <span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># log the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">()</span> <span class="k">as</span> <span class="n">run</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">mlflow</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">pytorch_model</span><span class="p">,</span> <span class="s2">&quot;models&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.pytorch.save_model">
+<code class="descclassname">mlflow.pytorch.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>pytorch_model</em>, <em>path</em>, <em>conda_env=None</em>, <em>mlflow_model=&lt;mlflow.models.Model object&gt;</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pytorch.save_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Save a PyTorch model to a path on the local file system.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pytorch_model</strong> – PyTorch model to be saved. Must accept a single <code class="docutils literal notranslate"><span class="pre">torch.FloatTensor</span></code> as
+input and produce a single output tensor.</li>
+<li><strong>path</strong> – Local path where the model is to be saved.</li>
+<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, this decribes the environment
+this model should be run in. At minimum, it should specify python, pytorch,
+and mlflow with appropriate versions.</li>
+<li><strong>mlflow_model</strong> – <a class="reference internal" href="mlflow.models.html#mlflow.models.Model" title="mlflow.models.Model"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.models.Model</span></code></a> this flavor is being added to.</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">torch.save</span></code> method.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.pytorch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># create model and set values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytorch_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pytorch_model_path</span> <span class="o">=</span> <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#train our model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#save the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">()</span> <span class="k">as</span> <span class="n">run</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="n">mlflow</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">pytorch_model</span><span class="p">,</span> <span class="n">pytorch_model_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </div>
 
 
