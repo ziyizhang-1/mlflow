@@ -172,7 +172,7 @@ Deployment Mode
     command (for example, submit a script that does ``mlflow run`` to a standard job queueing system).
 
 For example, in the tutorial we create and publish a MLproject which trains a linear model. The
-project is also published on Github at https://github.com/databricks/mlflow-example. To execute
+project is also published on GitHub at https://github.com/databricks/mlflow-example. To execute
 this project run
 
 .. code::
