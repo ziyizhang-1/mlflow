@@ -1,0 +1,397 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mlflow.tensorflow &mdash; MLflow 0.8.0 documentation</title>
+  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.tensorflow.html">
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MLflow 0.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API" href="index.html"/>
+        <link rel="next" title="mlflow.tracking" href="/mlflow.tracking.html"/>
+        <link rel="prev" title="mlflow.spark" href="/mlflow.spark.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side relative">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="../index.html" class="main-navigation-home"><img src="../_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlflow.html">mlflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.azureml.html">mlflow.azureml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.tensorflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../R-api.html">R API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+        <li><a href="index.html">Python API</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>mlflow.tensorflow</li>
+    
+    
+    <li class="wy-breadcrumbs-aside">
+      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.tensorflow.rst" class="fa fa-github"> Edit on GitHub</a>
+    </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="module-mlflow.tensorflow">
+<span id="mlflow-tensorflow"></span><h1>mlflow.tensorflow<a class="headerlink" href="#module-mlflow.tensorflow" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code> module provides an API for logging and loading TensorFlow models
+as <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> models.</p>
+<p>You must save your own <code class="docutils literal notranslate"><span class="pre">saved_model</span></code> and pass its
+path to <code class="docutils literal notranslate"><span class="pre">log_saved_model(saved_model_dir)</span></code>. To load the model to predict on it, you call
+<code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">pyfunc.load_pyfunc(saved_model_dir)</span></code> followed by
+<code class="docutils literal notranslate"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a pandas DataFrame.</p>
+<p>The loaded <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model <em>does not</em> expose any APIs for model training.</p>
+<dl class="function">
+<dt id="mlflow.tensorflow.load_model">
+<code class="descclassname">mlflow.tensorflow.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>tf_sess</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.load_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Load an MLflow model that contains the Tensorflow flavor from the specified path.</p>
+<p><strong>This method must be called within a Tensorflow graph context!</strong></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>path</strong> – The local filesystem path or run-relative artifact path to the model.</li>
+<li><strong>tf_sess</strong> – The Tensorflow session in which to the load the model.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A Tensorflow signature definition of type:
+<cite>tensorflow.core.protobuf.meta_graph_pb2.SignatureDef</cite>. This defines the input and
+output tensors for model inference.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.tensorflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tf_sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">tf_graph</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tf_graph</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">signature_definition</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;model_path&quot;</span><span class="p">,</span> <span class="n">tf_sess</span><span class="o">=</span><span class="n">tf_sess</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">input_tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf_graph</span><span class="o">.</span><span class="n">get_tensor_by_name</span><span class="p">(</span><span class="n">input_signature</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>                     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">input_signature</span> <span class="ow">in</span> <span class="n">signature_def</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">output_tensors</span> <span class="o">=</span> <span class="p">[</span><span class="n">tf_graph</span><span class="o">.</span><span class="n">get_tensor_by_name</span><span class="p">(</span><span class="n">output_signature</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>                      <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">output_signature</span> <span class="ow">in</span> <span class="n">signature_def</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tensorflow.log_model">
+<code class="descclassname">mlflow.tensorflow.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>tf_saved_model_dir</em>, <em>tf_meta_graph_tags</em>, <em>tf_signature_def_key</em>, <em>artifact_path</em>, <em>conda_env=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.log_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a <em>serialized</em> collection of Tensorflow graphs and variables as an MLflow model
+for the current run. This method operates on Tensorflow variables and graphs that have been
+serialized in Tensorflow’s <cite>SavedModel</cite> format. For more information about the <cite>SavedModel</cite>,
+see the following Tensorflow documentation: <a class="reference external" href="https://www.tensorflow.org/guide">https://www.tensorflow.org/guide</a>/saved_model#
+save_and_restore_models.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tf_saved_model_dir</strong> – Path to the directory containing serialized Tensorflow variables and
+graphs in <cite>SavedModel</cite> format.</li>
+<li><strong>tf_meta_graph_tags</strong> – A list of tags identifying the model’s metagraph within the
+serialized <cite>SavedModel</cite> object. For more information, see the <cite>tags</cite>
+parameter of the <cite>tf.saved_model.builder.SavedModelBuilder</cite> method:
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/saved_model/builder/">https://www.tensorflow.org/api_docs/python/tf/saved_model/builder/</a>
+SavedModelBuilder#add_meta_graph</li>
+<li><strong>tf_signature_def_key</strong> – A string identifying the input/output signature associated with the
+model. This is a key within the serialized <cite>SavedModel</cite>’s signature
+definition mapping. For more information, see the
+<cite>signature_def_map</cite> parameter of the
+<cite>tf.saved_model.builder.SavedModelBuilder</cite> method.</li>
+<li><strong>artifact_path</strong> – The run-relative path to which to log model artifacts.</li>
+<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, defines an environment for the
+model. At minimum, it should specify python, tensorflow, and mlflow with
+appropriate versions.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tensorflow.save_model">
+<code class="descclassname">mlflow.tensorflow.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>tf_saved_model_dir</em>, <em>tf_meta_graph_tags</em>, <em>tf_signature_def_key</em>, <em>path</em>, <em>mlflow_model=&lt;mlflow.models.Model object&gt;</em>, <em>conda_env=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.save_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Save a <em>serialized</em> collection of Tensorflow graphs and variables as an MLflow model
+to a local path. This method operates on Tensorflow variables and graphs that have been
+serialized in Tensorflow’s <cite>SavedModel</cite> format. For more information about the <cite>SavedModel</cite>,
+see the following Tensorflow documentation: <a class="reference external" href="https://www.tensorflow.org/guide">https://www.tensorflow.org/guide</a>/saved_model#
+save_and_restore_models.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>tf_saved_model_dir</strong> – Path to the directory containing serialized Tensorflow variables and
+graphs in <cite>SavedModel</cite> format.</li>
+<li><strong>tf_meta_graph_tags</strong> – A list of tags identifying the model’s metagraph within the
+serialized <cite>savedmodel</cite> object. for more information, see the <cite>tags</cite>
+parameter of the <cite>tf.saved_model.builder.savedmodelbuilder</cite> method:
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/saved_model/builder/">https://www.tensorflow.org/api_docs/python/tf/saved_model/builder/</a>
+savedmodelbuilder#add_meta_graph</li>
+<li><strong>tf_signature_def_key</strong> – A string identifying the input/output signature associated with the
+model. this is a key within the serialized <cite>savedmodel</cite>’s signature
+definition mapping. for more information, see the
+<cite>signature_def_map</cite> parameter of the
+<cite>tf.saved_model.builder.savedmodelbuilder</cite> method.</li>
+<li><strong>path</strong> – Local path where the MLflow model is to be saved.</li>
+<li><strong>mlflow_model</strong> – MLflow model configuration to which this flavor will be added.</li>
+<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, defines an environment for the
+model. At minimum, it should specify python, tensorflow, and mlflow with
+appropriate versions.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mlflow.spark.html" class="btn btn-neutral" title="mlflow.spark" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="mlflow.tracking.html" class="btn btn-neutral" title="mlflow.tracking" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'../',
+      VERSION:'0.8.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="../_static/jquery.js"></script>
+  <script type="text/javascript" src="../_static/underscore.js"></script>
+  <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="../_static/languagesections.js"></script>
+  
+
+  <script type="text/javascript" src="../_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="../_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "../_static/clippy.svg";</script>
+  <script type="text/javascript" src="../_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="../_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>

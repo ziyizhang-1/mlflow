@@ -1,0 +1,574 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mlflow &mdash; MLflow 0.8.0 documentation</title>
+  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.html">
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MLflow 0.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API" href="index.html"/>
+        <link rel="next" title="mlflow.azureml" href="/mlflow.azureml.html"/>
+        <link rel="prev" title="Python API" href="/index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side relative">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="../index.html" class="main-navigation-home"><img src="../_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.azureml.html">mlflow.azureml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../R-api.html">R API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+        <li><a href="index.html">Python API</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>mlflow</li>
+    
+    
+    <li class="wy-breadcrumbs-aside">
+      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.rst" class="fa fa-github"> Edit on GitHub</a>
+    </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="module-mlflow">
+<span id="mlflow"></span><h1>mlflow<a class="headerlink" href="#module-mlflow" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow</span></code> module provides an API for starting and managing MLflow runs.
+For example:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlflow</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">()</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;my&quot;</span><span class="p">,</span> <span class="s2">&quot;param&quot;</span><span class="p">)</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">mlflow</span><span class="o">.</span><span class="n">end_run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You can also use syntax like this:</p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">start_run</span><span class="p">()</span> <span class="k">as</span> <span class="n">run</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>which automatically terminates the run at the end of the block.</p>
+<p>The tracking API is not currently threadsafe. Any concurrent callers to the tracking API must
+implement mutual exclusion manually.</p>
+<p>For a lower level API, see the <a class="reference internal" href="mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tracking</span></code></a> module.</p>
+<dl class="class">
+<dt id="mlflow.ActiveRun">
+<em class="property">class </em><code class="descclassname">mlflow.</code><code class="descname">ActiveRun</code><span class="sig-paren">(</span><em>run</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.ActiveRun" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.run.Run</span></code></p>
+<p>Wrapper around <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> to enable using Python <code class="docutils literal notranslate"><span class="pre">with</span></code> syntax.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.log_param">
+<code class="descclassname">mlflow.</code><code class="descname">log_param</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.log_param" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a parameter under the current run, creating a run if necessary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> – Parameter name (string)</li>
+<li><strong>value</strong> – Parameter value (string, but will be string-ified if not)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.log_metric">
+<code class="descclassname">mlflow.</code><code class="descname">log_metric</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.log_metric" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a metric under the current run, creating a run if necessary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> – Metric name (string).</li>
+<li><strong>value</strong> – Metric value (float).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.set_tag">
+<code class="descclassname">mlflow.</code><code class="descname">set_tag</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.set_tag" title="Permalink to this definition"> </a></dt>
+<dd><p>Set a tag under the current run, creating a run if necessary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> – Tag name (string)</li>
+<li><strong>value</strong> – Tag value (string, but will be string-ified if not)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.log_artifacts">
+<code class="descclassname">mlflow.</code><code class="descname">log_artifacts</code><span class="sig-paren">(</span><em>local_dir</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.log_artifacts" title="Permalink to this definition"> </a></dt>
+<dd><p>Log all the contents of a local directory as artifacts of the run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>local_dir</strong> – Path to the directory of files to write.</li>
+<li><strong>artifact_path</strong> – If provided, the directory in <code class="docutils literal notranslate"><span class="pre">artifact_uri</span></code> to write to.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.log_artifact">
+<code class="descclassname">mlflow.</code><code class="descname">log_artifact</code><span class="sig-paren">(</span><em>local_path</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.log_artifact" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a local file or directory as an artifact of the currently active run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>local_path</strong> – Path to the file to write.</li>
+<li><strong>artifact_path</strong> – If provided, the directory in <code class="docutils literal notranslate"><span class="pre">artifact_uri</span></code> to write to.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.active_run">
+<code class="descclassname">mlflow.</code><code class="descname">active_run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.active_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Get the currently active <code class="docutils literal notranslate"><span class="pre">Run</span></code>, or None if no such run exists.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.start_run">
+<code class="descclassname">mlflow.</code><code class="descname">start_run</code><span class="sig-paren">(</span><em>run_uuid=None</em>, <em>experiment_id=None</em>, <em>source_name=None</em>, <em>source_version=None</em>, <em>entry_point_name=None</em>, <em>source_type=None</em>, <em>run_name=None</em>, <em>nested=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.start_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Start a new MLflow run, setting it as the active run under which metrics and parameters
+will be logged. The return value can be used as a context manager within a <code class="docutils literal notranslate"><span class="pre">with</span></code> block;
+otherwise, you must call <code class="docutils literal notranslate"><span class="pre">end_run()</span></code> to terminate the current run.</p>
+<p>If you pass a <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> or the <code class="docutils literal notranslate"><span class="pre">MLFLOW_RUN_ID</span></code> environment variable is set,
+<code class="docutils literal notranslate"><span class="pre">start_run</span></code> attempts to resume a run with the specified run ID and
+other parameters are ignored. <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> takes precedence over <code class="docutils literal notranslate"><span class="pre">MLFLOW_RUN_ID</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>run_uuid</strong> – If specified, get the run with the specified UUID and log parameters
+and metrics under that run. The run’s end time is unset and its status
+is set to running, but the run’s other attributes (<code class="docutils literal notranslate"><span class="pre">source_version</span></code>,
+<code class="docutils literal notranslate"><span class="pre">source_type</span></code>, etc.) are not changed.</li>
+<li><strong>experiment_id</strong> – ID of the experiment under which to create the current run (applicable
+only when <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> is not specified). If <code class="docutils literal notranslate"><span class="pre">experiment_id</span></code> argument
+is unspecified, will look for valid experiment in the following order:
+activated using <code class="docutils literal notranslate"><span class="pre">set_experiment</span></code>, <code class="docutils literal notranslate"><span class="pre">MLFLOW_EXPERIMENT_ID</span></code> env variable,
+or the default experiment.</li>
+<li><strong>source_name</strong> – Name of the source file or URI of the project to be associated with the run.
+If none provided defaults to the current file.</li>
+<li><strong>source_version</strong> – Optional Git commit hash to associate with the run.</li>
+<li><strong>entry_point_name</strong> – Optional name of the entry point for the current run.</li>
+<li><strong>source_type</strong> – Integer <a class="reference internal" href="mlflow.entities.html#mlflow.entities.SourceType" title="mlflow.entities.SourceType"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.SourceType</span></code></a> describing the type
+of the run (“local”, “project”, etc.). Defaults to
+<a class="reference internal" href="mlflow.entities.html#mlflow.entities.SourceType.LOCAL" title="mlflow.entities.SourceType.LOCAL"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.SourceType.LOCAL</span></code></a> (“local”).</li>
+<li><strong>run_name</strong> – Name of new run. Used only when <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> is unspecified.</li>
+<li><strong>nested</strong> – Parameter which must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to create nested runs.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#mlflow.ActiveRun" title="mlflow.ActiveRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.ActiveRun</span></code></a> object that acts as a context manager wrapping
+the run’s state.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.end_run">
+<code class="descclassname">mlflow.</code><code class="descname">end_run</code><span class="sig-paren">(</span><em>status='FINISHED'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.end_run" title="Permalink to this definition"> </a></dt>
+<dd><p>End an active MLflow run (if there is one).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.get_artifact_uri">
+<code class="descclassname">mlflow.</code><code class="descname">get_artifact_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.get_artifact_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Get the artifact URI of the currently active run. Calls to <code class="docutils literal notranslate"><span class="pre">log_artifact</span></code> and
+<code class="docutils literal notranslate"><span class="pre">log_artifacts</span></code> write artifact(s) to subdirectories of the returned URI.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.set_tracking_uri">
+<code class="descclassname">mlflow.</code><code class="descname">set_tracking_uri</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.set_tracking_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Set the tracking server URI. This does not affect the
+currently active run (if one exists), but takes effect for successive runs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uri</strong> – <ul class="simple">
+<li>An empty string, or a local file path, prefixed with <code class="docutils literal notranslate"><span class="pre">file:/</span></code>. Data is stored
+locally at the provided file (or <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> if empty).</li>
+<li>An HTTP URI like <code class="docutils literal notranslate"><span class="pre">https://my-tracking-server:5000</span></code>.</li>
+<li>A Databricks workspace, provided as the string “databricks” or, to use a
+Databricks CLI
+<a class="reference external" href="https://github.com/databricks/databricks-cli#installation">profile</a>,
+“databricks://&lt;profileName&gt;”.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.create_experiment">
+<code class="descclassname">mlflow.</code><code class="descname">create_experiment</code><span class="sig-paren">(</span><em>name</em>, <em>artifact_location=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.create_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Create an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> – The experiment name. Must be unique.</li>
+<li><strong>artifact_location</strong> – The location to store run artifacts.
+If not provided, the server picks an appropriate default.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Integer ID of the created experiment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.set_experiment">
+<code class="descclassname">mlflow.</code><code class="descname">set_experiment</code><span class="sig-paren">(</span><em>experiment_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.set_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Set given experiment as active experiment. If experiment does not exist, create an experiment
+with provided name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment_name</strong> – Name of experiment to be activated.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.run">
+<code class="descclassname">mlflow.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>storage_dir=None</em>, <em>block=True</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.run" title="Permalink to this definition"> </a></dt>
+<dd><p>Run an MLflow project. The project can be local or stored at a Git URI.</p>
+<p>You can run the project locally or remotely on a Databricks.</p>
+<p>For information on using this method in chained workflows, see <a class="reference external" href="../projects.html#building-multistep-workflows">Building Multistep Workflows</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ExecutionException</strong> – If a run launched in blocking mode is unsuccessful.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>uri</strong> – URI of project to run. A local filesystem path
+or a Git repository URI (e.g. <a class="reference external" href="https://github.com/mlflow/mlflow-example">https://github.com/mlflow/mlflow-example</a>)
+pointing to a project directory containing an MLproject file.</li>
+<li><strong>entry_point</strong> – Entry point to run within the project. If no entry point with the specified
+name is found, runs the project file <code class="docutils literal notranslate"><span class="pre">entry_point</span></code> as a script,
+using “python” to run <code class="docutils literal notranslate"><span class="pre">.py</span></code> files and the default shell (specified by
+environment variable <code class="docutils literal notranslate"><span class="pre">$SHELL</span></code>) to run <code class="docutils literal notranslate"><span class="pre">.sh</span></code> files.</li>
+<li><strong>version</strong> – For Git-based projects, either a commit hash or a branch name.</li>
+<li><strong>experiment_id</strong> – ID of experiment under which to launch the run.</li>
+<li><strong>mode</strong> – Execution mode of the run: “local” or “databricks”.</li>
+<li><strong>cluster_spec</strong> – When <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “databricks”, dictionary or path to a JSON file
+containing a <a class="reference external" href="https://docs.databricks.com/api/latest/jobs.html#clusterspec">Databricks cluster specification</a>
+to use when launching a run.</li>
+<li><strong>git_username</strong> – Username for HTTP(S) authentication with Git.</li>
+<li><strong>git_password</strong> – Password for HTTP(S) authentication with Git.</li>
+<li><strong>use_conda</strong> – If True (the default), create a new Conda environment for the run and
+install project dependencies within that environment. Otherwise, run the
+project in the current environment without installing any project
+dependencies.</li>
+<li><strong>storage_dir</strong> – Used only if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “local”. MLflow downloads artifacts from
+distributed URIs passed to parameters of type <code class="docutils literal notranslate"><span class="pre">path</span></code> to subdirectories of
+<code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>.</li>
+<li><strong>block</strong> – Whether to block while waiting for a run to complete. Defaults to True.
+Note that if <code class="docutils literal notranslate"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
+the current process will block when exiting until the local run completes.
+If the current process is interrupted, any asynchronous runs launched via this
+method will be terminated.</li>
+<li><strong>run_id</strong> – Note: this argument is used internally by the MLflow project APIs and should
+not be specified. If specified, the run ID will be used instead of
+creating a new run.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="mlflow.projects.html#mlflow.projects.SubmittedRun" title="mlflow.projects.SubmittedRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.projects.SubmittedRun</span></code></a> exposing information (e.g. run ID)
+about the launched run.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="index.html" class="btn btn-neutral" title="Python API" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="mlflow.azureml.html" class="btn btn-neutral" title="mlflow.azureml" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'../',
+      VERSION:'0.8.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="../_static/jquery.js"></script>
+  <script type="text/javascript" src="../_static/underscore.js"></script>
+  <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="../_static/languagesections.js"></script>
+  
+
+  <script type="text/javascript" src="../_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="../_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "../_static/clippy.svg";</script>
+  <script type="text/javascript" src="../_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="../_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>

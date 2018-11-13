@@ -1,0 +1,436 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quickstart &mdash; MLflow 0.8.0 documentation</title>
+  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/quickstart.html">
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="MLflow 0.8.0 documentation" href="index.html"/>
+        <link rel="next" title="Tutorial" href="/tutorial.html"/>
+        <link rel="prev" title="MLflow Documentation" href="/index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side relative">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="index.html" class="main-navigation-home"><img src="_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-mlflow">Installing MLflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#downloading-the-quickstart">Downloading the Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-tracking-api">Using the Tracking API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#viewing-the-tracking-ui">Viewing the Tracking UI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-mlflow-projects">Running MLflow Projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-and-serving-models">Saving and Serving Models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api/index.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="R-api.html">R API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="java_api/index.html">Java API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rest-api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>Quickstart</li>
+    
+    
+    <li class="wy-breadcrumbs-aside">
+      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
+    </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="quickstart">
+<span id="id1"></span><h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline"> </a></h1>
+<div class="section" id="installing-mlflow">
+<h2>Installing MLflow<a class="headerlink" href="#installing-mlflow" title="Permalink to this headline"> </a></h2>
+<p>You install MLflow by running:</p>
+<div class="code-section docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install mlflow
+</pre></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>install.packages<span class="p">(</span><span class="s">&quot;mlflow&quot;</span><span class="p">)</span>
+mlflow<span class="o">::</span>mlflow_install<span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You cannot install MLflow on the MacOS system installation of Python. We recommend installing
+Python 3 through the <a class="reference external" href="https://brew.sh/">Homebrew</a> package manager using
+<code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">python</span></code>. (In this case, installing MLflow is now <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">mlflow</span></code>).</p>
+</div>
+<p>At this point we recommend you follow the <a class="reference internal" href="tutorial.html"><span class="doc">Tutorial</span></a> for a walk-through on how you
+can leverage MLflow in your daily workflow.</p>
+</div>
+<div class="section" id="downloading-the-quickstart">
+<h2>Downloading the Quickstart<a class="headerlink" href="#downloading-the-quickstart" title="Permalink to this headline"> </a></h2>
+<p>Download the quickstart code by cloning MLflow via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/mlflow/mlflow</span></code>,
+and cd into the <code class="docutils literal notranslate"><span class="pre">examples</span></code> subdirectory of the repository. We’ll use this working directory for
+running the <code class="docutils literal notranslate"><span class="pre">quickstart</span></code>.</p>
+<p>We avoid running directly from our clone of MLflow as doing so would cause the tutorial to
+use MLflow from source, rather than your PyPi installation of MLflow.</p>
+</div>
+<div class="section" id="using-the-tracking-api">
+<h2>Using the Tracking API<a class="headerlink" href="#using-the-tracking-api" title="Permalink to this headline"> </a></h2>
+<p>The <a class="reference internal" href="tracking.html"><span class="doc">MLflow Tracking API</span></a> lets you log metrics and artifacts (files) from your data
+science code and see a history of your runs. You can try it out by writing a simple Python script
+as follows (this example is also included in <code class="docutils literal notranslate"><span class="pre">quickstart/mlflow_tracking.py</span></code>):</p>
+<div class="code-section docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">mlflow</span> <span class="kn">import</span> <span class="n">log_metric</span><span class="p">,</span> <span class="n">log_param</span><span class="p">,</span> <span class="n">log_artifact</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Log a parameter (key-value pair)</span>
+    <span class="n">log_param</span><span class="p">(</span><span class="s2">&quot;param1&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Log a metric; metrics can be updated throughout the run</span>
+    <span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">log_metric</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Log an artifact (output file)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+    <span class="n">log_artifact</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>mlflow<span class="p">)</span>
+
+<span class="c1"># Log a parameter (key-value pair)</span>
+mlflow_log_param<span class="p">(</span><span class="s">&quot;param1&quot;</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
+
+<span class="c1"># Log a metric; metrics can be updated throughout the run</span>
+mlflow_log_metric<span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+mlflow_log_metric<span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+mlflow_log_metric<span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+
+<span class="c1"># Log an artifact (output file)</span>
+<span class="kp">writeLines</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">,</span> <span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
+mlflow_log_artifact<span class="p">(</span><span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="viewing-the-tracking-ui">
+<h2>Viewing the Tracking UI<a class="headerlink" href="#viewing-the-tracking-ui" title="Permalink to this headline"> </a></h2>
+<p>By default, wherever you run your program, the tracking API writes data into files into an <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory.
+You can then run MLflow’s Tracking UI:</p>
+<div class="code-section docutils container">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow ui
+</pre></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>mlflow_ui<span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>and view it at <a class="reference external" href="http://localhost:5000">http://localhost:5000</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you see message <code class="docutils literal notranslate"><span class="pre">[CRITICAL]</span> <span class="pre">WORKER</span> <span class="pre">TIMEOUT</span></code> in the MLflow UI or error logs, try using <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code> instead of <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:5000</span></code>.</p>
+</div>
+<p>Alternatively, you can configure MLflow to <a class="reference internal" href="tracking.html#tracking"><span class="std std-ref">log runs to a remote server</span></a> to manage
+your results centrally or share them across a team.</p>
+</div>
+<div class="section" id="running-mlflow-projects">
+<h2>Running MLflow Projects<a class="headerlink" href="#running-mlflow-projects" title="Permalink to this headline"> </a></h2>
+<p>MLflow allows you to package code and its dependencies as a <em>project</em> that can be run in a
+reproducible fashion on other data. Each project includes its code and a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file that
+defines its dependencies (for example, Python environment) as well as what commands can be run into the
+project and what arguments they take.</p>
+<p>You can easily run existing projects with the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> command, which runs a project from
+either a local directory or a GitHub URI:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="n">tutorial</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+
+<span class="n">mlflow</span> <span class="n">run</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">mlflow</span><span class="o">/</span><span class="n">mlflow</span><span class="o">-</span><span class="n">example</span><span class="o">.</span><span class="n">git</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span>
+</pre></div>
+</div>
+<p>There’s a sample project in <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>, including a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file that
+specifies its dependencies. if you haven’t configured a <a class="reference internal" href="tracking.html#tracking-server"><span class="std std-ref">tracking server</span></a>,
+projects log their Tracking API data in the local <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory so you can see these
+runs using <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> installs all dependencies using <a class="reference external" href="https://conda.io/">conda</a>.
+To run a project without using <code class="docutils literal notranslate"><span class="pre">conda</span></code>, you can provide the <code class="docutils literal notranslate"><span class="pre">--no-conda</span></code> option to
+<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code>. In this case, you must ensure that the necessary dependencies are already installed
+in your Python environment.</p>
+</div>
+<p>For more information, see <a class="reference internal" href="projects.html"><span class="doc">MLflow Projects</span></a>.</p>
+</div>
+<div class="section" id="saving-and-serving-models">
+<h2>Saving and Serving Models<a class="headerlink" href="#saving-and-serving-models" title="Permalink to this headline"> </a></h2>
+<p>MLflow includes a generic <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> format for saving <em>models</em> from a variety of tools in diverse
+<em>flavors</em>. For example, many models can be served as Python functions, so an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file can
+declare how each model should be interpreted as a Python function in order to let various tools
+serve it. MLflow also includes tools for running such models locally and exporting them to Docker
+containers or commercial serving platforms.</p>
+<p>To illustrate this functionality, the <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code> package can log scikit-learn models as
+MLflow artifacts and then load them again for serving. There is an example training application in
+<code class="docutils literal notranslate"><span class="pre">sklearn_logistic_regression/train.py</span></code> that you can run as follows:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">sklearn_logistic_regression</span><span class="o">/</span><span class="n">train</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>When you run the example, it outputs an MLflow run ID for that experiment. If you look at
+<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code>, you will also see that the run saved a <code class="docutils literal notranslate"><span class="pre">model</span></code> folder containing an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code>
+description file and a pickled scikit-learn model. You can pass the run ID and the path of the model
+within the artifacts directory (here “model”) to various tools. For example, MLflow includes a
+simple REST server for python-based models:</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">pyfunc</span> <span class="n">serve</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">RUN_ID</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">m</span> <span class="n">model</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default the server runs on port 5000. If that port is already in use, use the <cite>–port</cite> option to
+specify a different port. For example: <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">pyfunc</span> <span class="pre">serve</span> <span class="pre">--port</span> <span class="pre">1234</span> <span class="pre">-r</span> <span class="pre">&lt;RUN_ID&gt;</span> <span class="pre">-m</span> <span class="pre">model</span></code></p>
+</div>
+<p>Once you have started the server, you can pass it some sample data and see the
+predictions.</p>
+<p>The following example uses <code class="docutils literal notranslate"><span class="pre">curl</span></code> to send a JSON-serialized Pandas DataFrame with the <code class="docutils literal notranslate"><span class="pre">split</span></code>
+orientation to the pyfunc server. For more information about the input data formats accepted by
+the pyfunc model server, see the <a class="reference internal" href="models.html#pyfunc-deployment"><span class="std std-ref">MLflow deployment tools documentation</span></a>.</p>
+<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;columns&quot;:[&quot;x&quot;], &quot;data&quot;:[[1], [-1]]}&#39;</span> <span class="o">-</span><span class="n">H</span> <span class="s1">&#39;Content-Type: application/json; format=pandas-split&#39;</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">invocations</span>
+</pre></div>
+</div>
+<p>which returns:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;predictions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sklearn_logistic_regression/train.py</span></code> script must be run with the same Python version as
+the version of Python that runs <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">pyfunc</span> <span class="pre">serve</span></code>. If they are not the same version,
+the stacktrace below may appear:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/site-packages/mlflow/sklearn.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">54</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_load_model_from_local_file</span>
+<span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xc6 in position 0: ordinal not in range(128)</span>
+</pre></div>
+</div>
+</div>
+<p>For more information, see <a class="reference internal" href="models.html"><span class="doc">MLflow Models</span></a>.</p>
+</div>
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="index.html" class="btn btn-neutral" title="MLflow Documentation" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral" title="Tutorial" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2018. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'./',
+      VERSION:'0.8.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="_static/jquery.js"></script>
+  <script type="text/javascript" src="_static/underscore.js"></script>
+  <script type="text/javascript" src="_static/doctools.js"></script>
+  <script type="text/javascript" src="_static/languagesections.js"></script>
+  
+
+  <script type="text/javascript" src="_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "_static/clippy.svg";</script>
+  <script type="text/javascript" src="_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>
