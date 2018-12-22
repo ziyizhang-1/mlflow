@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Concepts &mdash; MLflow 0.8.0 documentation</title>
+  <title>Concepts &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/concepts.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="index.html"/>
         <link rel="next" title="MLflow Tracking" href="/tracking.html"/>
         <link rel="prev" title="Tutorial" href="/tutorial.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -212,7 +212,7 @@ server, then compare multiple runs. Teams can also use it to compare results fro
 <p><strong>MLflow Projects</strong> are a standard format for packaging reusable data science code. Each project
 is simply a directory with code or a Git repository, and uses a descriptor file or simply
 convention to specify its dependencies and how to run the code. For example, projects can contain
-a <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code> file for specifying a Python <a class="reference external" href="https://conda.io/docs/">Conda</a> environment.
+a <code class="docutils literal"><span class="pre">conda.yaml</span></code> file for specifying a Python <a class="reference external" href="https://conda.io/docs/">Conda</a> environment.
 When you use the MLflow Tracking API in a Project, MLflow automatically remembers the project
 version executed (for example, Git commit) and any parameters. You can easily run existing MLflow
 Projects from GitHub or your own Git repository, and chain them into multi-step workflows.</p>
@@ -267,7 +267,7 @@ Moreover, engineering teams can easily move workflows from R&amp;D to staging to
 models as files in a management system of their choice, and track which run a model came from.</p>
 <p><strong>Researchers and Open Source Developers</strong> can publish code to GitHub in the MLflow Project format,
 making it easy for anyone to run their code using the
-<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">github.com/...</span></code> command.</p>
+<code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">github.com/...</span></code> command.</p>
 <p><strong>ML Library Developers</strong> can output models in the MLflow Model format to have them automatically
 support deployment using MLflow’s built-in tools. In addition, deployment tool developers (for example, a
 cloud vendor building a serving platform) can automatically support a large variety of models.</p>
@@ -312,7 +312,7 @@ cloud vendor building a serving platform) can automatically support a large vari
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
