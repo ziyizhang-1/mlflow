@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.keras &mdash; MLflow 0.8.0 documentation</title>
+  <title>mlflow.keras &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.keras.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.mleap" href="/mlflow.mleap.html"/>
         <link rel="prev" title="mlflow.h2o" href="/mlflow.h2o.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -183,32 +183,32 @@
                 
   <div class="section" id="module-mlflow.keras">
 <span id="mlflow-keras"></span><h1>mlflow.keras<a class="headerlink" href="#module-mlflow.keras" title="Permalink to this headline"> </a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.keras</span></code> module provides an API for logging and loading Keras models. This module
+<p>The <code class="docutils literal"><span class="pre">mlflow.keras</span></code> module provides an API for logging and loading Keras models. This module
 exports Keras models with the following flavors:</p>
 <dl class="docutils">
 <dt>Keras (native) format</dt>
 <dd>This is the main flavor that can be loaded back into Keras.</dd>
-<dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></dt>
+<dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.pyfunc</span></code></a></dt>
 <dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
 </dl>
 <dl class="function">
 <dt id="mlflow.keras.load_model">
 <code class="descclassname">mlflow.keras.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.keras.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a Keras model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is None) or a run.</p>
+<dd><p>Load a Keras model from a local file (if <code class="docutils literal"><span class="pre">run_id</span></code> is None) or a run.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model saved
-by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.keras.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.log_model()</span></code></a>.</li>
-<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.keras.log_model"><code class="xref py py-func docutils literal"><span class="pre">mlflow.keras.log_model()</span></code></a>.</li>
+<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal"><span class="pre">path</span></code> to identify the model.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load persisted model as a Keras model or as a PyFunc, call predict() on a Pandas DataFrame</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load persisted model as a Keras model or as a PyFunc, call predict() on a Pandas DataFrame</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">,</span> <span class="n">run_id</span><span class="o">=</span><span class="s2">&quot;96771d893a5e46159d9f3b49bf9013e2&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">keras_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 </pre></div>
@@ -217,7 +217,7 @@ by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.ke
 
 <dl class="function">
 <dt id="mlflow.keras.log_model">
-<code class="descclassname">mlflow.keras.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>keras_model</em>, <em>artifact_path</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.keras.log_model" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.keras.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>keras_model</em>, <em>artifact_path</em>, <em>conda_env=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.keras.log_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Log a Keras model as an MLflow artifact for the current run.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -226,13 +226,32 @@ by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.ke
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>keras_model</strong> – Keras model to be saved.</li>
 <li><strong>artifact_path</strong> – Run-relative artifact path.</li>
-<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal notranslate"><span class="pre">keras_model.save</span></code> method.</li>
+<li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
+Conda environment yaml file. If provided, this decribes the environment
+this model should be run in. At minimum, it should specify the dependencies
+contained in <code class="docutils literal"><span class="pre">mlflow.keras.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
+<code class="docutils literal"><span class="pre">mlflow.keras.DEFAULT_CONDA_ENV</span></code> environment will be added to the model.
+The following is an <em>example</em> dictionary representation of a Conda
+environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mlflow-env&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;python=3.7.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;keras=2.2.4&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;tensorflow=1.8.0&#39;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><strong>kwargs</strong> – kwargs to pass to <code class="docutils literal"><span class="pre">keras_model.save</span></code> method.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">layers</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">layers</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Build, compile, and train your model</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="o">...</span>
@@ -257,13 +276,32 @@ by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.ke
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>keras_model</strong> – Keras model to be saved.</li>
 <li><strong>path</strong> – Local path where the model is to be saved.</li>
+<li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
+Conda environment yaml file. If provided, this decribes the environment
+this model should be run in. At minimum, it should specify the dependencies
+contained in <code class="docutils literal"><span class="pre">mlflow.keras.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
+<code class="docutils literal"><span class="pre">mlflow.keras.DEFAULT_CONDA_ENV</span></code> environment will be added to the model.
+The following is an <em>example</em> dictionary representation of a Conda
+environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mlflow-env&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;python=3.7.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;keras=2.2.4&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;tensorflow=1.8.0&#39;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
 <li><strong>mlflow_model</strong> – MLflow model config this flavor is being added to.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Build, compile, and train your model</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model</span> <span class="o">=</span> <span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">keras_model_path</span> <span class="o">=</span> <span class="o">...</span>
@@ -316,7 +354,7 @@ by <a class="reference internal" href="#mlflow.keras.log_model" title="mlflow.ke
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.pyfunc &mdash; MLflow 0.8.0 documentation</title>
+  <title>mlflow.pyfunc &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.pyfunc.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.pytorch" href="/mlflow.pytorch.html"/>
         <link rel="prev" title="mlflow.projects" href="/mlflow.projects.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -183,37 +183,37 @@
                 
   <div class="section" id="module-mlflow.pyfunc">
 <span id="mlflow-pyfunc"></span><h1>mlflow.pyfunc<a class="headerlink" href="#module-mlflow.pyfunc" title="Permalink to this headline"> </a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code> module defines a generic filesystem format for Python models and provides
+<p>The <code class="docutils literal"><span class="pre">mlflow.pyfunc</span></code> module defines a generic filesystem format for Python models and provides
 utilities for saving to and loading from this format. The format is self contained in the sense
 that it includes all necessary information for anyone to load it and use it. Dependencies
 are either stored directly with the model or referenced via a Conda environment.</p>
-<p>The convention for pyfunc models is to have a <code class="docutils literal notranslate"><span class="pre">predict</span></code> method or function with the following
+<p>The convention for pyfunc models is to have a <code class="docutils literal"><span class="pre">predict</span></code> method or function with the following
 signature:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span> <span class="o">|</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">predict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">|</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span> <span class="o">|</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span>
 </pre></div>
 </div>
 <p>This convention is relied on by other MLflow components.</p>
 <p>Pyfunc model format is defined as a directory structure containing all required data, code, and
 configuration:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">dst</span><span class="o">-</span><span class="n">path</span><span class="o">/</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">dst</span><span class="o">-</span><span class="n">path</span><span class="o">/</span>
     <span class="o">./</span><span class="n">MLmodel</span><span class="p">:</span> <span class="n">configuration</span>
     <span class="o">&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">code</span> <span class="n">packaged</span> <span class="k">with</span> <span class="n">the</span> <span class="n">model</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MLmodel</span> <span class="n">file</span><span class="p">)</span>
     <span class="o">&lt;</span><span class="n">data</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">data</span> <span class="n">packaged</span> <span class="k">with</span> <span class="n">the</span> <span class="n">model</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MLmodel</span> <span class="n">file</span><span class="p">)</span>
     <span class="o">&lt;</span><span class="n">env</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">Conda</span> <span class="n">environment</span> <span class="n">definition</span> <span class="p">(</span><span class="n">specified</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">MLmodel</span> <span class="n">file</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A Python model contains an <code class="docutils literal notranslate"><span class="pre">MLmodel</span></code> file in “python_function” format in its root with the
+<p>A Python model contains an <code class="docutils literal"><span class="pre">MLmodel</span></code> file in “python_function” format in its root with the
 following parameters:</p>
 <ul>
 <li><dl class="first docutils">
 <dt>loader_module [required]:</dt>
 <dd><p class="first">Python module that can load the model. Expected as module identifier
-e.g. <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code>, it will be imported via <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code>.
+e.g. <code class="docutils literal"><span class="pre">mlflow.sklearn</span></code>, it will be imported via <code class="docutils literal"><span class="pre">importlib.import_module</span></code>.
 The imported module must contain function with the following signature:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_load_pyfunc</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&lt;</span><span class="n">pyfunc</span> <span class="n">model</span><span class="o">&gt;</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">_load_pyfunc</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&lt;</span><span class="n">pyfunc</span> <span class="n">model</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p class="last">The path argument is specified by the <code class="docutils literal notranslate"><span class="pre">data</span></code> parameter and may refer to a file or
+<p class="last">The path argument is specified by the <code class="docutils literal"><span class="pre">data</span></code> parameter and may refer to a file or
 directory.</p>
 </dd>
 </dl>
@@ -242,10 +242,10 @@ should be activated prior to running the model.</p>
 </li>
 </ul>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="n">example</span><span class="o">/</span><span class="n">sklearn_iris</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="n">run1</span><span class="o">/</span><span class="n">outputs</span><span class="o">/</span><span class="n">linear</span><span class="o">-</span><span class="n">lr</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="n">example</span><span class="o">/</span><span class="n">sklearn_iris</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="n">run1</span><span class="o">/</span><span class="n">outputs</span><span class="o">/</span><span class="n">linear</span><span class="o">-</span><span class="n">lr</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── MLmodel
+<div class="highlight-default"><div class="highlight"><pre><span></span>├── MLmodel
 ├── code
 │   ├── sklearn_iris.py
 │
@@ -254,10 +254,10 @@ should be activated prior to running the model.</p>
 └── mlflow_env.yml
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cat</span> <span class="n">example</span><span class="o">/</span><span class="n">sklearn_iris</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="n">run1</span><span class="o">/</span><span class="n">outputs</span><span class="o">/</span><span class="n">linear</span><span class="o">-</span><span class="n">lr</span><span class="o">/</span><span class="n">MLmodel</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cat</span> <span class="n">example</span><span class="o">/</span><span class="n">sklearn_iris</span><span class="o">/</span><span class="n">mlruns</span><span class="o">/</span><span class="n">run1</span><span class="o">/</span><span class="n">outputs</span><span class="o">/</span><span class="n">linear</span><span class="o">-</span><span class="n">lr</span><span class="o">/</span><span class="n">MLmodel</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python_function</span><span class="p">:</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python_function</span><span class="p">:</span>
   <span class="n">code</span><span class="p">:</span> <span class="n">code</span>
   <span class="n">data</span><span class="p">:</span> <span class="n">data</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">pkl</span>
   <span class="n">loader_module</span><span class="p">:</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span>
@@ -300,7 +300,7 @@ how to use their output as a pyfunc.</p>
 <dt id="mlflow.pyfunc.get_module_loader_src">
 <code class="descclassname">mlflow.pyfunc.</code><code class="descname">get_module_loader_src</code><span class="sig-paren">(</span><em>src_path</em>, <em>dst_path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.get_module_loader_src" title="Permalink to this definition"> </a></dt>
 <dd><p>Generate Python source of the model loader.</p>
-<p>Model loader contains <code class="docutils literal notranslate"><span class="pre">load_pyfunc</span></code> method with no parameters. It hardcodes model
+<p>Model loader contains <code class="docutils literal"><span class="pre">load_pyfunc</span></code> method with no parameters. It hardcodes model
 loading of the given model into a Python source. This is done so that the exported model has no
 unnecessary dependencies on MLflow or any other configuration file format or parsing library.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -346,8 +346,8 @@ will be emitted.</li>
 <dt id="mlflow.pyfunc.log_model">
 <code class="descclassname">mlflow.pyfunc.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>artifact_path</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.log_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Export model in Python function form and log it with current MLflow tracking service.</p>
-<p>Model is exported by calling <a class="reference internal" href="#mlflow.pyfunc.save_model" title="mlflow.pyfunc.save_model"><code class="xref py py-meth docutils literal notranslate"><span class="pre">save_model()</span></code></a> and logging the result with
-<code class="xref py py-meth docutils literal notranslate"><span class="pre">mlflow.tracking.log_artifacts()</span></code>.</p>
+<p>Model is exported by calling <a class="reference internal" href="#mlflow.pyfunc.save_model" title="mlflow.pyfunc.save_model"><code class="xref py py-meth docutils literal"><span class="pre">save_model()</span></code></a> and logging the result with
+<code class="xref py py-meth docutils literal"><span class="pre">mlflow.tracking.log_artifacts()</span></code>.</p>
 </dd></dl>
 
 <dl class="function">
@@ -363,7 +363,7 @@ will be emitted.</li>
 <li><strong>loader_module</strong> – The module to be used to load the model.</li>
 <li><strong>data_path</strong> – Path to a file or directory containing model data.</li>
 <li><strong>code_path</strong> – List of paths (file or dir) contains code dependencies not present in
-the environment. Every path in the <code class="docutils literal notranslate"><span class="pre">code_path</span></code> is added to the Python
+the environment. Every path in the <code class="docutils literal"><span class="pre">code_path</span></code> is added to the Python
 path before the model is loaded.</li>
 <li><strong>conda_env</strong> – Path to the Conda environment definition. This environment is activated
 prior to running model code.</li>
@@ -383,7 +383,11 @@ prior to running model code.</li>
 <dd><p>A Spark UDF that can be used to invoke the Python function formatted model.</p>
 <p>Parameters passed to the UDF are forwarded to the model as a DataFrame where the names are
 ordinals (0, 1, …).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">predict</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;/my/local/model&quot;</span><span class="p">)</span>
+<p>The predictions are filtered to contain only the columns that can be represented as the
+<code class="docutils literal"><span class="pre">result_type</span></code>. If the <code class="docutils literal"><span class="pre">result_type</span></code> is string or array of strings, all predictions are
+converted to string. If the result type is not an array type, the left most column with
+matching type will be returned.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">predict</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;/my/local/model&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -393,13 +397,36 @@ ordinals (0, 1, …).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>spark</strong> – A SparkSession object.</li>
-<li><strong>path</strong> – A path containing a <a class="reference internal" href="#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model.</li>
-<li><strong>run_id</strong> – ID of the run that produced this model. If provided, <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is used to
+<li><strong>path</strong> – A path containing a <a class="reference internal" href="#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.pyfunc</span></code></a> model.</li>
+<li><strong>run_id</strong> – ID of the run that produced this model. If provided, <code class="docutils literal"><span class="pre">run_id</span></code> is used to
 retrieve the model logged with MLflow.</li>
+<li><strong>result_type</strong> – <p>the return type of the user-defined function. The value can be either a
+<code class="xref py py-class docutils literal"><span class="pre">pyspark.sql.types.DataType</span></code> object or a DDL-formatted type string.
+Only a primitive type or an array (pyspark.sql.types.ArrayType) of primitive
+types are allowed. The following classes of result type are supported:
+- “int” or pyspark.sql.types.IntegerType: The leftmost integer that can fit</p>
+<blockquote>
+<div>in int32 result is returned or exception is raised if there is none.</div></blockquote>
+<ul>
+<li>”long” or pyspark.sql.types.LongType: The leftmost long integer that can
+fit in int64 result is returned or exception is raised if there is none.</li>
+<li>ArrayType(IntegerType|LongType): Return all integer columns that can fit
+into the requested size.</li>
+<li>”float” or pyspark.sql.types.FloatType: The leftmost numeric result cast
+to float32 is returned or exception is raised if there is none.</li>
+<li>”double” or pyspark.sql.types.DoubleType: The leftmost numeric result cast
+to double is returned or exception is raised if there is none..</li>
+<li>ArrayType(FloatType|DoubleType): Return all numeric columns cast to the
+requested type. Exception is raised if there are no numeric columns.</li>
+<li>”string” or pyspark.sql.types.StringType: Result is the leftmost column
+converted to string.</li>
+<li>ArrayType(StringType): Return all columns converted to string.</li>
+</ul>
+</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Spark UDF type returned by the model’s prediction method. Default double.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Spark UDF which will apply model’s prediction method to the data. Default double.</p>
 </td>
 </tr>
 </tbody>
@@ -446,7 +473,7 @@ retrieve the model logged with MLflow.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

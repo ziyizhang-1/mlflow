@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MLflow Projects &mdash; MLflow 0.8.0 documentation</title>
+  <title>MLflow Projects &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/projects.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="index.html"/>
         <link rel="next" title="MLflow Models" href="/models.html"/>
         <link rel="prev" title="MLflow Tracking" href="/tracking.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -115,7 +115,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#running-projects">Running Projects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#remote-execution-on-databricks">Remote Execution on Databricks</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#launching-a-remote-execution-on-databricks">Launching a Remote Execution on Databricks</a></li> 
+<li class="toctree-l4"><a class="reference internal" href="#launching-a-remote-execution-on-databricks">Launching a Remote Execution on Databricks</a></li>
 </ul>
 </li>
 </ul>
@@ -198,9 +198,9 @@ tools for running projects, making it possible to chain together projects into w
 <p>At the core, MLflow Projects are just a convention for organizing and describing your code to let
 other data scientists (or automated tools) run it. Each project is simply a directory of files, or
 a Git repository, containing your code. MLflow can run some projects based on a convention for
-placing files in this directory (for example, a <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code> file will be treated as a
+placing files in this directory (for example, a <code class="docutils literal"><span class="pre">conda.yaml</span></code> file will be treated as a
 <a class="reference external" href="https://conda.io/docs">Conda</a> environment), but you can describe your project in more detail by
-adding a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file, which is a <a class="reference external" href="https://learnxinyminutes.com/docs/yaml/">YAML</a> formatted
+adding a <code class="docutils literal"><span class="pre">MLproject</span></code> file, which is a <a class="reference external" href="https://learnxinyminutes.com/docs/yaml/">YAML</a> formatted
 text file. Each project can specify several properties:</p>
 <dl class="docutils">
 <dt>Name</dt>
@@ -209,27 +209,27 @@ text file. Each project can specify several properties:</p>
 <dd>Libraries needed to run the project. MLflow currently uses the
 <a class="reference external" href="https://conda.io/docs">Conda</a> package manager, which supports both Python packages and native
 libraries (for example, CuDNN or Intel MKL), to specify dependencies. MLflow will use the
-Conda installation given by the <code class="docutils literal notranslate"><span class="pre">MLFLOW_CONDA_HOME</span></code> environment variable if specified
-(e.g. running Conda commands by invoking <code class="docutils literal notranslate"><span class="pre">$MLFLOW_CONDA_HOME/bin/conda</span></code>), and default to
-running <code class="docutils literal notranslate"><span class="pre">conda</span></code> otherwise.</dd>
+Conda installation given by the <code class="docutils literal"><span class="pre">MLFLOW_CONDA_HOME</span></code> environment variable if specified
+(e.g. running Conda commands by invoking <code class="docutils literal"><span class="pre">$MLFLOW_CONDA_HOME/bin/conda</span></code>), and default to
+running <code class="docutils literal"><span class="pre">conda</span></code> otherwise.</dd>
 <dt>Entry Points</dt>
 <dd>Commands that can be executed within the project, and information about their
 parameters. Most projects will contain at least one entry point that you want other users to
 call. Some projects can also contain more than one entry point: for example, you might have a
 single Git repository containing multiple featurization algorithms. You can also call
-any <code class="docutils literal notranslate"><span class="pre">.py</span></code> or <code class="docutils literal notranslate"><span class="pre">.sh</span></code> file in the project as an entry point. If you list your entry points in
-a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file, however, you can also specify <em>parameters</em> for them, including data
+any <code class="docutils literal"><span class="pre">.py</span></code> or <code class="docutils literal"><span class="pre">.sh</span></code> file in the project as an entry point. If you list your entry points in
+a <code class="docutils literal"><span class="pre">MLproject</span></code> file, however, you can also specify <em>parameters</em> for them, including data
 types and default values.</dd>
 </dl>
-<p>You can run any project from a Git URI or from a local directory using the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code>
-command-line tool, or the <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a> Python API. These APIs also allow submitting the
+<p>You can run any project from a Git URI or from a local directory using the <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code>
+command-line tool, or the <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.projects.run()</span></code></a> Python API. These APIs also allow submitting the
 project for remote execution on <a class="reference external" href="https://databricks.com">Databricks</a>.</p>
 <div class="admonition caution">
 <p class="first admonition-title">Caution</p>
 <p class="last">By default, MLflow will use a new, temporary working directory for Git projects.
 This means that you should generally pass any file arguments to MLflow
 project using absolute, not relative, paths. If your project declares its parameters, MLflow
-will automatically make paths absolute for parameters of type <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p>
+will automatically make paths absolute for parameters of type <code class="docutils literal"><span class="pre">path</span></code>.</p>
 </div>
 </div>
 <div class="section" id="specifying-projects">
@@ -239,16 +239,16 @@ following conventions to determine its parameters:</p>
 <ul class="simple">
 <li>The project’s name is the name of the directory.</li>
 <li>The <a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html#create-env-file-manually">Conda environment</a>
-is specified in <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code>, if present. If no <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code> file is present, MLflow
+is specified in <code class="docutils literal"><span class="pre">conda.yaml</span></code>, if present. If no <code class="docutils literal"><span class="pre">conda.yaml</span></code> file is present, MLflow
 will use a Conda environment containing only Python (specifically, the latest Python available to
 Conda) when running the project.</li>
-<li>Any <code class="docutils literal notranslate"><span class="pre">.py</span></code> and <code class="docutils literal notranslate"><span class="pre">.sh</span></code> file in the project can be an entry point, with no parameters explicitly
+<li>Any <code class="docutils literal"><span class="pre">.py</span></code> and <code class="docutils literal"><span class="pre">.sh</span></code> file in the project can be an entry point, with no parameters explicitly
 declared. When you execute such a command with a set of parameters, MLflow will pass each
-parameter on the command line using <code class="docutils literal notranslate"><span class="pre">--key</span> <span class="pre">value</span></code> syntax.</li>
+parameter on the command line using <code class="docutils literal"><span class="pre">--key</span> <span class="pre">value</span></code> syntax.</li>
 </ul>
-<p>You can get more control over a project by adding a <code class="docutils literal notranslate"><span class="pre">MLproject</span></code>, which is simply a text file in
+<p>You can get more control over a project by adding a <code class="docutils literal"><span class="pre">MLproject</span></code>, which is simply a text file in
 YAML syntax. The MLproject file looks like this:</p>
-<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">My</span> <span class="n">Project</span>
+<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">My</span> <span class="n">Project</span>
 
 <span class="n">conda_env</span><span class="p">:</span> <span class="n">my_env</span><span class="o">.</span><span class="n">yaml</span>
 
@@ -269,12 +269,12 @@ detailed information about each entry point. Specifically, each entry point has 
 run and <em>parameters</em> (including data types). We describe these two pieces next.</p>
 <div class="section" id="command-syntax">
 <h3>Command Syntax<a class="headerlink" href="#command-syntax" title="Permalink to this headline"> </a></h3>
-<p>When specifying an entry point in an <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file, the command can be any string in Python
+<p>When specifying an entry point in an <code class="docutils literal"><span class="pre">MLproject</span></code> file, the command can be any string in Python
 <a class="reference external" href="https://docs.python.org/2/library/string.html#formatstrings">format string syntax</a>.
-All of the parameters declared in the entry point’s <code class="docutils literal notranslate"><span class="pre">parameters</span></code> field are passed into this
+All of the parameters declared in the entry point’s <code class="docutils literal"><span class="pre">parameters</span></code> field are passed into this
 string for substitution. If you call the project with additional parameters <em>not</em> listed in the
-<code class="docutils literal notranslate"><span class="pre">parameters</span></code> field, MLflow passes them using <code class="docutils literal notranslate"><span class="pre">--key</span> <span class="pre">value</span></code> syntax, so you can use the
-<code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file to declare types and defaults for just a subset of your parameters.</p>
+<code class="docutils literal"><span class="pre">parameters</span></code> field, MLflow passes them using <code class="docutils literal"><span class="pre">--key</span> <span class="pre">value</span></code> syntax, so you can use the
+<code class="docutils literal"><span class="pre">MLproject</span></code> file to declare types and defaults for just a subset of your parameters.</p>
 <p>Before substituting parameters in the command, MLflow escapes them using Python’s
 <a class="reference external" href="https://docs.python.org/3/library/shlex.html#shlex.quote">shlex.quote</a> function, so you don’t need
 to worry about adding quotes inside your command field.</p>
@@ -283,12 +283,12 @@ to worry about adding quotes inside your command field.</p>
 <span id="project-parameters"></span><h3>Specifying Parameters<a class="headerlink" href="#specifying-parameters" title="Permalink to this headline"> </a></h3>
 <p>MLflow allows specifying a data type and default value for each parameter. You can specify just the
 data type by writing:</p>
-<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">parameter_name</span><span class="p">:</span> <span class="n">data_type</span>
+<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="n">parameter_name</span><span class="p">:</span> <span class="n">data_type</span>
 </pre></div>
 </div>
 <p>in your YAML file, or add a default value as well using one of the following syntaxes (which are
 equivalent in YAML):</p>
-<div class="code yaml highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">parameter_name</span><span class="p">:</span> <span class="p">{</span><span class="nb">type</span><span class="p">:</span> <span class="n">data_type</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>  <span class="c1"># Short syntax</span>
+<div class="code yaml highlight-default"><div class="highlight"><pre><span></span><span class="n">parameter_name</span><span class="p">:</span> <span class="p">{</span><span class="nb">type</span><span class="p">:</span> <span class="n">data_type</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span>  <span class="c1"># Short syntax</span>
 
 <span class="n">parameter_name</span><span class="p">:</span>     <span class="c1"># Long syntax</span>
   <span class="nb">type</span><span class="p">:</span> <span class="n">data_type</span>
@@ -296,7 +296,7 @@ equivalent in YAML):</p>
 </pre></div>
 </div>
 <p>MLflow supports four parameter types, some of which it treats specially (for example, downloading
-data to local files). Any undeclared parameters are treated as <code class="docutils literal notranslate"><span class="pre">string</span></code>. The parameter types are:</p>
+data to local files). Any undeclared parameters are treated as <code class="docutils literal"><span class="pre">string</span></code>. The parameter types are:</p>
 <dl class="docutils">
 <dt>string</dt>
 <dd>Any text string.</dd>
@@ -305,32 +305,32 @@ data to local files). Any undeclared parameters are treated as <code class="docu
 <dt>path</dt>
 <dd>A path on the local file system. MLflow will convert any relative paths passed for
 parameters of this type to absolute paths, and will also download any paths passed
-as distributed storage URIs (<code class="docutils literal notranslate"><span class="pre">s3://</span></code> and <code class="docutils literal notranslate"><span class="pre">dbfs://</span></code>) to local files. Use this type
+as distributed storage URIs (<code class="docutils literal"><span class="pre">s3://</span></code> and <code class="docutils literal"><span class="pre">dbfs://</span></code>) to local files. Use this type
 for programs that can only read local files.</dd>
 <dt>uri</dt>
 <dd>A URI for data either in a local or distributed storage system. MLflow will convert
-any relative paths to absolute paths, as in the <code class="docutils literal notranslate"><span class="pre">path</span></code> type. Use this type for programs
+any relative paths to absolute paths, as in the <code class="docutils literal"><span class="pre">path</span></code> type. Use this type for programs
 that know how to read from distributed storage (for example using Spark).</dd>
 </dl>
 </div>
 </div>
 <div class="section" id="running-projects">
 <h2><a class="toc-backref" href="#id5">Running Projects</a><a class="headerlink" href="#running-projects" title="Permalink to this headline"> </a></h2>
-<p>MLflow provides two simple ways to run projects: the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> <a class="reference internal" href="cli.html#cli"><span class="std std-ref">command-line tool</span></a>, or
-the <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a> Python API. Both tools take the following parameters:</p>
+<p>MLflow provides two simple ways to run projects: the <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code> <a class="reference internal" href="cli.html#cli"><span class="std std-ref">command-line tool</span></a>, or
+the <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.projects.run()</span></code></a> Python API. Both tools take the following parameters:</p>
 <dl class="docutils">
 <dt>Project URI</dt>
 <dd>Can be either a directory on the local file system or a Git repository path,
-specified as a URI of the form <code class="docutils literal notranslate"><span class="pre">https://&lt;repo&gt;</span></code> (to use HTTPS) or <code class="docutils literal notranslate"><span class="pre">user&#64;host:path</span></code>
+specified as a URI of the form <code class="docutils literal"><span class="pre">https://&lt;repo&gt;</span></code> (to use HTTPS) or <code class="docutils literal"><span class="pre">user&#64;host:path</span></code>
 (to use Git over SSH). To run against an MLproject file located in a subdirectory of the project,
 add a ‘#’ to the end of the URI argument, followed by the relative path from the project’s root directory
 to the subdirectory containing the desired project.</dd>
 <dt>Project Version</dt>
 <dd>Either the commit hash or branch name in the Git repository to run, for Git-based projects.</dd>
 <dt>Entry Point</dt>
-<dd>The name of the entry point to use, which defaults to <code class="docutils literal notranslate"><span class="pre">main</span></code>. You can use any
-entry point named in the <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file, or any <code class="docutils literal notranslate"><span class="pre">.py</span></code> or <code class="docutils literal notranslate"><span class="pre">.sh</span></code> file in the project,
-given as a path from the project root (for example, <code class="docutils literal notranslate"><span class="pre">src/test.py</span></code>).</dd>
+<dd>The name of the entry point to use, which defaults to <code class="docutils literal"><span class="pre">main</span></code>. You can use any
+entry point named in the <code class="docutils literal"><span class="pre">MLproject</span></code> file, or any <code class="docutils literal"><span class="pre">.py</span></code> or <code class="docutils literal"><span class="pre">.sh</span></code> file in the project,
+given as a path from the project root (for example, <code class="docutils literal"><span class="pre">src/test.py</span></code>).</dd>
 <dt>Parameters</dt>
 <dd>Key-value parameters. Any parameters with
 <a class="reference internal" href="#project-parameters"><span class="std std-ref">declared types</span></a> will be validated and transformed if needed.</dd>
@@ -338,19 +338,20 @@ given as a path from the project root (for example, <code class="docutils litera
 <dd>Both the command-line and API let you <a class="reference internal" href="#databricks-execution"><span class="std std-ref">launch projects remotely</span></a> on
 a <a class="reference external" href="https://databricks.com">Databricks</a> environment if you have a Databricks account. This
 includes setting cluster parameters such as a VM type. Of course, you can also run projects on
-any other computing infrastructure of your choice using the local version of the <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code>
-command (for example, submit a script that does <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span></code> to a standard job queueing system).</dd>
+any other computing infrastructure of your choice using the local version of the <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code>
+command (for example, submit a script that does <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span></code> to a standard job queueing system).</dd>
 </dl>
 <p>For example, the tutorial creates and publishes a MLproject that trains a linear model. The
 project is also published on GitHub at <a class="reference external" href="https://github.com/mlflow/mlflow-example">https://github.com/mlflow/mlflow-example</a>. To execute
 this project, run:</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">mlflow</span><span class="o">/</span><span class="n">mlflow</span><span class="o">-</span><span class="n">example</span><span class="o">.</span><span class="n">git</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">mlflow</span><span class="o">/</span><span class="n">mlflow</span><span class="o">-</span><span class="n">example</span><span class="o">.</span><span class="n">git</span> <span class="o">-</span><span class="n">P</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
 </pre></div>
 </div>
 <p>There are also additional options for disabling the creation of a Conda environment, which can be
 useful if you quickly want to test a project in your existing shell environment.</p>
 <div class="section" id="remote-execution-on-databricks">
-<span id="databricks-execution"></span><h3>Remote Execution on Databricks<a class="headerlink" href="#remote-execution-on-databricks" title="Permalink to this headline"> </a></h3> <p>Support for running projects remotely on Databricks is in beta preview and requires a Databricks account.
+<span id="databricks-execution"></span><h3>Remote Execution on Databricks<a class="headerlink" href="#remote-execution-on-databricks" title="Permalink to this headline"> </a></h3>
+<p>Support for running projects remotely on Databricks is in beta preview and requires a Databricks account.
 To receive future updates about the feature please <a class="reference external" href="http://databricks.com/mlflow">sign up here</a>.</p>
 <div class="section" id="launching-a-remote-execution-on-databricks">
 <h4>Launching a Remote Execution on Databricks<a class="headerlink" href="#launching-a-remote-execution-on-databricks" title="Permalink to this headline"> </a></h4>
@@ -359,35 +360,35 @@ and you must have set up the <a class="reference external" href="https://docs.da
 <p>First, create a JSON file containing the
 <a class="reference external" href="https://docs.databricks.com/api/latest/jobs.html#jobsclusterspecnewcluster">cluster specification</a>
 for your run. Then, run your project via</p>
-<div class="code bash highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="o">&lt;</span><span class="n">uri</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">m</span> <span class="n">databricks</span> <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">spec</span> <span class="o">&lt;</span><span class="n">json</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">spec</span><span class="o">&gt;</span>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">run</span> <span class="o">&lt;</span><span class="n">uri</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">m</span> <span class="n">databricks</span> <span class="o">--</span><span class="n">cluster</span><span class="o">-</span><span class="n">spec</span> <span class="o">&lt;</span><span class="n">json</span><span class="o">-</span><span class="n">cluster</span><span class="o">-</span><span class="n">spec</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">&lt;uri&gt;</span></code> must be a Git repository URI. You can also pass Git credentials via the
-<code class="docutils literal notranslate"><span class="pre">git-username</span></code> and <code class="docutils literal notranslate"><span class="pre">git-password</span></code> arguments (or via the <code class="docutils literal notranslate"><span class="pre">MLFLOW_GIT_USERNAME</span></code> and
-<code class="docutils literal notranslate"><span class="pre">MLFLOW_GIT_PASSWORD</span></code> environment variables).</p>
+<p><code class="docutils literal"><span class="pre">&lt;uri&gt;</span></code> must be a Git repository URI. You can also pass Git credentials via the
+<code class="docutils literal"><span class="pre">git-username</span></code> and <code class="docutils literal"><span class="pre">git-password</span></code> arguments (or via the <code class="docutils literal"><span class="pre">MLFLOW_GIT_USERNAME</span></code> and
+<code class="docutils literal"><span class="pre">MLFLOW_GIT_PASSWORD</span></code> environment variables).</p>
 </div>
 </div>
 </div>
 <div class="section" id="iterating-quickly">
 <h2><a class="toc-backref" href="#id6">Iterating Quickly</a><a class="headerlink" href="#iterating-quickly" title="Permalink to this headline"> </a></h2>
-<p>If you want to rapidly develop a project, we recommend creating an <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file with your
-main program specified as the <code class="docutils literal notranslate"><span class="pre">main</span></code> entry point, and running it with <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">.</span></code>.
-To avoid repeatedly writing them you can add default parameters in your <code class="docutils literal notranslate"><span class="pre">MLproject</span></code> file.</p>
+<p>If you want to rapidly develop a project, we recommend creating an <code class="docutils literal"><span class="pre">MLproject</span></code> file with your
+main program specified as the <code class="docutils literal"><span class="pre">main</span></code> entry point, and running it with <code class="docutils literal"><span class="pre">mlflow</span> <span class="pre">run</span> <span class="pre">.</span></code>.
+To avoid repeatedly writing them you can add default parameters in your <code class="docutils literal"><span class="pre">MLproject</span></code> file.</p>
 </div>
 <div class="section" id="building-multistep-workflows">
 <h2><a class="toc-backref" href="#id7">Building Multistep Workflows</a><a class="headerlink" href="#building-multistep-workflows" title="Permalink to this headline"> </a></h2>
-<p>The <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a> API, combined with <a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tracking</span></code></a>, makes it possible to build
+<p>The <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.projects.run()</span></code></a> API, combined with <a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.tracking</span></code></a>, makes it possible to build
 multi-step workflows with separate projects (or entry points in the same project) as the individual
-steps. Each call to <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a> returns a run object, that you can use with
-<a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tracking</span></code></a> to determine when the run has ended and get its output artifacts. These artifacts
-can then be passed into another step that takes <code class="docutils literal notranslate"><span class="pre">path</span></code> or <code class="docutils literal notranslate"><span class="pre">uri</span></code> parameters. You can coordinate
+steps. Each call to <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.projects.run()</span></code></a> returns a run object, that you can use with
+<a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.tracking</span></code></a> to determine when the run has ended and get its output artifacts. These artifacts
+can then be passed into another step that takes <code class="docutils literal"><span class="pre">path</span></code> or <code class="docutils literal"><span class="pre">uri</span></code> parameters. You can coordinate
 all of the workflow in a single Python program that looks at the results of each step and decides
 what to submit next using custom code. Some example uses cases for multi-step workflows include:</p>
 <dl class="docutils">
 <dt>Modularizing Your Data Science Code</dt>
 <dd>Different users can publish reusable steps for data featurization, training, validation, and so on, that other users or team can run in their workflows. Because MLflow supports Git versioning, another team can lock their workflow to a specific version of a project, or upgrade to a new one on their own schedule.</dd>
 <dt>Hyperparameter Tuning</dt>
-<dd>Using <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a> you can launch multiple runs in parallel either on the local machine or on a cloud platform like Databricks. Your driver program can then inspect the metrics from each run in real time to cancel runs, launch new ones, or select the best performing run on a target metric.</dd>
+<dd>Using <a class="reference internal" href="python_api/mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal"><span class="pre">mlflow.projects.run()</span></code></a> you can launch multiple runs in parallel either on the local machine or on a cloud platform like Databricks. Your driver program can then inspect the metrics from each run in real time to cancel runs, launch new ones, or select the best performing run on a target metric.</dd>
 <dt>Cross-validation</dt>
 <dd>Sometimes you want to run the same training code on different random splits of training and validation data. With MLflow Projects, you can package the project in a way that allows this, for example, by taking a random seed for the train/validation split as a parameter, or by calling another project first that can split the input data.</dd>
 </dl>
@@ -433,7 +434,7 @@ what to submit next using custom code. Some example uses cases for multi-step wo
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

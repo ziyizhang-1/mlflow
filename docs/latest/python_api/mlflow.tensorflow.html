@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.tensorflow &mdash; MLflow 0.8.0 documentation</title>
+  <title>mlflow.tensorflow &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.tensorflow.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.tracking" href="/mlflow.tracking.html"/>
         <link rel="prev" title="mlflow.spark" href="/mlflow.spark.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -183,13 +183,13 @@
                 
   <div class="section" id="module-mlflow.tensorflow">
 <span id="mlflow-tensorflow"></span><h1>mlflow.tensorflow<a class="headerlink" href="#module-mlflow.tensorflow" title="Permalink to this headline"> </a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code> module provides an API for logging and loading TensorFlow models
-as <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> models.</p>
-<p>You must save your own <code class="docutils literal notranslate"><span class="pre">saved_model</span></code> and pass its
-path to <code class="docutils literal notranslate"><span class="pre">log_saved_model(saved_model_dir)</span></code>. To load the model to predict on it, you call
-<code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">pyfunc.load_pyfunc(saved_model_dir)</span></code> followed by
-<code class="docutils literal notranslate"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a pandas DataFrame.</p>
-<p>The loaded <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model <em>does not</em> expose any APIs for model training.</p>
+<p>The <code class="docutils literal"><span class="pre">mlflow.tensorflow</span></code> module provides an API for logging and loading TensorFlow models
+as <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.pyfunc</span></code></a> models.</p>
+<p>You must save your own <code class="docutils literal"><span class="pre">saved_model</span></code> and pass its
+path to <code class="docutils literal"><span class="pre">log_saved_model(saved_model_dir)</span></code>. To load the model to predict on it, you call
+<code class="docutils literal"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">pyfunc.load_pyfunc(saved_model_dir)</span></code> followed by
+<code class="docutils literal"><span class="pre">prediction</span> <span class="pre">=</span> <span class="pre">model.predict(pandas</span> <span class="pre">DataFrame)</span></code> to obtain a prediction in a pandas DataFrame.</p>
+<p>The loaded <a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal"><span class="pre">mlflow.pyfunc</span></code></a> model <em>does not</em> expose any APIs for model training.</p>
 <dl class="function">
 <dt id="mlflow.tensorflow.load_model">
 <code class="descclassname">mlflow.tensorflow.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>tf_sess</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.load_model" title="Permalink to this definition"> </a></dt>
@@ -212,7 +212,7 @@ output tensors for model inference.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.tensorflow</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.tensorflow</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tf_graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tf_sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">tf_graph</span><span class="p">)</span>
@@ -252,9 +252,24 @@ definition mapping. For more information, see the
 <cite>signature_def_map</cite> parameter of the
 <cite>tf.saved_model.builder.SavedModelBuilder</cite> method.</li>
 <li><strong>artifact_path</strong> – The run-relative path to which to log model artifacts.</li>
-<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, defines an environment for the
-model. At minimum, it should specify python, tensorflow, and mlflow with
-appropriate versions.</li>
+<li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
+Conda environment yaml file. If provided, this decribes the environment
+this model should be run in. At minimum, it should specify the dependencies
+contained in <code class="docutils literal"><span class="pre">mlflow.tensorflow.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
+<code class="docutils literal"><span class="pre">mlflow.tensorflow.DEFAULT_CONDA_ENV</span></code> environment will be added to the
+model. The following is an <em>example</em> dictionary representation of a Conda
+environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mlflow-env&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;python=3.7.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;tensorflow=1.8.0&#39;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </td>
 </tr>
@@ -289,9 +304,24 @@ definition mapping. for more information, see the
 <cite>tf.saved_model.builder.savedmodelbuilder</cite> method.</li>
 <li><strong>path</strong> – Local path where the MLflow model is to be saved.</li>
 <li><strong>mlflow_model</strong> – MLflow model configuration to which this flavor will be added.</li>
-<li><strong>conda_env</strong> – Path to a Conda environment file. If provided, defines an environment for the
-model. At minimum, it should specify python, tensorflow, and mlflow with
-appropriate versions.</li>
+<li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
+Conda environment yaml file. If provided, this decribes the environment
+this model should be run in. At minimum, it should specify the dependencies
+contained in <code class="docutils literal"><span class="pre">mlflow.tensorflow.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
+<code class="docutils literal"><span class="pre">mlflow.tensorflow.DEFAULT_CONDA_ENV</span></code> environment will be added to the
+model. The following is an <em>example</em> dictionary representation of a Conda
+environment:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mlflow-env&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;dependencies&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s1">&#39;python=3.7.0&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;tensorflow=1.8.0&#39;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
 </ul>
 </td>
 </tr>
@@ -339,7 +369,7 @@ appropriate versions.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

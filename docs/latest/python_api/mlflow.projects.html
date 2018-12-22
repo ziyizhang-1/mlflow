@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.projects &mdash; MLflow 0.8.0 documentation</title>
+  <title>mlflow.projects &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.projects.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.pyfunc" href="/mlflow.pyfunc.html"/>
         <link rel="prev" title="mlflow.models" href="/mlflow.models.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -183,7 +183,7 @@
                 
   <div class="section" id="module-mlflow.projects">
 <span id="mlflow-projects"></span><h1>mlflow.projects<a class="headerlink" href="#module-mlflow.projects" title="Permalink to this headline"> </a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.projects</span></code> module provides an API for running MLflow projects locally or remotely.</p>
+<p>The <code class="docutils literal"><span class="pre">mlflow.projects</span></code> module provides an API for running MLflow projects locally or remotely.</p>
 <dl class="function">
 <dt id="mlflow.projects.run">
 <code class="descclassname">mlflow.projects.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>storage_dir=None</em>, <em>block=True</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.projects.run" title="Permalink to this definition"> </a></dt>
@@ -202,13 +202,18 @@
 or a Git repository URI (e.g. <a class="reference external" href="https://github.com/mlflow/mlflow-example">https://github.com/mlflow/mlflow-example</a>)
 pointing to a project directory containing an MLproject file.</li>
 <li><strong>entry_point</strong> – Entry point to run within the project. If no entry point with the specified
-name is found, runs the project file <code class="docutils literal notranslate"><span class="pre">entry_point</span></code> as a script,
-using “python” to run <code class="docutils literal notranslate"><span class="pre">.py</span></code> files and the default shell (specified by
-environment variable <code class="docutils literal notranslate"><span class="pre">$SHELL</span></code>) to run <code class="docutils literal notranslate"><span class="pre">.sh</span></code> files.</li>
+name is found, runs the project file <code class="docutils literal"><span class="pre">entry_point</span></code> as a script,
+using “python” to run <code class="docutils literal"><span class="pre">.py</span></code> files and the default shell (specified by
+environment variable <code class="docutils literal"><span class="pre">$SHELL</span></code>) to run <code class="docutils literal"><span class="pre">.sh</span></code> files.</li>
 <li><strong>version</strong> – For Git-based projects, either a commit hash or a branch name.</li>
 <li><strong>experiment_id</strong> – ID of experiment under which to launch the run.</li>
-<li><strong>mode</strong> – Execution mode of the run: “local” or “databricks”.</li>
-<li><strong>cluster_spec</strong> – When <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “databricks”, dictionary or path to a JSON file
+<li><strong>mode</strong> – Execution mode of the run: “local” or “databricks”. If running against Databricks,
+will run against a Databricks workspace determined as follows: if a Databricks
+tracking URI of the form ‘databricks://profile’ has been set (e.g. by setting
+the MLFLOW_TRACKING_URI environment variable), will run against the workspace
+specified by &lt;profile&gt;. Otherwise, runs against the workspace specified by the
+default Databricks CLI profile.</li>
+<li><strong>cluster_spec</strong> – When <code class="docutils literal"><span class="pre">mode</span></code> is “databricks”, dictionary or path to a JSON file
 containing a <a class="reference external" href="https://docs.databricks.com/api/latest/jobs.html#clusterspec">Databricks cluster specification</a>
 to use when launching a run.</li>
 <li><strong>git_username</strong> – Username for HTTP(S) authentication with Git.</li>
@@ -217,11 +222,11 @@ to use when launching a run.</li>
 install project dependencies within that environment. Otherwise, run the
 project in the current environment without installing any project
 dependencies.</li>
-<li><strong>storage_dir</strong> – Used only if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “local”. MLflow downloads artifacts from
-distributed URIs passed to parameters of type <code class="docutils literal notranslate"><span class="pre">path</span></code> to subdirectories of
-<code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>.</li>
+<li><strong>storage_dir</strong> – Used only if <code class="docutils literal"><span class="pre">mode</span></code> is “local”. MLflow downloads artifacts from
+distributed URIs passed to parameters of type <code class="docutils literal"><span class="pre">path</span></code> to subdirectories of
+<code class="docutils literal"><span class="pre">storage_dir</span></code>.</li>
 <li><strong>block</strong> – Whether to block while waiting for a run to complete. Defaults to True.
-Note that if <code class="docutils literal notranslate"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
+Note that if <code class="docutils literal"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
 the current process will block when exiting until the local run completes.
 If the current process is interrupted, any asynchronous runs launched via this
 method will be terminated.</li>
@@ -231,7 +236,7 @@ creating a new run.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#mlflow.projects.SubmittedRun" title="mlflow.projects.SubmittedRun"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.projects.SubmittedRun</span></code></a> exposing information (e.g. run ID)
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#mlflow.projects.SubmittedRun" title="mlflow.projects.SubmittedRun"><code class="xref py py-class docutils literal"><span class="pre">mlflow.projects.SubmittedRun</span></code></a> exposing information (e.g. run ID)
 about the launched run.</p>
 </td>
 </tr>
@@ -242,17 +247,17 @@ about the launched run.</p>
 <dl class="class">
 <dt id="mlflow.projects.SubmittedRun">
 <em class="property">class </em><code class="descclassname">mlflow.projects.</code><code class="descname">SubmittedRun</code><a class="headerlink" href="#mlflow.projects.SubmittedRun" title="Permalink to this definition"> </a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Wrapper around an MLflow project run (e.g. a subprocess running an entry point
 command or a Databricks job run) and exposing methods for waiting on and cancelling the run.
 This class defines the interface that the MLflow project runner uses to manage the lifecycle
 of runs launched in different environments (e.g. runs launched locally or on Databricks).</p>
-<p><code class="docutils literal notranslate"><span class="pre">SubmittedRun</span></code> is not thread-safe. That is, concurrent calls to wait() / cancel()
+<p><code class="docutils literal"><span class="pre">SubmittedRun</span></code> is not thread-safe. That is, concurrent calls to wait() / cancel()
 from multiple threads may inadvertently kill resources (e.g. local processes) unrelated to the
 run.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Subclasses of <code class="docutils literal notranslate"><span class="pre">SubmittedRun</span></code> must expose a <code class="docutils literal notranslate"><span class="pre">run_id</span></code> member containing the
+<p class="last">Subclasses of <code class="docutils literal"><span class="pre">SubmittedRun</span></code> must expose a <code class="docutils literal"><span class="pre">run_id</span></code> member containing the
 run’s MLflow run ID.</p>
 </div>
 <dl class="method">
@@ -324,7 +329,7 @@ completes rather than until the MLflow run completes.</p>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

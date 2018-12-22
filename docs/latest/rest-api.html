@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>REST API &mdash; MLflow 0.8.0 documentation</title>
+  <title>REST API &mdash; MLflow 0.8.1 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/rest-api.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.8.0 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 0.8.1 documentation" href="index.html"/>
         <link rel="prev" title="Java API" href="/java_api/index.html"/> 
 
   
@@ -66,7 +66,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.0</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.8.1</span>
   </li>
 </ul>
   </nav>
@@ -259,9 +259,9 @@
   <div class="section" id="rest-api">
 <span id="id1"></span><h1>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline"> </a></h1>
 <p>The MLflow REST API allows you to create, list, and get experiments and runs, and log parameters, metrics, and artifacts.
-The API is hosted under the <code class="docutils literal notranslate"><span class="pre">/api</span></code> route on the MLflow tracking server. For example, to list
-experiments on a tracking server hosted at <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code>, access
-<code class="docutils literal notranslate"><span class="pre">http://localhost:5000/api/2.0/preview/mlflow/experiments/list</span></code>.</p>
+The API is hosted under the <code class="docutils literal"><span class="pre">/api</span></code> route on the MLflow tracking server. For example, to list
+experiments on a tracking server hosted at <code class="docutils literal"><span class="pre">http://localhost:5000</span></code>, access
+<code class="docutils literal"><span class="pre">http://localhost:5000/api/2.0/preview/mlflow/experiments/list</span></code>.</p>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
 <ul class="simple">
@@ -298,15 +298,15 @@ experiments on a tracking server hosted at <code class="docutils literal notrans
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/create</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/experiments/create</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>Create an experiment with a name. Returns the ID of the newly created experiment.
 Validates that another experiment with the same name does not already exist and fails if
 another experiment with the same name already exists.</p>
-<p>Throws <code class="docutils literal notranslate"><span class="pre">RESOURCE_ALREADY_EXISTS</span></code> if a experiment with the given name exists.</p>
+<p>Throws <code class="docutils literal"><span class="pre">RESOURCE_ALREADY_EXISTS</span></code> if a experiment with the given name exists.</p>
 <div class="section" id="request-structure">
 <span id="mlflowcreateexperiment"></span><h3>Request Structure<a class="headerlink" href="#request-structure" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
@@ -323,12 +323,12 @@ another experiment with the same name already exists.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Experiment name.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>artifact_location</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Location where all artifacts for the experiment are stored.
 If not provided, the remote server will select an appropriate default.</td>
 </tr>
@@ -351,7 +351,7 @@ If not provided, the remote server will select an appropriate default.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unique identifier for the experiment.</td>
 </tr>
 </tbody>
@@ -372,8 +372,8 @@ If not provided, the remote server will select an appropriate default.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/list</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/experiments/list</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -394,7 +394,7 @@ If not provided, the remote server will select an appropriate default.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>view_type</td>
-<td><a class="reference internal" href="#mlflowviewtype"><span class="std std-ref">ViewType</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowviewtype"><span class="std std-ref">ViewType</span></a></td>
 <td>Qualifier for type of experiments to be returned.
 If unspecified, return only active experiments.</td>
 </tr>
@@ -417,7 +417,7 @@ If unspecified, return only active experiments.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiments</td>
-<td>An array of <a class="reference internal" href="#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
 <td>All experiments</td>
 </tr>
 </tbody>
@@ -438,8 +438,8 @@ If unspecified, return only active experiments.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/get</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/experiments/get</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -460,7 +460,7 @@ If unspecified, return only active experiments.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Identifier to get an experiment.
 This field is required.</td>
 </tr>
@@ -483,11 +483,11 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment</td>
-<td><a class="reference internal" href="#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
 <td>Returns experiment details.</td>
 </tr>
 <tr class="row-odd"><td>runs</td>
-<td>An array of <a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
 <td>All (max limit to be imposed) runs associated with this experiment.</td>
 </tr>
 </tbody>
@@ -508,8 +508,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/delete</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/experiments/delete</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -531,7 +531,7 @@ If the experiment uses FileStore, artifacts associated with experiment are also 
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>ID of the associated experiment
 This field is required.</td>
 </tr>
@@ -553,15 +553,15 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/restore</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/experiments/restore</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>Restore an experiment marked for deletion. This also restores
 associated metadata, runs, metrics, and params. If experiment uses FileStore, underlying
 artifacts associated with experiment are also restored.</p>
-<p>Throws <code class="docutils literal notranslate"><span class="pre">RESOURCE_DOES_NOT_EXIST</span></code> if experiment was never created or was permanently deleted.</p>
+<p>Throws <code class="docutils literal"><span class="pre">RESOURCE_DOES_NOT_EXIST</span></code> if experiment was never created or was permanently deleted.</p>
 <div class="section" id="mlflowrestoreexperiment">
 <span id="id7"></span><h3>Request Structure<a class="headerlink" href="#mlflowrestoreexperiment" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
@@ -578,7 +578,7 @@ artifacts associated with experiment are also restored.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>ID of the associated experiment
 This field is required.</td>
 </tr>
@@ -600,14 +600,14 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/create</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/create</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>Create a new run within an experiment. A run is usually a single execution of a
-machine learning or data ETL pipeline. MLflow uses runs to track <a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a>,
-<a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a>, and <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a> associated with a single execution.</p>
+machine learning or data ETL pipeline. MLflow uses runs to track <a class="reference internal" href="rest_api.html#mlflowparam"><span class="std std-ref">Param</span></a>,
+<a class="reference internal" href="rest_api.html#mlflowmetric"><span class="std std-ref">Metric</span></a>, and <a class="reference internal" href="rest_api.html#mlflowruntag"><span class="std std-ref">RunTag</span></a> associated with a single execution.</p>
 <div class="section" id="mlflowcreaterun">
 <span id="id8"></span><h3>Request Structure<a class="headerlink" href="#mlflowcreaterun" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
@@ -624,40 +624,40 @@ machine learning or data ETL pipeline. MLflow uses runs to track <a class="refer
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>ID of the associated experiment.</td>
 </tr>
 <tr class="row-odd"><td>user_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the user executing the run.</td>
 </tr>
 <tr class="row-even"><td>run_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Human readable name for the run.</td>
 </tr>
 <tr class="row-odd"><td>source_type</td>
-<td><a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
 <td>Originating source for the run.</td>
 </tr>
 <tr class="row-even"><td>source_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>String descriptor for the run’s source. For example, name or description of a notebook, or the
 URL or path to a project.</td>
 </tr>
 <tr class="row-odd"><td>entry_point_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the project entry point associated with the current run, if any.</td>
 </tr>
 <tr class="row-even"><td>start_time</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp of when the run started in milliseconds.</td>
 </tr>
 <tr class="row-odd"><td>source_version</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Git commit hash of the source code used to create run.</td>
 </tr>
 <tr class="row-even"><td>tags</td>
-<td>An array of <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
 <td>Additional metadata for run.</td>
 </tr>
 </tbody>
@@ -679,7 +679,7 @@ URL or path to a project.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run</td>
-<td><a class="reference internal" href="#mlflowrun"><span class="std std-ref">Run</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowrun"><span class="std std-ref">Run</span></a></td>
 <td>The newly created run.</td>
 </tr>
 </tbody>
@@ -700,8 +700,8 @@ URL or path to a project.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/get</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/get</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -723,7 +723,7 @@ is returned.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run to fetch.
 This field is required.</td>
 </tr>
@@ -746,7 +746,7 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run</td>
-<td><a class="reference internal" href="#mlflowrun"><span class="std std-ref">Run</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowrun"><span class="std std-ref">Run</span></a></td>
 <td>Run metadata (name, start time, etc) and data (metrics, params, etc).</td>
 </tr>
 </tbody>
@@ -767,8 +767,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-metric</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/log-metric</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -791,22 +791,22 @@ A metric can be logged multiple times.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run under which to log the metric.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the metric.
 This field is required.</td>
 </tr>
 <tr class="row-even"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
+<td><code class="docutils literal"><span class="pre">FLOAT</span></code></td>
 <td>Float value of the metric being logged.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>timestamp</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp in milliseconds at the time metric was logged.
 This field is required.</td>
 </tr>
@@ -828,8 +828,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/set-tag</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/set-tag</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -851,17 +851,17 @@ a run completes.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run under which to set the tag.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the tag. Maximum size is 255 bytes.
 This field is required.</td>
 </tr>
 <tr class="row-even"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>String value of the tag being logged. Maximum size if 500 bytes.
 This field is required.</td>
 </tr>
@@ -883,8 +883,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-parameter</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/log-parameter</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -907,17 +907,17 @@ constant dates and values used in an ETL pipeline. A param can be logged only on
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run under which to log the param.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the param. Maximum size is 255 bytes.
 This field is required.</td>
 </tr>
 <tr class="row-even"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>String value of the param being logged. Maximum size if 500 bytes.
 This field is required.</td>
 </tr>
@@ -939,8 +939,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/params/get</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/params/get</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -961,12 +961,12 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run from which to retrieve the param value.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>param_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the param.
 This field is required.</td>
 </tr>
@@ -989,7 +989,7 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>parameter</td>
-<td><a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowparam"><span class="std std-ref">Param</span></a></td>
 <td>Param key-value pair.</td>
 </tr>
 </tbody>
@@ -1010,8 +1010,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/metrics/get</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/metrics/get</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -1033,12 +1033,12 @@ than once, returns the last logged value.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run from which to retrieve the metric value.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>metric_key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the metric.
 This field is required.</td>
 </tr>
@@ -1061,7 +1061,7 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>metric</td>
-<td><a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
 <td>Latest reported value of the specified metric.</td>
 </tr>
 </tbody>
@@ -1082,8 +1082,8 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/metrics/get-history</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/metrics/get-history</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -1104,12 +1104,12 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run from which to fetch metric values.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>metric_key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the metric.
 This field is required.</td>
 </tr>
@@ -1132,7 +1132,7 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>metrics</td>
-<td>An array of <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
 <td>All logged values for this metric.</td>
 </tr>
 </tbody>
@@ -1153,13 +1153,13 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/search</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/search</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>Search for runs that satisfy expressions. Search expressions can use <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a> and
-<a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a> keys.</p>
+<p>Search for runs that satisfy expressions. Search expressions can use <a class="reference internal" href="rest_api.html#mlflowmetric"><span class="std std-ref">Metric</span></a> and
+<a class="reference internal" href="rest_api.html#mlflowparam"><span class="std std-ref">Param</span></a> keys.</p>
 <div class="section" id="mlflowsearchruns">
 <span id="id21"></span><h3>Request Structure<a class="headerlink" href="#mlflowsearchruns" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
@@ -1176,11 +1176,11 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_ids</td>
-<td>An array of <code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>An array of <code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>List of experiment IDs to search over.</td>
 </tr>
 <tr class="row-odd"><td>anded_expressions</td>
-<td>An array of <a class="reference internal" href="#mlflowsearchexpression"><span class="std std-ref">SearchExpression</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowsearchexpression"><span class="std std-ref">SearchExpression</span></a></td>
 <td>Expressions describing runs (AND-ed together when filtering runs).</td>
 </tr>
 </tbody>
@@ -1202,7 +1202,7 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>runs</td>
-<td>An array of <a class="reference internal" href="#mlflowrun"><span class="std std-ref">Run</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowrun"><span class="std std-ref">Run</span></a></td>
 <td>Runs that match the search criteria.</td>
 </tr>
 </tbody>
@@ -1223,12 +1223,12 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/artifacts/list</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/artifacts/list</span></code></td>
+<td><code class="docutils literal"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>List artifacts for a run. Takes an optional <code class="docutils literal notranslate"><span class="pre">artifact_path</span></code> prefix which if specified,
+<p>List artifacts for a run. Takes an optional <code class="docutils literal"><span class="pre">artifact_path</span></code> prefix which if specified,
 the response contains only artifacts with the specified prefix.</p>
 <div class="section" id="mlflowlistartifacts">
 <span id="id23"></span><h3>Request Structure<a class="headerlink" href="#mlflowlistartifacts" title="Permalink to this headline"> </a></h3>
@@ -1246,11 +1246,11 @@ the response contains only artifacts with the specified prefix.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run whose artifacts to list.</td>
 </tr>
 <tr class="row-odd"><td>path</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Filter artifacts matching this path (a relative path from the root artifact directory).</td>
 </tr>
 </tbody>
@@ -1272,11 +1272,11 @@ the response contains only artifacts with the specified prefix.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>root_uri</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Root artifact directory for the run.</td>
 </tr>
 <tr class="row-odd"><td>files</td>
-<td>An array of <a class="reference internal" href="#mlflowfileinfo"><span class="std std-ref">FileInfo</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowfileinfo"><span class="std std-ref">FileInfo</span></a></td>
 <td>File location and metadata for artifacts.</td>
 </tr>
 </tbody>
@@ -1297,8 +1297,8 @@ the response contains only artifacts with the specified prefix.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/update</span></code></td>
-<td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">2.0/preview/mlflow/runs/update</span></code></td>
+<td><code class="docutils literal"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -1319,16 +1319,16 @@ the response contains only artifacts with the specified prefix.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>ID of the run to update.
 This field is required.</td>
 </tr>
 <tr class="row-odd"><td>status</td>
-<td><a class="reference internal" href="#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
 <td>Updated status of the run.</td>
 </tr>
 <tr class="row-even"><td>end_time</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp of when the run ended in milliseconds.</td>
 </tr>
 </tbody>
@@ -1350,7 +1350,7 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_info</td>
-<td><a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
 <td>Updated metadata of the run.</td>
 </tr>
 </tbody>
@@ -1376,28 +1376,28 @@ This field is required.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unique identifier for the experiment.</td>
 </tr>
 <tr class="row-odd"><td>name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Human readable name that identifies the experiment.</td>
 </tr>
 <tr class="row-even"><td>artifact_location</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Location where artifacts for the experiment are stored.</td>
 </tr>
 <tr class="row-odd"><td>lifecycle_stage</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Current life cycle stage of the experiment: “active” or “deleted”.
 Deleted experiments are not returned by APIs.</td>
 </tr>
 <tr class="row-even"><td>last_update_time</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Last update time</td>
 </tr>
 <tr class="row-odd"><td>creation_time</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Creation time</td>
 </tr>
 </tbody>
@@ -1420,15 +1420,15 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>path</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Path relative to the root artifact directory run.</td>
 </tr>
 <tr class="row-odd"><td>is_dir</td>
-<td><code class="docutils literal notranslate"><span class="pre">BOOL</span></code></td>
+<td><code class="docutils literal"><span class="pre">BOOL</span></code></td>
 <td>Whether the path is a directory.</td>
 </tr>
 <tr class="row-even"><td>file_size</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Size in bytes. Unset for directories.</td>
 </tr>
 </tbody>
@@ -1450,11 +1450,11 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>comparator</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>OneOf (“&gt;”, “&gt;=”, “==”, “!=”, “&lt;=”, “&lt;”)</td>
 </tr>
 <tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
+<td><code class="docutils literal"><span class="pre">FLOAT</span></code></td>
 <td>Float value for comparison.</td>
 </tr>
 </tbody>
@@ -1477,15 +1477,15 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Key identifying this metric.</td>
 </tr>
 <tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
+<td><code class="docutils literal"><span class="pre">FLOAT</span></code></td>
 <td>Value associated with this metric.</td>
 </tr>
 <tr class="row-even"><td>timestamp</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>The timestamp at which this metric was recorded.</td>
 </tr>
 </tbody>
@@ -1506,13 +1506,13 @@ Deleted experiments are not returned by APIs.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">float</span></code></td>
-<td><a class="reference internal" href="#mlflowfloatclause"><span class="std std-ref">FloatClause</span></a></td>
-<td>If <code class="docutils literal notranslate"><span class="pre">float</span></code>, float clause for comparison.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">float</span></code></td>
+<td><a class="reference internal" href="rest_api.html#mlflowfloatclause"><span class="std std-ref">FloatClause</span></a></td>
+<td>If <code class="docutils literal"><span class="pre">float</span></code>, float clause for comparison.</td>
 </tr>
 <tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td><a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a> key for search.</td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
+<td><a class="reference internal" href="rest_api.html#mlflowmetric"><span class="std std-ref">Metric</span></a> key for search.</td>
 </tr>
 </tbody>
 </table>
@@ -1534,11 +1534,11 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Key identifying this param.</td>
 </tr>
 <tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Value associated with this param.</td>
 </tr>
 </tbody>
@@ -1559,13 +1559,13 @@ Deleted experiments are not returned by APIs.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">string</span></code></td>
-<td><a class="reference internal" href="#mlflowstringclause"><span class="std std-ref">StringClause</span></a></td>
-<td>If <code class="docutils literal notranslate"><span class="pre">string</span></code>, string clause for comparison.</td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">string</span></code></td>
+<td><a class="reference internal" href="rest_api.html#mlflowstringclause"><span class="std std-ref">StringClause</span></a></td>
+<td>If <code class="docutils literal"><span class="pre">string</span></code>, string clause for comparison.</td>
 </tr>
 <tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td><a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a> key for search.</td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
+<td><a class="reference internal" href="rest_api.html#mlflowparam"><span class="std std-ref">Param</span></a> key for search.</td>
 </tr>
 </tbody>
 </table>
@@ -1587,11 +1587,11 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>info</td>
-<td><a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
 <td>Run metadata.</td>
 </tr>
 <tr class="row-odd"><td>data</td>
-<td><a class="reference internal" href="#mlflowrundata"><span class="std std-ref">RunData</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowrundata"><span class="std std-ref">RunData</span></a></td>
 <td>Run data.</td>
 </tr>
 </tbody>
@@ -1614,15 +1614,15 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>metrics</td>
-<td>An array of <a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowmetric"><span class="std std-ref">Metric</span></a></td>
 <td>Run metrics.</td>
 </tr>
 <tr class="row-odd"><td>params</td>
-<td>An array of <a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowparam"><span class="std std-ref">Param</span></a></td>
 <td>Run parameters.</td>
 </tr>
 <tr class="row-even"><td>tags</td>
-<td>An array of <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
+<td>An array of <a class="reference internal" href="rest_api.html#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
 <td>Additional metadata key-value pairs.</td>
 </tr>
 </tbody>
@@ -1645,55 +1645,55 @@ Deleted experiments are not returned by APIs.</td>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>run_uuid</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Unique identifier for the run.</td>
 </tr>
 <tr class="row-odd"><td>experiment_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>The experiment ID.</td>
 </tr>
 <tr class="row-even"><td>name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Human readable name that identifies this run.</td>
 </tr>
 <tr class="row-odd"><td>source_type</td>
-<td><a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
 <td>Source type.</td>
 </tr>
 <tr class="row-even"><td>source_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Source identifier: GitHub URL, name of notebook, name of job, etc.</td>
 </tr>
 <tr class="row-odd"><td>user_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>User who initiated the run.</td>
 </tr>
 <tr class="row-even"><td>status</td>
-<td><a class="reference internal" href="#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
+<td><a class="reference internal" href="rest_api.html#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
 <td>Current status of the run.</td>
 </tr>
 <tr class="row-odd"><td>start_time</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp of when the run started in milliseconds.</td>
 </tr>
 <tr class="row-even"><td>end_time</td>
-<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td><code class="docutils literal"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp of when the run ended in milliseconds.</td>
 </tr>
 <tr class="row-odd"><td>source_version</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Git commit hash of the code used for the run.</td>
 </tr>
 <tr class="row-even"><td>entry_point_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>Name of the entry point for the run.</td>
 </tr>
 <tr class="row-odd"><td>artifact_uri</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>URI of the directory where artifacts should be uploaded.
 This can be a local path (starting with “/”), or a distributed file system (DFS)
-path, like <code class="docutils literal notranslate"><span class="pre">s3://bucket/directory</span></code> or <code class="docutils literal notranslate"><span class="pre">dbfs:/my/directory</span></code>.
-If not set, the local <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> directory is  chosen.</td>
+path, like <code class="docutils literal"><span class="pre">s3://bucket/directory</span></code> or <code class="docutils literal"><span class="pre">dbfs:/my/directory</span></code>.
+If not set, the local <code class="docutils literal"><span class="pre">./mlruns</span></code> directory is  chosen.</td>
 </tr>
 </tbody>
 </table>
@@ -1715,11 +1715,11 @@ If not set, the local <code class="docutils literal notranslate"><span class="pr
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>The tag key.</td>
 </tr>
 <tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>The tag value.</td>
 </tr>
 </tbody>
@@ -1740,10 +1740,10 @@ If not set, the local <code class="docutils literal notranslate"><span class="pr
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">metric</span></code> OR <code class="docutils literal notranslate"><span class="pre">parameter</span></code></td>
-<td><a class="reference internal" href="#mlflowmetricsearchexpression"><span class="std std-ref">MetricSearchExpression</span></a> OR <a class="reference internal" href="#mlflowparametersearchexpression"><span class="std std-ref">ParameterSearchExpression</span></a></td>
-<td><p class="first">If <code class="docutils literal notranslate"><span class="pre">metric</span></code>, a metric search expression.</p>
-<p class="last">If <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, a parameter search expression.</p>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">metric</span></code> OR <code class="docutils literal"><span class="pre">parameter</span></code></td>
+<td><a class="reference internal" href="rest_api.html#mlflowmetricsearchexpression"><span class="std std-ref">MetricSearchExpression</span></a> OR <a class="reference internal" href="rest_api.html#mlflowparametersearchexpression"><span class="std std-ref">ParameterSearchExpression</span></a></td>
+<td><p class="first">If <code class="docutils literal"><span class="pre">metric</span></code>, a metric search expression.</p>
+<p class="last">If <code class="docutils literal"><span class="pre">parameter</span></code>, a parameter search expression.</p>
 </td>
 </tr>
 </tbody>
@@ -1765,11 +1765,11 @@ If not set, the local <code class="docutils literal notranslate"><span class="pr
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>comparator</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>OneOf (“==”, “!=”, “~”)</td>
 </tr>
 <tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td><code class="docutils literal"><span class="pre">STRING</span></code></td>
 <td>String value for comparison.</td>
 </tr>
 </tbody>
@@ -1904,7 +1904,7 @@ If not set, the local <code class="docutils literal notranslate"><span class="pr
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.8.0',
+      VERSION:'0.8.1',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
