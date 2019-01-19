@@ -15,8 +15,8 @@ and [Edmunds](https://www.edmunds.com/) about how they use MLflow.
 * 6:00 - 6:30 pm: Social Hour with Food, Drinks, Beer & Wine
 * 6:30 - 6:35 pm: Introduction & Announcements
 * 6:35 - 7:10 pm: What’s Coming in MLflow v0.9 and v1.0 (Databricks)
-* 7:10 - 7:35 pm: MLflow @ Brandless Community 
-* 7:35 - 8:05 pm: MLflow @ Edmunds Community 
+* 7:10 - 7:35 pm: MLflow @ Brandless 
+* 7:35 - 8:05 pm: MLflow @ Edmunds 
 * 8:05 - 8:30 pm: Additional Networking & Q&A
 &nbsp;
 
