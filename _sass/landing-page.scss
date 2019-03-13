@@ -109,7 +109,21 @@
   }
 }
 
+.powered-by {
+	margin: 0;
+	padding: 90px 0 130px;
+  
+  #powered-by-list {
+    list-style: none;
+    li {
+      padding: 20px;
+      display: inline;
+    }
+  }
+}
+
 .community {
+	background: #f5f5f5;
 	margin: 0;
 	padding: 100px 0 150px;
 
