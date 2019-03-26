@@ -1,4 +1,4 @@
-- name: Documentation
+- name: Docs
   link: /docs/latest/index.html
   new_window: false
   highlight: false
@@ -8,5 +8,15 @@
   highlight: false
 - name: Code
   link: https://github.com/mlflow/mlflow/
+  new_window: false
+  highlight: false
+- name: Stack Overflow
+  icon: stack-overflow
+  link: https://stackoverflow.com/questions/tagged/mlflow
+  new_window: false
+  highlight: false
+- name: Twitter
+  icon: twitter
+  link: https://twitter.com/MLflowOrg
   new_window: false
   highlight: false

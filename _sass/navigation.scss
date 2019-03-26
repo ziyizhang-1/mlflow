@@ -42,7 +42,6 @@ nav {
 			padding: 10px;
 		}
 
-
 		&.nav-toggle {
 			display: inline;
 			position: absolute;
@@ -58,6 +57,10 @@ nav {
 			&:hover {
 				border: 0;
 			}
+		}
+
+		i {
+			font-size: 1.7em;
 		}
 	}
 
