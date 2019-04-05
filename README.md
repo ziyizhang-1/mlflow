@@ -7,9 +7,14 @@ This is the website for the MLflow project, built on an open source Jekyll theme
 
 This site, and the original template (called Hydra) it was created using, was built with [Jekyll](http://jekyllrb.com/) version 3.3.1, but should support newer versions as well.
 
-Run `jekyll` commands through Bundler to ensure you're using the right versions:
+To get started on MacOS, install brew if you don't have it, then install jekyll (it's a ruby gem... see MacOS installation instructions [here](https://jekyllrb.com/docs/installation/macos/))checkout this repo, `cd` into it, and run `bundle exec jekyll build` or `bundle jekyll serve`.
 
+You should run `jekyll` commands through Bundler to ensure you're using the right versions:
+
+Example commands to type into your terminal:
 ~~~bash
+$ git clone git@github.com:databricks/mlflow-website.git
+$ cd mlflow-website
 $ bundle exec jekyll serve
 ~~~
 
