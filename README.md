@@ -13,7 +13,7 @@ You should run `jekyll` commands through Bundler to ensure you're using the righ
 
 Example commands to type into your terminal:
 ~~~bash
-$ git clone git@github.com:databricks/mlflow-website.git
+$ git clone https://github.com/databricks/mlflow-website.git
 $ cd mlflow-website
 $ bundle exec jekyll serve
 ~~~
