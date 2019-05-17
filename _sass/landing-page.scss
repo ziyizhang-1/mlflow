@@ -98,7 +98,7 @@
 .get-started {
 	background: #f5f5f5;
 	margin: 0;
-	padding: 90px 0 130px;
+	padding: 70px 0 70px 0;
 
   p {
     text-align: center;
@@ -109,11 +109,11 @@
   }
 }
 
-.powered-by {
+#integrations, #powered-by {
 	margin: 0;
-	padding: 90px 0 130px;
+	padding: 0;
 
-  #powered-by-list {
+  #integrations-list, #powered-by-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -121,9 +121,8 @@
     div {
       display: flex;
       flex-direction: column;
-      padding: 5px 25px;
+      padding: 5px 25px 45px 25px;
       width: 130px;
-      line-height: 100px;
       min-height: 100px;
       vertical-align: middle;
       text-align: center;
@@ -137,6 +136,14 @@
       height: auto;
     }
   }
+}
+
+#integrations {
+  padding: 90px 0 90px 0;
+}
+
+#powered-by {
+  padding: 0 0 90px 0;
 }
 
 .community {
