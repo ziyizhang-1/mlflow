@@ -1,0 +1,405 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mlflow.models &mdash; MLflow 1.0.0.rc0 documentation</title>
+  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.models.html">
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MLflow 1.0.0.rc0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API" href="index.html"/>
+        <link rel="next" title="mlflow.projects" href="/mlflow.projects.html"/>
+        <link rel="prev" title="mlflow.mleap" href="/mlflow.mleap.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0.rc0</span>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side relative">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+  </form>
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="../index.html" class="main-navigation-home"><img src="../_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../search-syntax.html">Search</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlflow.html">mlflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.azureml.html">mlflow.azureml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tracking.html">mlflow.tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../R-api.html">R API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+        <li><a href="index.html">Python API</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>mlflow.models</li>
+    
+    
+    <li class="wy-breadcrumbs-aside">
+      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.models.rst" class="fa fa-github"> Edit on GitHub</a>
+    </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="module-mlflow.models">
+<span id="mlflow-models"></span><h1>mlflow.models<a class="headerlink" href="#module-mlflow.models" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.models</span></code> module provides an API for saving machine learning models in
+“flavors” that can be understood by different downstream tools.</p>
+<p>The built-in flavors are:</p>
+<ul class="simple">
+<li><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></li>
+<li><a class="reference internal" href="mlflow.h2o.html#module-mlflow.h2o" title="mlflow.h2o"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.h2o</span></code></a></li>
+<li><a class="reference internal" href="mlflow.keras.html#module-mlflow.keras" title="mlflow.keras"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.keras</span></code></a></li>
+<li><a class="reference internal" href="mlflow.pytorch.html#module-mlflow.pytorch" title="mlflow.pytorch"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pytorch</span></code></a></li>
+<li><a class="reference internal" href="mlflow.sklearn.html#module-mlflow.sklearn" title="mlflow.sklearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code></a></li>
+<li><a class="reference internal" href="mlflow.spark.html#module-mlflow.spark" title="mlflow.spark"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.spark</span></code></a></li>
+<li><a class="reference internal" href="mlflow.tensorflow.html#module-mlflow.tensorflow" title="mlflow.tensorflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code></a></li>
+</ul>
+<p>For details, see <a class="reference external" href="../models.html">MLflow Models</a>.</p>
+<dl class="class">
+<dt id="mlflow.models.FlavorBackend">
+<em class="property">class </em><code class="descclassname">mlflow.models.</code><code class="descname">FlavorBackend</code><span class="sig-paren">(</span><em>config</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.FlavorBackend" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class for Flavor Backend.
+This class defines the API interface for local model deployment of MLflow model flavors.</p>
+<dl class="method">
+<dt id="mlflow.models.FlavorBackend.can_score_model">
+<code class="descname">can_score_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.FlavorBackend.can_score_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Check whether this flavor backend can be deployed in the current environment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if this flavor backend can be applied int he current environment.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.models.FlavorBackend.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>model_uri</em>, <em>input_path</em>, <em>output_path</em>, <em>content_type</em>, <em>json_format</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.FlavorBackend.predict" title="Permalink to this definition"> </a></dt>
+<dd><p>Generate predictions using a saved MLflow model referenced by the given URI.
+Input and output are read from and written to a file or stdin / stdout.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model_uri</strong> – URI pointing to the MLflow model to be used for scoring.</li>
+<li><strong>input_path</strong> – Path to the file with input data. If not specified, data is read from
+stdin.</li>
+<li><strong>output_path</strong> – Path to the file with output predictions. If not specified, data is
+written to stdout.</li>
+<li><strong>content_type</strong> – Specifies the input format. Can be one of {‘json’, ‘csv’}</li>
+<li><strong>json_format</strong> – <p>Only applies if content_type == ‘json’. Specifies how is the input data
+encoded in json. Can be one of {‘split’, ‘records’} mirroring the
+behavior of Pandas orient attribute. The default is ‘split’ which
+expects dict like data: {‘index’ -&gt; [index],</p>
+<blockquote>
+<div>’columns’ -&gt; [columns],
+‘data’ -&gt; [values]}, where index is optional.</div></blockquote>
+<p>For more information see “<a class="reference external" href="https://pandas.pydata.org/">https://pandas.pydata.org/</a>
+pandas-docs/stable/reference/api/pandas.read_json.html”</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.models.FlavorBackend.serve">
+<code class="descname">serve</code><span class="sig-paren">(</span><em>model_uri</em>, <em>port</em>, <em>host</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.FlavorBackend.serve" title="Permalink to this definition"> </a></dt>
+<dd><p>Serve saved MLflow model locally.
+:param model_uri: URI pointing to the MLflow model to be used for scoring.
+:param port: Port to deploy the model to.
+:param host: Host to use for the model deployment. Defaults to ‘localhost’.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflow.models.Model">
+<em class="property">class </em><code class="descclassname">mlflow.models.</code><code class="descname">Model</code><span class="sig-paren">(</span><em>artifact_path=None</em>, <em>run_id=None</em>, <em>utc_time_created=None</em>, <em>flavors=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An MLflow Model that can support multiple model flavors. Provides APIs for implementing
+new Model flavors.</p>
+<dl class="method">
+<dt id="mlflow.models.Model.add_flavor">
+<code class="descname">add_flavor</code><span class="sig-paren">(</span><em>name</em>, <em>**params</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model.add_flavor" title="Permalink to this definition"> </a></dt>
+<dd><p>Add an entry for how to serve the model in a given format.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="mlflow.models.Model.load">
+<em class="property">classmethod </em><code class="descname">load</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model.load" title="Permalink to this definition"> </a></dt>
+<dd><p>Load a model from its YAML representation.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="mlflow.models.Model.log">
+<em class="property">classmethod </em><code class="descname">log</code><span class="sig-paren">(</span><em>artifact_path</em>, <em>flavor</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model.log" title="Permalink to this definition"> </a></dt>
+<dd><p>Log model using supplied flavor module.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>artifact_path</strong> – Run relative path identifying the model.</li>
+<li><strong>flavor</strong> – Flavor module to save the model with. The module must have
+the <code class="docutils literal notranslate"><span class="pre">save_model</span></code> function that will persist the model as a valid
+MLflow model.</li>
+<li><strong>kwargs</strong> – Extra args passed to the model flavor.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.models.Model.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model.save" title="Permalink to this definition"> </a></dt>
+<dd><p>Write the model as a local YAML file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.models.Model.to_yaml">
+<code class="descname">to_yaml</code><span class="sig-paren">(</span><em>stream=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.Model.to_yaml" title="Permalink to this definition"> </a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mlflow.mleap.html" class="btn btn-neutral" title="mlflow.mleap" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="mlflow.projects.html" class="btn btn-neutral" title="mlflow.projects" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2019. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'../',
+      VERSION:'1.0.0.rc0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="../_static/jquery.js"></script>
+  <script type="text/javascript" src="../_static/underscore.js"></script>
+  <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../_static/languagesections.js"></script>
+  
+
+  <script type="text/javascript" src="../_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="../_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "../_static/clippy.svg";</script>
+  <script type="text/javascript" src="../_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+</body>
+</html>
