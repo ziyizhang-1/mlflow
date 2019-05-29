@@ -7,6 +7,8 @@ categories: news
 
 Join us for an evening of tech-talks about MLflow and Machine Learning from Databricks and Microsoft.
 
+[RSVP](https://www.meetup.com/Bay-Area-MLflow/events/261840002/) if you live in the Bay Area.
+
 ## Agenda
 
 * 6:00 - 6:30 pm: Social Hour with Food, Drinks, Beer & Wine
