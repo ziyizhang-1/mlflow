@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.spark &mdash; MLflow 0.9.1 documentation</title>
+  <title>mlflow.spark &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.spark.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.tensorflow" href="/mlflow.tensorflow.html"/>
         <link rel="prev" title="mlflow.sklearn" href="/mlflow.sklearn.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.onnx.html">mlflow.onnx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
@@ -174,7 +175,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.spark.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/python_api/mlflow.spark.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -204,18 +205,40 @@ back as Python objects. Rather, they must be deserialized in Java using the
 MLeap-compatible arguments.</dd>
 </dl>
 <dl class="function">
+<dt id="mlflow.spark.get_default_conda_env">
+<code class="descclassname">mlflow.spark.</code><code class="descname">get_default_conda_env</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.get_default_conda_env" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The default Conda environment for MLflow Models produced by calls to
+<a class="reference internal" href="#mlflow.spark.save_model" title="mlflow.spark.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a> and <a class="reference internal" href="#mlflow.spark.log_model" title="mlflow.spark.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model()</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mlflow.spark.load_model">
-<code class="descclassname">mlflow.spark.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em>, <em>dfs_tmpdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.load_model" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.spark.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>model_uri</em>, <em>dfs_tmpdir=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.load_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Load the Spark MLlib model from the path.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model.</li>
-<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+<li><strong>model_uri</strong> – <p>The location, in URI format, of the MLflow model, for example:</p>
+<ul>
+<li><code class="docutils literal notranslate"><span class="pre">/Users/me/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">relative/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">s3://my_bucket/path/to/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">runs:/&lt;mlflow_run_id&gt;/run-relative/path/to/model</span></code></li>
+</ul>
+<p>For more information about supported URI schemes, see
+<a class="reference external" href="https://www.mlflow.org/docs/latest/tracking.html#artifact-locations">Referencing Artifacts</a>.</p>
+</li>
 <li><strong>dfs_tmpdir</strong> – Temporary directory path on Distributed (Hadoop) File System (DFS) or local
-filesystem if running in local mode. The model will be loaded from this
+filesystem if running in local mode. The model is loaded from this
 destination. Defaults to <code class="docutils literal notranslate"><span class="pre">/tmp/mlflow</span></code>.</li>
 </ul>
 </td>
@@ -241,9 +264,9 @@ destination. Defaults to <code class="docutils literal notranslate"><span class=
 
 <dl class="function">
 <dt id="mlflow.spark.log_model">
-<code class="descclassname">mlflow.spark.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>spark_model</em>, <em>artifact_path</em>, <em>conda_env=None</em>, <em>jars=None</em>, <em>dfs_tmpdir=None</em>, <em>sample_input=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.log_model" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.spark.</code><code class="descname">log_model</code><span class="sig-paren">(</span><em>spark_model</em>, <em>artifact_path</em>, <em>conda_env=None</em>, <em>dfs_tmpdir=None</em>, <em>sample_input=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.log_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Log a Spark MLlib model as an MLflow artifact for the current run. This uses the
-MLlib persistence format, and the logged model will have the Spark flavor.</p>
+MLlib persistence format and produces an MLflow Model with the Spark flavor.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -254,8 +277,8 @@ MLlib persistence format, and the logged model will have the Spark flavor.</p>
 <li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
 Conda environment yaml file. If provided, this decribes the environment
 this model should be run in. At minimum, it should specify the dependencies
-contained in <code class="docutils literal notranslate"><span class="pre">mlflow.spark.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
-<code class="docutils literal notranslate"><span class="pre">mlflow.spark.DEFAULT_CONDA_ENV</span></code> environment will be added to the model.
+contained in <a class="reference internal" href="#mlflow.spark.get_default_conda_env" title="mlflow.spark.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <cite>None</cite>, the default
+<a class="reference internal" href="#mlflow.spark.get_default_conda_env" title="mlflow.spark.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a> environment is added to the model.
 The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -269,9 +292,8 @@ environment:</p>
 </pre></div>
 </div>
 </li>
-<li><strong>jars</strong> – List of JARs needed by the model.</li>
 <li><strong>dfs_tmpdir</strong> – Temporary directory path on Distributed (Hadoop) File System (DFS) or local
-filesystem if running in local mode. The model will be writen in this
+filesystem if running in local mode. The model is written in this
 destination and then copied into the model’s artifact directory. This is
 necessary as Spark ML models read from and write to DFS if running on a
 cluster. If this operation completes successfully, all temporary files
@@ -304,7 +326,7 @@ This must be a PySpark DataFrame that the model can evaluate. If
 
 <dl class="function">
 <dt id="mlflow.spark.save_model">
-<code class="descclassname">mlflow.spark.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>spark_model</em>, <em>path</em>, <em>mlflow_model=&lt;mlflow.models.Model object&gt;</em>, <em>conda_env=None</em>, <em>jars=None</em>, <em>dfs_tmpdir=None</em>, <em>sample_input=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.save_model" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.spark.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>spark_model</em>, <em>path</em>, <em>mlflow_model=&lt;mlflow.models.Model object&gt;</em>, <em>conda_env=None</em>, <em>dfs_tmpdir=None</em>, <em>sample_input=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.spark.save_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Save a Spark MLlib PipelineModel to a local path.</p>
 <p>By default, this function saves models using the Spark MLlib persistence mechanism.
 Additionally, if a sample input is specified using the <code class="docutils literal notranslate"><span class="pre">sample_input</span></code> parameter, the model
@@ -320,8 +342,8 @@ is also serialized in MLeap format and the MLeap flavor is added.</p>
 <li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
 Conda environment yaml file. If provided, this decribes the environment
 this model should be run in. At minimum, it should specify the dependencies
-contained in <code class="docutils literal notranslate"><span class="pre">mlflow.spark.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
-<code class="docutils literal notranslate"><span class="pre">mlflow.spark.DEFAULT_CONDA_ENV</span></code> environment will be added to the model.
+contained in <a class="reference internal" href="#mlflow.spark.get_default_conda_env" title="mlflow.spark.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <cite>None</cite>, the default
+<a class="reference internal" href="#mlflow.spark.get_default_conda_env" title="mlflow.spark.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a> environment is added to the model.
 The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -335,14 +357,13 @@ environment:</p>
 </pre></div>
 </div>
 </li>
-<li><strong>jars</strong> – List of JARs needed by the model.</li>
 <li><strong>dfs_tmpdir</strong> – Temporary directory path on Distributed (Hadoop) File System (DFS) or local
-filesystem if running in local mode. The model will be written in this
+filesystem if running in local mode. The model is be written in this
 destination and then copied to the requested local path. This is necessary
 as Spark ML models read from and write to DFS if running on a cluster. All
-temporary files created on the DFS will be removed if this operation
+temporary files created on the DFS are removed if this operation
 completes successfully. Defaults to <code class="docutils literal notranslate"><span class="pre">/tmp/mlflow</span></code>.</li>
-<li><strong>sample_input</strong> – A sample input that will be used to add the MLeap flavor to the model.
+<li><strong>sample_input</strong> – A sample input that is used to add the MLeap flavor to the model.
 This must be a PySpark DataFrame that the model can evaluate. If
 <code class="docutils literal notranslate"><span class="pre">sample_input</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, the MLeap flavor is not added.</li>
 </ul>
@@ -400,7 +421,7 @@ This must be a PySpark DataFrame that the model can evaluate. If
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -409,6 +430,7 @@ This must be a PySpark DataFrame that the model can evaluate. If
   <script type="text/javascript" src="../_static/jquery.js"></script>
   <script type="text/javascript" src="../_static/underscore.js"></script>
   <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../_static/languagesections.js"></script>
   
 

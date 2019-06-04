@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>REST API &mdash; MLflow 0.9.1 documentation</title>
+  <title>REST API &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/rest-api.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="index.html"/>
         <link rel="prev" title="Java API" href="/java_api/index.html"/> 
 
   
@@ -66,7 +66,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -145,11 +145,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#mlflowcreaterunresponse">Response Structure</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#mlflow-runs-delete">Mlflow Runs Delete</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#delete-run">Delete Run</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mlflowdeleterun">Request Structure</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#mlflow-runs-restore">Mlflow Runs Restore</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#restore-run">Restore Run</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mlflowrestorerun">Request Structure</a></li>
 </ul>
 </li>
@@ -196,22 +196,15 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#data-structures">Data Structures</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#doubleclause">DoubleClause</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#experiment">Experiment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fileinfo">FileInfo</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#floatclause">FloatClause</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#metric">Metric</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#metricsearchexpression">MetricSearchExpression</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#param">Param</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#parametersearchexpression">ParameterSearchExpression</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run">Run</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rundata">RunData</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#runinfo">RunInfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#runtag">RunTag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#searchexpression">SearchExpression</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stringclause">StringClause</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#runstatus">RunStatus</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sourcetype">SourceType</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#viewtype">ViewType</a></li>
 </ul>
 </li>
@@ -257,7 +250,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/rest-api.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/rest-api.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -281,8 +274,8 @@ experiments on a tracking server hosted at <code class="docutils literal notrans
 <li><a class="reference internal" href="#restore-experiment" id="id31">Restore Experiment</a></li>
 <li><a class="reference internal" href="#update-experiment" id="id32">Update Experiment</a></li>
 <li><a class="reference internal" href="#create-run" id="id33">Create Run</a></li>
-<li><a class="reference internal" href="#mlflow-runs-delete" id="id34">Mlflow Runs Delete</a></li>
-<li><a class="reference internal" href="#mlflow-runs-restore" id="id35">Mlflow Runs Restore</a></li>
+<li><a class="reference internal" href="#delete-run" id="id34">Delete Run</a></li>
+<li><a class="reference internal" href="#restore-run" id="id35">Restore Run</a></li>
 <li><a class="reference internal" href="#get-run" id="id36">Get Run</a></li>
 <li><a class="reference internal" href="#log-metric" id="id37">Log Metric</a></li>
 <li><a class="reference internal" href="#log-batch" id="id38">Log Batch</a></li>
@@ -300,8 +293,8 @@ experiments on a tracking server hosted at <code class="docutils literal notrans
 <span id="mlflowmlflowservicecreateexperiment"></span><h2><a class="toc-backref" href="#id27">Create Experiment</a><a class="headerlink" href="#create-experiment" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="77%" />
-<col width="23%" />
+<col width="73%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -309,7 +302,7 @@ experiments on a tracking server hosted at <code class="docutils literal notrans
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/create</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/experiments/create</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -374,8 +367,8 @@ If not provided, the remote server will select an appropriate default.</td>
 <span id="mlflowmlflowservicelistexperiments"></span><h2><a class="toc-backref" href="#id28">List Experiments</a><a class="headerlink" href="#list-experiments" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="76%" />
-<col width="24%" />
+<col width="72%" />
+<col width="28%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -383,7 +376,7 @@ If not provided, the remote server will select an appropriate default.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/list</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/experiments/list</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
@@ -417,8 +410,8 @@ If unspecified, return only active experiments.</td>
 <table border="1" class="docutils">
 <colgroup>
 <col width="19%" />
-<col width="55%" />
-<col width="25%" />
+<col width="54%" />
+<col width="26%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -429,7 +422,7 @@ If unspecified, return only active experiments.</td>
 <tbody valign="top">
 <tr class="row-even"><td>experiments</td>
 <td>An array of <a class="reference internal" href="#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
-<td>All experiments</td>
+<td>All experiments.</td>
 </tr>
 </tbody>
 </table>
@@ -440,8 +433,8 @@ If unspecified, return only active experiments.</td>
 <span id="mlflowmlflowservicegetexperiment"></span><h2><a class="toc-backref" href="#id29">Get Experiment</a><a class="headerlink" href="#get-experiment" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="75%" />
-<col width="25%" />
+<col width="71%" />
+<col width="29%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -449,13 +442,13 @@ If unspecified, return only active experiments.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/get</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/experiments/get</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>Get metadata for an experiment and a list of runs for the experiment.
-This RPC will work on deleted experiments.</p>
+This method works on deleted experiments.</p>
 <div class="section" id="mlflowgetexperiment">
 <span id="id4"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetexperiment" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
@@ -496,7 +489,7 @@ This field is required.</td>
 <tbody valign="top">
 <tr class="row-even"><td>experiment</td>
 <td><a class="reference internal" href="#mlflowexperiment"><span class="std std-ref">Experiment</span></a></td>
-<td>Returns experiment details.</td>
+<td>Experiment details.</td>
 </tr>
 <tr class="row-odd"><td>runs</td>
 <td>An array of <a class="reference internal" href="#mlflowruninfo"><span class="std std-ref">RunInfo</span></a></td>
@@ -511,8 +504,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicedeleteexperiment"></span><h2><a class="toc-backref" href="#id30">Delete Experiment</a><a class="headerlink" href="#delete-experiment" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="77%" />
-<col width="23%" />
+<col width="73%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -520,12 +513,12 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/delete</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/experiments/delete</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>Mark an experiment and associated runs, params, metrics, … etc for deletion.
+<p>Mark an experiment and associated metadata, runs, metrics, params, and tags for deletion.
 If the experiment uses FileStore, artifacts associated with experiment are also deleted.</p>
 <div class="section" id="mlflowdeleteexperiment">
 <span id="id6"></span><h3>Request Structure<a class="headerlink" href="#mlflowdeleteexperiment" title="Permalink to this headline"> </a></h3>
@@ -556,8 +549,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicerestoreexperiment"></span><h2><a class="toc-backref" href="#id31">Restore Experiment</a><a class="headerlink" href="#restore-experiment" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="77%" />
-<col width="23%" />
+<col width="73%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -565,13 +558,13 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/restore</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/experiments/restore</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
 <p>Restore an experiment marked for deletion. This also restores
-associated metadata, runs, metrics, and params. If experiment uses FileStore, underlying
+associated metadata, runs, metrics, params, and tags. If experiment uses FileStore, underlying
 artifacts associated with experiment are also restored.</p>
 <p>Throws <code class="docutils literal notranslate"><span class="pre">RESOURCE_DOES_NOT_EXIST</span></code> if experiment was never created or was permanently deleted.</p>
 <div class="section" id="mlflowrestoreexperiment">
@@ -580,7 +573,7 @@ artifacts associated with experiment are also restored.</p>
 <colgroup>
 <col width="25%" />
 <col width="20%" />
-<col width="55%" />
+<col width="56%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -591,7 +584,7 @@ artifacts associated with experiment are also restored.</p>
 <tbody valign="top">
 <tr class="row-even"><td>experiment_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Identifier to get an experiment
+<td>ID of the associated experiment.
 This field is required.</td>
 </tr>
 </tbody>
@@ -603,8 +596,8 @@ This field is required.</td>
 <span id="mlflowmlflowserviceupdateexperiment"></span><h2><a class="toc-backref" href="#id32">Update Experiment</a><a class="headerlink" href="#update-experiment" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="77%" />
-<col width="23%" />
+<col width="73%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -612,19 +605,19 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/experiments/update</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/experiments/update</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>Updates an experiment metadata.</p>
+<p>Update experiment metadata.</p>
 <div class="section" id="mlflowupdateexperiment">
 <span id="id8"></span><h3>Request Structure<a class="headerlink" href="#mlflowupdateexperiment" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="13%" />
 <col width="10%" />
-<col width="77%" />
+<col width="78%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -640,7 +633,7 @@ This field is required.</td>
 </tr>
 <tr class="row-odd"><td>new_name</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>If provided, the experiment’s name will be changed to this. The new name must be unique.</td>
+<td>If provided, the experiment’s name is changed to the new name. The new name must be unique.</td>
 </tr>
 </tbody>
 </table>
@@ -651,8 +644,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicecreaterun"></span><h2><a class="toc-backref" href="#id33">Create Run</a><a class="headerlink" href="#create-run" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="73%" />
-<col width="27%" />
+<col width="68%" />
+<col width="32%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -660,7 +653,7 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/create</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/create</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -673,8 +666,8 @@ machine learning or data ETL pipeline. MLflow uses runs to track <a class="refer
 <table border="1" class="docutils">
 <colgroup>
 <col width="12%" />
-<col width="22%" />
-<col width="65%" />
+<col width="27%" />
+<col width="61%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -689,52 +682,17 @@ machine learning or data ETL pipeline. MLflow uses runs to track <a class="refer
 </tr>
 <tr class="row-odd"><td>user_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the user executing the run.</td>
-</tr>
-<tr class="row-even"><td>run_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Human readable name for the run.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.runName</span></code> run tag
-instead.</td>
-</tr>
-<tr class="row-odd"><td>source_type</td>
-<td><a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
-<td>Originating source for the run.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.source.type</span></code> run
-tag instead.</td>
-</tr>
-<tr class="row-even"><td>source_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>String descriptor for the run’s source. For example, name or description of a notebook, or the
-URL or path to a project.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.source.name</span></code> run
-tag instead.</td>
-</tr>
-<tr class="row-odd"><td>entry_point_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Name of the project entry point associated with the current run, if any.
-This field is deprecated and will be removed in MLflow 1.0. Use the
-<code class="docutils literal notranslate"><span class="pre">mlflow.project.entryPoint</span></code> run tag instead.</td>
+<td>ID of the user executing the run.
+This field is deprecated as of MLflow 1.0, and will be removed in a future
+MLflow release. Use ‘mlflow.user’ tag instead.</td>
 </tr>
 <tr class="row-even"><td>start_time</td>
 <td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
-<td>Unix timestamp of when the run started in milliseconds.</td>
+<td>Unix timestamp in milliseconds of when the run started.</td>
 </tr>
-<tr class="row-odd"><td>source_version</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Git commit hash of the source code used to create run.
-This field is deprecated and will be removed in MLflow 1.0. Use the
-<code class="docutils literal notranslate"><span class="pre">mlflow.source.git.commit</span></code> run tag instead.</td>
-</tr>
-<tr class="row-even"><td>tags</td>
+<tr class="row-odd"><td>tags</td>
 <td>An array of <a class="reference internal" href="#mlflowruntag"><span class="std std-ref">RunTag</span></a></td>
 <td>Additional metadata for run.</td>
-</tr>
-<tr class="row-odd"><td>parent_run_id</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the parent run which started this run.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.parentRunId</span></code> run
-tag instead.</td>
 </tr>
 </tbody>
 </table>
@@ -763,12 +721,12 @@ tag instead.</td>
 <hr class="docutils" />
 </div>
 </div>
-<div class="section" id="mlflow-runs-delete">
-<span id="mlflowmlflowservicedeleterun"></span><h2><a class="toc-backref" href="#id34">Mlflow Runs Delete</a><a class="headerlink" href="#mlflow-runs-delete" title="Permalink to this headline"> </a></h2>
+<div class="section" id="delete-run">
+<span id="mlflowmlflowservicedeleterun"></span><h2><a class="toc-backref" href="#id34">Delete Run</a><a class="headerlink" href="#delete-run" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="73%" />
-<col width="27%" />
+<col width="68%" />
+<col width="32%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -776,19 +734,19 @@ tag instead.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/delete</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/delete</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>This operation will mark the run for deletion.</p>
+<p>Mark a run for deletion.</p>
 <div class="section" id="mlflowdeleterun">
 <span id="id11"></span><h3>Request Structure<a class="headerlink" href="#mlflowdeleterun" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
 <col width="24%" />
 <col width="24%" />
-<col width="51%" />
+<col width="52%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -799,19 +757,20 @@ tag instead.</td>
 <tbody valign="top">
 <tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>This field is required.</td>
+<td>ID of the run to delete.
+This field is required.</td>
 </tr>
 </tbody>
 </table>
 <hr class="docutils" />
 </div>
 </div>
-<div class="section" id="mlflow-runs-restore">
-<span id="mlflowmlflowservicerestorerun"></span><h2><a class="toc-backref" href="#id35">Mlflow Runs Restore</a><a class="headerlink" href="#mlflow-runs-restore" title="Permalink to this headline"> </a></h2>
+<div class="section" id="restore-run">
+<span id="mlflowmlflowservicerestorerun"></span><h2><a class="toc-backref" href="#id35">Restore Run</a><a class="headerlink" href="#restore-run" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="74%" />
-<col width="26%" />
+<col width="69%" />
+<col width="31%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -819,7 +778,7 @@ tag instead.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/restore</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/restore</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -831,7 +790,7 @@ tag instead.</td>
 <colgroup>
 <col width="24%" />
 <col width="24%" />
-<col width="51%" />
+<col width="53%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -842,7 +801,8 @@ tag instead.</td>
 <tbody valign="top">
 <tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>This field is required.</td>
+<td>ID of the run to restore.
+This field is required.</td>
 </tr>
 </tbody>
 </table>
@@ -853,8 +813,8 @@ tag instead.</td>
 <span id="mlflowmlflowservicegetrun"></span><h2><a class="toc-backref" href="#id36">Get Run</a><a class="headerlink" href="#get-run" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="72%" />
-<col width="28%" />
+<col width="66%" />
+<col width="34%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -862,20 +822,21 @@ tag instead.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/get</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/get</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>Get metadata, params, tags, and metrics for a run. Only the last logged value for each metric
-is returned.</p>
+<p>Get metadata, metrics, params, and tags for a run. In the case where multiple metrics
+with the same key are logged for a run, return only the value with the latest timestamp.
+If there are multiple values with the latest timestamp, return the maximum of these values.</p>
 <div class="section" id="mlflowgetrun">
 <span id="id13"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetrun" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="24%" />
-<col width="51%" />
+<col width="12%" />
+<col width="12%" />
+<col width="76%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -884,10 +845,14 @@ is returned.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run to fetch.
-This field is required.</td>
+<td>ID of the run to fetch. Must be provided.</td>
+</tr>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run to fetch. This field will
+be removed in a future MLflow version.</td>
 </tr>
 </tbody>
 </table>
@@ -896,9 +861,9 @@ This field is required.</td>
 <span id="id14"></span><h3>Response Structure<a class="headerlink" href="#mlflowgetrunresponse" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="12%" />
-<col width="18%" />
-<col width="70%" />
+<col width="11%" />
+<col width="17%" />
+<col width="72%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -909,7 +874,7 @@ This field is required.</td>
 <tbody valign="top">
 <tr class="row-even"><td>run</td>
 <td><a class="reference internal" href="#mlflowrun"><span class="std std-ref">Run</span></a></td>
-<td>Run metadata (name, start time, etc) and data (metrics, params, etc).</td>
+<td>Run metadata (name, start time, etc) and data (metrics, params, and tags).</td>
 </tr>
 </tbody>
 </table>
@@ -920,8 +885,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicelogmetric"></span><h2><a class="toc-backref" href="#id37">Log Metric</a><a class="headerlink" href="#log-metric" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="75%" />
-<col width="25%" />
+<col width="71%" />
+<col width="29%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -929,7 +894,7 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-metric</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/log-metric</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -941,9 +906,9 @@ A metric can be logged multiple times.</p>
 <span id="id15"></span><h3>Request Structure<a class="headerlink" href="#mlflowlogmetric" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="14%" />
-<col width="14%" />
-<col width="72%" />
+<col width="10%" />
+<col width="10%" />
+<col width="80%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -952,25 +917,33 @@ A metric can be logged multiple times.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run under which to log the metric.
-This field is required.</td>
+<td>ID of the run under which to log the metric. Must be provided.</td>
 </tr>
-<tr class="row-odd"><td>key</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run under which to log the metric. This field will
+be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>key</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Name of the metric.
 This field is required.</td>
 </tr>
-<tr class="row-even"><td>value</td>
+<tr class="row-odd"><td>value</td>
 <td><code class="docutils literal notranslate"><span class="pre">DOUBLE</span></code></td>
 <td>Double value of the metric being logged.
 This field is required.</td>
 </tr>
-<tr class="row-odd"><td>timestamp</td>
+<tr class="row-even"><td>timestamp</td>
 <td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp in milliseconds at the time metric was logged.
 This field is required.</td>
+</tr>
+<tr class="row-odd"><td>step</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Step at which to log the metric</td>
 </tr>
 </tbody>
 </table>
@@ -981,8 +954,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicelogbatch"></span><h2><a class="toc-backref" href="#id38">Log Batch</a><a class="headerlink" href="#log-batch" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="75%" />
-<col width="25%" />
+<col width="70%" />
+<col width="30%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -990,45 +963,38 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-batch</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/log-batch</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
 </table>
-<p>Log a batch of metrics, params, and/or tags for a run.
-The server will respond with an error (non-200 status code) if any data failed to be persisted.
+<p>Log a batch of metrics, params, and tags for a run.
+If any data failed to be persisted, the server will respond with an error (non-200 status code).
 In case of error (due to internal server error or an invalid request), partial data may
 be written.</p>
-<p>Metrics, params, and tags may be written in interleaving fashion, but within a given entity
-type, are guaranteed to follow the order specified in the request body. That is, for an API
-request like:</p>
-<dl class="docutils">
-<dt>{</dt>
-<dd><p class="first">“run_id”: “2a14ed5c6a87499199e0106c3501eab8”,
-“metrics”: [</p>
-<blockquote>
-<div>{“key”: “mae”, “value”: 2.5, “timestamp”: 1552550804},
-{“key”: “rmse”, “value”: 2.7, “timestamp”: 1552550804},</div></blockquote>
-<p>],
-“params”: [</p>
-<blockquote>
-<div>{“key”: “model_class”, “value”: “LogisticRegression”},</div></blockquote>
-<p class="last">]</p>
-</dd>
-</dl>
-<p>}</p>
-<p>The server is guaranteed to write metric “rmse” after “mae”, though it may write param
+<p>You can write metrics, params, and tags in interleaving fashion, but within a given entity
+type are guaranteed to follow the order specified in the request body. That is, for an API
+request like</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+   <span class="nt">&quot;run_id&quot;</span><span class="p">:</span> <span class="s2">&quot;2a14ed5c6a87499199e0106c3501eab8&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span><span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;mae&quot;</span><span class="p">,</span> <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mf">2.5</span><span class="p">,</span> <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1552550804</span><span class="p">},</span>
+     <span class="p">{</span><span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="mf">2.7</span><span class="p">,</span> <span class="nt">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1552550804</span><span class="p">},</span>
+   <span class="p">],</span>
+   <span class="nt">&quot;params&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span><span class="nt">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;model_class&quot;</span><span class="p">,</span> <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;LogisticRegression&quot;</span><span class="p">},</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>the server is guaranteed to write metric “rmse” after “mae”, though it may write param
 “model_class” before both metrics, after “mae”, or after both metrics.</p>
 <p>The overwrite behavior for metrics, params, and tags is as follows:</p>
-<p>Metrics: metric values are never overwritten. Logging a metric (key, value, timestamp)
-appends to the set of values for the metric with the provided key.</p>
-<p>Tags: tag values may be overwritten by successive writes to the same tag key. That is, if
-multiple tag values with the same key are provided in the same API request, the last-provided
-tag value is written. Logging the same tag (key, value) is permitted - that is, logging a tag
-is idempotent.</p>
-<p>Params: once written, param values may not be changed (attempting to overwrite a param value
-will result in an error). However, logging the same param (key, value) is permitted - that is,
-logging a param is idempotent.</p>
+<ul class="simple">
+<li>Metrics: metric values are never overwritten. Logging a metric (key, value, timestamp) appends to the set of values for the metric with the provided key.</li>
+<li>Tags: tag values can be overwritten by successive writes to the same tag key. That is, if multiple tag values with the same key are provided in the same API request, the last-provided tag value is written. Logging the same tag (key, value) is permitted - that is, logging a tag is idempotent.</li>
+<li>Params: once written, param values cannot be changed (attempting to overwrite a param value will result in an error). However, logging the same param (key, value) is permitted - that is, logging a param is idempotent.</li>
+</ul>
 <div class="section" id="request-limits">
 <h3>Request Limits<a class="headerlink" href="#request-limits" title="Permalink to this headline"> </a></h3>
 <p>A single JSON-serialized API request may be up to 1 MB in size and contain:</p>
@@ -1039,11 +1005,11 @@ logging a param is idempotent.</p>
 <li>Up to 100 tags</li>
 </ul>
 <p>For example, a valid request might contain 900 metrics, 50 params, and 50 tags, but logging
-900 metrics, 50 params, and 51 tags would be invalid. The following limits also apply
-to metric, param, and tag keys &amp; values:</p>
+900 metrics, 50 params, and 51 tags is invalid. The following limits also apply
+to metric, param, and tag keys and values:</p>
 <ul class="simple">
-<li>Metric, param, and tag keys may be up to 250 characters in length</li>
-<li>Param and tag values may be up to 250 characters in length</li>
+<li>Metric, param, and tag keys can be up to 250 characters in length</li>
+<li>Param and tag values can be up to 250 characters in length</li>
 </ul>
 </div>
 <div class="section" id="mlflowlogbatch">
@@ -1089,8 +1055,8 @@ metrics, params, and tags in total.</td>
 <span id="mlflowmlflowservicesettag"></span><h2><a class="toc-backref" href="#id39">Set Tag</a><a class="headerlink" href="#set-tag" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="74%" />
-<col width="26%" />
+<col width="69%" />
+<col width="31%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -1098,7 +1064,7 @@ metrics, params, and tags in total.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/set-tag</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/set-tag</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -1109,9 +1075,9 @@ a run completes.</p>
 <span id="id17"></span><h3>Request Structure<a class="headerlink" href="#mlflowsettag" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="13%" />
-<col width="13%" />
-<col width="74%" />
+<col width="10%" />
+<col width="10%" />
+<col width="79%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -1120,17 +1086,21 @@ a run completes.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run under which to set the tag.
-This field is required.</td>
+<td>ID of the run under which to log the tag. Must be provided.</td>
 </tr>
-<tr class="row-odd"><td>key</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run under which to log the tag. This field will
+be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>key</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Name of the tag. Maximum size is 255 bytes.
 This field is required.</td>
 </tr>
-<tr class="row-even"><td>value</td>
+<tr class="row-odd"><td>value</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>String value of the tag being logged. Maximum size is 5000 bytes.
 This field is required.</td>
@@ -1144,8 +1114,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicelogparam"></span><h2><a class="toc-backref" href="#id40">Log Param</a><a class="headerlink" href="#log-param" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="77%" />
-<col width="23%" />
+<col width="73%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -1153,7 +1123,7 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/log-parameter</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/log-parameter</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -1165,9 +1135,9 @@ constant dates and values used in an ETL pipeline. A param can be logged only on
 <span id="id18"></span><h3>Request Structure<a class="headerlink" href="#mlflowlogparam" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="13%" />
-<col width="13%" />
-<col width="74%" />
+<col width="10%" />
+<col width="10%" />
+<col width="80%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -1176,17 +1146,21 @@ constant dates and values used in an ETL pipeline. A param can be logged only on
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run under which to log the param.
-This field is required.</td>
+<td>ID of the run under which to log the param. Must be provided.</td>
 </tr>
-<tr class="row-odd"><td>key</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run under which to log the param. This field will
+be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>key</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Name of the param. Maximum size is 255 bytes.
 This field is required.</td>
 </tr>
-<tr class="row-even"><td>value</td>
+<tr class="row-odd"><td>value</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>String value of the param being logged. Maximum size is 500 bytes.
 This field is required.</td>
@@ -1200,8 +1174,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicegetmetrichistory"></span><h2><a class="toc-backref" href="#id41">Get Metric History</a><a class="headerlink" href="#get-metric-history" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="77%" />
-<col width="23%" />
+<col width="73%" />
+<col width="27%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -1209,7 +1183,7 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/metrics/get-history</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/metrics/get-history</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
@@ -1219,9 +1193,9 @@ This field is required.</td>
 <span id="id19"></span><h3>Request Structure<a class="headerlink" href="#mlflowgetmetrichistory" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="16%" />
-<col width="16%" />
-<col width="68%" />
+<col width="10%" />
+<col width="10%" />
+<col width="80%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -1230,12 +1204,16 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run from which to fetch metric values.
-This field is required.</td>
+<td>ID of the run from which to fetch metric values. Must be provided.</td>
 </tr>
-<tr class="row-odd"><td>metric_key</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run from which to fetch metric values. This field
+will be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>metric_key</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Name of the metric.
 This field is required.</td>
@@ -1271,8 +1249,8 @@ This field is required.</td>
 <span id="mlflowmlflowservicesearchruns"></span><h2><a class="toc-backref" href="#id42">Search Runs</a><a class="headerlink" href="#search-runs" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="73%" />
-<col width="27%" />
+<col width="68%" />
+<col width="32%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -1280,7 +1258,7 @@ This field is required.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/search</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/search</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -1291,9 +1269,9 @@ This field is required.</td>
 <span id="id21"></span><h3>Request Structure<a class="headerlink" href="#mlflowsearchruns" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="12%" />
-<col width="28%" />
-<col width="60%" />
+<col width="11%" />
+<col width="17%" />
+<col width="72%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -1306,32 +1284,33 @@ This field is required.</td>
 <td>An array of <code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>List of experiment IDs to search over.</td>
 </tr>
-<tr class="row-odd"><td>anded_expressions</td>
-<td>An array of <a class="reference internal" href="#mlflowsearchexpression"><span class="std std-ref">SearchExpression</span></a></td>
-<td>This field is deprecated and will be removed in MLflow 1.0.
-Expressions describing runs (AND-ed together when filtering runs).
-See ‘filter’ for a simpler on-the-wire representation of these expressions.</td>
-</tr>
-<tr class="row-even"><td>filter</td>
+<tr class="row-odd"><td>filter</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td><p class="first">A filter expression over params, metrics, and tags, allowing returning a subset of
-runs. The syntax is a subset of SQL which allows only ANDing together binary operations
-between a param/metric/tag and a constant.</p>
+<td><p class="first">A filter expression over params, metrics, and tags, that allows returning a subset of
+runs. The syntax is a subset of SQL that supports ANDing together binary operations
+between a param, metric, or tag and a constant.</p>
 <p>Example: <code class="docutils literal notranslate"><span class="pre">metrics.rmse</span> <span class="pre">&lt;</span> <span class="pre">1</span> <span class="pre">and</span> <span class="pre">params.model_class</span> <span class="pre">=</span> <span class="pre">'LogisticRegression'</span></code></p>
-<p>You can also select columns with spaces by using backticks or double quotes:
-<code class="docutils literal notranslate"><span class="pre">metrics.`model</span> <span class="pre">class`</span> <span class="pre">=</span> <span class="pre">'LinearRegression'</span> <span class="pre">and</span> <span class="pre">tags.&quot;user</span> <span class="pre">name&quot;</span> <span class="pre">=</span> <span class="pre">'Tomas'</span></code></p>
-<p>Supported operators are =, !=, &gt;, &gt;=, &lt;, &lt;=, and LIKE.
-LIKE syntax: <code class="docutils literal notranslate"><span class="pre">params.model_class</span> <span class="pre">LIKE</span> <span class="pre">'Linear%'</span></code></p>
-<p class="last">‘filter’ may not be provided when anded_expressions is present; an INVALID_PARAMETER_VALUE
+<p>You can select columns with special characters (hyphen, space, period, etc.) by using double quotes:
+<code class="docutils literal notranslate"><span class="pre">metrics.&quot;model</span> <span class="pre">class&quot;</span> <span class="pre">=</span> <span class="pre">'LinearRegression'</span> <span class="pre">and</span> <span class="pre">tags.&quot;user-name&quot;</span> <span class="pre">=</span> <span class="pre">'Tomas'</span></code></p>
+<p>Supported operators are <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">!=</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>.</p>
+<p class="last">You cannot provide <code class="docutils literal notranslate"><span class="pre">filter</span></code> when <code class="docutils literal notranslate"><span class="pre">anded_expressions</span></code> is present; an <code class="docutils literal notranslate"><span class="pre">INVALID_PARAMETER_VALUE</span></code>
 error will be returned if both are specified.
-If both ‘filter’ and ‘anded_expressions’ are absent, all runs part of the given experiments
-will be returned.</p>
+If both <code class="docutils literal notranslate"><span class="pre">filter</span></code> and <code class="docutils literal notranslate"><span class="pre">anded_expressions</span></code> are absent, all runs part of the given experiments
+are returned.</p>
 </td>
 </tr>
-<tr class="row-odd"><td>run_view_type</td>
+<tr class="row-even"><td>run_view_type</td>
 <td><a class="reference internal" href="#mlflowviewtype"><span class="std std-ref">ViewType</span></a></td>
 <td>Whether to display only active, only deleted, or all runs.
 Defaults to only active runs.</td>
+</tr>
+<tr class="row-odd"><td>max_results</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT32</span></code></td>
+<td>Maximum number of runs desired. Max threshold is 50000</td>
+</tr>
+<tr class="row-even"><td>order_by</td>
+<td>An array of <code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>Ordering expressions like “tags.`model class` DESC”</td>
 </tr>
 </tbody>
 </table>
@@ -1364,8 +1343,8 @@ Defaults to only active runs.</td>
 <span id="mlflowmlflowservicelistartifacts"></span><h2><a class="toc-backref" href="#id43">List Artifacts</a><a class="headerlink" href="#list-artifacts" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="75%" />
-<col width="25%" />
+<col width="70%" />
+<col width="30%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -1373,7 +1352,7 @@ Defaults to only active runs.</td>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/artifacts/list</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/artifacts/list</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">GET</span></code></td>
 </tr>
 </tbody>
@@ -1395,11 +1374,16 @@ the response contains only artifacts with the specified prefix.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run whose artifacts to list.</td>
+<td>ID of the run whose artifacts to list. Must be provided.</td>
 </tr>
-<tr class="row-odd"><td>path</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run whose artifacts to list. This field will
+be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>path</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Filter artifacts matching this path (a relative path from the root artifact directory).</td>
 </tr>
@@ -1438,8 +1422,8 @@ the response contains only artifacts with the specified prefix.</p>
 <span id="mlflowmlflowserviceupdaterun"></span><h2><a class="toc-backref" href="#id44">Update Run</a><a class="headerlink" href="#update-run" title="Permalink to this headline"> </a></h2>
 <table border="1" class="docutils">
 <colgroup>
-<col width="73%" />
-<col width="27%" />
+<col width="68%" />
+<col width="32%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Endpoint</th>
@@ -1447,7 +1431,7 @@ the response contains only artifacts with the specified prefix.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/preview/mlflow/runs/update</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2.0/mlflow/runs/update</span></code></td>
 <td><code class="docutils literal notranslate"><span class="pre">POST</span></code></td>
 </tr>
 </tbody>
@@ -1457,9 +1441,9 @@ the response contains only artifacts with the specified prefix.</p>
 <span id="id25"></span><h3>Request Structure<a class="headerlink" href="#mlflowupdaterun" title="Permalink to this headline"> </a></h3>
 <table border="1" class="docutils">
 <colgroup>
-<col width="13%" />
-<col width="26%" />
-<col width="60%" />
+<col width="11%" />
+<col width="21%" />
+<col width="68%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -1468,18 +1452,22 @@ the response contains only artifacts with the specified prefix.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>ID of the run to update.
-This field is required.</td>
+<td>ID of the run to update. Must be provided.</td>
 </tr>
-<tr class="row-odd"><td>status</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] ID of the run to update.. This field will
+be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>status</td>
 <td><a class="reference internal" href="#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
 <td>Updated status of the run.</td>
 </tr>
-<tr class="row-even"><td>end_time</td>
+<tr class="row-odd"><td>end_time</td>
 <td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
-<td>Unix timestamp of when the run ended in milliseconds.</td>
+<td>Unix timestamp in milliseconds of when the run ended.</td>
 </tr>
 </tbody>
 </table>
@@ -1505,36 +1493,11 @@ This field is required.</td>
 </tr>
 </tbody>
 </table>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="data-structures">
 <span id="restadd"></span><h2><a class="toc-backref" href="#id45">Data Structures</a><a class="headerlink" href="#data-structures" title="Permalink to this headline"> </a></h2>
-<div class="section" id="doubleclause">
-<span id="mlflowdoubleclause"></span><h3>DoubleClause<a class="headerlink" href="#doubleclause" title="Permalink to this headline"> </a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="18%" />
-<col width="64%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Field Name</th>
-<th class="head">Type</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>comparator</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>OneOf (“&gt;”, “&gt;=”, “==”, “!=”, “&lt;=”, “&lt;”)</td>
-</tr>
-<tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">DOUBLE</span></code></td>
-<td>Float value for comparison.</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="section" id="experiment">
 <span id="mlflowexperiment"></span><h3>Experiment<a class="headerlink" href="#experiment" title="Permalink to this headline"> </a></h3>
 <p>Experiment</p>
@@ -1610,32 +1573,6 @@ Deleted experiments are not returned by APIs.</td>
 </tbody>
 </table>
 </div>
-<div class="section" id="floatclause">
-<span id="mlflowfloatclause"></span><h3>FloatClause<a class="headerlink" href="#floatclause" title="Permalink to this headline"> </a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="18%" />
-<col width="64%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Field Name</th>
-<th class="head">Type</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>comparator</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>OneOf (“&gt;”, “&gt;=”, “==”, “!=”, “&lt;=”, “&lt;”)</td>
-</tr>
-<tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">FLOAT</span></code></td>
-<td>Float value for comparison.</td>
-</tr>
-</tbody>
-</table>
-</div>
 <div class="section" id="metric">
 <span id="mlflowmetric"></span><h3>Metric<a class="headerlink" href="#metric" title="Permalink to this headline"> </a></h3>
 <p>Metric associated with a run, represented as a key-value pair.</p>
@@ -1664,34 +1601,9 @@ Deleted experiments are not returned by APIs.</td>
 <td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
 <td>The timestamp at which this metric was recorded.</td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="metricsearchexpression">
-<span id="mlflowmetricsearchexpression"></span><h3>MetricSearchExpression<a class="headerlink" href="#metricsearchexpression" title="Permalink to this headline"> </a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="17%" />
-<col width="37%" />
-<col width="47%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Field Name</th>
-<th class="head">Type</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">float</span></code> OR <code class="docutils literal notranslate"><span class="pre">double</span></code></td>
-<td><a class="reference internal" href="#mlflowfloatclause"><span class="std std-ref">FloatClause</span></a> OR <a class="reference internal" href="#mlflowdoubleclause"><span class="std std-ref">DoubleClause</span></a></td>
-<td><p class="first">If <code class="docutils literal notranslate"><span class="pre">float</span></code>, [Deprecated in 0.7.0, to be removed in future version]
-Float clause for comparison. Use ‘double’ instead.</p>
-<p class="last">If <code class="docutils literal notranslate"><span class="pre">double</span></code>, double clause of comparison</p>
-</td>
-</tr>
-<tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td><a class="reference internal" href="#mlflowmetric"><span class="std std-ref">Metric</span></a> key for search.</td>
+<tr class="row-odd"><td>step</td>
+<td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
+<td>Step at which to log the metric.</td>
 </tr>
 </tbody>
 </table>
@@ -1719,32 +1631,6 @@ Float clause for comparison. Use ‘double’ instead.</p>
 <tr class="row-odd"><td>value</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Value associated with this param.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="parametersearchexpression">
-<span id="mlflowparametersearchexpression"></span><h3>ParameterSearchExpression<a class="headerlink" href="#parametersearchexpression" title="Permalink to this headline"> </a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="14%" />
-<col width="32%" />
-<col width="54%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Field Name</th>
-<th class="head">Type</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">string</span></code></td>
-<td><a class="reference internal" href="#mlflowstringclause"><span class="std std-ref">StringClause</span></a></td>
-<td>If <code class="docutils literal notranslate"><span class="pre">string</span></code>, string clause for comparison.</td>
-</tr>
-<tr class="row-odd"><td>key</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td><a class="reference internal" href="#mlflowparam"><span class="std std-ref">Param</span></a> key for search.</td>
 </tr>
 </tbody>
 </table>
@@ -1778,7 +1664,7 @@ Float clause for comparison. Use ‘double’ instead.</p>
 </div>
 <div class="section" id="rundata">
 <span id="mlflowrundata"></span><h3>RunData<a class="headerlink" href="#rundata" title="Permalink to this headline"> </a></h3>
-<p>Run data (metrics, params, etc).</p>
+<p>Run data (metrics, params, and tags).</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -1812,9 +1698,9 @@ Float clause for comparison. Use ‘double’ instead.</p>
 <p>Metadata of a single run.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="13%" />
-<col width="18%" />
-<col width="69%" />
+<col width="14%" />
+<col width="20%" />
+<col width="67%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Field Name</th>
@@ -1823,35 +1709,24 @@ Float clause for comparison. Use ‘double’ instead.</p>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>run_uuid</td>
+<tr class="row-even"><td>run_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>Unique identifier for the run.</td>
 </tr>
-<tr class="row-odd"><td>experiment_id</td>
+<tr class="row-odd"><td>run_uuid</td>
+<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
+<td>[Deprecated, use run_id instead] Unique identifier for the run. This field will
+be removed in a future MLflow version.</td>
+</tr>
+<tr class="row-even"><td>experiment_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
 <td>The experiment ID.</td>
 </tr>
-<tr class="row-even"><td>name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Human readable name that identifies this run.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.runName</span></code> run tag
-instead.</td>
-</tr>
-<tr class="row-odd"><td>source_type</td>
-<td><a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a></td>
-<td>Source type.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.source.type</span></code> run
-tag instead.</td>
-</tr>
-<tr class="row-even"><td>source_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Source identifier: GitHub URL, name of notebook, name of job, etc.
-This field is deprecated and will be removed in MLflow 1.0. Use the <code class="docutils literal notranslate"><span class="pre">mlflow.source.name</span></code> run
-tag instead.</td>
-</tr>
 <tr class="row-odd"><td>user_id</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>User who initiated the run.</td>
+<td>User who initiated the run.
+This field is deprecated as of MLflow 1.0, and will be removed in a future
+MLflow release. Use ‘mlflow.user’ tag instead.</td>
 </tr>
 <tr class="row-even"><td>status</td>
 <td><a class="reference internal" href="#mlflowrunstatus"><span class="std std-ref">RunStatus</span></a></td>
@@ -1864,18 +1739,6 @@ tag instead.</td>
 <tr class="row-even"><td>end_time</td>
 <td><code class="docutils literal notranslate"><span class="pre">INT64</span></code></td>
 <td>Unix timestamp of when the run ended in milliseconds.</td>
-</tr>
-<tr class="row-odd"><td>source_version</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Git commit hash of the code used for the run.
-This field is deprecated and will be removed in MLflow 1.0. Use the
-<code class="docutils literal notranslate"><span class="pre">mlflow.source.git.commit</span></code> run tag instead.</td>
-</tr>
-<tr class="row-even"><td>entry_point_name</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>Name of the entry point for the run.
-This field is deprecated and will be removed in MLflow 1.0. Use the
-<code class="docutils literal notranslate"><span class="pre">mlflow.project.entryPoint</span></code> run tag instead.</td>
 </tr>
 <tr class="row-odd"><td>artifact_uri</td>
 <td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
@@ -1917,104 +1780,6 @@ If not set, the local <code class="docutils literal notranslate"><span class="pr
 </tr>
 </tbody>
 </table>
-<p>Tag keys that start with <code class="docutils literal notranslate"><span class="pre">mlflow.</span></code> are reserved for internal use. The following tags are set
-automatically by MLflow:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="26%" />
-<col width="74%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Key</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mlflow.runName</span></code></td>
-<td>Human readable name that identifies this run.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mlflow.parentRunId</span></code></td>
-<td>The ID of the parent run, if this is a nested run.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mlflow.source.type</span></code></td>
-<td>The source type, one of <a class="reference internal" href="#mlflowsourcetype"><span class="std std-ref">SourceType</span></a>.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mlflow.source.name</span></code></td>
-<td>Source identifier: GitHub URL, name of notebook, name of job, etc.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mlflow.source.git.commit</span></code></td>
-<td>Commit hash of the executed code, if in a git repository.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mlflow.source.git.branch</span></code></td>
-<td>Name of the branch of the executed code, if in a git repository.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mlflow.source.git.repoURL</span></code></td>
-<td>URL that the executed code was clone from.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mlflow.project.env</span></code></td>
-<td>One of “docker” or “conda”, indicating the runtime context used by the mlflow project.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mlflow.project.entryPoint</span></code></td>
-<td>Name of the project entry point associated with the current run, if any.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">mlflow.docker.image.name</span></code></td>
-<td>Name of the Docker image used to execute this run.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">mlflow.docker.image.id</span></code></td>
-<td>ID of the Docker image used to execute this run.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="searchexpression">
-<span id="mlflowsearchexpression"></span><h3>SearchExpression<a class="headerlink" href="#searchexpression" title="Permalink to this headline"> </a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="50%" />
-<col width="32%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Field Name</th>
-<th class="head">Type</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">metric</span></code> OR <code class="docutils literal notranslate"><span class="pre">parameter</span></code></td>
-<td><a class="reference internal" href="#mlflowmetricsearchexpression"><span class="std std-ref">MetricSearchExpression</span></a> OR <a class="reference internal" href="#mlflowparametersearchexpression"><span class="std std-ref">ParameterSearchExpression</span></a></td>
-<td><p class="first">If <code class="docutils literal notranslate"><span class="pre">metric</span></code>, a metric search expression.</p>
-<p class="last">If <code class="docutils literal notranslate"><span class="pre">parameter</span></code>, a parameter search expression.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="stringclause">
-<span id="mlflowstringclause"></span><h3>StringClause<a class="headerlink" href="#stringclause" title="Permalink to this headline"> </a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="22%" />
-<col width="56%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Field Name</th>
-<th class="head">Type</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>comparator</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>OneOf (“==”, “!=”, “~”)</td>
-</tr>
-<tr class="row-odd"><td>value</td>
-<td><code class="docutils literal notranslate"><span class="pre">STRING</span></code></td>
-<td>String value for comparison.</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="runstatus">
 <span id="mlflowrunstatus"></span><h3>RunStatus<a class="headerlink" href="#runstatus" title="Permalink to this headline"> </a></h3>
@@ -2044,38 +1809,6 @@ automatically by MLflow:</p>
 </tr>
 <tr class="row-even"><td>KILLED</td>
 <td>Run killed by user.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="sourcetype">
-<span id="mlflowsourcetype"></span><h3>SourceType<a class="headerlink" href="#sourcetype" title="Permalink to this headline"> </a></h3>
-<p>Source that generated a run.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="12%" />
-<col width="88%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Name</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>NOTEBOOK</td>
-<td>Databricks notebook environment.</td>
-</tr>
-<tr class="row-odd"><td>JOB</td>
-<td>Scheduled or Run Now job.</td>
-</tr>
-<tr class="row-even"><td>PROJECT</td>
-<td>As a prepackaged project: either a Docker image or GitHub source, etc.</td>
-</tr>
-<tr class="row-odd"><td>LOCAL</td>
-<td>Local run: Using CLI, IDE, or local notebook.</td>
-</tr>
-<tr class="row-even"><td>UNKNOWN</td>
-<td>Unknown source type.</td>
 </tr>
 </tbody>
 </table>
@@ -2145,7 +1878,7 @@ automatically by MLflow:</p>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -2154,6 +1887,7 @@ automatically by MLflow:</p>
   <script type="text/javascript" src="_static/jquery.js"></script>
   <script type="text/javascript" src="_static/underscore.js"></script>
   <script type="text/javascript" src="_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="_static/languagesections.js"></script>
   
 

@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow &mdash; MLflow 0.9.1 documentation</title>
+  <title>mlflow &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.azureml" href="/mlflow.azureml.html"/>
         <link rel="prev" title="Python API" href="/index.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.onnx.html">mlflow.onnx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
@@ -174,7 +175,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/python_api/mlflow.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -229,7 +230,7 @@ implement mutual exclusion manually.</p>
 
 <dl class="function">
 <dt id="mlflow.log_metric">
-<code class="descclassname">mlflow.</code><code class="descname">log_metric</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.log_metric" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.</code><code class="descname">log_metric</code><span class="sig-paren">(</span><em>key</em>, <em>value</em>, <em>step=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.log_metric" title="Permalink to this definition"> </a></dt>
 <dd><p>Log a metric under the current run, creating a run if necessary.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -238,6 +239,7 @@ implement mutual exclusion manually.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>key</strong> – Metric name (string).</li>
 <li><strong>value</strong> – Metric value (float).</li>
+<li><strong>step</strong> – Metric step (int). Defaults to zero if unspecified.</li>
 </ul>
 </td>
 </tr>
@@ -307,36 +309,33 @@ implement mutual exclusion manually.</p>
 
 <dl class="function">
 <dt id="mlflow.start_run">
-<code class="descclassname">mlflow.</code><code class="descname">start_run</code><span class="sig-paren">(</span><em>run_uuid=None</em>, <em>experiment_id=None</em>, <em>source_name=None</em>, <em>source_version=None</em>, <em>entry_point_name=None</em>, <em>source_type=None</em>, <em>run_name=None</em>, <em>nested=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.start_run" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.</code><code class="descname">start_run</code><span class="sig-paren">(</span><em>run_id=None</em>, <em>experiment_id=None</em>, <em>run_name=None</em>, <em>nested=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.start_run" title="Permalink to this definition"> </a></dt>
 <dd><p>Start a new MLflow run, setting it as the active run under which metrics and parameters
 will be logged. The return value can be used as a context manager within a <code class="docutils literal notranslate"><span class="pre">with</span></code> block;
 otherwise, you must call <code class="docutils literal notranslate"><span class="pre">end_run()</span></code> to terminate the current run.</p>
-<p>If you pass a <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> or the <code class="docutils literal notranslate"><span class="pre">MLFLOW_RUN_ID</span></code> environment variable is set,
+<p>If you pass a <code class="docutils literal notranslate"><span class="pre">run_id</span></code> or the <code class="docutils literal notranslate"><span class="pre">MLFLOW_RUN_ID</span></code> environment variable is set,
 <code class="docutils literal notranslate"><span class="pre">start_run</span></code> attempts to resume a run with the specified run ID and
-other parameters are ignored. <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> takes precedence over <code class="docutils literal notranslate"><span class="pre">MLFLOW_RUN_ID</span></code>.</p>
+other parameters are ignored. <code class="docutils literal notranslate"><span class="pre">run_id</span></code> takes precedence over <code class="docutils literal notranslate"><span class="pre">MLFLOW_RUN_ID</span></code>.</p>
+<p>MLflow sets a variety of default tags on the run, as defined in
+<a class="reference internal" href="../tracking.html#system-tags"><span class="std std-ref">MLflow system tags</span></a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>run_uuid</strong> – If specified, get the run with the specified UUID and log parameters
+<li><strong>run_id</strong> – If specified, get the run with the specified UUID and log parameters
 and metrics under that run. The run’s end time is unset and its status
 is set to running, but the run’s other attributes (<code class="docutils literal notranslate"><span class="pre">source_version</span></code>,
 <code class="docutils literal notranslate"><span class="pre">source_type</span></code>, etc.) are not changed.</li>
 <li><strong>experiment_id</strong> – ID of the experiment under which to create the current run (applicable
-only when <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> is not specified). If <code class="docutils literal notranslate"><span class="pre">experiment_id</span></code> argument
+only when <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is not specified). If <code class="docutils literal notranslate"><span class="pre">experiment_id</span></code> argument
 is unspecified, will look for valid experiment in the following order:
-activated using <code class="docutils literal notranslate"><span class="pre">set_experiment</span></code>, <code class="docutils literal notranslate"><span class="pre">MLFLOW_EXPERIMENT_ID</span></code> env variable,
-or the default experiment.</li>
-<li><strong>source_name</strong> – Name of the source file or URI of the project to be associated with the run.
-If none provided defaults to the current file.</li>
-<li><strong>source_version</strong> – Optional Git commit hash to associate with the run.</li>
-<li><strong>entry_point_name</strong> – Optional name of the entry point for the current run.</li>
-<li><strong>source_type</strong> – Integer <a class="reference internal" href="mlflow.entities.html#mlflow.entities.SourceType" title="mlflow.entities.SourceType"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.SourceType</span></code></a> describing the type
-of the run (“local”, “project”, etc.). Defaults to
-<a class="reference internal" href="mlflow.entities.html#mlflow.entities.SourceType.LOCAL" title="mlflow.entities.SourceType.LOCAL"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.SourceType.LOCAL</span></code></a> (“local”).</li>
-<li><strong>run_name</strong> – Name of new run. Used only when <code class="docutils literal notranslate"><span class="pre">run_uuid</span></code> is unspecified.</li>
-<li><strong>nested</strong> – Parameter which must be set to <code class="docutils literal notranslate"><span class="pre">True</span></code> to create nested runs.</li>
+activated using <code class="docutils literal notranslate"><span class="pre">set_experiment</span></code>, <code class="docutils literal notranslate"><span class="pre">MLFLOW_EXPERIMENT_NAME</span></code>
+environment variable, <code class="docutils literal notranslate"><span class="pre">MLFLOW_EXPERIMENT_ID</span></code> environment variable,
+or the default experiment as defined by the tracking server.</li>
+<li><strong>run_name</strong> – Name of new run (stored as a <code class="docutils literal notranslate"><span class="pre">mlflow.runName</span></code> tag).
+Used only when <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is unspecified.</li>
+<li><strong>nested</strong> – Controls whether run is nested in parent run. <code class="docutils literal notranslate"><span class="pre">True</span></code> creates a nest run.</li>
 </ul>
 </td>
 </tr>
@@ -443,7 +442,7 @@ with provided name.</p>
 
 <dl class="function">
 <dt id="mlflow.run">
-<code class="descclassname">mlflow.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_name=None</em>, <em>experiment_id=None</em>, <em>mode=None</em>, <em>cluster_spec=None</em>, <em>git_username=None</em>, <em>git_password=None</em>, <em>use_conda=True</em>, <em>storage_dir=None</em>, <em>block=True</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.run" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.</code><code class="descname">run</code><span class="sig-paren">(</span><em>uri</em>, <em>entry_point='main'</em>, <em>version=None</em>, <em>parameters=None</em>, <em>experiment_name=None</em>, <em>experiment_id=None</em>, <em>backend=None</em>, <em>backend_config=None</em>, <em>use_conda=True</em>, <em>storage_dir=None</em>, <em>synchronous=True</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.run" title="Permalink to this definition"> </a></dt>
 <dd><p>Run an MLflow project. The project can be local or stored at a Git URI.</p>
 <p>You can run the project locally or remotely on a Databricks.</p>
 <p>For information on using this method in chained workflows, see <a class="reference external" href="../projects.html#building-multistep-workflows">Building Multistep Workflows</a>.</p>
@@ -465,29 +464,28 @@ environment variable <code class="docutils literal notranslate"><span class="pre
 <li><strong>version</strong> – For Git-based projects, either a commit hash or a branch name.</li>
 <li><strong>experiment_name</strong> – Name of experiment under which to launch the run.</li>
 <li><strong>experiment_id</strong> – ID of experiment under which to launch the run.</li>
-<li><strong>mode</strong> – Execution mode of the run: “local” or “databricks”. If running against Databricks,
-will run against a Databricks workspace determined as follows: if a Databricks
-tracking URI of the form ‘databricks://profile’ has been set (e.g. by setting
-the MLFLOW_TRACKING_URI environment variable), will run against the workspace
-specified by &lt;profile&gt;. Otherwise, runs against the workspace specified by the
-default Databricks CLI profile.</li>
-<li><strong>cluster_spec</strong> – When <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “databricks”, dictionary or path to a JSON file
-containing a <a class="reference external" href="https://docs.databricks.com/api/latest/jobs.html#clusterspec">Databricks cluster specification</a>
-to use when launching a run.</li>
-<li><strong>git_username</strong> – Username for HTTP(S) authentication with Git.</li>
-<li><strong>git_password</strong> – Password for HTTP(S) authentication with Git.</li>
+<li><strong>backend</strong> – Execution backend for the run: “local” or “databricks”. If running against
+Databricks, will run against a Databricks workspace determined as follows: if
+a Databricks tracking URI of the form <code class="docutils literal notranslate"><span class="pre">databricks://profile</span></code> has been set
+(e.g. by setting the MLFLOW_TRACKING_URI environment variable), will run
+against the workspace specified by &lt;profile&gt;. Otherwise, runs against the
+workspace specified by the default Databricks CLI profile.</li>
+<li><strong>backend_config</strong> – A dictionary, or a path to a JSON file (must end in ‘.json’), which will
+be passed as config to the backend. For the Databricks backend, this
+should be a cluster spec: see <a class="reference external" href="https://docs.databricks.com/api/latest/jobs.html#jobsclusterspecnewcluster">Databricks Cluster Specs for Jobs</a>
+for more information.</li>
 <li><strong>use_conda</strong> – If True (the default), create a new Conda environment for the run and
 install project dependencies within that environment. Otherwise, run the
 project in the current environment without installing any project
 dependencies.</li>
-<li><strong>storage_dir</strong> – Used only if <code class="docutils literal notranslate"><span class="pre">mode</span></code> is “local”. MLflow downloads artifacts from
+<li><strong>storage_dir</strong> – Used only if <code class="docutils literal notranslate"><span class="pre">backend</span></code> is “local”. MLflow downloads artifacts from
 distributed URIs passed to parameters of type <code class="docutils literal notranslate"><span class="pre">path</span></code> to subdirectories of
 <code class="docutils literal notranslate"><span class="pre">storage_dir</span></code>.</li>
-<li><strong>block</strong> – Whether to block while waiting for a run to complete. Defaults to True.
-Note that if <code class="docutils literal notranslate"><span class="pre">block</span></code> is False and mode is “local”, this method will return, but
-the current process will block when exiting until the local run completes.
-If the current process is interrupted, any asynchronous runs launched via this
-method will be terminated.</li>
+<li><strong>synchronous</strong> – Whether to block while waiting for a run to complete. Defaults to True.
+Note that if <code class="docutils literal notranslate"><span class="pre">synchronous</span></code> is False and <code class="docutils literal notranslate"><span class="pre">backend</span></code> is “local”, this
+method will return, but the current process will block when exiting until
+the local run completes. If the current process is interrupted, any
+asynchronous runs launched via this method will be terminated.</li>
 <li><strong>run_id</strong> – Note: this argument is used internally by the MLflow project APIs and should
 not be specified. If specified, the run ID will be used instead of
 creating a new run.</li>
@@ -542,7 +540,7 @@ about the launched run.</p>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -551,6 +549,7 @@ about the launched run.</p>
   <script type="text/javascript" src="../_static/jquery.js"></script>
   <script type="text/javascript" src="../_static/underscore.js"></script>
   <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../_static/languagesections.js"></script>
   
 

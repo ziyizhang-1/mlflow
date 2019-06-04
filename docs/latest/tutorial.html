@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial &mdash; MLflow 0.9.1 documentation</title>
+  <title>Tutorial &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/tutorial.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="index.html"/>
         <link rel="next" title="Concepts" href="/concepts.html"/>
         <link rel="prev" title="Quickstart" href="/quickstart.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -162,7 +162,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -198,26 +198,38 @@ is from UCI’s <a class="reference external" href="http://archive.ics.uci.edu/m
 <p>To run this tutorial, you’ll need to:</p>
 <div class="plain-section docutils container">
 <div class="python docutils container">
-<ul class="simple">
-<li>Install MLflow (via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mlflow</span></code>)</li>
-<li>Install <a class="reference external" href="https://conda.io/docs/user-guide/install/index.html#">conda</a></li>
-<li>Clone (download) the MLflow repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/mlflow/mlflow</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">cd</span></code> into the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory within your clone of MLflow - we’ll use this working
+<ul>
+<li><p class="first">Install MLflow and scikit-learn. There are two options for installing these dependencies:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Install MLflow with extra dependencies, including scikit-learn
+(via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mlflow[extras]</span></code>)</li>
+<li>Install MLflow (via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mlflow</span></code>) and install scikit-learn separately
+(via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">sckit-learn</span></code>)</li>
+</ol>
+</div></blockquote>
+</li>
+<li><p class="first">Install <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a></p>
+</li>
+<li><p class="first">Clone (download) the MLflow repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/mlflow/mlflow</span></code></p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">cd</span></code> into the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory within your clone of MLflow - we’ll use this working
 directory for running the tutorial. We avoid running directly from our clone of MLflow as doing
 so would cause the tutorial to use MLflow from source, rather than your PyPI installation of
-MLflow.</li>
+MLflow.</p>
+</li>
 </ul>
 </div>
 <div class="r docutils container">
 <ul class="simple">
-<li>Install <a class="reference external" href="https://conda.io/docs/user-guide/install/index.html#">conda</a></li>
+<li>Install <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a></li>
 <li>Install the MLflow package (via <code class="docutils literal notranslate"><span class="pre">install.packages(&quot;mlflow&quot;)</span></code>)</li>
 <li>Install MLflow (via <code class="docutils literal notranslate"><span class="pre">mlflow::mlflow_install()</span></code>)</li>
 <li>Clone (download) the MLflow repository via <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/mlflow/mlflow</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">setwd()</span></code> into the <code class="docutils literal notranslate"><span class="pre">example</span></code> directory within your clone of MLflow - we’ll use this working
-directory for running the tutorial. We avoid running directly from our clone of MLflow as doing
-so would cause the tutorial to use MLflow from source, rather than your PyPI installation of
-MLflow.</li>
+<li><code class="docutils literal notranslate"><span class="pre">setwd()</span></code> into the <code class="docutils literal notranslate"><span class="pre">examples</span></code> directory within your clone of MLflow - we’ll use this
+working directory for running the tutorial. We avoid running directly from our clone of
+MLflow as doing so would cause the tutorial to use MLflow from source, rather than your
+PyPI installation of MLflow.</li>
 </ul>
 </div>
 </div>
@@ -323,6 +335,7 @@ model in a format that MLflow knows how to deploy.</p>
 
 library(mlflow)
 library(glmnet)
+library(carrier)
 
 set.seed(40)
 
@@ -345,7 +358,7 @@ lambda &lt;- mlflow_param(&quot;lambda&quot;, 0.5, &quot;numeric&quot;)
 
 with(mlflow_start_run(), {
     model &lt;- glmnet(train_x, train_y, alpha = alpha, lambda = lambda, family= &quot;gaussian&quot;, standardize = FALSE)
-    predictor &lt;- crate(~ glmnet::predict.glmnet(model, as.matrix(.x)), model)
+    predictor &lt;- crate(~ glmnet::predict.glmnet(!!model, as.matrix(.x)), !!model)
     predicted &lt;- predictor(test_x)
 
     rmse &lt;- sqrt(mean((predicted - test_y) ^ 2))
@@ -373,11 +386,11 @@ training run, like the hyperparameters <code class="docutils literal notranslate
 the root mean square error, used to evaluate the model. The example also serializes the
 model in a format that MLflow knows how to deploy.</p>
 <p>You can run the example with default hyperparameters as follows:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_run</span><span class="p">(</span><span class="n">uri</span> <span class="o">=</span> <span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> <span class="n">entry_point</span> <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>mlflow_run<span class="p">(</span>uri <span class="o">=</span> <span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> entry_point <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Try out some other values for <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">lambda</span></code> by passing them as arguments to <code class="docutils literal notranslate"><span class="pre">train.R</span></code>:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_run</span><span class="p">(</span><span class="n">uri</span> <span class="o">=</span> <span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> <span class="n">entry_point</span> <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">,</span> <span class="n">param_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> <span class="n">lambda</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>mlflow_run<span class="p">(</span>uri <span class="o">=</span> <span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> entry_point <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">,</span> parameters <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.1</span><span class="p">,</span> lambda <span class="o">=</span> <span class="m">0.5</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Each time you run the example, MLflow logs information about your experiment runs in the directory <code class="docutils literal notranslate"><span class="pre">mlruns</span></code>.</p>
@@ -396,7 +409,7 @@ as the one that contains the <code class="docutils literal notranslate"><span cl
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">ui</span>
 </pre></div>
 </div>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_ui</span><span class="p">()</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>mlflow_ui<span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -419,33 +432,33 @@ you can download this table as a CSV and use your favorite data munging software
 <p>Now that you have your training code, you can package it so that other data scientists can easily reuse the model, or so that you can run the training remotely, for example on Databricks.</p>
 <div class="plain-section docutils container">
 <div class="python docutils container">
-<p>You do this by using <a class="reference internal" href="projects.html"><span class="doc">MLflow Projects</span></a> conventions to specify the dependencies and entry points to your code. The <code class="docutils literal notranslate"><span class="pre">sklearn_elasticnet_wine/MLproject</span></code> file specifies that the project has the dependencies located in a <a class="reference external" href="https://conda.io/docs/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually">Conda environment file</a>
+<p>You do this by using <a class="reference internal" href="projects.html"><span class="doc">MLflow Projects</span></a> conventions to specify the dependencies and entry points to your code. The <code class="docutils literal notranslate"><span class="pre">sklearn_elasticnet_wine/MLproject</span></code> file specifies that the project has the dependencies located in a <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-file-manually">Conda environment file</a>
 called <code class="docutils literal notranslate"><span class="pre">conda.yaml</span></code> and has one entry point that takes two parameters: <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">l1_ratio</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># sklearn_elasticnet_wine/MLproject</span>
 
-<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial</span>
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial</span>
 
-<span class="nt">conda_env</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda.yaml</span>
+<span class="l l-Scalar l-Scalar-Plain">conda_env</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">conda.yaml</span>
 
-<span class="nt">entry_points</span><span class="p">:</span>
-  <span class="nt">main</span><span class="p">:</span>
-    <span class="nt">parameters</span><span class="p">:</span>
-      <span class="nt">alpha</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">float</span>
-      <span class="nt">l1_ratio</span><span class="p">:</span> <span class="p p-Indicator">{</span><span class="nt">type</span><span class="p">:</span> <span class="nv">float</span><span class="p p-Indicator">,</span><span class="nt"> default</span><span class="p">:</span> <span class="nv">0.1</span><span class="p p-Indicator">}</span>
-    <span class="nt">command</span><span class="p">:</span> <span class="s">&quot;python</span><span class="nv"> </span><span class="s">train.py</span><span class="nv"> </span><span class="s">{alpha}</span><span class="nv"> </span><span class="s">{l1_ratio}&quot;</span>
+<span class="l l-Scalar l-Scalar-Plain">entry_points</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">parameters</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">alpha</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">float</span>
+      <span class="l l-Scalar l-Scalar-Plain">l1_ratio</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">{</span><span class="nv">type</span><span class="p p-Indicator">:</span> <span class="nv">float</span><span class="p p-Indicator">,</span> <span class="nv">default</span><span class="p p-Indicator">:</span> <span class="nv">0.1</span><span class="p p-Indicator">}</span>
+    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="s">&quot;python</span><span class="nv"> </span><span class="s">train.py</span><span class="nv"> </span><span class="s">{alpha}</span><span class="nv"> </span><span class="s">{l1_ratio}&quot;</span>
 </pre></div>
 </div>
 <p>The Conda file lists the dependencies:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># sklearn_elasticnet_wine/conda.yaml</span>
 
-<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial</span>
-<span class="nt">channels</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tutorial</span>
+<span class="l l-Scalar l-Scalar-Plain">channels</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">defaults</span>
-<span class="nt">dependencies</span><span class="p">:</span>
+<span class="l l-Scalar l-Scalar-Plain">dependencies</span><span class="p p-Indicator">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">numpy=1.14.3</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandas=0.22.0</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scikit-learn=0.19.1</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pip</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip</span><span class="p p-Indicator">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mlflow</span>
 </pre></div>
 </div>
@@ -460,40 +473,40 @@ which you can run with <code class="docutils literal notranslate"><span class="p
 <p>The R dependencies file lists the dependencies:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># examples/r_wine/r-dependencies.txt</span>
 
-<span class="n">PackratFormat</span><span class="o">:</span> <span class="m">1.4</span>
-<span class="n">PackratVersion</span><span class="o">:</span> <span class="m">0.4.9.3</span>
-<span class="n">RVersion</span><span class="o">:</span> <span class="m">3.5.1</span>
-<span class="n">Repos</span><span class="o">:</span> <span class="n">CRAN</span><span class="o">=</span><span class="n">https</span><span class="o">://</span><span class="n">cran.rstudio.com</span><span class="o">/</span>
+PackratFormat<span class="o">:</span> <span class="m">1.4</span>
+PackratVersion<span class="o">:</span> <span class="m">0.4.9.3</span>
+RVersion<span class="o">:</span> <span class="m">3.5.1</span>
+Repos<span class="o">:</span> CRAN<span class="o">=</span>https<span class="o">://</span>cran.rstudio.com<span class="o">/</span>
 
-<span class="n">Package</span><span class="o">:</span> <span class="n">BH</span>
-<span class="n">Source</span><span class="o">:</span> <span class="n">CRAN</span>
-<span class="n">Version</span><span class="o">:</span> <span class="m">1.66.0-1</span>
-<span class="n">Hash</span><span class="o">:</span> <span class="m">4</span><span class="n">cc8883584b955ed01f38f68bc03af6d</span>
+Package<span class="o">:</span> BH
+Source<span class="o">:</span> CRAN
+Version<span class="o">:</span> <span class="m">1.66.0-1</span>
+Hash<span class="o">:</span> <span class="m">4</span>cc8883584b955ed01f38f68bc03af6d
 
-<span class="n">Package</span><span class="o">:</span> <span class="n">Matrix</span>
-<span class="n">Source</span><span class="o">:</span> <span class="n">CRAN</span>
-<span class="n">Version</span><span class="o">:</span> <span class="m">1.2-14</span>
-<span class="n">Hash</span><span class="o">:</span> <span class="m">521</span><span class="n">aa8772a1941dfdb007bf532d19dde</span>
-<span class="n">Requires</span><span class="o">:</span> <span class="n">lattice</span>
+Package<span class="o">:</span> Matrix
+Source<span class="o">:</span> CRAN
+Version<span class="o">:</span> <span class="m">1.2-14</span>
+Hash<span class="o">:</span> <span class="m">521</span>aa8772a1941dfdb007bf532d19dde
+Requires<span class="o">:</span> lattice
 
 <span class="kc">...</span>
 </pre></div>
 </div>
 <p>To run this project, invoke:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_run</span><span class="p">(</span><span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> <span class="n">entry_point</span> <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">,</span> <span class="n">param_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span>mlflow_run<span class="p">(</span><span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> entry_point <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">,</span> parameters <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>After running this command, MLflow runs your training code in a new R session.</p>
 <p>To restore the dependencies specified in <code class="docutils literal notranslate"><span class="pre">r-dependencies.txt</span></code>, you can run instead:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_restore_snapshot</span><span class="p">()</span>
-<span class="nf">mlflow_run</span><span class="p">(</span><span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> <span class="n">entry_point</span> <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">,</span> <span class="n">param_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span>mlflow_restore_snapshot<span class="p">()</span>
+mlflow_run<span class="p">(</span><span class="s">&quot;examples/r_wine&quot;</span><span class="p">,</span> entry_point <span class="o">=</span> <span class="s">&quot;train.R&quot;</span><span class="p">,</span> parameters <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>You can also run a project directly from GitHub. This tutorial is duplicated in the <a class="reference external" href="https://github.com/rstudio/mlflow-example">https://github.com/rstudio/mlflow-example</a> repository which you can run with:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_run</span><span class="p">(</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span>mlflow_run<span class="p">(</span>
   <span class="s">&quot;train.R&quot;</span><span class="p">,</span>
   <span class="s">&quot;https://github.com/rstudio/mlflow-example&quot;</span><span class="p">,</span>
-  <span class="n">param_list</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span>
+  parameters <span class="o">=</span> <span class="kt">list</span><span class="p">(</span>alpha <span class="o">=</span> <span class="m">0.2</span><span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -522,21 +535,21 @@ The first file, <code class="docutils literal notranslate"><span class="pre">MLm
 second file, <code class="docutils literal notranslate"><span class="pre">model.pkl</span></code>, is a serialized version of the linear regression model that you trained.</p>
 <p>In this example, you can use this MLmodel format with MLflow to deploy a local REST server that can serve predictions.</p>
 <p>To deploy the server, run (replace the path with your model’s actual path):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow pyfunc serve -m /Users/mlflow/mlflow-prototype/mlruns/0/7c1a0d5c42844dcdb8f5191146925174/artifacts/model -p <span class="m">1234</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow models serve -m /Users/mlflow/mlflow-prototype/mlruns/0/7c1a0d5c42844dcdb8f5191146925174/artifacts/model -p <span class="m">1234</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">The version of Python used to create the model must be the same as the one running <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">sklearn</span></code>.
+<p class="last">The version of Python used to create the model must be the same as the one running <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">models</span> <span class="pre">serve</span></code>.
 If this is not the case, you may see the error
 <code class="docutils literal notranslate"><span class="pre">UnicodeDecodeError:</span> <span class="pre">'ascii'</span> <span class="pre">codec</span> <span class="pre">can't</span> <span class="pre">decode</span> <span class="pre">byte</span> <span class="pre">0x9f</span> <span class="pre">in</span> <span class="pre">position</span> <span class="pre">1:</span> <span class="pre">ordinal</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">range(128)</span></code>
 or <code class="docutils literal notranslate"><span class="pre">raise</span> <span class="pre">ValueError,</span> <span class="pre">&quot;unsupported</span> <span class="pre">pickle</span> <span class="pre">protocol:</span> <span class="pre">%d&quot;</span></code>.</p>
 </div>
 <p>Once you have deployed the server, you can pass it some sample data and see the
 predictions. The following example uses <code class="docutils literal notranslate"><span class="pre">curl</span></code> to send a JSON-serialized pandas DataFrame
-with the <code class="docutils literal notranslate"><span class="pre">split</span></code> orientation to the pyfunc server. For more information about the input data
-formats accepted by the pyfunc model server, see the
-<a class="reference internal" href="models.html#pyfunc-deployment"><span class="std std-ref">MLflow deployment tools documentation</span></a>.</p>
+with the <code class="docutils literal notranslate"><span class="pre">split</span></code> orientation to the model server. For more information about the input data
+formats accepted by the model server, see the
+<a class="reference internal" href="models.html#local-model-deployment"><span class="std std-ref">MLflow deployment tools documentation</span></a>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -X POST -H <span class="s2">&quot;Content-Type:application/json; format=pandas-split&quot;</span> --data <span class="s1">&#39;{&quot;columns&quot;:[&quot;alcohol&quot;, &quot;chlorides&quot;, &quot;citric acid&quot;, &quot;density&quot;, &quot;fixed acidity&quot;, &quot;free sulfur dioxide&quot;, &quot;pH&quot;, &quot;residual sugar&quot;, &quot;sulphates&quot;, &quot;total sulfur dioxide&quot;, &quot;volatile acidity&quot;],&quot;data&quot;:[[12.8, 0.029, 0.48, 0.98, 6.2, 29, 3.33, 1.2, 0.39, 75, 0.66]]}&#39;</span> http://127.0.0.1:1234/invocations
 </pre></div>
 </div>
@@ -546,7 +559,7 @@ formats accepted by the pyfunc model server, see the
 </div>
 </div>
 <div class="r docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_log_model</span><span class="p">(</span><span class="n">predictor</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span>mlflow_log_model<span class="p">(</span>predictor<span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>To view this artifact, you can use the UI again. When you click a date in the list of experiment
@@ -558,7 +571,7 @@ The first file, <code class="docutils literal notranslate"><span class="pre">MLm
 second file, <code class="docutils literal notranslate"><span class="pre">r_model.bin</span></code>, is a serialized version of the linear regression model that you trained.</p>
 <p>In this example, you can use this MLmodel format with MLflow to deploy a local REST server that can serve predictions.</p>
 <p>To deploy the server, run:</p>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_rfunc_serve</span><span class="p">(</span><span class="n">model_path</span> <span class="o">=</span> <span class="s">&quot;model&quot;</span><span class="p">,</span> <span class="n">run_uuid</span> <span class="o">=</span> <span class="s">&quot;1bf3cca7f3814d8fac7be7874de1046d&quot;</span><span class="p">)</span>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span>mlflow_rfunc_serve<span class="p">(</span>model_uri<span class="o">=</span><span class="s">&quot;mlruns/0/c2a7325210ef4242bd4631cec8f92351/artifacts/model&quot;</span><span class="p">,</span> port<span class="o">=</span><span class="m">8090</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This initializes a REST server and opens a <a class="reference external" href="https://swagger.io/">Swagger</a> interface to perform predictions against
@@ -570,18 +583,36 @@ the REST API:</p>
 the prediction function matches the model, set <code class="docutils literal notranslate"><span class="pre">restore</span> <span class="pre">=</span> <span class="pre">TRUE</span></code> when calling
 <code class="docutils literal notranslate"><span class="pre">mlflow_rfunc_serve()</span></code>.</p>
 </div>
-<p>To serve a prediction, run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -X POST <span class="s2">&quot;http://127.0.0.1:8090/predict/&quot;</span> -H <span class="s2">&quot;accept: application/json&quot;</span> -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -d <span class="s2">&quot;{\&quot;fixed acidity\&quot;: 6.2, \&quot;volatile acidity\&quot;: 0.66, \&quot;citric acid\&quot;: 0.48, \&quot;residual sugar\&quot;: 1.2, \&quot;chlorides\&quot;: 0.029, \&quot;free sulfur dioxide\&quot;: 29, \&quot;total sulfur dioxide\&quot;: 75, \&quot;density\&quot;: 0.98, \&quot;pH\&quot;: 3.33, \&quot;sulphates\&quot;: 0.39, \&quot;alcohol\&quot;: 12.8}&quot;</span>
+<p>To serve a prediction, enter this in the Swagger UI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;fixed acidity&quot;</span><span class="p">:</span> <span class="mf">6.2</span><span class="p">,</span>
+  <span class="s2">&quot;volatile acidity&quot;</span><span class="p">:</span> <span class="mf">0.66</span><span class="p">,</span>
+  <span class="s2">&quot;citric acid&quot;</span><span class="p">:</span> <span class="mf">0.48</span><span class="p">,</span>
+  <span class="s2">&quot;residual sugar&quot;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>
+  <span class="s2">&quot;chlorides&quot;</span><span class="p">:</span> <span class="mf">0.029</span><span class="p">,</span>
+  <span class="s2">&quot;free sulfur dioxide&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+  <span class="s2">&quot;total sulfur dioxide&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+  <span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="mf">0.98</span><span class="p">,</span>
+  <span class="s2">&quot;pH&quot;</span><span class="p">:</span> <span class="mf">3.33</span><span class="p">,</span>
+  <span class="s2">&quot;sulphates&quot;</span><span class="p">:</span> <span class="mf">0.39</span><span class="p">,</span>
+  <span class="s2">&quot;alcohol&quot;</span><span class="p">:</span> <span class="mf">12.8</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>which should return something like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;predictions&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">[</span>
-      <span class="mf">6.1312</span>
-    <span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">[</span>
+    <span class="mf">6.4287492410792</span>
   <span class="p">]</span>
-<span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Or run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -X POST <span class="s2">&quot;http://127.0.0.1:8090/predict/&quot;</span> -H <span class="s2">&quot;accept: application/json&quot;</span> -H <span class="s2">&quot;Content-Type: application/json&quot;</span> -d <span class="s2">&quot;{\&quot;fixed acidity\&quot;: 6.2, \&quot;volatile acidity\&quot;: 0.66, \&quot;citric acid\&quot;: 0.48, \&quot;residual sugar\&quot;: 1.2, \&quot;chlorides\&quot;: 0.029, \&quot;free sulfur dioxide\&quot;: 29, \&quot;total sulfur dioxide\&quot;: 75, \&quot;density\&quot;: 0.98, \&quot;pH\&quot;: 3.33, \&quot;sulphates\&quot;: 0.39, \&quot;alcohol\&quot;: 12.8}&quot;</span>
+</pre></div>
+</div>
+<p>the server should respond with output similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">6.4287492410792</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -640,7 +671,7 @@ the prediction function matches the model, set <code class="docutils literal not
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -649,6 +680,7 @@ the prediction function matches the model, set <code class="docutils literal not
   <script type="text/javascript" src="_static/jquery.js"></script>
   <script type="text/javascript" src="_static/underscore.js"></script>
   <script type="text/javascript" src="_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="_static/languagesections.js"></script>
   
 

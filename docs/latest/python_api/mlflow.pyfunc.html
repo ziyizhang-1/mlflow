@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.pyfunc &mdash; MLflow 0.9.1 documentation</title>
+  <title>mlflow.pyfunc &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.pyfunc.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.pytorch" href="/mlflow.pytorch.html"/>
         <link rel="prev" title="mlflow.projects" href="/mlflow.projects.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.onnx.html">mlflow.onnx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.pyfunc</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#filesystem-format">Filesystem format</a><ul>
@@ -186,7 +187,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.pyfunc.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/python_api/mlflow.pyfunc.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -225,8 +226,8 @@ following parameters:</p>
 <li><dl class="first docutils">
 <dt>loader_module [required]:</dt>
 <dd><p class="first">Python module that can load the model. Expected as module identifier
-e.g. <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code>, it will be imported via <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code>.
-The imported module must contain function with the following signature:</p>
+e.g. <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code>, it will be imported using <code class="docutils literal notranslate"><span class="pre">importlib.import_module</span></code>.
+The imported module must contain a function with the following signature:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_load_pyfunc</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&lt;</span><span class="n">pyfunc</span> <span class="n">model</span><span class="o">&gt;</span>
 </pre></div>
 </div>
@@ -357,7 +358,7 @@ REPL.</li>
 <ul class="simple">
 <li>Inference logic is always persisted as code, rather than a Python object. This makes logic
 easier to inspect and modify later.</li>
-<li>If the user has already collected all of their model data in a single location, the second
+<li>If you have already collected all of your model data in a single location, the second
 workflow allows it to be saved in MLflow format directly, without enumerating constituent
 artifacts.</li>
 </ul>
@@ -395,24 +396,28 @@ Values must be YAML-serializable.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="mlflow.pyfunc.get_module_loader_src">
-<code class="descclassname">mlflow.pyfunc.</code><code class="descname">get_module_loader_src</code><span class="sig-paren">(</span><em>src_path</em>, <em>dst_path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.get_module_loader_src" title="Permalink to this definition"> </a></dt>
-<dd><p>Generate Python source of the model loader.</p>
-<p>Model loader contains <code class="docutils literal notranslate"><span class="pre">load_pyfunc</span></code> method with no parameters. It hardcodes model
-loading of the given model into a Python source. This is done so that the exported model has no
-unnecessary dependencies on MLflow or any other configuration file format or parsing library.</p>
+<dt id="mlflow.pyfunc.load_model">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>model_uri</em>, <em>suppress_warnings=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.load_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Load a model stored in Python function format.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>src_path</strong> – Current path to the model.</li>
-<li><strong>dst_path</strong> – Relative or absolute path where the model will be stored in the deployment
-environment.</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model_uri</strong> – <p>The location, in URI format, of the MLflow model. For example:</p>
+<ul>
+<li><code class="docutils literal notranslate"><span class="pre">/Users/me/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">relative/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">s3://my_bucket/path/to/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">runs:/&lt;mlflow_run_id&gt;/run-relative/path/to/model</span></code></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Python source code of the model loader as string.</p>
+<p>For more information about supported URI schemes, see
+<a class="reference external" href="https://www.mlflow.org/docs/latest/tracking.html#artifact-locations">Referencing Artifacts</a>.</p>
+</li>
+<li><strong>suppress_warnings</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, non-fatal warning messages associated with the model
+loading process will be suppressed. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, these warning
+messages will be emitted.</li>
+</ul>
 </td>
 </tr>
 </tbody>
@@ -421,18 +426,30 @@ environment.</li>
 
 <dl class="function">
 <dt id="mlflow.pyfunc.load_pyfunc">
-<code class="descclassname">mlflow.pyfunc.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em>, <em>suppress_warnings=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.load_pyfunc" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a model stored in Python function format.</p>
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">load_pyfunc</code><span class="sig-paren">(</span><em>model_uri</em>, <em>suppress_warnings=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.load_pyfunc" title="Permalink to this definition"> </a></dt>
+<dd><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Deprecated since 1.0: This method will be removed in a near future release. Use <code class="docutils literal notranslate"><span class="pre">pyfunc.load_model</span></code> instead.</p>
+</div>
+<p>Load a model stored in Python function format.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>path</strong> – Path to the model.</li>
-<li><strong>run_id</strong> – MLflow run ID.</li>
-<li><strong>suppress_warnings</strong> – If True, non-fatal warning messages associated with the model
-loading process will be suppressed. If False, these warning messages
-will be emitted.</li>
+<li><strong>model_uri</strong> – <p>The location, in URI format, of the MLflow model. For example:</p>
+<ul>
+<li><code class="docutils literal notranslate"><span class="pre">/Users/me/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">relative/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">s3://my_bucket/path/to/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">runs:/&lt;mlflow_run_id&gt;/run-relative/path/to/model</span></code></li>
+</ul>
+<p>For more information about supported URI schemes, see
+<a class="reference external" href="https://www.mlflow.org/docs/latest/tracking.html#artifact-locations">Referencing Artifacts</a>.</p>
+</li>
+<li><strong>suppress_warnings</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, non-fatal warning messages associated with the model
+loading process will be suppressed. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, these warning
+messages will be emitted.</li>
 </ul>
 </td>
 </tr>
@@ -455,9 +472,9 @@ and the parameters for the second workflow: <code class="docutils literal notran
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>artifact_path</strong> – The run-relative artifact path to which to log the Python model.</li>
-<li><strong>loader_module</strong> – <p>The name of the Python module that will be used to load the model
+<li><strong>loader_module</strong> – <p>The name of the Python module that is used to load the model
 from <code class="docutils literal notranslate"><span class="pre">data_path</span></code>. This module must define a method with the prototype
-<code class="docutils literal notranslate"><span class="pre">_load_pyfunc(data_path)</span></code>. If not <em>None</em>, this module and its
+<code class="docutils literal notranslate"><span class="pre">_load_pyfunc(data_path)</span></code>. If not <code class="docutils literal notranslate"><span class="pre">None</span></code>, this module and its
 dependencies must be included in one of the following locations:</p>
 <ul>
 <li>The MLflow library.</li>
@@ -468,14 +485,14 @@ the <code class="docutils literal notranslate"><span class="pre">conda_env</span
 </li>
 <li><strong>data_path</strong> – Path to a file or directory containing model data.</li>
 <li><strong>code_path</strong> – A list of local filesystem paths to Python file dependencies (or directories
-containing file dependencies). These files will be <em>prepended</em> to the system
+containing file dependencies). These files are <em>prepended</em> to the system
 path before the model is loaded.</li>
 <li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
 Conda environment yaml file. This decribes the environment this model should
-be run in. If <code class="docutils literal notranslate"><span class="pre">python_model</span></code> is not <em>None</em>, the Conda environment must
+be run in. If <code class="docutils literal notranslate"><span class="pre">python_model</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, the Conda environment must
 at least specify the dependencies contained in
-<code class="xref py py-data docutils literal notranslate"><span class="pre">mlflow.pyfunc.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
-<code class="xref py py-data docutils literal notranslate"><span class="pre">mlflow.pyfunc.DEFAULT_CONDA_ENV</span></code> environment will be added to the
+<a class="reference internal" href="#mlflow.pyfunc.get_default_conda_env" title="mlflow.pyfunc.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <cite>None</cite>, the default
+<a class="reference internal" href="#mlflow.pyfunc.get_default_conda_env" title="mlflow.pyfunc.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a> environment is added to the
 model. The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -489,7 +506,7 @@ environment:</p>
 </pre></div>
 </div>
 </li>
-<li><strong>python_model</strong> – <p>An instance of a subclass of <a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a>. This class will be
+<li><strong>python_model</strong> – <p>An instance of a subclass of <a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a>. This class is
 serialized using the CloudPickle library. Any dependencies of the class
 should be included in one of the following locations:</p>
 <blockquote>
@@ -505,7 +522,7 @@ defined in the <code class="docutils literal notranslate"><span class="pre">__ma
 included in one of the listed locations.</p>
 </li>
 <li><strong>artifacts</strong> – <p>A dictionary containing <code class="docutils literal notranslate"><span class="pre">&lt;name,</span> <span class="pre">artifact_uri&gt;</span></code> entries. Remote artifact URIs
-will be resolved to absolute filesystem paths, producing a dictionary of
+are resolved to absolute filesystem paths, producing a dictionary of
 <code class="docutils literal notranslate"><span class="pre">&lt;name,</span> <span class="pre">absolute_path&gt;</span></code> entries. <code class="docutils literal notranslate"><span class="pre">python_model</span></code> can reference these
 resolved entries as the <code class="docutils literal notranslate"><span class="pre">artifacts</span></code> property of the <code class="docutils literal notranslate"><span class="pre">context</span></code> parameter
 in <a class="reference internal" href="#mlflow.pyfunc.PythonModel.load_context" title="mlflow.pyfunc.PythonModel.load_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">PythonModel.load_context()</span></code></a>
@@ -516,10 +533,10 @@ For example, consider the following <code class="docutils literal notranslate"><
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In this case, the <code class="docutils literal notranslate"><span class="pre">&quot;my_file&quot;</span></code> artifact will be downloaded from S3. The
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">&quot;my_file&quot;</span></code> artifact is downloaded from S3. The
 <code class="docutils literal notranslate"><span class="pre">python_model</span></code> can then refer to <code class="docutils literal notranslate"><span class="pre">&quot;my_file&quot;</span></code> as an absolute filesystem
 path via <code class="docutils literal notranslate"><span class="pre">context.artifacts[&quot;my_file&quot;]</span></code>.</p>
-<p>If <em>None</em>, no artifacts will be added to the model.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no artifacts are added to the model.</p>
 </li>
 </ul>
 </td>
@@ -530,7 +547,7 @@ path via <code class="docutils literal notranslate"><span class="pre">context.ar
 
 <dl class="function">
 <dt id="mlflow.pyfunc.save_model">
-<code class="descclassname">mlflow.pyfunc.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>dst_path</em>, <em>loader_module=None</em>, <em>data_path=None</em>, <em>code_path=None</em>, <em>conda_env=None</em>, <em>model=&lt;mlflow.models.Model object&gt;</em>, <em>python_model=None</em>, <em>artifacts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.save_model" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">save_model</code><span class="sig-paren">(</span><em>path</em>, <em>loader_module=None</em>, <em>data_path=None</em>, <em>code_path=None</em>, <em>conda_env=None</em>, <em>model=&lt;mlflow.models.Model object&gt;</em>, <em>python_model=None</em>, <em>artifacts=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.save_model" title="Permalink to this definition"> </a></dt>
 <dd><p>Create a custom Pyfunc model, incorporating custom inference logic and data dependencies.</p>
 <p>For information about the workflows that this method supports, please see <a class="reference internal" href="#pyfunc-create-custom-workflows"><span class="std std-ref">“workflows for
 creating custom pyfunc models”</span></a> and
@@ -543,10 +560,10 @@ specified together.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>dst_path</strong> – The path to which to save the Python model.</li>
-<li><strong>loader_module</strong> – <p>The name of the Python module that will be used to load the model
+<li><strong>path</strong> – The path to which to save the Python model.</li>
+<li><strong>loader_module</strong> – <p>The name of the Python module that is used to load the model
 from <code class="docutils literal notranslate"><span class="pre">data_path</span></code>. This module must define a method with the prototype
-<code class="docutils literal notranslate"><span class="pre">_load_pyfunc(data_path)</span></code>. If not <em>None</em>, this module and its
+<code class="docutils literal notranslate"><span class="pre">_load_pyfunc(data_path)</span></code>. If not <code class="docutils literal notranslate"><span class="pre">None</span></code>, this module and its
 dependencies must be included in one of the following locations:</p>
 <ul>
 <li>The MLflow library.</li>
@@ -557,14 +574,14 @@ the <code class="docutils literal notranslate"><span class="pre">conda_env</span
 </li>
 <li><strong>data_path</strong> – Path to a file or directory containing model data.</li>
 <li><strong>code_path</strong> – A list of local filesystem paths to Python file dependencies (or directories
-containing file dependencies). These files will be <em>prepended</em> to the system
+containing file dependencies). These files are <em>prepended</em> to the system
 path before the model is loaded.</li>
 <li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
 Conda environment yaml file. This decribes the environment this model should
 be run in. If <code class="docutils literal notranslate"><span class="pre">python_model</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, the Conda environment must
 at least specify the dependencies contained in
-<code class="xref py py-data docutils literal notranslate"><span class="pre">mlflow.pyfunc.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
-<code class="xref py py-data docutils literal notranslate"><span class="pre">mlflow.pyfunc.DEFAULT_CONDA_ENV</span></code> environment will be added to the
+<a class="reference internal" href="#mlflow.pyfunc.get_default_conda_env" title="mlflow.pyfunc.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the default
+<a class="reference internal" href="#mlflow.pyfunc.get_default_conda_env" title="mlflow.pyfunc.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a> environment is added to the
 model. The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -578,7 +595,7 @@ environment:</p>
 </pre></div>
 </div>
 </li>
-<li><strong>python_model</strong> – <p>An instance of a subclass of <a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a>. This class will be
+<li><strong>python_model</strong> – <p>An instance of a subclass of <a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a>. This class is
 serialized using the CloudPickle library. Any dependencies of the class
 should be included in one of the following locations:</p>
 <blockquote>
@@ -594,7 +611,7 @@ defined in the <code class="docutils literal notranslate"><span class="pre">__ma
 included in one of the listed locations.</p>
 </li>
 <li><strong>artifacts</strong> – <p>A dictionary containing <code class="docutils literal notranslate"><span class="pre">&lt;name,</span> <span class="pre">artifact_uri&gt;</span></code> entries. Remote artifact URIs
-will be resolved to absolute filesystem paths, producing a dictionary of
+are resolved to absolute filesystem paths, producing a dictionary of
 <code class="docutils literal notranslate"><span class="pre">&lt;name,</span> <span class="pre">absolute_path&gt;</span></code> entries. <code class="docutils literal notranslate"><span class="pre">python_model</span></code> can reference these
 resolved entries as the <code class="docutils literal notranslate"><span class="pre">artifacts</span></code> property of the <code class="docutils literal notranslate"><span class="pre">context</span></code> parameter
 in <a class="reference internal" href="#mlflow.pyfunc.PythonModel.load_context" title="mlflow.pyfunc.PythonModel.load_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">PythonModel.load_context()</span></code></a>
@@ -605,10 +622,10 @@ For example, consider the following <code class="docutils literal notranslate"><
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In this case, the <code class="docutils literal notranslate"><span class="pre">&quot;my_file&quot;</span></code> artifact will be downloaded from S3. The
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">&quot;my_file&quot;</span></code> artifact is downloaded from S3. The
 <code class="docutils literal notranslate"><span class="pre">python_model</span></code> can then refer to <code class="docutils literal notranslate"><span class="pre">&quot;my_file&quot;</span></code> as an absolute filesystem
 path via <code class="docutils literal notranslate"><span class="pre">context.artifacts[&quot;my_file&quot;]</span></code>.</p>
-<p>If <em>None</em>, no artifacts will be added to the model.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no artifacts are added to the model.</p>
 </li>
 </ul>
 </td>
@@ -619,14 +636,14 @@ path via <code class="docutils literal notranslate"><span class="pre">context.ar
 
 <dl class="function">
 <dt id="mlflow.pyfunc.spark_udf">
-<code class="descclassname">mlflow.pyfunc.</code><code class="descname">spark_udf</code><span class="sig-paren">(</span><em>spark</em>, <em>path</em>, <em>run_id=None</em>, <em>result_type='double'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.spark_udf" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">spark_udf</code><span class="sig-paren">(</span><em>spark</em>, <em>model_uri</em>, <em>result_type='double'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.spark_udf" title="Permalink to this definition"> </a></dt>
 <dd><p>A Spark UDF that can be used to invoke the Python function formatted model.</p>
 <p>Parameters passed to the UDF are forwarded to the model as a DataFrame where the names are
 ordinals (0, 1, …).</p>
 <p>The predictions are filtered to contain only the columns that can be represented as the
 <code class="docutils literal notranslate"><span class="pre">result_type</span></code>. If the <code class="docutils literal notranslate"><span class="pre">result_type</span></code> is string or array of strings, all predictions are
 converted to string. If the result type is not an array type, the left most column with
-matching type will be returned.</p>
+matching type is returned.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">predict</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">spark_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="s2">&quot;/my/local/model&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;prediction&quot;</span><span class="p">,</span> <span class="n">predict</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -637,36 +654,43 @@ matching type will be returned.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>spark</strong> – A SparkSession object.</li>
-<li><strong>path</strong> – A path containing a <a class="reference internal" href="#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> model.</li>
-<li><strong>run_id</strong> – ID of the run that produced this model. If provided, <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is used to
-retrieve the model logged with MLflow.</li>
-<li><strong>result_type</strong> – <p>the return type of the user-defined function. The value can be either a
-<code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.types.DataType</span></code> object or a DDL-formatted type string.
-Only a primitive type or an array (pyspark.sql.types.ArrayType) of primitive
-types are allowed. The following classes of result type are supported:
-- “int” or pyspark.sql.types.IntegerType: The leftmost integer that can fit</p>
-<blockquote>
-<div>in int32 result is returned or exception is raised if there is none.</div></blockquote>
+<li><strong>model_uri</strong> – <p>The location, in URI format, of the MLflow model with the
+<a class="reference internal" href="#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a> flavor. For example:</p>
 <ul>
-<li>”long” or pyspark.sql.types.LongType: The leftmost long integer that can
-fit in int64 result is returned or exception is raised if there is none.</li>
-<li>ArrayType(IntegerType|LongType): Return all integer columns that can fit
-into the requested size.</li>
-<li>”float” or pyspark.sql.types.FloatType: The leftmost numeric result cast
-to float32 is returned or exception is raised if there is none.</li>
-<li>”double” or pyspark.sql.types.DoubleType: The leftmost numeric result cast
-to double is returned or exception is raised if there is none..</li>
-<li>ArrayType(FloatType|DoubleType): Return all numeric columns cast to the
-requested type. Exception is raised if there are no numeric columns.</li>
-<li>”string” or pyspark.sql.types.StringType: Result is the leftmost column
-converted to string.</li>
-<li>ArrayType(StringType): Return all columns converted to string.</li>
+<li><code class="docutils literal notranslate"><span class="pre">/Users/me/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">relative/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">s3://my_bucket/path/to/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">runs:/&lt;mlflow_run_id&gt;/run-relative/path/to/model</span></code></li>
+</ul>
+<p>For more information about supported URI schemes, see
+<a class="reference external" href="https://www.mlflow.org/docs/latest/tracking.html#artifact-locations">Referencing Artifacts</a>.</p>
+</li>
+<li><strong>result_type</strong> – <p>the return type of the user-defined function. The value can be either a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.types.DataType</span></code> object or a DDL-formatted type string. Only a primitive
+type or an array <code class="docutils literal notranslate"><span class="pre">pyspark.sql.types.ArrayType</span></code> of primitive type are allowed.
+The following classes of result type are supported:</p>
+<ul>
+<li>”int” or <code class="docutils literal notranslate"><span class="pre">pyspark.sql.types.IntegerType</span></code>: The leftmost integer that can fit in an
+<code class="docutils literal notranslate"><span class="pre">int32</span></code> or an exception if there is none.</li>
+<li>”long” or <code class="docutils literal notranslate"><span class="pre">pyspark.sql.types.LongType</span></code>: The leftmost long integer that can fit in an
+<code class="docutils literal notranslate"><span class="pre">int64</span></code> or an exception if there is none.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ArrayType(IntegerType|LongType)</span></code>: All integer columns that can fit into the requested
+size.</li>
+<li>”float” or <code class="docutils literal notranslate"><span class="pre">pyspark.sql.types.FloatType</span></code>: The leftmost numeric result cast to
+<code class="docutils literal notranslate"><span class="pre">float32</span></code> or an exception if there is none.</li>
+<li>”double” or <code class="docutils literal notranslate"><span class="pre">pyspark.sql.types.DoubleType</span></code>: The leftmost numeric result cast to
+<code class="docutils literal notranslate"><span class="pre">double</span></code> or an exception if there is none.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ArrayType(FloatType|DoubleType)</span></code>: All numeric columns cast to the requested type or
+an exception if there are no numeric columns.</li>
+<li>”string” or <code class="docutils literal notranslate"><span class="pre">pyspark.sql.types.StringType</span></code>: The leftmost column converted to <code class="docutils literal notranslate"><span class="pre">string</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">ArrayType(StringType)</span></code>: All columns converted to <code class="docutils literal notranslate"><span class="pre">string</span></code>.</li>
 </ul>
 </li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Spark UDF which will apply model’s prediction method to the data. Default double.</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Spark UDF that applies the model’s <code class="docutils literal notranslate"><span class="pre">predict</span></code> method to the data and returns a
+type specified by <code class="docutils literal notranslate"><span class="pre">result_type</span></code>, which by default is a double.</p>
 </td>
 </tr>
 </tbody>
@@ -675,6 +699,22 @@ converted to string.</li>
 
 </div>
 </div>
+<dl class="function">
+<dt id="mlflow.pyfunc.get_default_conda_env">
+<code class="descclassname">mlflow.pyfunc.</code><code class="descname">get_default_conda_env</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.get_default_conda_env" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The default Conda environment for MLflow Models produced by calls to
+<a class="reference internal" href="#mlflow.pyfunc.save_model" title="mlflow.pyfunc.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a>
+and <a class="reference internal" href="#mlflow.pyfunc.log_model" title="mlflow.pyfunc.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model()</span></code></a> when a user-defined subclass of
+<a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a> is provided.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="class">
 <dt id="mlflow.pyfunc.PythonModelContext">
 <em class="property">class </em><code class="descclassname">mlflow.pyfunc.</code><code class="descname">PythonModelContext</code><a class="headerlink" href="#mlflow.pyfunc.PythonModelContext" title="Permalink to this definition"> </a></dt>
@@ -686,8 +726,16 @@ by the <code class="docutils literal notranslate"><span class="pre">artifacts</s
 <dl class="attribute">
 <dt id="mlflow.pyfunc.PythonModelContext.artifacts">
 <code class="descname">artifacts</code><a class="headerlink" href="#mlflow.pyfunc.PythonModelContext.artifacts" title="Permalink to this definition"> </a></dt>
-<dd><p><em>return</em> – A dictionary containing <code class="docutils literal notranslate"><span class="pre">&lt;name,</span> <span class="pre">artifact_path&gt;</span></code> entries, where <code class="docutils literal notranslate"><span class="pre">artifact_path</span></code>
+<dd><p>A dictionary containing <code class="docutils literal notranslate"><span class="pre">&lt;name,</span> <span class="pre">artifact_path&gt;</span></code> entries, where <code class="docutils literal notranslate"><span class="pre">artifact_path</span></code>
 is an absolute filesystem path to the artifact.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">return</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -704,7 +752,7 @@ dependencies.</p>
 <code class="descname">load_context</code><span class="sig-paren">(</span><em>context</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.pyfunc.PythonModel.load_context" title="Permalink to this definition"> </a></dt>
 <dd><p>Loads artifacts from the specified <a class="reference internal" href="#mlflow.pyfunc.PythonModelContext" title="mlflow.pyfunc.PythonModelContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModelContext</span></code></a> that can be used by
 <a class="reference internal" href="#mlflow.pyfunc.PythonModel.predict" title="mlflow.pyfunc.PythonModel.predict"><code class="xref py py-func docutils literal notranslate"><span class="pre">predict()</span></code></a> when evaluating inputs. When loading an MLflow model with
-<a class="reference internal" href="#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_pyfunc()</span></code></a>, this method will be called as soon as the <a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a> is
+<a class="reference internal" href="#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_pyfunc()</span></code></a>, this method is called as soon as the <a class="reference internal" href="#mlflow.pyfunc.PythonModel" title="mlflow.pyfunc.PythonModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModel</span></code></a> is
 constructed.</p>
 <p>The same <a class="reference internal" href="#mlflow.pyfunc.PythonModelContext" title="mlflow.pyfunc.PythonModelContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">PythonModelContext</span></code></a> will also be available during calls to
 <a class="reference internal" href="#mlflow.pyfunc.PythonModel.predict" title="mlflow.pyfunc.PythonModel.predict"><code class="xref py py-func docutils literal notranslate"><span class="pre">predict()</span></code></a>, but it may be more efficient to override this method
@@ -782,7 +830,7 @@ can use to perform inference.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -791,6 +839,7 @@ can use to perform inference.</li>
   <script type="text/javascript" src="../_static/jquery.js"></script>
   <script type="text/javascript" src="../_static/underscore.js"></script>
   <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../_static/languagesections.js"></script>
   
 

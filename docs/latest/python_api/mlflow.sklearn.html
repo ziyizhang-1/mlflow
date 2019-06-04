@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.sklearn &mdash; MLflow 0.9.1 documentation</title>
+  <title>mlflow.sklearn &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.sklearn.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.spark" href="/mlflow.spark.html"/>
         <link rel="prev" title="mlflow.sagemaker" href="/mlflow.sagemaker.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -119,6 +119,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.onnx.html">mlflow.onnx</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
@@ -174,7 +175,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/python_api/mlflow.sklearn.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/python_api/mlflow.sklearn.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -193,24 +194,44 @@ module exports scikit-learn models with the following flavors:</p>
 <dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
 </dl>
 <dl class="function">
+<dt id="mlflow.sklearn.get_default_conda_env">
+<code class="descclassname">mlflow.sklearn.</code><code class="descname">get_default_conda_env</code><span class="sig-paren">(</span><em>include_cloudpickle=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.get_default_conda_env" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The default Conda environment for MLflow Models produced by calls to
+<a class="reference internal" href="#mlflow.sklearn.save_model" title="mlflow.sklearn.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a> and <a class="reference internal" href="#mlflow.sklearn.log_model" title="mlflow.sklearn.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model()</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="mlflow.sklearn.load_model">
-<code class="descclassname">mlflow.sklearn.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>path</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.load_model" title="Permalink to this definition"> </a></dt>
-<dd><p>Load a scikit-learn model from a local file (if <code class="docutils literal notranslate"><span class="pre">run_id</span></code> is None) or a run.</p>
+<code class="descclassname">mlflow.sklearn.</code><code class="descname">load_model</code><span class="sig-paren">(</span><em>model_uri</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.sklearn.load_model" title="Permalink to this definition"> </a></dt>
+<dd><p>Load a scikit-learn model from a local file or a run.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>path</strong> – Local filesystem path or run-relative artifact path to the model saved
-by <a class="reference internal" href="#mlflow.sklearn.save_model" title="mlflow.sklearn.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.sklearn.save_model()</span></code></a>.</li>
-<li><strong>run_id</strong> – Run ID. If provided, combined with <code class="docutils literal notranslate"><span class="pre">path</span></code> to identify the model.</li>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>model_uri</strong> – <p>The location, in URI format, of the MLflow model, for example:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/Users/me/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">relative/path/to/local/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">s3://my_bucket/path/to/model</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">runs:/&lt;mlflow_run_id&gt;/run-relative/path/to/model</span></code></li>
 </ul>
+<p>For more information about supported URI schemes, see
+<a class="reference external" href="https://www.mlflow.org/docs/latest/tracking.html#artifact-locations">Referencing Artifacts</a>.</p>
 </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A scikit-learn model.</td>
 </tr>
 </tbody>
 </table>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">mlflow.sklearn</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sk_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;sk_models&quot;</span><span class="p">,</span> <span class="n">run_id</span><span class="o">=</span><span class="s2">&quot;96771d893a5e46159d9f3b49bf9013e2&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sk_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">sklearn</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;runs:/96771d893a5e46159d9f3b49bf9013e2/&quot;</span><span class="n">sk_models</span><span class="s2">&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#use Pandas DataFrame to make predictions</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pandas_df</span> <span class="o">=</span> <span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">sk_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pandas_df</span><span class="p">)</span>
@@ -232,8 +253,8 @@ by <a class="reference internal" href="#mlflow.sklearn.save_model" title="mlflow
 <li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
 Conda environment yaml file. If provided, this decribes the environment
 this model should be run in. At minimum, it should specify the dependencies
-contained in <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
-<code class="docutils literal notranslate"><span class="pre">mlflow.sklearn.DEFAULT_CONDA_ENV</span></code> environment will be added to the model.
+contained in <a class="reference internal" href="#mlflow.sklearn.get_default_conda_env" title="mlflow.sklearn.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <cite>None</cite>, the default
+<a class="reference internal" href="#mlflow.sklearn.get_default_conda_env" title="mlflow.sklearn.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a> environment is added to the model.
 The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -289,8 +310,8 @@ packaging code dependencies with the serialized model.</li>
 <li><strong>conda_env</strong> – <p>Either a dictionary representation of a Conda environment or the path to a
 Conda environment yaml file. If provided, this decribes the environment
 this model should be run in. At minimum, it should specify the dependencies
-contained in <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn.DEFAULT_CONDA_ENV</span></code>. If <cite>None</cite>, the default
-<code class="docutils literal notranslate"><span class="pre">mlflow.sklearn.DEFAULT_CONDA_ENV</span></code> environment will be added to the model.
+contained in <a class="reference internal" href="#mlflow.sklearn.get_default_conda_env" title="mlflow.sklearn.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <cite>None</cite>, the default
+<code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()`()</span></code> environment is added to the model.
 The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -378,7 +399,7 @@ packaging code dependencies with the serialized model.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -387,6 +408,7 @@ packaging code dependencies with the serialized model.</li>
   <script type="text/javascript" src="../_static/jquery.js"></script>
   <script type="text/javascript" src="../_static/underscore.js"></script>
   <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="../_static/languagesections.js"></script>
   
 

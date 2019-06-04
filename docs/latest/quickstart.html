@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quickstart &mdash; MLflow 0.9.1 documentation</title>
+  <title>Quickstart &mdash; MLflow 1.0.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/quickstart.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 0.9.1 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="index.html"/>
         <link rel="next" title="Tutorial" href="/tutorial.html"/>
         <link rel="prev" title="MLflow Documentation" href="/index.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">0.9.1</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
   </li>
 </ul>
   </nav>
@@ -162,7 +162,7 @@
     
     
     <li class="wy-breadcrumbs-aside">
-      <a href="https://github.com/databricks/mlflow/blob/master/docs/source/quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/quickstart.rst" class="fa fa-github"> Edit on GitHub</a>
     </li>
     
   </ul>
@@ -179,8 +179,8 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">mlflow</span>
 </pre></div>
 </div>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;mlflow&quot;</span><span class="p">)</span>
-<span class="n">mlflow</span><span class="o">::</span><span class="nf">mlflow_install</span><span class="p">()</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>install.packages<span class="p">(</span><span class="s">&quot;mlflow&quot;</span><span class="p">)</span>
+mlflow<span class="o">::</span>install_mlflow<span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -225,19 +225,19 @@ as follows (this example is also included in <code class="docutils literal notra
     <span class="n">log_artifact</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">mlflow</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>mlflow<span class="p">)</span>
 
 <span class="c1"># Log a parameter (key-value pair)</span>
-<span class="nf">mlflow_log_param</span><span class="p">(</span><span class="s">&quot;param1&quot;</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
+mlflow_log_param<span class="p">(</span><span class="s">&quot;param1&quot;</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
 
 <span class="c1"># Log a metric; metrics can be updated throughout the run</span>
-<span class="nf">mlflow_log_metric</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-<span class="nf">mlflow_log_metric</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
-<span class="nf">mlflow_log_metric</span><span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+mlflow_log_metric<span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+mlflow_log_metric<span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+mlflow_log_metric<span class="p">(</span><span class="s">&quot;foo&quot;</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
 
 <span class="c1"># Log an artifact (output file)</span>
-<span class="nf">writeLines</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">,</span> <span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
-<span class="nf">mlflow_log_artifact</span><span class="p">(</span><span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
+<span class="kp">writeLines</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">,</span> <span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
+mlflow_log_artifact<span class="p">(</span><span class="s">&quot;output.txt&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -250,7 +250,7 @@ You can then run MLflow’s Tracking UI:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span> <span class="n">ui</span>
 </pre></div>
 </div>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">mlflow_ui</span><span class="p">()</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span>mlflow_ui<span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -306,36 +306,25 @@ MLflow artifacts and then load them again for serving. There is an example train
 description file and a pickled scikit-learn model. You can pass the run ID and the path of the model
 within the artifacts directory (here “model”) to various tools. For example, MLflow includes a
 simple REST server for python-based models:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow pyfunc serve -r &lt;RUN_ID&gt; -m model
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlflow models serve -m runs:/&lt;RUN_ID&gt;/model
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">By default the server runs on port 5000. If that port is already in use, use the <cite>–port</cite> option to
-specify a different port. For example: <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">pyfunc</span> <span class="pre">serve</span> <span class="pre">--port</span> <span class="pre">1234</span> <span class="pre">-r</span> <span class="pre">&lt;RUN_ID&gt;</span> <span class="pre">-m</span> <span class="pre">model</span></code></p>
+specify a different port. For example: <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">models</span> <span class="pre">serve</span> <span class="pre">-m</span> <span class="pre">runs:/&lt;RUN_ID&gt;/model</span> <span class="pre">--port</span> <span class="pre">1234</span></code></p>
 </div>
 <p>Once you have started the server, you can pass it some sample data and see the
 predictions.</p>
 <p>The following example uses <code class="docutils literal notranslate"><span class="pre">curl</span></code> to send a JSON-serialized pandas DataFrame with the <code class="docutils literal notranslate"><span class="pre">split</span></code>
-orientation to the pyfunc server. For more information about the input data formats accepted by
-the pyfunc model server, see the <a class="reference internal" href="models.html#pyfunc-deployment"><span class="std std-ref">MLflow deployment tools documentation</span></a>.</p>
+orientation to the model server. For more information about the input data formats accepted by
+the pyfunc model server, see the <a class="reference internal" href="models.html#local-model-deployment"><span class="std std-ref">MLflow deployment tools documentation</span></a>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl -d <span class="s1">&#39;{&quot;columns&quot;:[&quot;x&quot;], &quot;data&quot;:[[1], [-1]]}&#39;</span> -H <span class="s1">&#39;Content-Type: application/json; format=pandas-split&#39;</span> -X POST localhost:5000/invocations
 </pre></div>
 </div>
 <p>which returns:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;predictions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">sklearn_logistic_regression/train.py</span></code> script must be run with the same Python version as
-the version of Python that runs <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">pyfunc</span> <span class="pre">serve</span></code>. If they are not the same version,
-the stacktrace below may appear:</p>
-<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/site-packages/mlflow/sklearn.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">54</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_load_model_from_local_file</span>
-<span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xc6 in position 0: ordinal not in range(128)</span>
-</pre></div>
-</div>
 </div>
 <p>For more information, see <a class="reference internal" href="models.html"><span class="doc">MLflow Models</span></a>.</p>
 </div>
@@ -379,7 +368,7 @@ the stacktrace below may appear:</p>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'0.9.1',
+      VERSION:'1.0.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
@@ -388,6 +377,7 @@ the stacktrace below may appear:</p>
   <script type="text/javascript" src="_static/jquery.js"></script>
   <script type="text/javascript" src="_static/underscore.js"></script>
   <script type="text/javascript" src="_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/javascript" src="_static/languagesections.js"></script>
   
 
