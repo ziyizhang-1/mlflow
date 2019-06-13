@@ -1,0 +1,700 @@
+
+  
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mlflow.tracking &mdash; MLflow 1.0.0 documentation</title>
+  
+   
+  <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.tracking.html">
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    
+
+    
+
+  
+    
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WXWDBL');</script>
+      
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+    
+    <link rel="stylesheet" href="../_static/css/algolia.css" type="text/css" />
+    
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="MLflow 1.0.0 documentation" href="../index.html"/>
+        <link rel="up" title="Python API" href="index.html"/>
+        <link rel="next" title="R API" href="/../R-api.html"/>
+        <link rel="prev" title="mlflow.tensorflow" href="/mlflow.tensorflow.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  
+
+  
+  <nav class="wy-nav-top header" role="navigation" aria-label="top navigation">
+    <ul>
+  <li class="menu-toggle">
+    <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.0.0</span>
+  </li>
+</ul>
+  </nav>
+  <page>
+    
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side relative">
+      <div class="wy-side-scroll">
+  <div class="wy-side-nav-search">
+    
+
+    
+
+    
+<div role="search">
+  
+  <input id="algolia-search" type="text" name="q" placeholder="Search" />
+  
+</div>
+
+
+    
+  </div>
+
+  <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+    
+      <a href="../index.html" class="main-navigation-home"><img src="../_static/icons/nav-home.svg"> MLflow</a>
+    
+
+    
+      
+
+      
+        <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tracking.html">MLflow Tracking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../projects.html">MLflow Projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">MLflow Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command-Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../search-syntax.html">Search</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="mlflow.html">mlflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.azureml.html">mlflow.azureml</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.entities.html">mlflow.entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.h2o.html">mlflow.h2o</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.keras.html">mlflow.keras</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.mleap.html">mlflow.mleap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.models.html">mlflow.models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.onnx.html">mlflow.onnx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.projects.html">mlflow.projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pyfunc.html">mlflow.pyfunc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.pytorch.html">mlflow.pytorch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sagemaker.html">mlflow.sagemaker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.sklearn.html">mlflow.sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.spark.html">mlflow.spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mlflow.tensorflow.html">mlflow.tensorflow</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">mlflow.tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../R-api.html">R API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../java_api/index.html">Java API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rest-api.html">REST API</a></li>
+</ul>
+
+      
+    
+  </div>
+
+  <div role="contentinfo">
+    
+
+    <p>
+      <a id='feedbacklink' href="https://github.com/mlflow/mlflow/blob/master/CONTRIBUTING.rst" target="_blank">Contribute</a>
+    </p>
+  </div>
+</div>
+    </nav>
+
+    <main class="wy-grid-for-nav">
+      <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+        <div class="wy-nav-content">
+          <div class="rst-content">
+            
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Documentation</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+        <li><a href="index.html">Python API</a> <span class="db-icon db-icon-chevron-right"></span></li>
+    
+    
+      <li>mlflow.tracking</li>
+    
+    
+    <li class="wy-breadcrumbs-aside">
+      <a href="https://github.com/mlflow/mlflow/blob/master/docs/source/python_api/mlflow.tracking.rst" class="fa fa-github"> Edit on GitHub</a>
+    </li>
+    
+  </ul>
+</div>
+            <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+              <div itemprop="articleBody">
+                
+  <div class="section" id="module-mlflow.tracking">
+<span id="mlflow-tracking"></span><h1>mlflow.tracking<a class="headerlink" href="#module-mlflow.tracking" title="Permalink to this headline"> </a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">mlflow.tracking</span></code> module provides a Python CRUD interface to MLflow experiments
+and runs. This is a lower level API that directly translates to MLflow
+<a class="reference external" href="../rest-api.html">REST API</a> calls.
+For a higher level API for managing an “active run”, use the <a class="reference internal" href="mlflow.html#module-mlflow" title="mlflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow</span></code></a> module.</p>
+<dl class="class">
+<dt id="mlflow.tracking.MlflowClient">
+<em class="property">class </em><code class="descclassname">mlflow.tracking.</code><code class="descname">MlflowClient</code><span class="sig-paren">(</span><em>tracking_uri=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient" title="Permalink to this definition"> </a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Client of an MLflow Tracking Server that creates and manages experiments and runs.</p>
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.create_experiment">
+<code class="descname">create_experiment</code><span class="sig-paren">(</span><em>name</em>, <em>artifact_location=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.create_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Create an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> – The experiment name. Must be unique.</li>
+<li><strong>artifact_location</strong> – The location to store run artifacts.
+If not provided, the server picks an appropriate default.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Integer ID of the created experiment.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.create_run">
+<code class="descname">create_run</code><span class="sig-paren">(</span><em>experiment_id</em>, <em>start_time=None</em>, <em>tags=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.create_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Create a <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> object that can be associated with
+metrics, parameters, artifacts, etc.
+Unlike <a class="reference internal" href="mlflow.projects.html#mlflow.projects.run" title="mlflow.projects.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.projects.run()</span></code></a>, creates objects but does not run code.
+Unlike <a class="reference internal" href="mlflow.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.start_run()</span></code></a>, does not change the “active run” used by
+<a class="reference internal" href="mlflow.html#mlflow.log_param" title="mlflow.log_param"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_param()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment_id</strong> – The ID of then experiment to create a run in.</li>
+<li><strong>start_time</strong> – If not provided, use the current timestamp.</li>
+<li><strong>tags</strong> – A dictionary of key-value pairs that are converted into
+<a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunTag" title="mlflow.entities.RunTag"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunTag</span></code></a> objects.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> that was created.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.delete_experiment">
+<code class="descname">delete_experiment</code><span class="sig-paren">(</span><em>experiment_id</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.delete_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Delete an experiment from the backend store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment_id</strong> – The experiment ID returned from <code class="docutils literal notranslate"><span class="pre">create_experiment</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.delete_run">
+<code class="descname">delete_run</code><span class="sig-paren">(</span><em>run_id</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.delete_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Deletes a run with the given ID.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.download_artifacts">
+<code class="descname">download_artifacts</code><span class="sig-paren">(</span><em>run_id</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.download_artifacts" title="Permalink to this definition"> </a></dt>
+<dd><p>Download an artifact file or directory from a run to a local directory if applicable,
+and return a local path for it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>run_id</strong> – The run to download artifacts from.</li>
+<li><strong>path</strong> – Relative source path to the desired artifact.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">Local path of desired artifact.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.get_experiment">
+<code class="descname">get_experiment</code><span class="sig-paren">(</span><em>experiment_id</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.get_experiment" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment_id</strong> – The experiment ID returned from <code class="docutils literal notranslate"><span class="pre">create_experiment</span></code>.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.get_experiment_by_name">
+<code class="descname">get_experiment_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.get_experiment_by_name" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> – The experiment name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.get_metric_history">
+<code class="descname">get_metric_history</code><span class="sig-paren">(</span><em>run_id</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.get_metric_history" title="Permalink to this definition"> </a></dt>
+<dd><p>Return a list of metric objects corresponding to all values logged for a given metric.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>run_id</strong> – Unique identifier for run</li>
+<li><strong>key</strong> – Metric name within the run</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Metric" title="mlflow.entities.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Metric</span></code></a> entities if logged, else empty list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.get_run">
+<code class="descname">get_run</code><span class="sig-paren">(</span><em>run_id</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.get_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Fetch the run from backend store. The resulting <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">Run</span></code></a>
+contains a collection of run metadata – <a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunInfo" title="mlflow.entities.RunInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunInfo</span></code></a>,
+as well as a collection of run parameters, tags, and metrics –
+<a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunData" title="mlflow.entities.RunData"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunData</span></code></a>. In the case where multiple metrics with the
+same key are logged for the run, the <a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunData" title="mlflow.entities.RunData"><code class="xref py py-class docutils literal notranslate"><span class="pre">RunData</span></code></a> contains
+the most recently logged value at the largest step for each metric.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>run_id</strong> – Unique identifier for the run.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A single <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> object, if the run exists. Otherwise,
+raises an exception.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.list_artifacts">
+<code class="descname">list_artifacts</code><span class="sig-paren">(</span><em>run_id</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.list_artifacts" title="Permalink to this definition"> </a></dt>
+<dd><p>List the artifacts for a run.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>run_id</strong> – The run to list artifacts from.</li>
+<li><strong>path</strong> – The run’s relative artifact path to list from. By default it is set to None
+or the root artifact path.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">List of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.FileInfo" title="mlflow.entities.FileInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.FileInfo</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.list_experiments">
+<code class="descname">list_experiments</code><span class="sig-paren">(</span><em>view_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.list_experiments" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Experiment" title="mlflow.entities.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Experiment</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.list_run_infos">
+<code class="descname">list_run_infos</code><span class="sig-paren">(</span><em>experiment_id</em>, <em>run_view_type=1</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.list_run_infos" title="Permalink to this definition"> </a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunInfo" title="mlflow.entities.RunInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunInfo</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.log_artifact">
+<code class="descname">log_artifact</code><span class="sig-paren">(</span><em>run_id</em>, <em>local_path</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.log_artifact" title="Permalink to this definition"> </a></dt>
+<dd><p>Write a local file to the remote <code class="docutils literal notranslate"><span class="pre">artifact_uri</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>local_path</strong> – Path to the file to write.</li>
+<li><strong>artifact_path</strong> – If provided, the directory in <code class="docutils literal notranslate"><span class="pre">artifact_uri</span></code> to write to.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.log_artifacts">
+<code class="descname">log_artifacts</code><span class="sig-paren">(</span><em>run_id</em>, <em>local_dir</em>, <em>artifact_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.log_artifacts" title="Permalink to this definition"> </a></dt>
+<dd><p>Write a directory of files to the remote <code class="docutils literal notranslate"><span class="pre">artifact_uri</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>local_dir</strong> – Path to the directory of files to write.</li>
+<li><strong>artifact_path</strong> – If provided, the directory in <code class="docutils literal notranslate"><span class="pre">artifact_uri</span></code> to write to.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.log_batch">
+<code class="descname">log_batch</code><span class="sig-paren">(</span><em>run_id</em>, <em>metrics</em>, <em>params</em>, <em>tags</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.log_batch" title="Permalink to this definition"> </a></dt>
+<dd><p>Log multiple metrics, params, and/or tags.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>metrics</strong> – List of Metric(key, value, timestamp) instances.</li>
+<li><strong>params</strong> – List of Param(key, value) instances.</li>
+<li><strong>tags</strong> – List of RunTag(key, value) instances.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Raises an MlflowException if any errors occur.
+:returns: None</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.log_metric">
+<code class="descname">log_metric</code><span class="sig-paren">(</span><em>run_id</em>, <em>key</em>, <em>value</em>, <em>timestamp=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.log_metric" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a metric against the run ID. The timestamp defaults to the current timestamp.
+The step defaults to 0.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.log_param">
+<code class="descname">log_param</code><span class="sig-paren">(</span><em>run_id</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.log_param" title="Permalink to this definition"> </a></dt>
+<dd><p>Log a parameter against the run ID. Value is converted to a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.rename_experiment">
+<code class="descname">rename_experiment</code><span class="sig-paren">(</span><em>experiment_id</em>, <em>new_name</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.rename_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Update an experiment’s name. The new name must be unique.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment_id</strong> – The experiment ID returned from <code class="docutils literal notranslate"><span class="pre">create_experiment</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.restore_experiment">
+<code class="descname">restore_experiment</code><span class="sig-paren">(</span><em>experiment_id</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.restore_experiment" title="Permalink to this definition"> </a></dt>
+<dd><p>Restore a deleted experiment unless permanently deleted.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment_id</strong> – The experiment ID returned from <code class="docutils literal notranslate"><span class="pre">create_experiment</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.restore_run">
+<code class="descname">restore_run</code><span class="sig-paren">(</span><em>run_id</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.restore_run" title="Permalink to this definition"> </a></dt>
+<dd><p>Restores a deleted run with the given ID.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.search_runs">
+<code class="descname">search_runs</code><span class="sig-paren">(</span><em>experiment_ids</em>, <em>filter_string=''</em>, <em>run_view_type=1</em>, <em>max_results=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.search_runs" title="Permalink to this definition"> </a></dt>
+<dd><p>Search experiments that fit the search criteria.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment_ids</strong> – List of experiment IDs, or a single int or string id.</li>
+<li><strong>filter_string</strong> – Filter query string, defaults to searching all runs.</li>
+<li><strong>run_view_type</strong> – one of enum values ACTIVE_ONLY, DELETED_ONLY, or ALL runs
+defined in <a class="reference internal" href="mlflow.entities.html#mlflow.entities.ViewType" title="mlflow.entities.ViewType"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.ViewType</span></code></a>.</li>
+<li><strong>max_results</strong> – Maximum number of runs desired.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A list of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.Run" title="mlflow.entities.Run"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.Run</span></code></a> objects that satisfy the search
+expressions</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.set_tag">
+<code class="descname">set_tag</code><span class="sig-paren">(</span><em>run_id</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.set_tag" title="Permalink to this definition"> </a></dt>
+<dd><p>Set a tag on the run ID. Value is converted to a string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflow.tracking.MlflowClient.set_terminated">
+<code class="descname">set_terminated</code><span class="sig-paren">(</span><em>run_id</em>, <em>status=None</em>, <em>end_time=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.set_terminated" title="Permalink to this definition"> </a></dt>
+<dd><p>Set a run’s status to terminated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>status</strong> – A string value of <a class="reference internal" href="mlflow.entities.html#mlflow.entities.RunStatus" title="mlflow.entities.RunStatus"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.entities.RunStatus</span></code></a>.
+Defaults to “FINISHED”.</li>
+<li><strong>end_time</strong> – If not provided, defaults to the current time.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.get_tracking_uri">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">get_tracking_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.get_tracking_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Get the current tracking URI. This may not correspond to the tracking URI of
+the currently active run, since the tracking URI can be updated via <code class="docutils literal notranslate"><span class="pre">set_tracking_uri</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The tracking URI.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="mlflow.tracking.set_tracking_uri">
+<code class="descclassname">mlflow.tracking.</code><code class="descname">set_tracking_uri</code><span class="sig-paren">(</span><em>uri</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.set_tracking_uri" title="Permalink to this definition"> </a></dt>
+<dd><p>Set the tracking server URI. This does not affect the
+currently active run (if one exists), but takes effect for successive runs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>uri</strong> – <ul class="simple">
+<li>An empty string, or a local file path, prefixed with <code class="docutils literal notranslate"><span class="pre">file:/</span></code>. Data is stored
+locally at the provided file (or <code class="docutils literal notranslate"><span class="pre">./mlruns</span></code> if empty).</li>
+<li>An HTTP URI like <code class="docutils literal notranslate"><span class="pre">https://my-tracking-server:5000</span></code>.</li>
+<li>A Databricks workspace, provided as the string “databricks” or, to use a
+Databricks CLI
+<a class="reference external" href="https://github.com/databricks/databricks-cli#installation">profile</a>,
+“databricks://&lt;profileName&gt;”.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+              </div>
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mlflow.tensorflow.html" class="btn btn-neutral" title="mlflow.tensorflow" accesskey="p"><span class="db-icon db-icon-chevron-left"></span> Previous</a>
+      
+      
+        <a href="../R-api.html" class="btn btn-neutral" title="R API" accesskey="n">Next <span class="db-icon db-icon-chevron-right"></span></a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+      <p class="copyright">
+          &copy; Databricks 2019. All rights reserved.
+      </p>
+
+  </div> 
+
+</footer>
+          </div>
+        </div>
+      </section>
+    </main>
+  </page>
+
+  
+
+
+  
+  <script type="text/javascript">
+    var DOCUMENTATION_OPTIONS = {
+      URL_ROOT:'../',
+      VERSION:'1.0.0',
+      COLLAPSE_INDEX:false,
+      FILE_SUFFIX:'.html',
+      HAS_SOURCE:  true
+    };
+  </script>
+  <script type="text/javascript" src="../_static/jquery.js"></script>
+  <script type="text/javascript" src="../_static/underscore.js"></script>
+  <script type="text/javascript" src="../_static/doctools.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/javascript" src="../_static/languagesections.js"></script>
+  
+
+  <script type="text/javascript" src="../_static/js/clipboard.min.js"></script>
+  <script type="text/javascript" src="../_static/js/jquery.waypoints.min.js"></script>
+
+  
+  
+  
+  <script type="text/javascript">var CLIPPY_SVG_PATH = "../_static/clippy.svg";</script>
+  <script type="text/javascript" src="../_static/js/custom.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+    jQuery(function () {
+      SphinxRtdTheme.StickyNav.enable();
+    });
+
+  </script>
+  
+ 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44077918-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-44077918-9');
+</script>
+
+
+  
+    <!-- Algolia Search -->
+    <script type="text/javascript">
+      var algoliaConfigs = {
+        key: 'b6d79a1058f2b3c1ee03bf659ade5a4b',
+        index: 'mlflow',
+      };
+    </script>
+    <div id="algolia-wrapper"></div>
+    <script src="../_static/js/tether.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  
+</body>
+</html>
