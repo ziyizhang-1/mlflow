@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Bay Area MLflow Meetup @ Microsoft in Sunnyvale, CA"
-date:   2019-06-20
+date:   2019-06-13
 categories: news
 ---
 
-Join us for an evening of tech-talks about MLflow and Machine Learning from Databricks and Microsoft.
+Join us on June 20th for an evening of tech-talks about MLflow and Machine Learning from Databricks and Microsoft.
 
 [RSVP](https://www.meetup.com/Bay-Area-MLflow/events/261840002/) if you live in the Bay Area.
 
