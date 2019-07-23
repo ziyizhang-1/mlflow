@@ -199,7 +199,7 @@ This module exports TensorFlow models with the following flavors:</p>
 </dl>
 <dl class="function">
 <dt id="mlflow.tensorflow.autolog">
-<code class="descclassname">mlflow.tensorflow.</code><code class="descname">autolog</code><span class="sig-paren">(</span><em>metrics_every_n_steps=100</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.autolog" title="Permalink to this definition"> </a></dt>
+<code class="descclassname">mlflow.tensorflow.</code><code class="descname">autolog</code><span class="sig-paren">(</span><em>every_n_iter=100</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tensorflow.autolog" title="Permalink to this definition"> </a></dt>
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Experimental: This method may change or be removed in a future release without warning.</p>
@@ -213,7 +213,7 @@ information on what is logged with different TensorFlow workflows.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>metrics_every_n_steps</strong> – The frequency with which metrics should be logged.
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>every_n_iter</strong> – The frequency with which metrics should be logged.
 Defaults to 100. Ex: a value of 100 will log metrics
 at step 0, 100, 200, etc.</td>
 </tr>
