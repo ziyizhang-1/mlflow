@@ -114,7 +114,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#where-runs-are-recorded">Where Runs Are Recorded</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#logging-data-to-runs">Logging Data to Runs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#logging-functions">Logging Functions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#enable-automatic-logging-from-tensorflow-and-keras-experimental">Enable Automatic Logging from TensorFlow and Keras (experimental)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#launching-multiple-runs-in-one-program">Launching Multiple Runs in One Program</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#performance-tracking-with-metrics">Performance Tracking with Metrics</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
@@ -123,6 +122,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#visualizing-metrics">Visualizing Metrics</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#automatic-logging-from-tensorflow-and-keras-experimental">Automatic Logging from TensorFlow and Keras (experimental)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#organizing-runs-in-experiments">Organizing Runs in Experiments</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#managing-experiments-and-runs-with-the-tracking-service-api">Managing Experiments and Runs with the Tracking Service API</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#adding-tags-to-runs">Adding Tags to Runs</a></li>
@@ -211,36 +211,36 @@ MLflow Tracking lets you log and query experiments using <a class="reference int
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#concepts" id="id13">Concepts</a></li>
-<li><a class="reference internal" href="#where-runs-are-recorded" id="id14">Where Runs Are Recorded</a></li>
-<li><a class="reference internal" href="#logging-data-to-runs" id="id15">Logging Data to Runs</a><ul>
-<li><a class="reference internal" href="#logging-functions" id="id16">Logging Functions</a></li>
-<li><a class="reference internal" href="#enable-automatic-logging-from-tensorflow-and-keras-experimental" id="id17">Enable Automatic Logging from TensorFlow and Keras (experimental)</a></li>
+<li><a class="reference internal" href="#concepts" id="id14">Concepts</a></li>
+<li><a class="reference internal" href="#where-runs-are-recorded" id="id15">Where Runs Are Recorded</a></li>
+<li><a class="reference internal" href="#logging-data-to-runs" id="id16">Logging Data to Runs</a><ul>
+<li><a class="reference internal" href="#logging-functions" id="id17">Logging Functions</a></li>
 <li><a class="reference internal" href="#launching-multiple-runs-in-one-program" id="id18">Launching Multiple Runs in One Program</a></li>
 <li><a class="reference internal" href="#performance-tracking-with-metrics" id="id19">Performance Tracking with Metrics</a></li>
 <li><a class="reference internal" href="#visualizing-metrics" id="id20">Visualizing Metrics</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#organizing-runs-in-experiments" id="id21">Organizing Runs in Experiments</a><ul>
-<li><a class="reference internal" href="#managing-experiments-and-runs-with-the-tracking-service-api" id="id22">Managing Experiments and Runs with the Tracking Service API</a></li>
+<li><a class="reference internal" href="#automatic-logging-from-tensorflow-and-keras-experimental" id="id21">Automatic Logging from TensorFlow and Keras (experimental)</a></li>
+<li><a class="reference internal" href="#organizing-runs-in-experiments" id="id22">Organizing Runs in Experiments</a><ul>
+<li><a class="reference internal" href="#managing-experiments-and-runs-with-the-tracking-service-api" id="id23">Managing Experiments and Runs with the Tracking Service API</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#tracking-ui" id="id23">Tracking UI</a></li>
-<li><a class="reference internal" href="#querying-runs-programmatically" id="id24">Querying Runs Programmatically</a><ul>
-<li><a class="reference internal" href="#referencing-artifacts" id="id25">Referencing Artifacts</a></li>
+<li><a class="reference internal" href="#tracking-ui" id="id24">Tracking UI</a></li>
+<li><a class="reference internal" href="#querying-runs-programmatically" id="id25">Querying Runs Programmatically</a><ul>
+<li><a class="reference internal" href="#referencing-artifacts" id="id26">Referencing Artifacts</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#mlflow-tracking-servers" id="id26">MLflow Tracking Servers</a><ul>
-<li><a class="reference internal" href="#storage" id="id27">Storage</a></li>
-<li><a class="reference internal" href="#networking" id="id28">Networking</a></li>
-<li><a class="reference internal" href="#logging-to-a-tracking-server" id="id29">Logging to a Tracking Server</a></li>
+<li><a class="reference internal" href="#mlflow-tracking-servers" id="id27">MLflow Tracking Servers</a><ul>
+<li><a class="reference internal" href="#storage" id="id28">Storage</a></li>
+<li><a class="reference internal" href="#networking" id="id29">Networking</a></li>
+<li><a class="reference internal" href="#logging-to-a-tracking-server" id="id30">Logging to a Tracking Server</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#system-tags" id="id30">System Tags</a></li>
+<li><a class="reference internal" href="#system-tags" id="id31">System Tags</a></li>
 </ul>
 </div>
 <div class="section" id="concepts">
-<h2><a class="toc-backref" href="#id13">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline"> </a></h2>
+<h2><a class="toc-backref" href="#id14">Concepts</a><a class="headerlink" href="#concepts" title="Permalink to this headline"> </a></h2>
 <p>MLflow Tracking is organized around the concept of <em>runs</em>, which are executions of some piece of
 data science code. Each run records the following information:</p>
 <dl class="docutils">
@@ -274,7 +274,7 @@ UI let you create and search for experiments.</p>
 API.</p>
 </div>
 <div class="section" id="where-runs-are-recorded">
-<span id="id1"></span><h2><a class="toc-backref" href="#id14">Where Runs Are Recorded</a><a class="headerlink" href="#where-runs-are-recorded" title="Permalink to this headline"> </a></h2>
+<span id="id1"></span><h2><a class="toc-backref" href="#id15">Where Runs Are Recorded</a><a class="headerlink" href="#where-runs-are-recorded" title="Permalink to this headline"> </a></h2>
 <p>MLflow runs can be recorded to local files, to a SQLAlchemy compatible database, or remotely
 to a tracking server. By default, the MLflow Python API logs runs locally to files in an <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory wherever you
 ran your program. You can then run <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code> to see the logged runs.</p>
@@ -289,21 +289,20 @@ call <a class="reference internal" href="python_api/mlflow.html#mlflow.set_track
 </ul>
 </div>
 <div class="section" id="logging-data-to-runs">
-<h2><a class="toc-backref" href="#id15">Logging Data to Runs</a><a class="headerlink" href="#logging-data-to-runs" title="Permalink to this headline"> </a></h2>
+<h2><a class="toc-backref" href="#id16">Logging Data to Runs</a><a class="headerlink" href="#logging-data-to-runs" title="Permalink to this headline"> </a></h2>
 <p>You can log data to runs using the MLflow Python, R, Java, or REST API. This section
 shows the Python API.</p>
 <div class="contents local topic" id="in-this-section">
 <p class="topic-title first">In this section:</p>
 <ul class="simple">
-<li><a class="reference internal" href="#logging-functions" id="id31">Logging Functions</a></li>
-<li><a class="reference internal" href="#enable-automatic-logging-from-tensorflow-and-keras-experimental" id="id32">Enable Automatic Logging from TensorFlow and Keras (experimental)</a></li>
+<li><a class="reference internal" href="#logging-functions" id="id32">Logging Functions</a></li>
 <li><a class="reference internal" href="#launching-multiple-runs-in-one-program" id="id33">Launching Multiple Runs in One Program</a></li>
 <li><a class="reference internal" href="#performance-tracking-with-metrics" id="id34">Performance Tracking with Metrics</a></li>
 <li><a class="reference internal" href="#visualizing-metrics" id="id35">Visualizing Metrics</a></li>
 </ul>
 </div>
 <div class="section" id="logging-functions">
-<span id="basic-logging-functions"></span><h3><a class="toc-backref" href="#id31">Logging Functions</a><a class="headerlink" href="#logging-functions" title="Permalink to this headline"> </a></h3>
+<span id="basic-logging-functions"></span><h3><a class="toc-backref" href="#id32">Logging Functions</a><a class="headerlink" href="#logging-functions" title="Permalink to this headline"> </a></h3>
 <p><a class="reference internal" href="python_api/mlflow.html#mlflow.set_tracking_uri" title="mlflow.set_tracking_uri"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri()</span></code></a> connects to a tracking URI. You can also set the
 <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> environment variable to have MLflow find a URI from there. In both cases,
 the URI can either be a HTTP/HTTPS URI for a remote server, a database connection string, or a
@@ -335,55 +334,6 @@ directories, so you can place the artifact in a directory this way.</p>
 an optional <code class="docutils literal notranslate"><span class="pre">artifact_path</span></code>.</p>
 <p><a class="reference internal" href="python_api/mlflow.html#mlflow.get_artifact_uri" title="mlflow.get_artifact_uri"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.get_artifact_uri()</span></code></a> returns the URI that artifacts from the current run should be
 logged to.</p>
-</div>
-<div class="section" id="enable-automatic-logging-from-tensorflow-and-keras-experimental">
-<h3><a class="toc-backref" href="#id32">Enable Automatic Logging from TensorFlow and Keras (experimental)</a><a class="headerlink" href="#enable-automatic-logging-from-tensorflow-and-keras-experimental" title="Permalink to this headline"> </a></h3>
-<p>MLflow supports automatic logging from TensorFlow and Keras without the need for explicit log
-statements. You can enable this feature by calling one of <a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.autolog" title="mlflow.tensorflow.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.autolog()</span></code></a>
-or <a class="reference internal" href="python_api/mlflow.keras.html#mlflow.keras.autolog" title="mlflow.keras.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.autolog()</span></code></a> depending on the framework before your training code.
-Note that <code class="docutils literal notranslate"><span class="pre">tensorflow.keras</span></code> is handled by <code class="docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code>, not <code class="docutils literal notranslate"><span class="pre">mlflow.keras</span></code>.
-<strong>Note</strong>: this feature is experimental - the API and format of the logged data are subject to change.</p>
-<p><a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.autolog" title="mlflow.tensorflow.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.autolog()</span></code></a> optionally accepts a <code class="docutils literal notranslate"><span class="pre">metrics_every_n_steps</span></code>
-argument to specify the frequency with which metrics should be logged to MLflow.</p>
-<p>The following table details auto-logging capabilities for different TensorFlow workflows:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="7%" />
-<col width="21%" />
-<col width="22%" />
-<col width="6%" />
-<col width="44%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>Framework</td>
-<td>Metrics</td>
-<td>Parameters</td>
-<td>Tags</td>
-<td>Artifacts</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">tf.keras</span></code></td>
-<td>Training loss; validation loss; user-specified metrics</td>
-<td>Number of layers; optimizer name; learning rate; epsilon</td>
-<td>Model summary</td>
-<td><a class="reference external" href="https://mlflow.org/docs/latest/models.html">MLflow Model</a> (Keras model), TensorBoard logs; on training end</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code></td>
-<td>TensorBoard metrics</td>
-<td>–</td>
-<td>–</td>
-<td><a class="reference external" href="https://mlflow.org/docs/latest/models.html">MLflow Model</a> (TF saved model); on call to <code class="docutils literal notranslate"><span class="pre">export_saved_model</span></code></td>
-</tr>
-<tr class="row-even"><td>TensorFlow Core</td>
-<td>All <code class="docutils literal notranslate"><span class="pre">tf.summary.scalar</span></code> calls</td>
-<td>–</td>
-<td>–</td>
-<td>–</td>
-</tr>
-</tbody>
-</table>
-<p>For Keras, loss and any metrics specified in the <code class="docutils literal notranslate"><span class="pre">metrics</span></code> argument of <code class="docutils literal notranslate"><span class="pre">keras.model.fit</span></code> are logged
-as metrics. Learning rate, optimizer name and epsilon are logged as parameters. Model checkpointing
-(as a Keras model) occurs once at training end.</p>
 </div>
 <div class="section" id="launching-multiple-runs-in-one-program">
 <h3><a class="toc-backref" href="#id33">Launching Multiple Runs in One Program</a><a class="headerlink" href="#launching-multiple-runs-in-one-program" title="Permalink to this headline"> </a></h3>
@@ -437,22 +387,72 @@ statement exits, even if it exits due to an exception.</p>
 <div class="section" id="visualizing-metrics">
 <h3><a class="toc-backref" href="#id35">Visualizing Metrics</a><a class="headerlink" href="#visualizing-metrics" title="Permalink to this headline"> </a></h3>
 <p>Here is an example plot of the <a class="reference internal" href="quickstart.html#quickstart"><span class="std std-ref">quick start tutorial</span></a> with the step x-axis and two timestamp axes:</p>
-<div class="figure" id="id10">
+<div class="figure" id="id11">
 <img alt="_images/metrics-step.png" src="_images/metrics-step.png" />
 <p class="caption"><span class="caption-text">X-axis step</span></p>
 </div>
-<div class="figure" id="id11">
+<div class="figure" id="id12">
 <img alt="_images/metrics-time-wall.png" src="_images/metrics-time-wall.png" />
 <p class="caption"><span class="caption-text">X-axis wall time - graphs the absolute time each metric was logged</span></p>
 </div>
-<div class="figure" id="id12">
+<div class="figure" id="id13">
 <img alt="_images/metrics-time-relative.png" src="_images/metrics-time-relative.png" />
 <p class="caption"><span class="caption-text">X-axis relative time - graphs the time relative to the first metric logged, for each run</span></p>
 </div>
 </div>
 </div>
+<div class="section" id="automatic-logging-from-tensorflow-and-keras-experimental">
+<h2><a class="toc-backref" href="#id21">Automatic Logging from TensorFlow and Keras (experimental)</a><a class="headerlink" href="#automatic-logging-from-tensorflow-and-keras-experimental" title="Permalink to this headline"> </a></h2>
+<p>Call <a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.autolog" title="mlflow.tensorflow.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.autolog()</span></code></a> or <a class="reference internal" href="python_api/mlflow.keras.html#mlflow.keras.autolog" title="mlflow.keras.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.autolog()</span></code></a> before your training code to enable automatic logging of metrics and parameters without the need for explicit
+log statements. See example usages with <a class="reference external" href="http://www.github.com/mlflow/mlflow/tree/master/examples/keras">Keras</a> and
+<a class="reference external" href="http://www.github.com/mlflow/mlflow/tree/master/examples/tensorflow">TensorFlow</a>.</p>
+<p>Autologging captures the following information:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="20%" />
+<col width="21%" />
+<col width="5%" />
+<col width="46%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Framework</td>
+<td>Metrics</td>
+<td>Parameters</td>
+<td>Tags</td>
+<td>Artifacts</td>
+</tr>
+<tr class="row-even"><td>Keras</td>
+<td>Training loss; validation loss; user-specified metrics</td>
+<td>Number of layers; optimizer name; learning rate; epsilon</td>
+<td>Model summary</td>
+<td><a class="reference external" href="https://mlflow.org/docs/latest/models.html">MLflow Model</a> (Keras model), TensorBoard logs; on training end</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tf.keras</span></code></td>
+<td>Training loss; validation loss; user-specified metrics</td>
+<td>Number of layers; optimizer name; learning rate; epsilon</td>
+<td>Model summary</td>
+<td><a class="reference external" href="https://mlflow.org/docs/latest/models.html">MLflow Model</a> (Keras model), TensorBoard logs; on training end</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">tf.estimator</span></code></td>
+<td>TensorBoard metrics</td>
+<td>–</td>
+<td>–</td>
+<td><a class="reference external" href="https://mlflow.org/docs/latest/models.html">MLflow Model</a> (TF saved model); on call to <code class="docutils literal notranslate"><span class="pre">tf.estimator.export_saved_model</span></code></td>
+</tr>
+<tr class="row-odd"><td>TensorFlow Core</td>
+<td>All <code class="docutils literal notranslate"><span class="pre">tf.summary.scalar</span></code> calls</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody>
+</table>
+<p>Note that autologging for <code class="docutils literal notranslate"><span class="pre">tf.keras</span></code> is handled by <a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.autolog" title="mlflow.tensorflow.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.autolog()</span></code></a>, not <a class="reference internal" href="python_api/mlflow.keras.html#mlflow.keras.autolog" title="mlflow.keras.autolog"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.autolog()</span></code></a>.</p>
+<p><strong>Note</strong>: this feature is experimental - the API and format of the logged data are subject to change.</p>
+</div>
 <div class="section" id="organizing-runs-in-experiments">
-<span id="id3"></span><h2><a class="toc-backref" href="#id21">Organizing Runs in Experiments</a><a class="headerlink" href="#organizing-runs-in-experiments" title="Permalink to this headline"> </a></h2>
+<span id="id4"></span><h2><a class="toc-backref" href="#id22">Organizing Runs in Experiments</a><a class="headerlink" href="#organizing-runs-in-experiments" title="Permalink to this headline"> </a></h2>
 <p>MLflow allows you to group runs under experiments, which can be useful for comparing runs intended
 to tackle a particular task. You can create experiments using the <a class="reference internal" href="cli.html#cli"><span class="std std-ref">Command-Line Interface</span></a> (<code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">experiments</span></code>) or
 the <a class="reference internal" href="python_api/mlflow.html#mlflow.create_experiment" title="mlflow.create_experiment"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.create_experiment()</span></code></a> Python API. You can pass the experiment name for a individual run
@@ -474,7 +474,7 @@ mlflow experiments create --experiment-name fraud-detection
 </pre></div>
 </div>
 <div class="section" id="managing-experiments-and-runs-with-the-tracking-service-api">
-<h3><a class="toc-backref" href="#id22">Managing Experiments and Runs with the Tracking Service API</a><a class="headerlink" href="#managing-experiments-and-runs-with-the-tracking-service-api" title="Permalink to this headline"> </a></h3>
+<h3><a class="toc-backref" href="#id23">Managing Experiments and Runs with the Tracking Service API</a><a class="headerlink" href="#managing-experiments-and-runs-with-the-tracking-service-api" title="Permalink to this headline"> </a></h3>
 <p>MLflow provides a more detailed Tracking Service API for managing experiments and runs directly,
 which is available through client SDK in the <a class="reference internal" href="python_api/mlflow.tracking.html#module-mlflow.tracking" title="mlflow.tracking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tracking</span></code></a> module.
 This makes it possible to query data about past runs, log additional information about them, create experiments,
@@ -502,7 +502,7 @@ add tags to a run, and more.</p>
 </div>
 </div>
 <div class="section" id="tracking-ui">
-<span id="id4"></span><h2><a class="toc-backref" href="#id23">Tracking UI</a><a class="headerlink" href="#tracking-ui" title="Permalink to this headline"> </a></h2>
+<span id="id5"></span><h2><a class="toc-backref" href="#id24">Tracking UI</a><a class="headerlink" href="#tracking-ui" title="Permalink to this headline"> </a></h2>
 <p>The Tracking UI lets you visualize, search and compare runs, as well as download run artifacts or
 metadata for analysis in other tools. If you log runs to a local <code class="docutils literal notranslate"><span class="pre">mlruns</span></code> directory,
 run <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">ui</span></code> in the directory above it, and it loads the corresponding runs.
@@ -516,7 +516,7 @@ Alternatively, the <a class="reference internal" href="#tracking-server"><span c
 </ul>
 </div>
 <div class="section" id="querying-runs-programmatically">
-<span id="tracking-query-api"></span><h2><a class="toc-backref" href="#id24">Querying Runs Programmatically</a><a class="headerlink" href="#querying-runs-programmatically" title="Permalink to this headline"> </a></h2>
+<span id="tracking-query-api"></span><h2><a class="toc-backref" href="#id25">Querying Runs Programmatically</a><a class="headerlink" href="#querying-runs-programmatically" title="Permalink to this headline"> </a></h2>
 <p>You can access all of the functions in the Tracking UI programmatically. This makes it easy to do several common tasks:</p>
 <ul class="simple">
 <li>Query and compare runs using any data analysis tool of your choice, for example, <strong>pandas</strong>.</li>
@@ -525,7 +525,7 @@ Alternatively, the <a class="reference internal" href="#tracking-server"><span c
 <li>Run automated parameter search algorithms, where you query the metrics from various runs to submit new ones. For an example of running automated parameter search algorithms, see the MLflow <a class="reference external" href="https://github.com/mlflow/mlflow/blob/master/examples/hyperparam/README.rst">Hyperparameter Tuning Example project</a>.</li>
 </ul>
 <div class="section" id="referencing-artifacts">
-<span id="artifact-locations"></span><h3><a class="toc-backref" href="#id25">Referencing Artifacts</a><a class="headerlink" href="#referencing-artifacts" title="Permalink to this headline"> </a></h3>
+<span id="artifact-locations"></span><h3><a class="toc-backref" href="#id26">Referencing Artifacts</a><a class="headerlink" href="#referencing-artifacts" title="Permalink to this headline"> </a></h3>
 <p>When you specify the location of an artifact in MLflow APIs, the syntax depends on whether you
 are invoking the Tracking, Models, or Projects API. For the Tracking API, you specify the artifact location using a (run ID, relative path) tuple. For the Models and Projects APIs, you specify the artifact location in the follow ways:</p>
 <ul class="simple">
@@ -550,8 +550,8 @@ are invoking the Tracking, Models, or Projects API. For the Tracking API, you sp
 </div>
 </div>
 <div class="section" id="mlflow-tracking-servers">
-<span id="tracking-server"></span><h2><a class="toc-backref" href="#id26">MLflow Tracking Servers</a><a class="headerlink" href="#mlflow-tracking-servers" title="Permalink to this headline"> </a></h2>
-<div class="contents local topic" id="id5">
+<span id="tracking-server"></span><h2><a class="toc-backref" href="#id27">MLflow Tracking Servers</a><a class="headerlink" href="#mlflow-tracking-servers" title="Permalink to this headline"> </a></h2>
+<div class="contents local topic" id="id6">
 <p class="topic-title first">In this section:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#storage" id="id36">Storage</a><ul>
@@ -616,7 +616,7 @@ server probably refer to different physical locations (that is, the same path on
 </div>
 <div class="section" id="artifact-stores">
 <h4><a class="toc-backref" href="#id37">Artifact Stores</a><a class="headerlink" href="#artifact-stores" title="Permalink to this headline"> </a></h4>
-<div class="contents local topic" id="id7">
+<div class="contents local topic" id="id8">
 <p class="topic-title first">In this section:</p>
 <ul class="simple">
 <li><a class="reference internal" href="#amazon-s3" id="id40">Amazon S3</a></li>
@@ -736,7 +736,7 @@ production environments.</li>
 </div>
 </div>
 <div class="section" id="system-tags">
-<span id="id9"></span><h2><a class="toc-backref" href="#id30">System Tags</a><a class="headerlink" href="#system-tags" title="Permalink to this headline"> </a></h2>
+<span id="id10"></span><h2><a class="toc-backref" href="#id31">System Tags</a><a class="headerlink" href="#system-tags" title="Permalink to this headline"> </a></h2>
 <p>You can annotate runs with arbitrary tags. Tag keys that start with <code class="docutils literal notranslate"><span class="pre">mlflow.</span></code> are reserved for
 internal use. The following tags are set automatically by MLflow, when appropriate:</p>
 <table border="1" class="docutils">
