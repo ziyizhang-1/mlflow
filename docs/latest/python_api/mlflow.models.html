@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.models &mdash; MLflow 1.1.0 documentation</title>
+  <title>mlflow.models &mdash; MLflow 1.2.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.models.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.onnx" href="/mlflow.onnx.html"/>
         <link rel="prev" title="mlflow.mleap" href="/mlflow.mleap.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.1.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.2.0</span>
   </li>
 </ul>
   </nav>
@@ -251,14 +251,14 @@ Input and output are read from and written to a file or stdin / stdout.</p>
 stdin.</li>
 <li><strong>output_path</strong> – Path to the file with output predictions. If not specified, data is
 written to stdout.</li>
-<li><strong>content_type</strong> – Specifies the input format. Can be one of {‘json’, ‘csv’}</li>
-<li><strong>json_format</strong> – Only applies if content_type == ‘json’. Specifies how is the input data
-encoded in json. Can be one of {‘split’, ‘records’} mirroring the
-behavior of Pandas orient attribute. The default is ‘split’ which
+<li><strong>content_type</strong> – Specifies the input format. Can be one of {<code class="docutils literal notranslate"><span class="pre">json</span></code>, <code class="docutils literal notranslate"><span class="pre">csv</span></code>}</li>
+<li><strong>json_format</strong> – Only applies if <code class="docutils literal notranslate"><span class="pre">content_type</span> <span class="pre">==</span> <span class="pre">json</span></code>. Specifies how is the input
+data encoded in json. Can be one of {<code class="docutils literal notranslate"><span class="pre">split</span></code>, <code class="docutils literal notranslate"><span class="pre">records</span></code>} mirroring
+the behavior of Pandas orient attribute. The default is <code class="docutils literal notranslate"><span class="pre">split</span></code> which
 expects dict like data: <code class="docutils literal notranslate"><span class="pre">{'index'</span> <span class="pre">-&gt;</span> <span class="pre">[index],</span> <span class="pre">'columns'</span> <span class="pre">-&gt;</span> <span class="pre">[columns],</span>
 <span class="pre">'data'</span> <span class="pre">-&gt;</span> <span class="pre">[values]}</span></code>, where index is optional.
-For more information see “<a class="reference external" href="https://pandas.pydata.org/">https://pandas.pydata.org/</a>
-pandas-docs/stable/reference/api/pandas.read_json.html”</li>
+For more information see
+<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_json.html">https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_json.html</a></li>
 </ul>
 </td>
 </tr>
@@ -269,10 +269,20 @@ pandas-docs/stable/reference/api/pandas.read_json.html”</li>
 <dl class="method">
 <dt id="mlflow.models.FlavorBackend.serve">
 <code class="descname">serve</code><span class="sig-paren">(</span><em>model_uri</em>, <em>port</em>, <em>host</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.models.FlavorBackend.serve" title="Permalink to this definition"> </a></dt>
-<dd><p>Serve saved MLflow model locally.
-:param model_uri: URI pointing to the MLflow model to be used for scoring.
-:param port: Port to deploy the model to.
-:param host: Host to use for the model deployment. Defaults to ‘localhost’.</p>
+<dd><p>Serve the specified MLflow model locally.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>model_uri</strong> – URI pointing to the MLflow model to be used for scoring.</li>
+<li><strong>port</strong> – Port to use for the model deployment.</li>
+<li><strong>host</strong> – Host to use for the model deployment. Defaults to <code class="docutils literal notranslate"><span class="pre">localhost</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
@@ -369,7 +379,7 @@ MLflow model.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'1.1.0',
+      VERSION:'1.2.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

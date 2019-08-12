@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.tracking &mdash; MLflow 1.1.0 documentation</title>
+  <title>mlflow.tracking &mdash; MLflow 1.2.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.tracking.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="R API" href="/../R-api.html"/>
         <link rel="prev" title="mlflow.tensorflow" href="/mlflow.tensorflow.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.1.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.2.0</span>
   </li>
 </ul>
   </nav>
@@ -270,9 +270,19 @@ Unlike <a class="reference internal" href="mlflow.html#mlflow.start_run" title="
 <dl class="method">
 <dt id="mlflow.tracking.MlflowClient.delete_tag">
 <code class="descname">delete_tag</code><span class="sig-paren">(</span><em>run_id</em>, <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.delete_tag" title="Permalink to this definition"> </a></dt>
-<dd><p>Delete a tag from a run. This is irreversible.
-:param run_id: String ID of the run
-:param key: Name of the tag</p>
+<dd><p>Delete a tag from a run. This is irreversible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>run_id</strong> – String ID of the run</li>
+<li><strong>key</strong> – Name of the tag</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -492,16 +502,16 @@ or the root artifact path.</li>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>run_id</strong> – The run id to which the metric should be logged.</li>
 <li><strong>key</strong> – Metric name.</li>
-<li><strong>value</strong> – Metric value (float). Note that some special values such</li>
+<li><strong>value</strong> – Metric value (float). Note that some special values such
+as +/- Infinity may be replaced by other values depending on the store. For
+example, the SQLAlchemy store replaces +/- Inf with max / min float values.</li>
+<li><strong>timestamp</strong> – Time when this metric was calculated. Defaults to the current system time.</li>
+<li><strong>step</strong> – Training step (iteration) at which was the metric calculated. Defaults to 0.</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>as +/- Infinity may be replaced by other values depending on the store. For example, the
-SQLAlchemy store replaces +/- Inf with max / min float values.
-:param timestamp: Time when this metric was calculated. Defaults to the current system time.
-:param step: Training step (iteration) at which was the metric calculated. Defaults to 0.</p>
 </dd></dl>
 
 <dl class="method">
@@ -575,9 +585,21 @@ the next page may be obtained via the <code class="docutils literal notranslate"
 </dd></dl>
 
 <dl class="method">
+<dt id="mlflow.tracking.MlflowClient.set_experiment_tag">
+<code class="descname">set_experiment_tag</code><span class="sig-paren">(</span><em>experiment_id</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.set_experiment_tag" title="Permalink to this definition"> </a></dt>
+<dd><p>Set a tag on the experiment with the specified ID. Value is converted to a string.
+:param experiment_id: String ID of the experiment.
+:param key: Name of the tag.
+:param value: Tag value (converted to a string).</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="mlflow.tracking.MlflowClient.set_tag">
 <code class="descname">set_tag</code><span class="sig-paren">(</span><em>run_id</em>, <em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.tracking.MlflowClient.set_tag" title="Permalink to this definition"> </a></dt>
-<dd><p>Set a tag on the run ID. Value is converted to a string.</p>
+<dd><p>Set a tag on the run with the specified ID. Value is converted to a string.
+:param run_id: String ID of the run.
+:param key: Name of the tag.
+:param value: Tag value (converted to a string)</p>
 </dd></dl>
 
 <dl class="method">
@@ -680,7 +702,7 @@ Databricks CLI
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'1.1.0',
+      VERSION:'1.2.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

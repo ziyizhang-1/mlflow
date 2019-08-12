@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MLflow Models &mdash; MLflow 1.1.0 documentation</title>
+  <title>MLflow Models &mdash; MLflow 1.2.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/models.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 1.1.0 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 1.2.0 documentation" href="index.html"/>
         <link rel="next" title="Command-Line Interface" href="/cli.html"/>
         <link rel="prev" title="MLflow Projects" href="/projects.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.1.0</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.2.0</span>
   </li>
 </ul>
   </nav>
@@ -358,8 +358,8 @@ produce a dataframe, a vector or a list with the predictions as output.</p>
 <p>The <a class="reference internal" href="python_api/mlflow.h2o.html#module-mlflow.h2o" title="mlflow.h2o"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.h2o</span></code></a> module defines <a class="reference internal" href="python_api/mlflow.h2o.html#mlflow.h2o.save_model" title="mlflow.h2o.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a> and
 <a class="reference internal" href="python_api/mlflow.h2o.html#mlflow.h2o.log_model" title="mlflow.h2o.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model()</span></code></a> methods for saving H2O models in MLflow Model format.
 These methods produce MLflow Models with the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor, allowing you to load them
-as generic Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>. When you load
-MLflow Models with the <code class="docutils literal notranslate"><span class="pre">h2o</span></code> flavor using <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">load_pyfunc()</span></code></a>,
+as generic Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>. When you load
+MLflow Models with the <code class="docutils literal notranslate"><span class="pre">h2o</span></code> flavor using <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>,
 the <a class="reference external" href="http://docs.h2o.ai/h2o/latest-stable/h2o-py/docs/h2o.html#h2o.init">h2o.init()</a> method is
 called. Therefore, the correct version of <code class="docutils literal notranslate"><span class="pre">h2o(-py)</span></code> must be installed in the loader’s
 environment. You can customize the arguments given to
@@ -378,7 +378,7 @@ in MLflow Model format in Python. Similarly, in R, you can save or log the model
 <a class="reference external" href="R-api.rst#mlflow-save-model">mlflow_save_model</a> and <a class="reference external" href="R-api.rst#mlflow-log-model">mlflow_log_model</a>. These functions serialize Keras
 models as HDF5 files using the Keras library’s built-in model persistence functions. MLflow Models
 produced by these functions also contain the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor, allowing them to be interpreted
-as generic Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>. Finally, you
+as generic Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>. Finally, you
 can use the <a class="reference internal" href="python_api/mlflow.keras.html#mlflow.keras.load_model" title="mlflow.keras.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.keras.load_model()</span></code></a> function in Python or <a class="reference external" href="R-api.rst#mlflow-load-model">mlflow_load_model</a>
 function in R to load MLflow Models with the <code class="docutils literal notranslate"><span class="pre">keras</span></code> flavor as
 <a class="reference external" href="https://keras.io/models/about-keras-models/">Keras Model objects</a>.</p>
@@ -413,7 +413,7 @@ serialize PyTorch models. Additionally, you can use the <a class="reference inte
 method to load MLflow Models with the <code class="docutils literal notranslate"><span class="pre">pytorch</span></code> flavor as PyTorch model objects. Finally, models
 produced by <a class="reference internal" href="python_api/mlflow.pytorch.html#mlflow.pytorch.save_model" title="mlflow.pytorch.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pytorch.save_model()</span></code></a> and <a class="reference internal" href="python_api/mlflow.pytorch.html#mlflow.pytorch.log_model" title="mlflow.pytorch.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pytorch.log_model()</span></code></a> contain
 the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor, allowing you to load them as generic Python functions for inference
-via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>.</p>
+via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>.</p>
 <p>For more information, see <a class="reference internal" href="python_api/mlflow.pytorch.html#module-mlflow.pytorch" title="mlflow.pytorch"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pytorch</span></code></a>.</p>
 </div>
 <div class="section" id="scikit-learn-sklearn">
@@ -424,7 +424,7 @@ models. The <a class="reference internal" href="python_api/mlflow.sklearn.html#m
 <a class="reference internal" href="python_api/mlflow.sklearn.html#mlflow.sklearn.log_model" title="mlflow.sklearn.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model()</span></code></a> functions that save scikit-learn models in
 MLflow format, using either Python’s pickle module (Pickle) or CloudPickle for model serialization.
 These functions produce MLflow Models with the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor, allowing them to
-be loaded as generic Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>.
+be loaded as generic Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>.
 Finally, you can use the <a class="reference internal" href="python_api/mlflow.sklearn.html#mlflow.sklearn.load_model" title="mlflow.sklearn.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.sklearn.load_model()</span></code></a> method to load MLflow Models with
 the <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> flavor as scikit-learn model objects.</p>
 <p>For more information, see <a class="reference internal" href="python_api/mlflow.sklearn.html#module-mlflow.sklearn" title="mlflow.sklearn"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code></a>.</p>
@@ -435,9 +435,9 @@ the <code class="docutils literal notranslate"><span class="pre">sklearn</span><
 <p>The <a class="reference internal" href="python_api/mlflow.spark.html#module-mlflow.spark" title="mlflow.spark"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.spark</span></code></a> module defines <a class="reference internal" href="python_api/mlflow.spark.html#mlflow.spark.save_model" title="mlflow.spark.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">save_model()</span></code></a> and
 <a class="reference internal" href="python_api/mlflow.spark.html#mlflow.spark.log_model" title="mlflow.spark.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_model()</span></code></a> methods that save Spark MLlib pipelines in MLflow
 model format. MLflow Models produced by these functions contain the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor,
-allowing you to load them as generic Python functions via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>.
+allowing you to load them as generic Python functions via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>.
 When a model with the <code class="docutils literal notranslate"><span class="pre">spark</span></code> flavor is loaded as a Python function via
-<code class="xref py py-func docutils literal notranslate"><span class="pre">load_pyfunc()</span></code>, a new
+<a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>, a new
 <a class="reference external" href="https://spark.apache.org/docs/latest/api/python/pyspark.html#pyspark.SparkContext">SparkContext</a>
 is created for model inference; additionally, the function converts all Pandas DataFrame inputs to
 Spark DataFrames before scoring. While this initialization overhead and format translation latency
@@ -455,7 +455,7 @@ the <code class="docutils literal notranslate"><span class="pre">spark</span></c
 to be logged in MLflow format via the <a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.save_model" title="mlflow.tensorflow.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.save_model()</span></code></a> and
 <a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.log_model" title="mlflow.tensorflow.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.log_model()</span></code></a> methods. These methods also add the <code class="docutils literal notranslate"><span class="pre">python_function</span></code>
 flavor to the MLflow Models that they produce, allowing the models to be interpreted as generic
-Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>. Finally, you can use the
+Python functions for inference via <a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>. Finally, you can use the
 <a class="reference internal" href="python_api/mlflow.tensorflow.html#mlflow.tensorflow.load_model" title="mlflow.tensorflow.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.tensorflow.load_model()</span></code></a> method to load MLflow Models with the <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code>
 flavor as TensorFlow graphs.</p>
 <p>For more information, see <a class="reference internal" href="python_api/mlflow.tensorflow.html#module-mlflow.tensorflow" title="mlflow.tensorflow"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.tensorflow</span></code></a>.</p>
@@ -466,7 +466,7 @@ flavor as TensorFlow graphs.</p>
 the <a class="reference internal" href="python_api/mlflow.onnx.html#mlflow.onnx.save_model" title="mlflow.onnx.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.onnx.save_model()</span></code></a> and <a class="reference internal" href="python_api/mlflow.onnx.html#mlflow.onnx.log_model" title="mlflow.onnx.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.onnx.log_model()</span></code></a> methods. These
 methods also add the <code class="docutils literal notranslate"><span class="pre">python_function</span></code> flavor to the MLflow Models that they produce, allowing the
 models to be interpreted as generic Python functions for inference via
-<a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_pyfunc" title="mlflow.pyfunc.load_pyfunc"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_pyfunc()</span></code></a>. The <code class="docutils literal notranslate"><span class="pre">python_function</span></code> representation of an MLflow
+<a class="reference internal" href="python_api/mlflow.pyfunc.html#mlflow.pyfunc.load_model" title="mlflow.pyfunc.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.pyfunc.load_model()</span></code></a>. The <code class="docutils literal notranslate"><span class="pre">python_function</span></code> representation of an MLflow
 ONNX model uses the <a class="reference external" href="https://github.com/microsoft/onnxruntime">ONNX Runtime execution engine</a> for
 evaluation Finally, you can use the <a class="reference internal" href="python_api/mlflow.onnx.html#mlflow.onnx.load_model" title="mlflow.onnx.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.onnx.load_model()</span></code></a> method to load MLflow
 Models with the <code class="docutils literal notranslate"><span class="pre">onnx</span></code> flavor in native ONNX format.</p>
@@ -528,7 +528,7 @@ instance of this model with <code class="docutils literal notranslate"><span cla
 <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">python_model</span><span class="o">=</span><span class="n">add5_model</span><span class="p">)</span>
 
 <span class="c1"># Load the model in `python_function` format</span>
-<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_pyfunc</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
 
 <span class="c1"># Evaluate the model</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -601,7 +601,7 @@ evaluate test data.</p>
         <span class="n">conda_env</span><span class="o">=</span><span class="n">conda_env</span><span class="p">)</span>
 
 <span class="c1"># Load the model in `python_function` format</span>
-<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_pyfunc</span><span class="p">(</span><span class="n">mlflow_pyfunc_model_path</span><span class="p">)</span>
+<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">mlflow_pyfunc_model_path</span><span class="p">)</span>
 
 <span class="c1"># Evaluate the model</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
@@ -685,13 +685,10 @@ curl http://127.0.0.1:5000/invocations -H <span class="s1">&#39;Content-Type: ap
 <div class="section" id="commands">
 <h4>Commands<a class="headerlink" href="#commands" title="Permalink to this headline"> </a></h4>
 <ul class="simple">
-<li><code class="xref py py-func docutils literal notranslate"><span class="pre">serve</span></code> deploys the model as a local REST API server.</li>
-<li><dl class="first docutils">
-<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">build_docker</span></code> packages a REST API endpoint serving the</dt>
-<dd>model as a docker image.</dd>
-</dl>
-</li>
-<li><code class="xref py py-func docutils literal notranslate"><span class="pre">predict</span></code> uses the model to generate a prediction for a local
+<li><a class="reference external" href="cli.html#mlflow-models-serve">serve</a> deploys the model as a local REST API server.</li>
+<li><a class="reference external" href="cli.html#mlflow-models-build-docker">build_docker</a> packages a REST API endpoint serving the
+model as a docker image.</li>
+<li><a class="reference external" href="cli.html#mlflow-models-predict">predict</a> uses the model to generate a prediction for a local
 CSV or JSON file.</li>
 </ul>
 <p>For more info, see:</p>
@@ -850,7 +847,7 @@ request header value of <code class="docutils literal notranslate"><span class="
 <li><a class="reference internal" href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.run_local" title="mlflow.sagemaker.run_local"><code class="xref py py-func docutils literal notranslate"><span class="pre">run-local</span></code></a> deploys the model locally in a Docker
 container. The image and the environment should be identical to how the model would be run
 remotely and it is therefore useful for testing the model prior to deployment.</li>
-<li>The <code class="xref py py-func docutils literal notranslate"><span class="pre">build-and-push-container</span></code> CLI command builds an MLfLow
+<li><a class="reference external" href="cli.html#mlflow-sagemaker-build-and-push-container">build-and-push-container</a> builds an MLfLow
 Docker image and uploads it to ECR. The caller must have the correct permissions set up. The image
 is built locally and requires Docker to be present on the machine that performs this step.</li>
 <li><a class="reference internal" href="python_api/mlflow.sagemaker.html#mlflow.sagemaker.deploy" title="mlflow.sagemaker.deploy"><code class="xref py py-func docutils literal notranslate"><span class="pre">deploy</span></code></a> deploys the model on Amazon SageMaker. MLflow
@@ -950,7 +947,7 @@ requested. type. Exception is raised if there are numeric columns.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'1.1.0',
+      VERSION:'1.2.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

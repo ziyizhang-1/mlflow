@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Command-Line Interface &mdash; MLflow 1.1.0 documentation</title>
+  <title>Command-Line Interface &mdash; MLflow 1.2.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/cli.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="MLflow 1.1.0 documentation" href="index.html"/>
+    <link rel="top" title="MLflow 1.2.0 documentation" href="index.html"/>
         <link rel="next" title="Search" href="/search-syntax.html"/>
         <link rel="prev" title="MLflow Models" href="/models.html"/> 
 
@@ -67,7 +67,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.1.0</span>
+    <a href="index.html" class="wy-nav-top-logo"><img src="_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.2.0</span>
   </li>
 </ul>
   </nav>
@@ -221,8 +221,8 @@
 <span id="cli"></span><h1>Command-Line Interface<a class="headerlink" href="#command-line-interface" title="Permalink to this headline"> </a></h1>
 <p>The MLflow command-line interface (CLI) provides a simple interface to various functionality in MLflow. You can use the CLI to run projects, start the tracking UI, create and list experiments, download run artifacts,
 serve MLflow Python Function and scikit-learn models, and serve models on
-<a class="reference external" href="https://azure.microsoft.com/en-us/overview/machine-learning/">Microsoft Azure Machine Learning</a> and
-<a class="reference external" href="https://aws.amazon.com/sagemaker/">Amazon SageMaker</a>.</p>
+<a class="reference external" href="https://azure.microsoft.com/en-us/services/machine-learning-service/">Microsoft Azure Machine Learning</a>
+and <a class="reference external" href="https://aws.amazon.com/sagemaker/">Amazon SageMaker</a>.</p>
 <p>Each individual command has a detailed help screen accessible via <code class="docutils literal notranslate"><span class="pre">mlflow</span> <span class="pre">command_name</span> <span class="pre">--help</span></code>.</p>
 <div class="contents local topic" id="table-of-contents">
 <p class="topic-title first">Table of Contents</p>
@@ -395,7 +395,7 @@ documentation: <a class="reference external" href="https://www.mlflow.org/docs/l
 <dl class="option">
 <dt id="cmdoption-mlflow-azureml-build-image-m">
 <code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--model-uri</code><code class="descclassname"> &lt;model_uri&gt;</code><a class="headerlink" href="#cmdoption-mlflow-azureml-build-image-m" title="Permalink to this definition"> </a></dt>
-<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#supported-artifact-stores  [required]</p>
+<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#artifact-stores  [required]</p>
 </dd></dl>
 
 <dl class="option">
@@ -493,7 +493,7 @@ as subfolders.</p>
 <dl class="option">
 <dt id="cmdoption-mlflow-experiments-create-l">
 <code class="descname">-l</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--artifact-location</code><code class="descclassname"> &lt;artifact_location&gt;</code><a class="headerlink" href="#cmdoption-mlflow-experiments-create-l" title="Permalink to this definition"> </a></dt>
-<dd><p>Base location for runs to store artifact results. Artifacts will be stored at $artifact_location/$run_id/artifacts. See <a class="reference external" href="https://mlflow.org/docs/latest/tracking.html#where-runs-get-recorded">https://mlflow.org/docs/latest/tracking.html#where-runs-get-recorded</a> for more info on the properties of artifact location. If no location is provided, the tracking server will pick a default.</p>
+<dd><p>Base location for runs to store artifact results. Artifacts will be stored at $artifact_location/$run_id/artifacts. See <a class="reference external" href="https://mlflow.org/docs/latest/tracking.html#where-runs-are-recorded">https://mlflow.org/docs/latest/tracking.html#where-runs-are-recorded</a> for more info on the properties of artifact location. If no location is provided, the tracking server will pick a default.</p>
 </dd></dl>
 
 </div>
@@ -606,7 +606,7 @@ same.</p>
 <dl class="option">
 <dt id="cmdoption-mlflow-models-build-docker-m">
 <code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--model-uri</code><code class="descclassname"> &lt;model_uri&gt;</code><a class="headerlink" href="#cmdoption-mlflow-models-build-docker-m" title="Permalink to this definition"> </a></dt>
-<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#supported-artifact-stores  [required]</p>
+<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#artifact-stores  [required]</p>
 </dd></dl>
 
 <dl class="option">
@@ -626,7 +626,7 @@ same.</p>
 <h4>predict<a class="headerlink" href="#mlflow-models-predict" title="Permalink to this headline"> </a></h4>
 <p>Generate predictions in json format using a saved MLflow model. For information about the input
 data formats accepted by this function, see the following documentation:
-<a class="reference external" href="https://www.mlflow.org/docs/latest/models.html#model-deployment">https://www.mlflow.org/docs/latest/models.html#model-deployment</a>.</p>
+<a class="reference external" href="https://www.mlflow.org/docs/latest/models.html#built-in-deployment-tools">https://www.mlflow.org/docs/latest/models.html#built-in-deployment-tools</a>.</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mlflow models predict <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
@@ -634,7 +634,7 @@ data formats accepted by this function, see the following documentation:
 <dl class="option">
 <dt id="cmdoption-mlflow-models-predict-m">
 <code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--model-uri</code><code class="descclassname"> &lt;model_uri&gt;</code><a class="headerlink" href="#cmdoption-mlflow-models-predict-m" title="Permalink to this definition"> </a></dt>
-<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#supported-artifact-stores  [required]</p>
+<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#artifact-stores  [required]</p>
 </dd></dl>
 
 <dl class="option">
@@ -678,7 +678,7 @@ data formats accepted by this function, see the following documentation:
 <h4>serve<a class="headerlink" href="#mlflow-models-serve" title="Permalink to this headline"> </a></h4>
 <p>Serve a model saved with MLflow by launching a webserver on the specified host and port. For
 information about the input data formats accepted by the webserver, see the following
-documentation: <a class="reference external" href="https://www.mlflow.org/docs/latest/models.html#model-deployment">https://www.mlflow.org/docs/latest/models.html#model-deployment</a>.</p>
+documentation: <a class="reference external" href="https://www.mlflow.org/docs/latest/models.html#built-in-deployment-tools">https://www.mlflow.org/docs/latest/models.html#built-in-deployment-tools</a>.</p>
 <p>You can make requests to <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/invocations</span></code> in pandas split- or record-oriented formats.</p>
 <p>Example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mlflow models serve -m runs:/my-run-id/model-path <span class="p">&amp;</span>
@@ -696,7 +696,7 @@ $ curl http://127.0.0.1:5000/invocations -H <span class="s1">&#39;Content-Type: 
 <dl class="option">
 <dt id="cmdoption-mlflow-models-serve-m">
 <code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--model-uri</code><code class="descclassname"> &lt;model_uri&gt;</code><a class="headerlink" href="#cmdoption-mlflow-models-serve-m" title="Permalink to this definition"> </a></dt>
-<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#supported-artifact-stores  [required]</p>
+<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#artifact-stores  [required]</p>
 </dd></dl>
 
 <dl class="option">
@@ -1023,7 +1023,7 @@ see the following documentation:
 <dl class="option">
 <dt id="cmdoption-mlflow-sagemaker-deploy-m">
 <code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--model-uri</code><code class="descclassname"> &lt;model_uri&gt;</code><a class="headerlink" href="#cmdoption-mlflow-sagemaker-deploy-m" title="Permalink to this definition"> </a></dt>
-<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#supported-artifact-stores  [required]</p>
+<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#artifact-stores  [required]</p>
 </dd></dl>
 
 <dl class="option">
@@ -1109,7 +1109,7 @@ see the following documentation:
 <dl class="option">
 <dt id="cmdoption-mlflow-sagemaker-run-local-m">
 <code class="descname">-m</code><code class="descclassname"></code><code class="descclassname">, </code><code class="descname">--model-uri</code><code class="descclassname"> &lt;model_uri&gt;</code><a class="headerlink" href="#cmdoption-mlflow-sagemaker-run-local-m" title="Permalink to this definition"> </a></dt>
-<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#supported-artifact-stores  [required]</p>
+<dd><p>URI to the model. A local path, a ‘runs:/’ URI, or a remote storage URI (e.g., an ‘s3://’ URI). For more information about supported remote URIs for model artifacts, see https://mlflow.org/docs/latest/tracking.html#artifact-stores  [required]</p>
 </dd></dl>
 
 <dl class="option">
@@ -1135,9 +1135,10 @@ see the following documentation:
 <div class="section" id="mlflow-server">
 <h3><a class="toc-backref" href="#id10">server</a><a class="headerlink" href="#mlflow-server" title="Permalink to this headline"> </a></h3>
 <p>Run the MLflow tracking server.</p>
-<p>The server which listen on <a class="reference external" href="http://localhost:5000">http://localhost:5000</a> by default, and only accept connections from
-the local machine. To let the server accept connections from other machines, you will need to
-pass –host 0.0.0.0 to listen on all network interfaces (or a specific interface address).</p>
+<p>The server which listen on <a class="reference external" href="http://localhost:5000">http://localhost:5000</a> by default, and only accept connections
+from the local machine. To let the server accept connections from other machines, you will need
+to pass <code class="docutils literal notranslate"><span class="pre">--host</span> <span class="pre">0.0.0.0</span></code> to listen on all network interfaces
+(or a specific interface address).</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mlflow server <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
@@ -1260,7 +1261,7 @@ server, use the “mlflow server” command instead.</p>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'./',
-      VERSION:'1.1.0',
+      VERSION:'1.2.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true

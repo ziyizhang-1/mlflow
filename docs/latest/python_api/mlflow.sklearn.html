@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflow.sklearn &mdash; MLflow 1.1.0 documentation</title>
+  <title>mlflow.sklearn &mdash; MLflow 1.2.0 documentation</title>
   
    
   <link rel="canonical" href="https://www.mlflow.org/docs/latest/python_api/mlflow.sklearn.html">
@@ -49,7 +49,7 @@
         <link rel="index" title="Index"
               href="../genindex.html"/>
         <link rel="search" title="Search" href="../search.html"/>
-    <link rel="top" title="MLflow 1.1.0 documentation" href="../index.html"/>
+    <link rel="top" title="MLflow 1.2.0 documentation" href="../index.html"/>
         <link rel="up" title="Python API" href="index.html"/>
         <link rel="next" title="mlflow.spark" href="/mlflow.spark.html"/>
         <link rel="prev" title="mlflow.sagemaker" href="/mlflow.sagemaker.html"/> 
@@ -68,7 +68,7 @@
     <ul>
   <li class="menu-toggle">
     <i data-toggle="wy-nav-top" class="wy-nav-top-menu-button db-icon db-icon-menu pull-left"></i>
-    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.1.0</span>
+    <a href="../index.html" class="wy-nav-top-logo"><img src="../_static/MLflow-logo-final-black.png" alt="MLFlow" /></a> <span class="version">1.2.0</span>
   </li>
 </ul>
   </nav>
@@ -192,7 +192,7 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">mlflow.sklearn</span></code> module provides an API for logging and loading scikit-learn models. This
 module exports scikit-learn models with the following flavors:</p>
 <dl class="docutils">
-<dt>Python (native) <a class="reference external" href="http://scikit-learn.org/stable/modules/model_persistence.html">pickle</a> format</dt>
+<dt>Python (native) <a class="reference external" href="https://scikit-learn.org/stable/modules/model_persistence.html">pickle</a> format</dt>
 <dd>This is the main flavor that can be loaded back into scikit-learn.</dd>
 <dt><a class="reference internal" href="mlflow.pyfunc.html#module-mlflow.pyfunc" title="mlflow.pyfunc"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mlflow.pyfunc</span></code></a></dt>
 <dd>Produced for use by generic pyfunc-based deployment tools and batch inference.</dd>
@@ -315,7 +315,7 @@ packaging code dependencies with the serialized model.</li>
 Conda environment yaml file. If provided, this decribes the environment
 this model should be run in. At minimum, it should specify the dependencies
 contained in <a class="reference internal" href="#mlflow.sklearn.get_default_conda_env" title="mlflow.sklearn.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a>. If <cite>None</cite>, the default
-<code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()`()</span></code> environment is added to the model.
+<a class="reference internal" href="#mlflow.sklearn.get_default_conda_env" title="mlflow.sklearn.get_default_conda_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_conda_env()</span></code></a> environment is added to the model.
 The following is an <em>example</em> dictionary representation of a Conda
 environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -403,7 +403,7 @@ packaging code dependencies with the serialized model.</li>
   <script type="text/javascript">
     var DOCUMENTATION_OPTIONS = {
       URL_ROOT:'../',
-      VERSION:'1.1.0',
+      VERSION:'1.2.0',
       COLLAPSE_INDEX:false,
       FILE_SUFFIX:'.html',
       HAS_SOURCE:  true
