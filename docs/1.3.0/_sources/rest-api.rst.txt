@@ -32,8 +32,8 @@ Create Experiment
 +-----------------------------------+-------------+
 
 Create an experiment with a name. Returns the ID of the newly created experiment.
-Validates that another experiment with the same name does not already exist and fails if
-another experiment with the same name already exists.
+Validates that another experiment with the same name does not already exist and fails
+if another experiment with the same name already exists.
 
 
 Throws ``RESOURCE_ALREADY_EXISTS`` if a experiment with the given name exists.
@@ -148,8 +148,7 @@ Get Experiment
 | ``2.0/mlflow/experiments/get`` | ``GET``     |
 +--------------------------------+-------------+
 
-Get metadata for an experiment and a list of runs for the experiment.
-This method works on deleted experiments.
+Get metadata for an experiment. This method works on deleted experiments.
 
 
 
@@ -182,13 +181,78 @@ Response Structure
 
 
 
-+------------+----------------------------------+----------------------------------------------------------------------------+
-| Field Name |               Type               |                                Description                                 |
-+============+==================================+============================================================================+
-| experiment | :ref:`mlflowexperiment`          | Experiment details.                                                        |
-+------------+----------------------------------+----------------------------------------------------------------------------+
-| runs       | An array of :ref:`mlflowruninfo` | All (max limit to be imposed) active runs associated with this experiment. |
-+------------+----------------------------------+----------------------------------------------------------------------------+
++------------+----------------------------------+---------------------------------------------------------------------------+
+| Field Name |               Type               |                                Description                                |
++============+==================================+===========================================================================+
+| experiment | :ref:`mlflowexperiment`          | Experiment details.                                                       |
++------------+----------------------------------+---------------------------------------------------------------------------+
+| runs       | An array of :ref:`mlflowruninfo` | A collection of active runs in the experiment. Note: this may not contain |
+|            |                                  | all of the experiment's active runs.                                      |
+|            |                                  |                                                                           |
+|            |                                  | This field is deprecated. Please use the "Search Runs" API to fetch       |
+|            |                                  | runs within an experiment.                                                |
++------------+----------------------------------+---------------------------------------------------------------------------+
+
+===========================
+
+
+
+.. _mlflowMlflowServicegetExperimentByName:
+
+Get Experiment By Name
+======================
+
+
++----------------------------------------+-------------+
+|                Endpoint                | HTTP Method |
++========================================+=============+
+| ``2.0/mlflow/experiments/get-by-name`` | ``GET``     |
++----------------------------------------+-------------+
+
+Get metadata for an experiment.
+
+This endpoint will return deleted experiments, but prefers the active experiment
+if an active and deleted experiment share the same name. If multiple deleted
+experiments share the same name, the API will return one of them.
+
+Throws ``RESOURCE_DOES_NOT_EXIST`` if no experiment with the specified name exists.
+
+
+
+
+.. _mlflowGetExperimentByName:
+
+Request Structure
+-----------------
+
+
+
+
+
+
++-----------------+------------+------------------------------------+
+|   Field Name    |    Type    |            Description             |
++=================+============+====================================+
+| experiment_name | ``STRING`` | Name of the associated experiment. |
+|                 |            | This field is required.            |
+|                 |            |                                    |
++-----------------+------------+------------------------------------+
+
+.. _mlflowGetExperimentByNameResponse:
+
+Response Structure
+------------------
+
+
+
+
+
+
++------------+-------------------------+---------------------+
+| Field Name |          Type           |     Description     |
++============+=========================+=====================+
+| experiment | :ref:`mlflowexperiment` | Experiment details. |
++------------+-------------------------+---------------------+
 
 ===========================
 
@@ -666,6 +730,55 @@ Request Structure
 
 
 
+.. _mlflowMlflowServicesetExperimentTag:
+
+Set Experiment Tag
+==================
+
+
++-----------------------------------------------+-------------+
+|                   Endpoint                    | HTTP Method |
++===============================================+=============+
+| ``2.0/mlflow/experiments/set-experiment-tag`` | ``POST``    |
++-----------------------------------------------+-------------+
+
+Set a tag on an experiment. Experiment tags are metadata that can be updated.
+
+
+
+
+.. _mlflowSetExperimentTag:
+
+Request Structure
+-----------------
+
+
+
+
+
+
++---------------+------------+-------------------------------------------------------------------------------------+
+|  Field Name   |    Type    |                                     Description                                     |
++===============+============+=====================================================================================+
+| experiment_id | ``STRING`` | ID of the experiment under which to log the tag. Must be provided.                  |
+|               |            | This field is required.                                                             |
+|               |            |                                                                                     |
++---------------+------------+-------------------------------------------------------------------------------------+
+| key           | ``STRING`` | Name of the tag. Maximum size depends on storage backend.                           |
+|               |            | All storage backends are guaranteed to support key values up to 250 bytes in size.  |
+|               |            | This field is required.                                                             |
+|               |            |                                                                                     |
++---------------+------------+-------------------------------------------------------------------------------------+
+| value         | ``STRING`` | String value of the tag being logged. Maximum size depends on storage backend.      |
+|               |            | All storage backends are guaranteed to support key values up to 5000 bytes in size. |
+|               |            | This field is required.                                                             |
+|               |            |                                                                                     |
++---------------+------------+-------------------------------------------------------------------------------------+
+
+===========================
+
+
+
 .. _mlflowMlflowServicesetTag:
 
 Set Tag
@@ -702,14 +815,60 @@ Request Structure
 | run_uuid   | ``STRING`` | [Deprecated, use run_id instead] ID of the run under which to log the tag. This field will |
 |            |            | be removed in a future MLflow version.                                                     |
 +------------+------------+--------------------------------------------------------------------------------------------+
-| key        | ``STRING`` | Name of the tag. Maximum size is 255 bytes.                                                |
+| key        | ``STRING`` | Name of the tag. Maximum size depends on storage backend.                                  |
+|            |            | All storage backends are guaranteed to support key values up to 250 bytes in size.         |
 |            |            | This field is required.                                                                    |
 |            |            |                                                                                            |
 +------------+------------+--------------------------------------------------------------------------------------------+
-| value      | ``STRING`` | String value of the tag being logged. Maximum size is 5000 bytes.                          |
+| value      | ``STRING`` | String value of the tag being logged. Maximum size depends on storage backend.             |
+|            |            | All storage backends are guaranteed to support key values up to 5000 bytes in size.        |
 |            |            | This field is required.                                                                    |
 |            |            |                                                                                            |
 +------------+------------+--------------------------------------------------------------------------------------------+
+
+===========================
+
+
+
+.. _mlflowMlflowServicedeleteTag:
+
+Delete Tag
+==========
+
+
++--------------------------------+-------------+
+|            Endpoint            | HTTP Method |
++================================+=============+
+| ``2.0/mlflow/runs/delete-tag`` | ``POST``    |
++--------------------------------+-------------+
+
+Delete a tag on a run. Tags are run metadata that can be updated during a run and after
+a run completes.
+
+
+
+
+.. _mlflowDeleteTag:
+
+Request Structure
+-----------------
+
+
+
+
+
+
++------------+------------+----------------------------------------------------------------+
+| Field Name |    Type    |                          Description                           |
++============+============+================================================================+
+| run_id     | ``STRING`` | ID of the run that the tag was logged under. Must be provided. |
+|            |            | This field is required.                                        |
+|            |            |                                                                |
++------------+------------+----------------------------------------------------------------+
+| key        | ``STRING`` | Name of the tag. Maximum size is 255 bytes. Must be provided.  |
+|            |            | This field is required.                                        |
+|            |            |                                                                |
++------------+------------+----------------------------------------------------------------+
 
 ===========================
 
@@ -868,18 +1027,19 @@ Request Structure
 |                |                        | ``metrics."model class" = 'LinearRegression' and tags."user-name" = 'Tomas'``                        |
 |                |                        |                                                                                                      |
 |                |                        | Supported operators are ``=``, ``!=``, ``>``, ``>=``, ``<``, and ``<=``.                             |
-|                |                        |                                                                                                      |
-|                |                        | You cannot provide ``filter`` when ``anded_expressions`` is present; an ``INVALID_PARAMETER_VALUE``  |
-|                |                        | error will be returned if both are specified.                                                        |
-|                |                        | If both ``filter`` and ``anded_expressions`` are absent, all runs part of the given experiments      |
-|                |                        | are returned.                                                                                        |
 +----------------+------------------------+------------------------------------------------------------------------------------------------------+
 | run_view_type  | :ref:`mlflowviewtype`  | Whether to display only active, only deleted, or all runs.                                           |
 |                |                        | Defaults to only active runs.                                                                        |
 +----------------+------------------------+------------------------------------------------------------------------------------------------------+
 | max_results    | ``INT32``              | Maximum number of runs desired. Max threshold is 50000                                               |
 +----------------+------------------------+------------------------------------------------------------------------------------------------------+
-| order_by       | An array of ``STRING`` | Ordering expressions like "tags.`model class` DESC"                                                  |
+| order_by       | An array of ``STRING`` | List of columns to be ordered by, including attributes, params, metrics, and tags with an            |
+|                |                        | optional "DESC" or "ASC" annotation, where "ASC" is the default.                                     |
+|                |                        | Example: ["params.input DESC", "metrics.alpha ASC", "metrics.rmse"]                                  |
+|                |                        | Tiebreaks are done by start_time DESC followed by run_id for runs with the same start time           |
+|                |                        | (and this is the default ordering criterion if order_by is not provided).                            |
++----------------+------------------------+------------------------------------------------------------------------------------------------------+
+| page_token     | ``STRING``             |                                                                                                      |
 +----------------+------------------------+------------------------------------------------------------------------------------------------------+
 
 .. _mlflowSearchRunsResponse:
@@ -892,11 +1052,13 @@ Response Structure
 
 
 
-+------------+------------------------------+--------------------------------------+
-| Field Name |             Type             |             Description              |
-+============+==============================+======================================+
-| runs       | An array of :ref:`mlflowrun` | Runs that match the search criteria. |
-+------------+------------------------------+--------------------------------------+
++-----------------+------------------------------+--------------------------------------+
+|   Field Name    |             Type             |             Description              |
++=================+==============================+======================================+
+| runs            | An array of :ref:`mlflowrun` | Runs that match the search criteria. |
++-----------------+------------------------------+--------------------------------------+
+| next_page_token | ``STRING``                   |                                      |
++-----------------+------------------------------+--------------------------------------+
 
 ===========================
 
@@ -1019,10 +1181,6 @@ Response Structure
 | run_info   | :ref:`mlflowruninfo` | Updated metadata of the run. |
 +------------+----------------------+------------------------------+
 
-===========================
-
-
-
 .. _RESTadd:
 
 Data Structures
@@ -1040,22 +1198,42 @@ Experiment
 Experiment
 
 
-+-------------------+------------+--------------------------------------------------------------------+
-|    Field Name     |    Type    |                            Description                             |
-+===================+============+====================================================================+
-| experiment_id     | ``STRING`` | Unique identifier for the experiment.                              |
-+-------------------+------------+--------------------------------------------------------------------+
-| name              | ``STRING`` | Human readable name that identifies the experiment.                |
-+-------------------+------------+--------------------------------------------------------------------+
-| artifact_location | ``STRING`` | Location where artifacts for the experiment are stored.            |
-+-------------------+------------+--------------------------------------------------------------------+
-| lifecycle_stage   | ``STRING`` | Current life cycle stage of the experiment: "active" or "deleted". |
-|                   |            | Deleted experiments are not returned by APIs.                      |
-+-------------------+------------+--------------------------------------------------------------------+
-| last_update_time  | ``INT64``  | Last update time                                                   |
-+-------------------+------------+--------------------------------------------------------------------+
-| creation_time     | ``INT64``  | Creation time                                                      |
-+-------------------+------------+--------------------------------------------------------------------+
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+|    Field Name     |                  Type                  |                            Description                             |
++===================+========================================+====================================================================+
+| experiment_id     | ``STRING``                             | Unique identifier for the experiment.                              |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+| name              | ``STRING``                             | Human readable name that identifies the experiment.                |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+| artifact_location | ``STRING``                             | Location where artifacts for the experiment are stored.            |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+| lifecycle_stage   | ``STRING``                             | Current life cycle stage of the experiment: "active" or "deleted". |
+|                   |                                        | Deleted experiments are not returned by APIs.                      |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+| last_update_time  | ``INT64``                              | Last update time                                                   |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+| creation_time     | ``INT64``                              | Creation time                                                      |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+| tags              | An array of :ref:`mlflowexperimenttag` | Tags: Additional metadata key-value pairs.                         |
++-------------------+----------------------------------------+--------------------------------------------------------------------+
+
+.. _mlflowExperimentTag:
+
+ExperimentTag
+-------------
+
+
+
+Tag for an experiment.
+
+
++------------+------------+----------------+
+| Field Name |    Type    |  Description   |
++============+============+================+
+| key        | ``STRING`` | The tag key.   |
++------------+------------+----------------+
+| value      | ``STRING`` | The tag value. |
++------------+------------+----------------+
 
 .. _mlflowFileInfo:
 
