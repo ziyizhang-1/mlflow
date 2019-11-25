@@ -1,13 +1,14 @@
 ---
 layout: post
-title:  "Bay Area MLflow Meetup @ Databricks in San Francisco, CA"
+title:  "Bay Area MLflow Meetup @ Databricks on December 16, 2019"
 date:   2019-11-25
 categories: news
 ---
 
-Join us on Dec 16th for an evening of tech-talks about MLflow and Machine Learning from Microsoft, Google, and Databricks.
+Join us on Dec 16th for an evening of tech-talks about MLflow and Machine Learning from 
+Microsoft, Google, and Databricks.
 
-[RSVP](https://www.meetup.com/Bay-Area-MLflow/events/266614106/) if you live in the Bay Area.
+[RSVP](https://www.meetup.com/Bay-Area-MLflow/events/266614106/) if you are in the Bay Area.
 
 ## Agenda
 
@@ -53,7 +54,8 @@ along with most of the bugs associated with them. As the recent version of Azure
 become more of an open platform rather than a managed product, his focus has shifted outward for 
 open-source platform definitions for cloud-scale implementations and focused on MLflow for the 
 Azure ML managed tracking store.
-           
+
+
 ## Talk 3: TensorFlow(X) Data Validation: Better ML through better data.
 **Presenter**: Alkis Polyzotis, Google
 
