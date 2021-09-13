@@ -230,7 +230,7 @@ def get_command_run_id():
 
 def get_webapp_url():
     """Should only be called if is_in_databricks_notebook or is_in_databricks_jobs is true"""
-    url = _get_property_from_spark_context("spark.databricks.api.url")
+    url = _get_property_from_spark_context("spark.databricks.clusterUsageTags.clusterOwnerOrgId")
     if url is not None:
         return url
     try:
