@@ -82,7 +82,7 @@ class App extends Component {
                 </NavLink>
               </div>
               <div className='header-links'>
-                <a href={'https://github.com/mlflow/mlflow'}>
+                <a href={'https://github.com/intel-innersource/applications.benchmarking.benchmark.platform-hero-features'}>
                   <div className='github'>
                     <span>GitHub</span>
                   </div>
