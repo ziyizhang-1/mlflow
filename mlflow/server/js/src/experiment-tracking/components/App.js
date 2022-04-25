@@ -87,7 +87,7 @@ class App extends Component {
                     <span>GitHub</span>
                   </div>
                 </a>
-                <a href={HomePageDocsUrl}>
+                <a href={'https://wiecg.notion.site/MLFlow-Mysql-db7bcfd02f4540ecabc8dd3f5b3904d2'}>
                   <div className='docs'>
                     <span>Docs</span>
                   </div>
