@@ -82,12 +82,12 @@ class App extends Component {
                 </NavLink>
               </div>
               <div className='header-links'>
-                <a href={'https://github.com/intel-innersource/applications.benchmarking.benchmark.platform-hero-features'}>
+                <a href={'https://github.com/intel-innersource/applications.benchmarking.benchmark.platform-hero-features'} target="_blank" rel="noopener noreferrer">
                   <div className='github'>
                     <span>GitHub</span>
                   </div>
                 </a>
-                <a href={'https://wiecg.notion.site/MLFlow-Mysql-db7bcfd02f4540ecabc8dd3f5b3904d2'}>
+                <a href={'https://wiecg.notion.site/MLFlow-Mysql-db7bcfd02f4540ecabc8dd3f5b3904d2'} target="_blank" rel="noopener noreferrer">
                   <div className='docs'>
                     <span>Docs</span>
                   </div>
