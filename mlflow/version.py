@@ -2,8 +2,8 @@
 import re
 
 
-VERSION = "1.25.1"
+VERSION = "1.25.1.WiE"
 
 
 def is_release_version():
-    return bool(re.match(r"^\d+\.\d+\.\d+$", VERSION))
+    return bool(re.match(r"^\d+\.\d+\.\d+\.WiE$", VERSION))
